@@ -2246,3 +2246,43 @@ fresh misses; neither is a cover.
 These computations strengthen both the finite obstruction and the positive
 search.  They still do not supply an integer `m` or a global impossibility
 proof.
+
+## Closest-family conditional-overlap checkpoint (2026-07-26)
+
+For the surviving period
+
+```
+2533395664800
+```
+
+the corrected 14-anchor block was combined with 22 conditional-fibre
+intersection certificates.  Each conditional certificate has a separate
+verification artifact, and the assembled period certificate was replayed by
+`verify_ranked_period_conditional_star.py`.
+
+The exact current upper bound is
+
+```
+730799865304831267447 / 729328817548572040800
+= 1.0020169883883154
+```
+
+so the remaining gap to the no-cover cutoff is exactly
+
+```
+1471047756259226647 / 729328817548572040800
+= 0.00201698838831534.
+```
+
+The newest `p=103` conditional certificate contributes an independently
+verified improvement of
+
+```
+152102 / 1882330695
+= 0.0000808051424779003.
+```
+
+This is the strongest certified bound currently assembled for that finite
+family, but it does not eliminate the family because the upper bound remains
+greater than one.  It also does not imply a corresponding percentage of
+progress on the unrestricted Erdős problem.

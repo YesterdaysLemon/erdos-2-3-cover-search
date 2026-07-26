@@ -29,6 +29,12 @@ As of 2026-07-26:
   replayed no-cover certificates;
 - 28 ranked finite families remain in the intersection of the aggregate
   block-star and separately verified single-anchor frontiers.
+- for the closest remaining family, at period `2533395664800`, 22
+  independently replayed conditional-overlap bounds reduce the exact
+  period-level upper bound to
+  `730799865304831267447/729328817548572040800`, or
+  `1.0020169883883154`. Because this is still greater than one, that family
+  remains unresolved.
 
 The fraction \(4{,}609/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence

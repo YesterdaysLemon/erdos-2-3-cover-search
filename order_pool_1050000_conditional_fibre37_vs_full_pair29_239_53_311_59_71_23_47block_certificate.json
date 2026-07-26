@@ -1,0 +1,998 @@
+{
+  "schema": "projected_pair_conditional_fibre_overlap_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "block_certificate": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_311_59_plus71normalized_plus23_plus47_certificate.json",
+  "structured_base_certificate": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_311_59_plus71normalized_certificate.json",
+  "structured_base_schema": "projected_pair_normalized_start_leaf_v2",
+  "row_count": 1577,
+  "outside_prime": 37,
+  "outside_row": {
+    "p": 37,
+    "h": 36,
+    "a": 1,
+    "b": 26
+  },
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    53,
+    311,
+    59,
+    71,
+    23,
+    47
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 59,
+      "h": 58,
+      "a": 1,
+      "b": 50
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "independent_projected_primes": [
+    53,
+    311,
+    59,
+    23,
+    47
+  ],
+  "core_independent_projected_primes": [
+    53,
+    311,
+    59
+  ],
+  "extra_independent_primes": [
+    23,
+    47
+  ],
+  "paired_projected_prime": null,
+  "paired_shared_prime": null,
+  "normalized_start_shared_prime": 71,
+  "start_leaf_included": true,
+  "normalization_primes": [
+    19
+  ],
+  "normalization_period": 1260,
+  "normalization_target_count": 22680,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "outside_base_points": 14400,
+  "projection_moduli": [
+    4,
+    4,
+    5,
+    2,
+    1,
+    1
+  ],
+  "fixed_leaf_projection_modulus": 5,
+  "fixed_leaf_projection_target": 0,
+  "residual_moduli": [
+    7,
+    17,
+    13,
+    31,
+    29,
+    11,
+    23
+  ],
+  "residual_target_relation": "incompatible",
+  "path_leaf_densities": {
+    "inactive": {
+      "numerator": 1,
+      "denominator": 119,
+      "decimal": 0.008403361344537815
+    },
+    "one": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "both_compatible": {
+      "numerator": 227,
+      "denominator": 833,
+      "decimal": 0.2725090036014406
+    },
+    "both_incompatible": {
+      "numerator": 226,
+      "denominator": 833,
+      "decimal": 0.27130852340936373
+    }
+  },
+  "residual_union_weights": {
+    "0000000": {
+      "numerator": 1,
+      "denominator": 119,
+      "decimal": 0.008403361344537815
+    },
+    "0000001": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "0000010": {
+      "numerator": 141,
+      "denominator": 2737,
+      "decimal": 0.051516258677384
+    },
+    "0000011": {
+      "numerator": 3583,
+      "denominator": 19159,
+      "decimal": 0.18701393600918628
+    },
+    "0000100": {
+      "numerator": 129,
+      "denominator": 1309,
+      "decimal": 0.0985485103132162
+    },
+    "0000101": {
+      "numerator": 2083,
+      "denominator": 9163,
+      "decimal": 0.22732729455418532
+    },
+    "0000110": {
+      "numerator": 377,
+      "denominator": 2737,
+      "decimal": 0.13774205334307635
+    },
+    "0000111": {
+      "numerator": 4999,
+      "denominator": 19159,
+      "decimal": 0.26092176000835116
+    },
+    "0001000": {
+      "numerator": 21,
+      "denominator": 493,
+      "decimal": 0.04259634888438134
+    },
+    "0001001": {
+      "numerator": 619,
+      "denominator": 3451,
+      "decimal": 0.17936829904375542
+    },
+    "0001010": {
+      "numerator": 955,
+      "denominator": 11339,
+      "decimal": 0.08422259458506041
+    },
+    "0001011": {
+      "numerator": 17069,
+      "denominator": 79373,
+      "decimal": 0.21504793821576607
+    },
+    "0001100": {
+      "numerator": 703,
+      "denominator": 5423,
+      "decimal": 0.12963304444034668
+    },
+    "0001101": {
+      "numerator": 9641,
+      "denominator": 37961,
+      "decimal": 0.25397118094886856
+    },
+    "0001110": {
+      "numerator": 1899,
+      "denominator": 11339,
+      "decimal": 0.16747508598641855
+    },
+    "0001111": {
+      "numerator": 22733,
+      "denominator": 79373,
+      "decimal": 0.28640721655978735
+    },
+    "0010000": {
+      "numerator": 149,
+      "denominator": 3689,
+      "decimal": 0.040390349688262404
+    },
+    "0010001": {
+      "numerator": 4583,
+      "denominator": 25823,
+      "decimal": 0.1774774425899392
+    },
+    "0010010": {
+      "numerator": 6967,
+      "denominator": 84847,
+      "decimal": 0.08211250839746838
+    },
+    "0010011": {
+      "numerator": 126649,
+      "denominator": 593929,
+      "decimal": 0.21323929291211577
+    },
+    "0010100": {
+      "numerator": 5179,
+      "denominator": 40579,
+      "decimal": 0.1276275906256931
+    },
+    "0010101": {
+      "numerator": 71653,
+      "denominator": 284053,
+      "decimal": 0.25225222053630836
+    },
+    "0010110": {
+      "numerator": 14047,
+      "denominator": 84847,
+      "decimal": 0.16555682581588035
+    },
+    "0010111": {
+      "numerator": 169129,
+      "denominator": 593929,
+      "decimal": 0.2847629935564689
+    },
+    "0011000": {
+      "numerator": 1123,
+      "denominator": 15283,
+      "decimal": 0.07348033763004645
+    },
+    "0011001": {
+      "numerator": 22021,
+      "denominator": 106981,
+      "decimal": 0.20584028939718269
+    },
+    "0011010": {
+      "numerator": 39989,
+      "denominator": 351509,
+      "decimal": 0.11376380121134878
+    },
+    "0011011": {
+      "numerator": 591443,
+      "denominator": 2460563,
+      "decimal": 0.2403689724668704
+    },
+    "0011100": {
+      "numerator": 26513,
+      "denominator": 168113,
+      "decimal": 0.15770939784549678
+    },
+    "0011101": {
+      "numerator": 327191,
+      "denominator": 1176791,
+      "decimal": 0.2780366267247115
+    },
+    "0011110": {
+      "numerator": 68309,
+      "denominator": 351509,
+      "decimal": 0.19433072837395343
+    },
+    "0011111": {
+      "numerator": 761363,
+      "denominator": 2460563,
+      "decimal": 0.3094263386062458
+    },
+    "0100000": {
+      "numerator": 131,
+      "denominator": 1547,
+      "decimal": 0.08468002585649645
+    },
+    "0100001": {
+      "numerator": 2333,
+      "denominator": 10829,
+      "decimal": 0.21544002216271124
+    },
+    "0100010": {
+      "numerator": 4429,
+      "denominator": 35581,
+      "decimal": 0.12447654647143139
+    },
+    "0100011": {
+      "numerator": 62155,
+      "denominator": 249067,
+      "decimal": 0.24955132554694118
+    },
+    "0100100": {
+      "numerator": 2857,
+      "denominator": 17017,
+      "decimal": 0.16789093259681495
+    },
+    "0100101": {
+      "numerator": 34159,
+      "denominator": 119119,
+      "decimal": 0.28676365651155566
+    },
+    "0100110": {
+      "numerator": 7261,
+      "denominator": 35581,
+      "decimal": 0.20406958770130126
+    },
+    "0100111": {
+      "numerator": 79147,
+      "denominator": 249067,
+      "decimal": 0.3177739323154011
+    },
+    "0101000": {
+      "numerator": 745,
+      "denominator": 6409,
+      "decimal": 0.11624278358558278
+    },
+    "0101001": {
+      "numerator": 10879,
+      "denominator": 44863,
+      "decimal": 0.24249381450192808
+    },
+    "0101010": {
+      "numerator": 22799,
+      "denominator": 147407,
+      "decimal": 0.1546670103862096
+    },
+    "0101011": {
+      "numerator": 284201,
+      "denominator": 1031849,
+      "decimal": 0.2754288660453225
+    },
+    "0101100": {
+      "numerator": 13859,
+      "denominator": 70499,
+      "decimal": 0.19658434871416616
+    },
+    "0101101": {
+      "numerator": 153653,
+      "denominator": 493493,
+      "decimal": 0.311358013183571
+    },
+    "0101110": {
+      "numerator": 34127,
+      "denominator": 147407,
+      "decimal": 0.23151546398746328
+    },
+    "0101111": {
+      "numerator": 352169,
+      "denominator": 1031849,
+      "decimal": 0.3412989691321114
+    },
+    "0110000": {
+      "numerator": 5477,
+      "denominator": 47957,
+      "decimal": 0.11420647663531915
+    },
+    "0110001": {
+      "numerator": 80819,
+      "denominator": 335699,
+      "decimal": 0.24074840854455926
+    },
+    "0110010": {
+      "numerator": 168451,
+      "denominator": 1103011,
+      "decimal": 0.15271923852074004
+    },
+    "0110011": {
+      "numerator": 2113717,
+      "denominator": 7721077,
+      "decimal": 0.2737593473034915
+    },
+    "0110100": {
+      "numerator": 102727,
+      "denominator": 527527,
+      "decimal": 0.19473316057756285
+    },
+    "0110101": {
+      "numerator": 1143889,
+      "denominator": 3692689,
+      "decimal": 0.30977128049505387
+    },
+    "0110110": {
+      "numerator": 253411,
+      "denominator": 1103011,
+      "decimal": 0.22974476229158186
+    },
+    "0110111": {
+      "numerator": 2623477,
+      "denominator": 7721077,
+      "decimal": 0.33978122482135587
+    },
+    "0111000": {
+      "numerator": 28759,
+      "denominator": 198679,
+      "decimal": 0.14475108088927366
+    },
+    "0111001": {
+      "numerator": 371233,
+      "denominator": 1390753,
+      "decimal": 0.2669294979050917
+    },
+    "0111010": {
+      "numerator": 831377,
+      "denominator": 4569617,
+      "decimal": 0.18193581650278348
+    },
+    "0111011": {
+      "numerator": 9557879,
+      "denominator": 31987319,
+      "decimal": 0.29880212843095727
+    },
+    "0111100": {
+      "numerator": 486269,
+      "denominator": 2185469,
+      "decimal": 0.22250098262661241
+    },
+    "0111101": {
+      "numerator": 5103083,
+      "denominator": 15298283,
+      "decimal": 0.33357227082281066
+    },
+    "0111110": {
+      "numerator": 1171217,
+      "denominator": 4569617,
+      "decimal": 0.25630528772980316
+    },
+    "0111111": {
+      "numerator": 11596919,
+      "denominator": 31987319,
+      "decimal": 0.36254738948268844
+    },
+    "1000000": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "1000001": {
+      "numerator": 226,
+      "denominator": 833,
+      "decimal": 0.27130852340936373
+    },
+    "1000010": {
+      "numerator": 3583,
+      "denominator": 19159,
+      "decimal": 0.18701393600918628
+    },
+    "1000011": {
+      "numerator": 5805,
+      "denominator": 19159,
+      "decimal": 0.3029907615220001
+    },
+    "1000100": {
+      "numerator": 2083,
+      "denominator": 9163,
+      "decimal": 0.22732729455418532
+    },
+    "1000101": {
+      "numerator": 3093,
+      "denominator": 9163,
+      "decimal": 0.3375532030994216
+    },
+    "1000110": {
+      "numerator": 4999,
+      "denominator": 19159,
+      "decimal": 0.26092176000835116
+    },
+    "1000111": {
+      "numerator": 7019,
+      "denominator": 19159,
+      "decimal": 0.3663552377472728
+    },
+    "1001000": {
+      "numerator": 619,
+      "denominator": 3451,
+      "decimal": 0.17936829904375542
+    },
+    "1001001": {
+      "numerator": 1023,
+      "denominator": 3451,
+      "decimal": 0.2964358157055926
+    },
+    "1001010": {
+      "numerator": 17069,
+      "denominator": 79373,
+      "decimal": 0.21504793821576607
+    },
+    "1001011": {
+      "numerator": 25957,
+      "denominator": 79373,
+      "decimal": 0.32702556284882767
+    },
+    "1001100": {
+      "numerator": 9641,
+      "denominator": 37961,
+      "decimal": 0.25397118094886856
+    },
+    "1001101": {
+      "numerator": 13681,
+      "denominator": 37961,
+      "decimal": 0.36039619609599327
+    },
+    "1001110": {
+      "numerator": 22733,
+      "denominator": 79373,
+      "decimal": 0.28640721655978735
+    },
+    "1001111": {
+      "numerator": 30813,
+      "denominator": 79373,
+      "decimal": 0.3882050571352979
+    },
+    "1010000": {
+      "numerator": 4583,
+      "denominator": 25823,
+      "decimal": 0.1774774425899392
+    },
+    "1010001": {
+      "numerator": 7613,
+      "denominator": 25823,
+      "decimal": 0.2948147000735778
+    },
+    "1010010": {
+      "numerator": 126649,
+      "denominator": 593929,
+      "decimal": 0.21323929291211577
+    },
+    "1010011": {
+      "numerator": 193309,
+      "denominator": 593929,
+      "decimal": 0.3254749305051614
+    },
+    "1010100": {
+      "numerator": 71653,
+      "denominator": 284053,
+      "decimal": 0.25225222053630836
+    },
+    "1010101": {
+      "numerator": 101953,
+      "denominator": 284053,
+      "decimal": 0.35892245461234346
+    },
+    "1010110": {
+      "numerator": 169129,
+      "denominator": 593929,
+      "decimal": 0.2847629935564689
+    },
+    "1010111": {
+      "numerator": 229729,
+      "denominator": 593929,
+      "decimal": 0.3867953913683285
+    },
+    "1011000": {
+      "numerator": 22021,
+      "denominator": 106981,
+      "decimal": 0.20584028939718269
+    },
+    "1011001": {
+      "numerator": 34141,
+      "denominator": 106981,
+      "decimal": 0.3191314345537993
+    },
+    "1011010": {
+      "numerator": 591443,
+      "denominator": 2460563,
+      "decimal": 0.2403689724668704
+    },
+    "1011011": {
+      "numerator": 858083,
+      "denominator": 2460563,
+      "decimal": 0.34873441566015584
+    },
+    "1011100": {
+      "numerator": 327191,
+      "denominator": 1176791,
+      "decimal": 0.2780366267247115
+    },
+    "1011101": {
+      "numerator": 448391,
+      "denominator": 1176791,
+      "decimal": 0.38102857686709024
+    },
+    "1011110": {
+      "numerator": 761363,
+      "denominator": 2460563,
+      "decimal": 0.3094263386062458
+    },
+    "1011111": {
+      "numerator": 1003763,
+      "denominator": 2460563,
+      "decimal": 0.4079403778728689
+    },
+    "1100000": {
+      "numerator": 2333,
+      "denominator": 10829,
+      "decimal": 0.21544002216271124
+    },
+    "1100001": {
+      "numerator": 3545,
+      "denominator": 10829,
+      "decimal": 0.3273617139163358
+    },
+    "1100010": {
+      "numerator": 62155,
+      "denominator": 249067,
+      "decimal": 0.24955132554694118
+    },
+    "1100011": {
+      "numerator": 88819,
+      "denominator": 249067,
+      "decimal": 0.3566068567895386
+    },
+    "1100100": {
+      "numerator": 34159,
+      "denominator": 119119,
+      "decimal": 0.28676365651155566
+    },
+    "1100101": {
+      "numerator": 46279,
+      "denominator": 119119,
+      "decimal": 0.3885106490148507
+    },
+    "1100110": {
+      "numerator": 79147,
+      "denominator": 249067,
+      "decimal": 0.3177739323154011
+    },
+    "1100111": {
+      "numerator": 103387,
+      "denominator": 249067,
+      "decimal": 0.41509714253594415
+    },
+    "1101000": {
+      "numerator": 10879,
+      "denominator": 44863,
+      "decimal": 0.24249381450192808
+    },
+    "1101001": {
+      "numerator": 15727,
+      "denominator": 44863,
+      "decimal": 0.35055613757439313
+    },
+    "1101010": {
+      "numerator": 284201,
+      "denominator": 1031849,
+      "decimal": 0.2754288660453225
+    },
+    "1101011": {
+      "numerator": 390857,
+      "denominator": 1031849,
+      "decimal": 0.3787928272450717
+    },
+    "1101100": {
+      "numerator": 153653,
+      "denominator": 493493,
+      "decimal": 0.311358013183571
+    },
+    "1101101": {
+      "numerator": 202133,
+      "denominator": 493493,
+      "decimal": 0.4095964887039938
+    },
+    "1101110": {
+      "numerator": 352169,
+      "denominator": 1031849,
+      "decimal": 0.3412989691321114
+    },
+    "1101111": {
+      "numerator": 449129,
+      "denominator": 1031849,
+      "decimal": 0.43526620658642884
+    },
+    "1110000": {
+      "numerator": 80819,
+      "denominator": 335699,
+      "decimal": 0.24074840854455926
+    },
+    "1110001": {
+      "numerator": 117179,
+      "denominator": 335699,
+      "decimal": 0.34905972314484107
+    },
+    "1110010": {
+      "numerator": 2113717,
+      "denominator": 7721077,
+      "decimal": 0.2737593473034915
+    },
+    "1110011": {
+      "numerator": 2913637,
+      "denominator": 7721077,
+      "decimal": 0.37736147431245665
+    },
+    "1110100": {
+      "numerator": 1143889,
+      "denominator": 3692689,
+      "decimal": 0.30977128049505387
+    },
+    "1110101": {
+      "numerator": 1507489,
+      "denominator": 3692689,
+      "decimal": 0.4082361119498555
+    },
+    "1110110": {
+      "numerator": 2623477,
+      "denominator": 7721077,
+      "decimal": 0.33978122482135587
+    },
+    "1110111": {
+      "numerator": 3350677,
+      "denominator": 7721077,
+      "decimal": 0.4339649766476879
+    },
+    "1111000": {
+      "numerator": 371233,
+      "denominator": 1390753,
+      "decimal": 0.2669294979050917
+    },
+    "1111001": {
+      "numerator": 516673,
+      "denominator": 1390753,
+      "decimal": 0.3715059395881224
+    },
+    "1111010": {
+      "numerator": 9557879,
+      "denominator": 31987319,
+      "decimal": 0.29880212843095727
+    },
+    "1111011": {
+      "numerator": 12757559,
+      "denominator": 31987319,
+      "decimal": 0.3988317683016823
+    },
+    "1111100": {
+      "numerator": 5103083,
+      "denominator": 15298283,
+      "decimal": 0.33357227082281066
+    },
+    "1111101": {
+      "numerator": 6557483,
+      "denominator": 15298283,
+      "decimal": 0.4286417632619295
+    },
+    "1111110": {
+      "numerator": 11596919,
+      "denominator": 31987319,
+      "decimal": 0.36254738948268844
+    },
+    "1111111": {
+      "numerator": 14505719,
+      "denominator": 31987319,
+      "decimal": 0.45348342572880207
+    }
+  },
+  "target_tuples": 46080,
+  "projection_target_combinations_per_base": 160,
+  "target_combinations_checked": 7372800,
+  "minimizing_base_targets": [
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+  ],
+  "minimizing_projection_targets": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "minimizing_base_covered_cells": 4000,
+  "minimizing_uncovered_category_counts": {
+    "0000000": 0,
+    "0000001": 0,
+    "0000010": 0,
+    "0000011": 0,
+    "0000100": 0,
+    "0000101": 0,
+    "0000110": 6656,
+    "0000111": 1664,
+    "0001000": 0,
+    "0001001": 0,
+    "0001010": 0,
+    "0001011": 0,
+    "0001100": 0,
+    "0001101": 0,
+    "0001110": 0,
+    "0001111": 0,
+    "0010000": 0,
+    "0010001": 0,
+    "0010010": 0,
+    "0010011": 0,
+    "0010100": 0,
+    "0010101": 0,
+    "0010110": 1664,
+    "0010111": 416,
+    "0011000": 0,
+    "0011001": 0,
+    "0011010": 0,
+    "0011011": 0,
+    "0011100": 0,
+    "0011101": 0,
+    "0011110": 0,
+    "0011111": 0,
+    "0100000": 0,
+    "0100001": 0,
+    "0100010": 0,
+    "0100011": 0,
+    "0100100": 0,
+    "0100101": 0,
+    "0100110": 0,
+    "0100111": 0,
+    "0101000": 0,
+    "0101001": 0,
+    "0101010": 0,
+    "0101011": 0,
+    "0101100": 0,
+    "0101101": 0,
+    "0101110": 0,
+    "0101111": 0,
+    "0110000": 0,
+    "0110001": 0,
+    "0110010": 0,
+    "0110011": 0,
+    "0110100": 0,
+    "0110101": 0,
+    "0110110": 0,
+    "0110111": 0,
+    "0111000": 0,
+    "0111001": 0,
+    "0111010": 0,
+    "0111011": 0,
+    "0111100": 0,
+    "0111101": 0,
+    "0111110": 0,
+    "0111111": 0,
+    "1000000": 0,
+    "1000001": 0,
+    "1000010": 0,
+    "1000011": 0,
+    "1000100": 0,
+    "1000101": 0,
+    "1000110": 0,
+    "1000111": 0,
+    "1001000": 0,
+    "1001001": 0,
+    "1001010": 0,
+    "1001011": 0,
+    "1001100": 0,
+    "1001101": 0,
+    "1001110": 0,
+    "1001111": 0,
+    "1010000": 0,
+    "1010001": 0,
+    "1010010": 0,
+    "1010011": 0,
+    "1010100": 0,
+    "1010101": 0,
+    "1010110": 0,
+    "1010111": 0,
+    "1011000": 0,
+    "1011001": 0,
+    "1011010": 0,
+    "1011011": 0,
+    "1011100": 0,
+    "1011101": 0,
+    "1011110": 0,
+    "1011111": 0,
+    "1100000": 0,
+    "1100001": 0,
+    "1100010": 0,
+    "1100011": 0,
+    "1100100": 0,
+    "1100101": 0,
+    "1100110": 0,
+    "1100111": 0,
+    "1101000": 0,
+    "1101001": 0,
+    "1101010": 0,
+    "1101011": 0,
+    "1101100": 0,
+    "1101101": 0,
+    "1101110": 0,
+    "1101111": 0,
+    "1110000": 0,
+    "1110001": 0,
+    "1110010": 0,
+    "1110011": 0,
+    "1110100": 0,
+    "1110101": 0,
+    "1110110": 0,
+    "1110111": 0,
+    "1111000": 0,
+    "1111001": 0,
+    "1111010": 0,
+    "1111011": 0,
+    "1111100": 0,
+    "1111101": 0,
+    "1111110": 0,
+    "1111111": 0
+  },
+  "minimum_intersection_score": 14149905049280,
+  "score_denominator": 2463023563,
+  "forced_intersection_density": {
+    "numerator": 89603,
+    "denominator": 8085420,
+    "decimal": 0.01108204644904037
+  },
+  "argument": "Translate the outside fibre, the named base anchors, and the start leaf to target zero; the recorded joint image is surjective. Restrict the exact base-plane partition to the outside fibre and enumerate every remaining anchor target. Residual weights count the exact projected union. Incompatible targets minimize the shared residual triangle pointwise. The smallest score is therefore the exact minimum intersection of the outside fibre with the full anchor-block union."
+}
