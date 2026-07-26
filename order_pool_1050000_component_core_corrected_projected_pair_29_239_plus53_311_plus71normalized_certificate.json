@@ -1,0 +1,295 @@
+{
+  "schema": "projected_pair_normalized_start_leaf_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    53,
+    311,
+    71
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "independent_projected_prime": 53,
+  "independent_projected_primes": [
+    53,
+    311
+  ],
+  "normalized_start_shared_prime": 71,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 420,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_moduli": [
+    4,
+    4,
+    5
+  ],
+  "fixed_leaf_projection_modulus": 5,
+  "fixed_leaf_projection_target": 0,
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "independent_residual_modulus": 13,
+  "independent_residual_moduli": [
+    13,
+    31
+  ],
+  "projected_lifted_determinant": -128,
+  "projected_leaf_determinant": -2,
+  "lifted_leaf_determinant": 318,
+  "all_shared_pair_maps_jointly_surjective": true,
+  "path_leaf_densities": {
+    "inactive": {
+      "numerator": 1,
+      "denominator": 119,
+      "decimal": 0.008403361344537815
+    },
+    "one": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "both_compatible": {
+      "numerator": 227,
+      "denominator": 833,
+      "decimal": 0.2725090036014406
+    },
+    "both_incompatible": {
+      "numerator": 226,
+      "denominator": 833,
+      "decimal": 0.27130852340936373
+    }
+  },
+  "compatible_residual_targets_dominate": true,
+  "residual_union_weights": {
+    "0000": {
+      "numerator": 1,
+      "denominator": 119,
+      "decimal": 0.008403361344537815
+    },
+    "0001": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "0010": {
+      "numerator": 149,
+      "denominator": 3689,
+      "decimal": 0.040390349688262404
+    },
+    "0011": {
+      "numerator": 4583,
+      "denominator": 25823,
+      "decimal": 0.1774774425899392
+    },
+    "0100": {
+      "numerator": 131,
+      "denominator": 1547,
+      "decimal": 0.08468002585649645
+    },
+    "0101": {
+      "numerator": 2333,
+      "denominator": 10829,
+      "decimal": 0.21544002216271124
+    },
+    "0110": {
+      "numerator": 5477,
+      "denominator": 47957,
+      "decimal": 0.11420647663531915
+    },
+    "0111": {
+      "numerator": 80819,
+      "denominator": 335699,
+      "decimal": 0.24074840854455926
+    },
+    "1000": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "1001": {
+      "numerator": 227,
+      "denominator": 833,
+      "decimal": 0.2725090036014406
+    },
+    "1010": {
+      "numerator": 4583,
+      "denominator": 25823,
+      "decimal": 0.1774774425899392
+    },
+    "1011": {
+      "numerator": 7643,
+      "denominator": 25823,
+      "decimal": 0.2959764550981683
+    },
+    "1100": {
+      "numerator": 2333,
+      "denominator": 10829,
+      "decimal": 0.21544002216271124
+    },
+    "1101": {
+      "numerator": 3557,
+      "denominator": 10829,
+      "decimal": 0.32846984947825286
+    },
+    "1110": {
+      "numerator": 80819,
+      "denominator": 335699,
+      "decimal": 0.24074840854455926
+    },
+    "1111": {
+      "numerator": 117539,
+      "denominator": 335699,
+      "decimal": 0.3501321123983092
+    }
+  },
+  "enumerated_period": 34529040,
+  "target_tuples": 34560,
+  "projection_target_combinations_per_base": 80,
+  "target_combinations_checked": 2764800,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_targets": [
+    1,
+    3,
+    0
+  ],
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_uncovered_category_counts": {
+    "0000": 50112,
+    "0001": 14256,
+    "0010": 14256,
+    "0011": 1836,
+    "0100": 44160,
+    "0101": 13056,
+    "0110": 13056,
+    "0111": 1248,
+    "1000": 44160,
+    "1001": 13056,
+    "1010": 13056,
+    "1011": 1248,
+    "1100": 0,
+    "1101": 0,
+    "1110": 0,
+    "1111": 0
+  },
+  "maximum_block_union_density": {
+    "numerator": 372505667,
+    "denominator": 604258200,
+    "decimal": 0.6164677070166362
+  },
+  "block_individual_density_sum": {
+    "numerator": 28190441,
+    "denominator": 34529040,
+    "decimal": 0.8164270133198027
+  },
+  "forced_overlap_loss": {
+    "numerator": 6196259,
+    "denominator": 30987600,
+    "decimal": 0.19995930630316644
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 477508048004783,
+    "denominator": 336941623418400,
+    "decimal": 1.417183318464141
+  },
+  "proved_no_cover": false
+}

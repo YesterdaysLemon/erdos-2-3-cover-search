@@ -1,0 +1,81 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period25200.json",
+  "row_count": 47,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    }
+  ],
+  "enumerated_period": 240,
+  "enumerated_cells": 57600,
+  "target_tuples": 46080,
+  "maximum_covered_cells": 30580,
+  "maximizing_targets": [
+    0,
+    0,
+    0,
+    1,
+    3
+  ],
+  "maximum_block_union_density": {
+    "numerator": 1529,
+    "denominator": 2880,
+    "decimal": 0.5309027777777777
+  },
+  "block_individual_density_sum": {
+    "numerator": 53,
+    "denominator": 80,
+    "decimal": 0.6625
+  },
+  "forced_overlap_loss": {
+    "numerator": 379,
+    "denominator": 2880,
+    "decimal": 0.13159722222222223
+  },
+  "total_pool_density": {
+    "numerator": 8951,
+    "denominator": 8400,
+    "decimal": 1.065595238095238
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 94147,
+    "denominator": 100800,
+    "decimal": 0.9339980158730159
+  },
+  "proved_no_cover": true,
+  "argument": "Every possible anchor-target tuple was enumerated on the full anchor period plane. Grouping those anchor rows first loses at least the stated density relative to their individual density sum; adding every other row by the union bound gives the final pool upper bound."
+}

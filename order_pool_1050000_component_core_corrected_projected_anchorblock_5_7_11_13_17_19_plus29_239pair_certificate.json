@@ -1,0 +1,132 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period4227022800.json",
+  "row_count": 521,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_modulus": 4,
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "pair_component_union_density": {
+    "numerator": 125,
+    "denominator": 833,
+    "decimal": 0.15006002400960383
+  },
+  "enumerated_period": 85680,
+  "target_tuples": 34560,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_target": 1,
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_projected_compatible_uncovered_cells": 71520,
+  "maximum_block_union_density": {
+    "numerator": 2130463,
+    "denominator": 3598560,
+    "decimal": 0.5920320906140234
+  },
+  "block_individual_density_sum": {
+    "numerator": 9329,
+    "denominator": 12240,
+    "decimal": 0.762173202614379
+  },
+  "forced_overlap_loss": {
+    "numerator": 612263,
+    "denominator": 3598560,
+    "decimal": 0.1701411120003557
+  },
+  "total_pool_density": {
+    "numerator": 250058489,
+    "denominator": 169080912,
+    "decimal": 1.4789279643819286
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 101244191,
+    "denominator": 77357280,
+    "decimal": 1.3087868523815729
+  },
+  "proved_no_cover": false,
+  "argument": "The base targets and projected lower target are exhaustively enumerated. Above a compatible uncovered base cell, the two extra rows have exact union density 1/s + 1/(s*r) - 1/(s^2*r). Above an incompatible uncovered base cell, only the lifted row applies, with density 1/(s*r)."
+}

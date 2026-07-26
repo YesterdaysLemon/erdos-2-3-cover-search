@@ -1,0 +1,65 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period25200.json",
+  "row_count": 47,
+  "anchor_primes": [
+    5,
+    7,
+    11
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    }
+  ],
+  "enumerated_period": 60,
+  "enumerated_cells": 3600,
+  "target_tuples": 240,
+  "maximum_covered_cells": 1590,
+  "maximizing_targets": [
+    0,
+    0,
+    0
+  ],
+  "maximum_block_union_density": {
+    "numerator": 53,
+    "denominator": 120,
+    "decimal": 0.44166666666666665
+  },
+  "block_individual_density_sum": {
+    "numerator": 31,
+    "denominator": 60,
+    "decimal": 0.5166666666666667
+  },
+  "forced_overlap_loss": {
+    "numerator": 3,
+    "denominator": 40,
+    "decimal": 0.075
+  },
+  "total_pool_density": {
+    "numerator": 8951,
+    "denominator": 8400,
+    "decimal": 1.065595238095238
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 8321,
+    "denominator": 8400,
+    "decimal": 0.9905952380952381
+  },
+  "proved_no_cover": true,
+  "argument": "Every possible anchor-target tuple was enumerated on the full anchor period plane. Grouping those anchor rows first loses at least the stated density relative to their individual density sum; adding every other row by the union bound gives the final pool upper bound."
+}

@@ -1,0 +1,40 @@
+{
+  "source": "C:\\Users\\Yeste\\OneDrive\\Documents\\open problem search\\order_pool_1050000.json",
+  "certificate": "order_pool_1050000_period292907815200_projected29_plus23_47_plus15conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_projected29_factorized_plus23_plus47_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre71_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre31_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre601_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre53_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre191_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre101_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre43_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre97_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre61_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre67_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre89_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre37_vs_projected29_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre79_vs_projected29_47block_anchors_verification.json"
+  ],
+  "period": 292907815200,
+  "row_count": 813,
+  "anchor_count": 9,
+  "outside_rows_checked": 804,
+  "conditional_edges_checked": 15,
+  "block_overlap_loss": {
+    "numerator": 470363,
+    "denominator": 1912680
+  },
+  "star_overlap_sum": {
+    "numerator": 6091178409818599,
+    "denominator": 24899507554521600
+  },
+  "union_density_upper_bound": {
+    "numerator": 24898388077728761,
+    "denominator": 24899507554521600
+  },
+  "verified": true
+}

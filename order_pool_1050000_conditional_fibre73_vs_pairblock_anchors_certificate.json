@@ -1,0 +1,113 @@
+{
+  "schema": "conditional_fibre_overlap_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "outside_prime": 73,
+  "outside_row": {
+    "p": 73,
+    "h": 36,
+    "a": 4,
+    "b": 3
+  },
+  "anchor_primes": [
+    5,
+    11,
+    13,
+    23,
+    19,
+    71,
+    47
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "normalizer_anchor_prime": 5,
+  "kernel_image_generators": [
+    [
+      3,
+      1,
+      11,
+      4,
+      5,
+      27,
+      10
+    ],
+    [
+      0,
+      8,
+      0,
+      1,
+      0,
+      25,
+      10
+    ]
+  ],
+  "kernel_image_size": 1593900,
+  "normalizer_covered_image_points": 398475,
+  "target_tensor_shape": [
+    10,
+    12,
+    11,
+    18,
+    35,
+    23
+  ],
+  "target_combinations": 19126800,
+  "maximizing_targets": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "maximum_uncovered_image_points": 912560,
+  "minimum_covered_image_points": 681340,
+  "forced_intersection_density": {
+    "numerator": 3097,
+    "denominator": 260820,
+    "decimal": 0.011874089410321295
+  },
+  "argument": "After normalizing the outside and one anchor target to zero, the two displayed kernel-image generators enumerate exactly the anchor values on the outside fibre. Successive complement transforms evaluate every remaining anchor-target tuple. The largest uncovered image count therefore gives the exact minimum intersection with the selected anchor subunion."
+}

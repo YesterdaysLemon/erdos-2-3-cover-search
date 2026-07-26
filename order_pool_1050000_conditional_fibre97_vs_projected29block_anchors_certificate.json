@@ -1,0 +1,86 @@
+{
+  "schema": "projected_conditional_fibre_overlap_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "outside_prime": 97,
+  "outside_row": {
+    "p": 97,
+    "h": 48,
+    "a": 17,
+    "b": 35
+  },
+  "anchor_primes": [
+    7,
+    11,
+    17,
+    23
+  ],
+  "anchor_rows": [
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    }
+  ],
+  "normalizer_anchor_prime": 7,
+  "base_anchor_primes": [
+    11,
+    17
+  ],
+  "projected_anchors": [
+    {
+      "prime": 23,
+      "projection_modulus": 1,
+      "residual_modulus": 11
+    }
+  ],
+  "paired_projected_prime": null,
+  "paired_shared_prime": null,
+  "paired_projection_modulus": null,
+  "paired_residual_modulus": null,
+  "paired_determinant": null,
+  "base_period": 240,
+  "base_cells": 57600,
+  "outside_base_points": 1200,
+  "normalizer_covered_base_points": 200,
+  "uncovered_count_tensor_shape": [
+    10,
+    16,
+    1
+  ],
+  "uncovered_count_tensor_sum": 1000,
+  "uncovered_count_tensor_nonzero": 80,
+  "residual_denominator": 11,
+  "target_combinations": 160,
+  "maximizing_targets": [
+    0,
+    0,
+    0
+  ],
+  "maximum_uncovered_score": 8800,
+  "forced_intersection_density": {
+    "numerator": 1,
+    "denominator": 144,
+    "decimal": 0.006944444444444444
+  },
+  "argument": "Normalize the outside fibre and the named anchor to target zero. On the base plane, points covered by that anchor are removed. Complement transforms enumerate every remaining base-anchor target, while residual matrices give the exact uncovered count for each projected target. The shared pair uses two independent residual lines. Therefore the maximum uncovered score gives the minimum intersection of the outside fibre with this anchor subunion."
+}

@@ -1,0 +1,3580 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_scan_v26.json",
+  "families_checked": 238,
+  "proved_no_cover": 183,
+  "unresolved_count": 55,
+  "checks": [
+    {
+      "period": 378788256,
+      "anchor_prime": 5,
+      "edge_count": 104,
+      "overlap_sum": {
+        "numerator": 1657505,
+        "denominator": 11478432
+      },
+      "union_upper_bound": {
+        "numerator": 162100117,
+        "denominator": 189394128
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 5846297688,
+      "anchor_prime": 5,
+      "edge_count": 153,
+      "overlap_sum": {
+        "numerator": 3397358245,
+        "denominator": 23385190752
+      },
+      "union_upper_bound": {
+        "numerator": 105809763,
+        "denominator": 123731168
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4468464,
+      "anchor_prime": 5,
+      "edge_count": 58,
+      "overlap_sum": {
+        "numerator": 1256179,
+        "denominator": 8936928
+      },
+      "union_upper_bound": {
+        "numerator": 2561807,
+        "denominator": 2978976
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 408612204,
+      "anchor_prime": 5,
+      "edge_count": 100,
+      "overlap_sum": {
+        "numerator": 3212815,
+        "denominator": 22700678
+      },
+      "union_upper_bound": {
+        "numerator": 175499903,
+        "denominator": 204306102
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 59808672,
+      "anchor_prime": 5,
+      "edge_count": 88,
+      "overlap_sum": {
+        "numerator": 34723793,
+        "denominator": 239234688
+      },
+      "union_upper_bound": {
+        "numerator": 68261497,
+        "denominator": 79744896
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1310377068,
+      "anchor_prime": 5,
+      "edge_count": 135,
+      "overlap_sum": {
+        "numerator": 105863707,
+        "denominator": 748786896
+      },
+      "union_upper_bound": {
+        "numerator": 145437797,
+        "denominator": 169080912
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 37026552024,
+      "anchor_prime": 5,
+      "edge_count": 186,
+      "overlap_sum": {
+        "numerator": 86619497,
+        "denominator": 597202452
+      },
+      "union_upper_bound": {
+        "numerator": 31714629725,
+        "denominator": 37026552024
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1089632544,
+      "anchor_prime": 5,
+      "edge_count": 125,
+      "overlap_sum": {
+        "numerator": 656917307,
+        "denominator": 4358530176
+      },
+      "union_upper_bound": {
+        "numerator": 1236292627,
+        "denominator": 1452843392
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 385770528,
+      "anchor_prime": 5,
+      "edge_count": 104,
+      "overlap_sum": {
+        "numerator": 19482077,
+        "denominator": 128590176
+      },
+      "union_upper_bound": {
+        "numerator": 41036293,
+        "denominator": 48221316
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1046402557200,
+      "anchor_prime": 5,
+      "edge_count": 593,
+      "overlap_sum": {
+        "numerator": 827371144,
+        "denominator": 3442113675
+      },
+      "union_upper_bound": {
+        "numerator": 143497196369,
+        "denominator": 116266950800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 22130812704,
+      "anchor_prime": 5,
+      "edge_count": 190,
+      "overlap_sum": {
+        "numerator": 1016958359,
+        "denominator": 6809480832
+      },
+      "union_upper_bound": {
+        "numerator": 25186413163,
+        "denominator": 29507750272
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 40392602208,
+      "anchor_prime": 5,
+      "edge_count": 213,
+      "overlap_sum": {
+        "numerator": 22971349055,
+        "denominator": 161570408832
+      },
+      "union_upper_bound": {
+        "numerator": 8182197061,
+        "denominator": 9504141696
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 42471633204,
+      "anchor_prime": 5,
+      "edge_count": 199,
+      "overlap_sum": {
+        "numerator": 1877672021,
+        "denominator": 13068194832
+      },
+      "union_upper_bound": {
+        "numerator": 48689021833,
+        "denominator": 56628844272
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 6983776800,
+      "anchor_prime": 5,
+      "edge_count": 432,
+      "overlap_sum": {
+        "numerator": 6634778237,
+        "denominator": 27935107200
+      },
+      "union_upper_bound": {
+        "numerator": 11373982001,
+        "denominator": 9311702400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 288288,
+      "anchor_prime": 5,
+      "edge_count": 39,
+      "overlap_sum": {
+        "numerator": 54599,
+        "denominator": 384384
+      },
+      "union_upper_bound": {
+        "numerator": 76463,
+        "denominator": 88704
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 5466384,
+      "anchor_prime": 5,
+      "edge_count": 52,
+      "overlap_sum": {
+        "numerator": 782921,
+        "denominator": 5466384
+      },
+      "union_upper_bound": {
+        "numerator": 106987,
+        "denominator": 124236
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 15444230256,
+      "anchor_prime": 5,
+      "edge_count": 182,
+      "overlap_sum": {
+        "numerator": 8690110987,
+        "denominator": 61776921024
+      },
+      "union_upper_bound": {
+        "numerator": 17786825467,
+        "denominator": 20592307008
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 10659448800,
+      "anchor_prime": 5,
+      "edge_count": 395,
+      "overlap_sum": {
+        "numerator": 8664427,
+        "denominator": 36442560
+      },
+      "union_upper_bound": {
+        "numerator": 25973021891,
+        "denominator": 21318897600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 578655792,
+      "anchor_prime": 5,
+      "edge_count": 115,
+      "overlap_sum": {
+        "numerator": 351076093,
+        "denominator": 2314623168
+      },
+      "union_upper_bound": {
+        "numerator": 219317011,
+        "denominator": 257180352
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1255683068640,
+      "anchor_prime": 5,
+      "edge_count": 648,
+      "overlap_sum": {
+        "numerator": 154221191,
+        "denominator": 631313760
+      },
+      "union_upper_bound": {
+        "numerator": 220959305657,
+        "denominator": 179383295520
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 108248540400,
+      "anchor_prime": 5,
+      "edge_count": 531,
+      "overlap_sum": {
+        "numerator": 28735501,
+        "denominator": 120577600
+      },
+      "union_upper_bound": {
+        "numerator": 4465850923,
+        "denominator": 3638606400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 137005268400,
+      "anchor_prime": 5,
+      "edge_count": 501,
+      "overlap_sum": {
+        "numerator": 5361706795,
+        "denominator": 21920842944
+      },
+      "union_upper_bound": {
+        "numerator": 184041217,
+        "denominator": 147913920
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 111024144,
+      "anchor_prime": 5,
+      "edge_count": 90,
+      "overlap_sum": {
+        "numerator": 31638053,
+        "denominator": 222048288
+      },
+      "union_upper_bound": {
+        "numerator": 191497139,
+        "denominator": 222048288
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 17530128,
+      "anchor_prime": 5,
+      "edge_count": 72,
+      "overlap_sum": {
+        "numerator": 37957,
+        "denominator": 265608
+      },
+      "union_upper_bound": {
+        "numerator": 444485,
+        "denominator": 515592
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 568182384,
+      "anchor_prime": 5,
+      "edge_count": 123,
+      "overlap_sum": {
+        "numerator": 329424967,
+        "denominator": 2272729536
+      },
+      "union_upper_bound": {
+        "numerator": 1955900645,
+        "denominator": 2272729536
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 3304429128,
+      "anchor_prime": 5,
+      "edge_count": 165,
+      "overlap_sum": {
+        "numerator": 57245533,
+        "denominator": 400536864
+      },
+      "union_upper_bound": {
+        "numerator": 393240319,
+        "denominator": 455783328
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 913368456,
+      "anchor_prime": 5,
+      "edge_count": 124,
+      "overlap_sum": {
+        "numerator": 22033073,
+        "denominator": 152228076
+      },
+      "union_upper_bound": {
+        "numerator": 131112287,
+        "denominator": 152228076
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8454045600,
+      "anchor_prime": 5,
+      "edge_count": 411,
+      "overlap_sum": {
+        "numerator": 8287247,
+        "denominator": 33782400
+      },
+      "union_upper_bound": {
+        "numerator": 80602309,
+        "denominator": 64411776
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2929078152,
+      "anchor_prime": 5,
+      "edge_count": 169,
+      "overlap_sum": {
+        "numerator": 281190589,
+        "denominator": 1952718768
+      },
+      "union_upper_bound": {
+        "numerator": 1683522205,
+        "denominator": 1952718768
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8299054764,
+      "anchor_prime": 5,
+      "edge_count": 158,
+      "overlap_sum": {
+        "numerator": 1570999511,
+        "denominator": 11065406352
+      },
+      "union_upper_bound": {
+        "numerator": 2608085105,
+        "denominator": 3017838096
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 996401952,
+      "anchor_prime": 5,
+      "edge_count": 146,
+      "overlap_sum": {
+        "numerator": 12293461,
+        "denominator": 86643648
+      },
+      "union_upper_bound": {
+        "numerator": 1723050995,
+        "denominator": 1992803904
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1266697832400,
+      "anchor_prime": 5,
+      "edge_count": 595,
+      "overlap_sum": {
+        "numerator": 54648416479,
+        "denominator": 220295275200
+      },
+      "union_upper_bound": {
+        "numerator": 6399320755187,
+        "denominator": 5066791329600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 36100888223400,
+      "anchor_prime": 5,
+      "edge_count": 863,
+      "overlap_sum": {
+        "numerator": 8754689573549,
+        "denominator": 36100888223400
+      },
+      "union_upper_bound": {
+        "numerator": 22238338845763,
+        "denominator": 18050444111700
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 369318549600,
+      "anchor_prime": 5,
+      "edge_count": 563,
+      "overlap_sum": {
+        "numerator": 35214078821,
+        "denominator": 147727419840
+      },
+      "union_upper_bound": {
+        "numerator": 28926921389,
+        "denominator": 23827003200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 144216072,
+      "anchor_prime": 5,
+      "edge_count": 97,
+      "overlap_sum": {
+        "numerator": 1749667,
+        "denominator": 12018006
+      },
+      "union_upper_bound": {
+        "numerator": 124228369,
+        "denominator": 144216072
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 11107965607200,
+      "anchor_prime": 5,
+      "edge_count": 761,
+      "overlap_sum": {
+        "numerator": 978159967,
+        "denominator": 3894798600
+      },
+      "union_upper_bound": {
+        "numerator": 582557983523,
+        "denominator": 462831900300
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 1520037398880,
+      "anchor_prime": 5,
+      "edge_count": 629,
+      "overlap_sum": {
+        "numerator": 381808332349,
+        "denominator": 1520037398880
+      },
+      "union_upper_bound": {
+        "numerator": 7564712453,
+        "denominator": 6008052960
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 292907815200,
+      "anchor_prime": 5,
+      "edge_count": 579,
+      "overlap_sum": {
+        "numerator": 10263263761,
+        "denominator": 41843973600
+      },
+      "union_upper_bound": {
+        "numerator": 17368446103,
+        "denominator": 13947991200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2738736,
+      "anchor_prime": 5,
+      "edge_count": 55,
+      "overlap_sum": {
+        "numerator": 73819,
+        "denominator": 521664
+      },
+      "union_upper_bound": {
+        "numerator": 9487925,
+        "denominator": 10954944
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 131037706800,
+      "anchor_prime": 5,
+      "edge_count": 521,
+      "overlap_sum": {
+        "numerator": 5164683275,
+        "denominator": 20966033088
+      },
+      "union_upper_bound": {
+        "numerator": 2853418879,
+        "denominator": 2269051200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 28180152,
+      "anchor_prime": 5,
+      "edge_count": 83,
+      "overlap_sum": {
+        "numerator": 2694325,
+        "denominator": 18786768
+      },
+      "union_upper_bound": {
+        "numerator": 5412975,
+        "denominator": 6262256
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 465817912560,
+      "anchor_prime": 5,
+      "edge_count": 597,
+      "overlap_sum": {
+        "numerator": 466461708269,
+        "denominator": 1863271650240
+      },
+      "union_upper_bound": {
+        "numerator": 783663645013,
+        "denominator": 621090550080
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 7162848,
+      "anchor_prime": 5,
+      "edge_count": 67,
+      "overlap_sum": {
+        "numerator": 4122625,
+        "denominator": 28651392
+      },
+      "union_upper_bound": {
+        "numerator": 3537221,
+        "denominator": 4093056
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 10351509168,
+      "anchor_prime": 5,
+      "edge_count": 173,
+      "overlap_sum": {
+        "numerator": 2081904945,
+        "denominator": 13802012224
+      },
+      "union_upper_bound": {
+        "numerator": 3227012783,
+        "denominator": 3764185152
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 447069823200,
+      "anchor_prime": 5,
+      "edge_count": 552,
+      "overlap_sum": {
+        "numerator": 55104880213,
+        "denominator": 223534911600
+      },
+      "union_upper_bound": {
+        "numerator": 278064226549,
+        "denominator": 223534911600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 20928051144,
+      "anchor_prime": 5,
+      "edge_count": 201,
+      "overlap_sum": {
+        "numerator": 427276039,
+        "denominator": 2989721592
+      },
+      "union_upper_bound": {
+        "numerator": 18111392755,
+        "denominator": 20928051144
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 476500752,
+      "anchor_prime": 5,
+      "edge_count": 128,
+      "overlap_sum": {
+        "numerator": 266717023,
+        "denominator": 1906003008
+      },
+      "union_upper_bound": {
+        "numerator": 1655386541,
+        "denominator": 1906003008
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 3017838096,
+      "anchor_prime": 5,
+      "edge_count": 154,
+      "overlap_sum": {
+        "numerator": 1680317047,
+        "denominator": 12071352384
+      },
+      "union_upper_bound": {
+        "numerator": 3497886907,
+        "denominator": 4023784128
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 194699232,
+      "anchor_prime": 5,
+      "edge_count": 122,
+      "overlap_sum": {
+        "numerator": 5192891,
+        "denominator": 37085568
+      },
+      "union_upper_bound": {
+        "numerator": 676509229,
+        "denominator": 778796928
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1130976,
+      "anchor_prime": 5,
+      "edge_count": 50,
+      "overlap_sum": {
+        "numerator": 93301,
+        "denominator": 646272
+      },
+      "union_upper_bound": {
+        "numerator": 558763,
+        "denominator": 646272
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 53542288800,
+      "anchor_prime": 5,
+      "edge_count": 492,
+      "overlap_sum": {
+        "numerator": 2643544369,
+        "denominator": 10708457760
+      },
+      "union_upper_bound": {
+        "numerator": 793542791,
+        "denominator": 629909280
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 30741984,
+      "anchor_prime": 5,
+      "edge_count": 99,
+      "overlap_sum": {
+        "numerator": 2164459,
+        "denominator": 15370992
+      },
+      "union_upper_bound": {
+        "numerator": 785329,
+        "denominator": 904176
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 101264763600,
+      "anchor_prime": 5,
+      "edge_count": 529,
+      "overlap_sum": {
+        "numerator": 145398945,
+        "denominator": 600087488
+      },
+      "union_upper_bound": {
+        "numerator": 167644662131,
+        "denominator": 135019684800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 13127595717600,
+      "anchor_prime": 5,
+      "edge_count": 750,
+      "overlap_sum": {
+        "numerator": 3070059820621,
+        "denominator": 13127595717600
+      },
+      "union_upper_bound": {
+        "numerator": 189044788717,
+        "denominator": 156280901400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 829905476400,
+      "anchor_prime": 5,
+      "edge_count": 599,
+      "overlap_sum": {
+        "numerator": 218724173,
+        "denominator": 882408800
+      },
+      "union_upper_bound": {
+        "numerator": 36880255843,
+        "denominator": 29119490400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 432432,
+      "anchor_prime": 5,
+      "edge_count": 43,
+      "overlap_sum": {
+        "numerator": 246643,
+        "denominator": 1729728
+      },
+      "union_upper_bound": {
+        "numerator": 1500197,
+        "denominator": 1729728
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 148586256,
+      "anchor_prime": 5,
+      "edge_count": 105,
+      "overlap_sum": {
+        "numerator": 606845,
+        "denominator": 4306848
+      },
+      "union_upper_bound": {
+        "numerator": 258274075,
+        "denominator": 297172512
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 9626903526240,
+      "anchor_prime": 5,
+      "edge_count": 725,
+      "overlap_sum": {
+        "numerator": 2198580563,
+        "denominator": 8678750080
+      },
+      "union_upper_bound": {
+        "numerator": 16293413741131,
+        "denominator": 12835871368320
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 995886571680,
+      "anchor_prime": 5,
+      "edge_count": 659,
+      "overlap_sum": {
+        "numerator": 10527347455,
+        "denominator": 41932066176
+      },
+      "union_upper_bound": {
+        "numerator": 558824261551,
+        "denominator": 442616254080
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 1888245216,
+      "anchor_prime": 5,
+      "edge_count": 116,
+      "overlap_sum": {
+        "numerator": 1161759649,
+        "denominator": 7552980864
+      },
+      "union_upper_bound": {
+        "numerator": 6469175335,
+        "denominator": 7552980864
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 81722440800,
+      "anchor_prime": 5,
+      "edge_count": 477,
+      "overlap_sum": {
+        "numerator": 80852854867,
+        "denominator": 326889763200
+      },
+      "union_upper_bound": {
+        "numerator": 137022558107,
+        "denominator": 108963254400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 22830601248,
+      "anchor_prime": 5,
+      "edge_count": 216,
+      "overlap_sum": {
+        "numerator": 1423402475,
+        "denominator": 10146933888
+      },
+      "union_upper_bound": {
+        "numerator": 79483080637,
+        "denominator": 91322404992
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 36656928,
+      "anchor_prime": 5,
+      "edge_count": 92,
+      "overlap_sum": {
+        "numerator": 1536859,
+        "denominator": 10473408
+      },
+      "union_upper_bound": {
+        "numerator": 9049127,
+        "denominator": 10473408
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2831442213600,
+      "anchor_prime": 5,
+      "edge_count": 638,
+      "overlap_sum": {
+        "numerator": 468192181211,
+        "denominator": 1887628142400
+      },
+      "union_upper_bound": {
+        "numerator": 473225326537,
+        "denominator": 377525628480
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 12666978324,
+      "anchor_prime": 5,
+      "edge_count": 153,
+      "overlap_sum": {
+        "numerator": 3644301553,
+        "denominator": 25333956648
+      },
+      "union_upper_bound": {
+        "numerator": 108268885,
+        "denominator": 124797816
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 330442912800,
+      "anchor_prime": 5,
+      "edge_count": 566,
+      "overlap_sum": {
+        "numerator": 9735224123,
+        "denominator": 40053686400
+      },
+      "union_upper_bound": {
+        "numerator": 3596988119,
+        "denominator": 2904992640
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 3583214712,
+      "anchor_prime": 5,
+      "edge_count": 169,
+      "overlap_sum": {
+        "numerator": 75555661,
+        "denominator": 511887816
+      },
+      "union_upper_bound": {
+        "numerator": 1550664821,
+        "denominator": 1791607356
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 33778608864,
+      "anchor_prime": 5,
+      "edge_count": 181,
+      "overlap_sum": {
+        "numerator": 10349114543,
+        "denominator": 67557217728
+      },
+      "union_upper_bound": {
+        "numerator": 19394354115,
+        "denominator": 22519072576
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 11958886368,
+      "anchor_prime": 5,
+      "edge_count": 155,
+      "overlap_sum": {
+        "numerator": 141342277,
+        "denominator": 919914336
+      },
+      "union_upper_bound": {
+        "numerator": 3431348125,
+        "denominator": 3986295456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 803134332,
+      "anchor_prime": 5,
+      "edge_count": 147,
+      "overlap_sum": {
+        "numerator": 153772163,
+        "denominator": 1070845776
+      },
+      "union_upper_bound": {
+        "numerator": 2338423,
+        "denominator": 2683824
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2092805114400,
+      "anchor_prime": 5,
+      "edge_count": 669,
+      "overlap_sum": {
+        "numerator": 48876029051,
+        "denominator": 199314772800
+      },
+      "union_upper_bound": {
+        "numerator": 95100639667,
+        "denominator": 76102004160
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 8936928,
+      "anchor_prime": 5,
+      "edge_count": 66,
+      "overlap_sum": {
+        "numerator": 184201,
+        "denominator": 1276704
+      },
+      "union_upper_bound": {
+        "numerator": 432701,
+        "denominator": 496496
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 17938329552,
+      "anchor_prime": 5,
+      "edge_count": 173,
+      "overlap_sum": {
+        "numerator": 49945063,
+        "denominator": 324675648
+      },
+      "union_upper_bound": {
+        "numerator": 4758952081,
+        "denominator": 5519486016
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 10744272,
+      "anchor_prime": 5,
+      "edge_count": 79,
+      "overlap_sum": {
+        "numerator": 6232301,
+        "denominator": 42977088
+      },
+      "union_upper_bound": {
+        "numerator": 37445131,
+        "denominator": 42977088
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 169457904,
+      "anchor_prime": 5,
+      "edge_count": 95,
+      "overlap_sum": {
+        "numerator": 195929,
+        "denominator": 1344904
+      },
+      "union_upper_bound": {
+        "numerator": 49177895,
+        "denominator": 56485968
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 216497080800,
+      "anchor_prime": 5,
+      "edge_count": 603,
+      "overlap_sum": {
+        "numerator": 52546174579,
+        "denominator": 216497080800
+      },
+      "union_upper_bound": {
+        "numerator": 29866387247,
+        "denominator": 24055231200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 274010536800,
+      "anchor_prime": 5,
+      "edge_count": 576,
+      "overlap_sum": {
+        "numerator": 39081921757,
+        "denominator": 156577449600
+      },
+      "union_upper_bound": {
+        "numerator": 460310244103,
+        "denominator": 365347382400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 776363187600,
+      "anchor_prime": 5,
+      "edge_count": 613,
+      "overlap_sum": {
+        "numerator": 71024276111,
+        "denominator": 282313886400
+      },
+      "union_upper_bound": {
+        "numerator": 441667776007,
+        "denominator": 345050305600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 262075413600,
+      "anchor_prime": 5,
+      "edge_count": 583,
+      "overlap_sum": {
+        "numerator": 18768798467,
+        "denominator": 74878689600
+      },
+      "union_upper_bound": {
+        "numerator": 31736450381,
+        "denominator": 24959563200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2533395664800,
+      "anchor_prime": 5,
+      "edge_count": 660,
+      "overlap_sum": {
+        "numerator": 2562241138021,
+        "denominator": 10133582659200
+      },
+      "union_upper_bound": {
+        "numerator": 12953146035019,
+        "denominator": 10133582659200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 30888460512,
+      "anchor_prime": 5,
+      "edge_count": 209,
+      "overlap_sum": {
+        "numerator": 1978094179,
+        "denominator": 13728204672
+      },
+      "union_upper_bound": {
+        "numerator": 108070892093,
+        "denominator": 123553842048
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 292048848,
+      "anchor_prime": 5,
+      "edge_count": 139,
+      "overlap_sum": {
+        "numerator": 82809413,
+        "denominator": 584097696
+      },
+      "union_upper_bound": {
+        "numerator": 512272297,
+        "denominator": 584097696
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 28314422136,
+      "anchor_prime": 5,
+      "edge_count": 185,
+      "overlap_sum": {
+        "numerator": 16683387269,
+        "denominator": 113257688544
+      },
+      "union_upper_bound": {
+        "numerator": 10974715331,
+        "denominator": 12584187616
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4470698232,
+      "anchor_prime": 5,
+      "edge_count": 159,
+      "overlap_sum": {
+        "numerator": 10030421,
+        "denominator": 67737852
+      },
+      "union_upper_bound": {
+        "numerator": 1947931379,
+        "denominator": 2235349116
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1225836612,
+      "anchor_prime": 5,
+      "edge_count": 131,
+      "overlap_sum": {
+        "numerator": 79122559,
+        "denominator": 544816272
+      },
+      "union_upper_bound": {
+        "numerator": 4287029185,
+        "denominator": 4903346448
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2025295272,
+      "anchor_prime": 5,
+      "edge_count": 181,
+      "overlap_sum": {
+        "numerator": 1179158261,
+        "denominator": 8101181088
+      },
+      "union_upper_bound": {
+        "numerator": 7081927639,
+        "denominator": 8101181088
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 122583661200,
+      "anchor_prime": 5,
+      "edge_count": 519,
+      "overlap_sum": {
+        "numerator": 66981781,
+        "denominator": 268382400
+      },
+      "union_upper_bound": {
+        "numerator": 88946780207,
+        "denominator": 70047806400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 4247163320400,
+      "anchor_prime": 5,
+      "edge_count": 698,
+      "overlap_sum": {
+        "numerator": 472199972969,
+        "denominator": 1887628142400
+      },
+      "union_upper_bound": {
+        "numerator": 330611848307,
+        "denominator": 261363896640
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 80313433200,
+      "anchor_prime": 5,
+      "edge_count": 549,
+      "overlap_sum": {
+        "numerator": 26738790349,
+        "denominator": 107084577600
+      },
+      "union_upper_bound": {
+        "numerator": 409293570793,
+        "denominator": 321253732800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 84900816,
+      "anchor_prime": 5,
+      "edge_count": 92,
+      "overlap_sum": {
+        "numerator": 3757933,
+        "denominator": 26123328
+      },
+      "union_upper_bound": {
+        "numerator": 297530659,
+        "denominator": 339603264
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 873584712,
+      "anchor_prime": 5,
+      "edge_count": 128,
+      "overlap_sum": {
+        "numerator": 254618719,
+        "denominator": 1747169424
+      },
+      "union_upper_bound": {
+        "numerator": 138859619,
+        "denominator": 158833584
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 931635825120,
+      "anchor_prime": 5,
+      "edge_count": 672,
+      "overlap_sum": {
+        "numerator": 107433191,
+        "denominator": 420840576
+      },
+      "union_upper_bound": {
+        "numerator": 4759848184639,
+        "denominator": 3726543300480
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 14440355289360,
+      "anchor_prime": 5,
+      "edge_count": 802,
+      "overlap_sum": {
+        "numerator": 14783161177061,
+        "denominator": 57761421157440
+      },
+      "union_upper_bound": {
+        "numerator": 10583253094457,
+        "denominator": 8251631593920
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 222048288,
+      "anchor_prime": 5,
+      "edge_count": 106,
+      "overlap_sum": {
+        "numerator": 10823633,
+        "denominator": 74016096
+      },
+      "union_upper_bound": {
+        "numerator": 97057087,
+        "denominator": 111024144
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 35060256,
+      "anchor_prime": 5,
+      "edge_count": 82,
+      "overlap_sum": {
+        "numerator": 2570297,
+        "denominator": 17530128
+      },
+      "union_upper_bound": {
+        "numerator": 30635999,
+        "denominator": 35060256
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 953001504,
+      "anchor_prime": 5,
+      "edge_count": 147,
+      "overlap_sum": {
+        "numerator": 544394099,
+        "denominator": 3812006016
+      },
+      "union_upper_bound": {
+        "numerator": 3345830057,
+        "denominator": 3812006016
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 6035676192,
+      "anchor_prime": 5,
+      "edge_count": 177,
+      "overlap_sum": {
+        "numerator": 490003021,
+        "denominator": 3448957824
+      },
+      "union_upper_bound": {
+        "numerator": 21209684513,
+        "denominator": 24142704768
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1659810952800,
+      "anchor_prime": 5,
+      "edge_count": 675,
+      "overlap_sum": {
+        "numerator": 837459375667,
+        "denominator": 3319621905600
+      },
+      "union_upper_bound": {
+        "numerator": 1417162900801,
+        "denominator": 1106540635200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 4180176,
+      "anchor_prime": 5,
+      "edge_count": 52,
+      "overlap_sum": {
+        "numerator": 607993,
+        "denominator": 4180176
+      },
+      "union_upper_bound": {
+        "numerator": 457627,
+        "denominator": 522522
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 10932768,
+      "anchor_prime": 5,
+      "edge_count": 62,
+      "overlap_sum": {
+        "numerator": 3223631,
+        "denominator": 21865536
+      },
+      "union_upper_bound": {
+        "numerator": 1124033,
+        "denominator": 1286208
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 13405392,
+      "anchor_prime": 5,
+      "edge_count": 77,
+      "overlap_sum": {
+        "numerator": 149375,
+        "denominator": 1031184
+      },
+      "union_upper_bound": {
+        "numerator": 419657,
+        "denominator": 478764
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 320896784208,
+      "anchor_prime": 5,
+      "edge_count": 240,
+      "overlap_sum": {
+        "numerator": 28129795043,
+        "denominator": 183369590976
+      },
+      "union_upper_bound": {
+        "numerator": 1114242959519,
+        "denominator": 1283587136832
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4606173936,
+      "anchor_prime": 5,
+      "edge_count": 151,
+      "overlap_sum": {
+        "numerator": 12986135,
+        "denominator": 90762048
+      },
+      "union_upper_bound": {
+        "numerator": 16184702311,
+        "denominator": 18424695744
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1157311584,
+      "anchor_prime": 5,
+      "edge_count": 134,
+      "overlap_sum": {
+        "numerator": 18520825,
+        "denominator": 118698624
+      },
+      "union_upper_bound": {
+        "numerator": 4009837825,
+        "denominator": 4629246336
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 202529527200,
+      "anchor_prime": 5,
+      "edge_count": 604,
+      "overlap_sum": {
+        "numerator": 10542931067,
+        "denominator": 42637795200
+      },
+      "union_upper_bound": {
+        "numerator": 1018483225723,
+        "denominator": 810118108800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 5477472,
+      "anchor_prime": 5,
+      "edge_count": 70,
+      "overlap_sum": {
+        "numerator": 3183503,
+        "denominator": 21909888
+      },
+      "union_upper_bound": {
+        "numerator": 19226941,
+        "denominator": 21909888
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1136364768,
+      "anchor_prime": 5,
+      "edge_count": 142,
+      "overlap_sum": {
+        "numerator": 226122893,
+        "denominator": 1515153024
+      },
+      "union_upper_bound": {
+        "numerator": 441478201,
+        "denominator": 505051008
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 297172512,
+      "anchor_prime": 5,
+      "edge_count": 120,
+      "overlap_sum": {
+        "numerator": 171468169,
+        "denominator": 1188690048
+      },
+      "union_upper_bound": {
+        "numerator": 348430765,
+        "denominator": 396230016
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 3139207671600,
+      "anchor_prime": 5,
+      "edge_count": 731,
+      "overlap_sum": {
+        "numerator": 1906182703,
+        "denominator": 7694136450
+      },
+      "union_upper_bound": {
+        "numerator": 1981089036413,
+        "denominator": 1569603835800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 864864,
+      "anchor_prime": 5,
+      "edge_count": 52,
+      "overlap_sum": {
+        "numerator": 56255,
+        "denominator": 384384
+      },
+      "union_upper_bound": {
+        "numerator": 3039893,
+        "denominator": 3459456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 7763631876,
+      "anchor_prime": 5,
+      "edge_count": 163,
+      "overlap_sum": {
+        "numerator": 378180599,
+        "denominator": 2587877292
+      },
+      "union_upper_bound": {
+        "numerator": 325007459,
+        "denominator": 369696756
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 20703018336,
+      "anchor_prime": 5,
+      "edge_count": 199,
+      "overlap_sum": {
+        "numerator": 3212092885,
+        "denominator": 20703018336
+      },
+      "union_upper_bound": {
+        "numerator": 783502933,
+        "denominator": 900131232
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 24897164292,
+      "anchor_prime": 5,
+      "edge_count": 214,
+      "overlap_sum": {
+        "numerator": 1614229187,
+        "denominator": 11065406352
+      },
+      "union_upper_bound": {
+        "numerator": 2656568329,
+        "denominator": 3017838096
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 111079656072,
+      "anchor_prime": 5,
+      "edge_count": 240,
+      "overlap_sum": {
+        "numerator": 66744831133,
+        "denominator": 444318624288
+      },
+      "union_upper_bound": {
+        "numerator": 389257203875,
+        "denominator": 444318624288
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 16399152,
+      "anchor_prime": 5,
+      "edge_count": 68,
+      "overlap_sum": {
+        "numerator": 190259,
+        "denominator": 1286208
+      },
+      "union_upper_bound": {
+        "numerator": 57659963,
+        "denominator": 65596608
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 3800093497200,
+      "anchor_prime": 5,
+      "edge_count": 721,
+      "overlap_sum": {
+        "numerator": 387836994971,
+        "denominator": 1520037398880
+      },
+      "union_upper_bound": {
+        "numerator": 338170008763,
+        "denominator": 262075413600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 103861296,
+      "anchor_prime": 5,
+      "edge_count": 93,
+      "overlap_sum": {
+        "numerator": 61410047,
+        "denominator": 415445184
+      },
+      "union_upper_bound": {
+        "numerator": 121880699,
+        "denominator": 138481728
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 333072432,
+      "anchor_prime": 5,
+      "edge_count": 123,
+      "overlap_sum": {
+        "numerator": 5775293,
+        "denominator": 39184992
+      },
+      "union_upper_bound": {
+        "numerator": 2103485,
+        "denominator": 2387616
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2740105368,
+      "anchor_prime": 5,
+      "edge_count": 167,
+      "overlap_sum": {
+        "numerator": 42051239,
+        "denominator": 281036448
+      },
+      "union_upper_bound": {
+        "numerator": 741914491,
+        "denominator": 843109344
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8216208,
+      "anchor_prime": 5,
+      "edge_count": 79,
+      "overlap_sum": {
+        "numerator": 800411,
+        "denominator": 5477472
+      },
+      "union_upper_bound": {
+        "numerator": 14521627,
+        "denominator": 16432416
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 535422888,
+      "anchor_prime": 5,
+      "edge_count": 138,
+      "overlap_sum": {
+        "numerator": 78979577,
+        "denominator": 535422888
+      },
+      "union_upper_bound": {
+        "numerator": 2568404,
+        "denominator": 2909907
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 9053514288,
+      "anchor_prime": 5,
+      "edge_count": 201,
+      "overlap_sum": {
+        "numerator": 2604538693,
+        "denominator": 18107028576
+      },
+      "union_upper_bound": {
+        "numerator": 16052961559,
+        "denominator": 18107028576
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1552726375200,
+      "anchor_prime": 5,
+      "edge_count": 695,
+      "overlap_sum": {
+        "numerator": 46864849783,
+        "denominator": 182673691200
+      },
+      "union_upper_bound": {
+        "numerator": 1341104043109,
+        "denominator": 1035150916800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 38000934972,
+      "anchor_prime": 5,
+      "edge_count": 201,
+      "overlap_sum": {
+        "numerator": 2039439959,
+        "denominator": 13818521808
+      },
+      "union_upper_bound": {
+        "numerator": 312855943,
+        "denominator": 354321072
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 584097696,
+      "anchor_prime": 5,
+      "edge_count": 161,
+      "overlap_sum": {
+        "numerator": 84515707,
+        "denominator": 584097696
+      },
+      "union_upper_bound": {
+        "numerator": 36967261,
+        "denominator": 41721264
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 84540456,
+      "anchor_prime": 5,
+      "edge_count": 109,
+      "overlap_sum": {
+        "numerator": 6260357,
+        "denominator": 42270228
+      },
+      "union_upper_bound": {
+        "numerator": 74619355,
+        "denominator": 84540456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 24067258815600,
+      "anchor_prime": 5,
+      "edge_count": 825,
+      "overlap_sum": {
+        "numerator": 2063525860171,
+        "denominator": 8022419605200
+      },
+      "union_upper_bound": {
+        "numerator": 10440095970589,
+        "denominator": 8022419605200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 445758768,
+      "anchor_prime": 5,
+      "edge_count": 132,
+      "overlap_sum": {
+        "numerator": 86392109,
+        "denominator": 594345024
+      },
+      "union_upper_bound": {
+        "numerator": 1579155317,
+        "denominator": 1783035072
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 160626866400,
+      "anchor_prime": 5,
+      "edge_count": 623,
+      "overlap_sum": {
+        "numerator": 6281928707,
+        "denominator": 24711825600
+      },
+      "union_upper_bound": {
+        "numerator": 413885299987,
+        "denominator": 321253732800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2489716429200,
+      "anchor_prime": 5,
+      "edge_count": 748,
+      "overlap_sum": {
+        "numerator": 1448011277,
+        "denominator": 5674567360
+      },
+      "union_upper_bound": {
+        "numerator": 758514404261,
+        "denominator": 585815630400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 21488544,
+      "anchor_prime": 5,
+      "edge_count": 96,
+      "overlap_sum": {
+        "numerator": 12792127,
+        "denominator": 85954176
+      },
+      "union_upper_bound": {
+        "numerator": 190231,
+        "denominator": 215424
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 245167322400,
+      "anchor_prime": 5,
+      "edge_count": 585,
+      "overlap_sum": {
+        "numerator": 15596466967,
+        "denominator": 61291830600
+      },
+      "union_upper_bound": {
+        "numerator": 63013514381,
+        "denominator": 49033464480
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2823138864,
+      "anchor_prime": 5,
+      "edge_count": 165,
+      "overlap_sum": {
+        "numerator": 409391153,
+        "denominator": 2823138864
+      },
+      "union_upper_bound": {
+        "numerator": 1252621913,
+        "denominator": 1411569432
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 28880710578720,
+      "anchor_prime": 5,
+      "edge_count": 892,
+      "overlap_sum": {
+        "numerator": 33638719066,
+        "denominator": 128931743655
+      },
+      "union_upper_bound": {
+        "numerator": 37505260121737,
+        "denominator": 28880710578720
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 8494326640800,
+      "anchor_prime": 5,
+      "edge_count": 788,
+      "overlap_sum": {
+        "numerator": 144514816561,
+        "denominator": 566288442720
+      },
+      "union_upper_bound": {
+        "numerator": 2176522828223,
+        "denominator": 1698865328160
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 62784153432,
+      "anchor_prime": 5,
+      "edge_count": 263,
+      "overlap_sum": {
+        "numerator": 12392243195,
+        "denominator": 83712204576
+      },
+      "union_upper_bound": {
+        "numerator": 31752870653,
+        "denominator": 35876659104
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 129585456,
+      "anchor_prime": 5,
+      "edge_count": 92,
+      "overlap_sum": {
+        "numerator": 5476417,
+        "denominator": 37024416
+      },
+      "union_upper_bound": {
+        "numerator": 76514183,
+        "denominator": 86390304
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 338915808,
+      "anchor_prime": 5,
+      "edge_count": 105,
+      "overlap_sum": {
+        "numerator": 33866191,
+        "denominator": 225943872
+      },
+      "union_upper_bound": {
+        "numerator": 85573315,
+        "denominator": 96833088
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 35876659104,
+      "anchor_prime": 5,
+      "edge_count": 196,
+      "overlap_sum": {
+        "numerator": 22701326177,
+        "denominator": 143506636416
+      },
+      "union_upper_bound": {
+        "numerator": 6616935965,
+        "denominator": 7552980864
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 9212347872,
+      "anchor_prime": 5,
+      "edge_count": 170,
+      "overlap_sum": {
+        "numerator": 5396349965,
+        "denominator": 36849391488
+      },
+      "union_upper_bound": {
+        "numerator": 32763152183,
+        "denominator": 36849391488
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 169801632,
+      "anchor_prime": 5,
+      "edge_count": 110,
+      "overlap_sum": {
+        "numerator": 321427,
+        "denominator": 2176944
+      },
+      "union_upper_bound": {
+        "numerator": 2692465,
+        "denominator": 3032172
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 26810784,
+      "anchor_prime": 5,
+      "edge_count": 88,
+      "overlap_sum": {
+        "numerator": 15938653,
+        "denominator": 107243136
+      },
+      "union_upper_bound": {
+        "numerator": 95271571,
+        "denominator": 107243136
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 240672588156,
+      "anchor_prime": 5,
+      "edge_count": 231,
+      "overlap_sum": {
+        "numerator": 71516402843,
+        "denominator": 481345176312
+      },
+      "union_upper_bound": {
+        "numerator": 427721739097,
+        "denominator": 481345176312
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 6278415343200,
+      "anchor_prime": 5,
+      "edge_count": 821,
+      "overlap_sum": {
+        "numerator": 9279443039,
+        "denominator": 36715879200
+      },
+      "union_upper_bound": {
+        "numerator": 501580494671,
+        "denominator": 392400958950
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 8360352,
+      "anchor_prime": 5,
+      "edge_count": 65,
+      "overlap_sum": {
+        "numerator": 385139,
+        "denominator": 2572416
+      },
+      "union_upper_bound": {
+        "numerator": 29718905,
+        "denominator": 33441408
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 508373712,
+      "anchor_prime": 5,
+      "edge_count": 118,
+      "overlap_sum": {
+        "numerator": 12743713,
+        "denominator": 84728952
+      },
+      "union_upper_bound": {
+        "numerator": 75285713,
+        "denominator": 84728952
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 641793568416,
+      "anchor_prime": 5,
+      "edge_count": 272,
+      "overlap_sum": {
+        "numerator": 18405796813,
+        "denominator": 116689739712
+      },
+      "union_upper_bound": {
+        "numerator": 3503624687,
+        "denominator": 3973953984
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 7600186994400,
+      "anchor_prime": 5,
+      "edge_count": 800,
+      "overlap_sum": {
+        "numerator": 68750071003,
+        "denominator": 264354330240
+      },
+      "union_upper_bound": {
+        "numerator": 4412113389727,
+        "denominator": 3377860886400
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2329089562800,
+      "anchor_prime": 5,
+      "edge_count": 757,
+      "overlap_sum": {
+        "numerator": 402206365607,
+        "denominator": 1552726375200
+      },
+      "union_upper_bound": {
+        "numerator": 6096764306207,
+        "denominator": 4658179125600
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 3219700176,
+      "anchor_prime": 5,
+      "edge_count": 148,
+      "overlap_sum": {
+        "numerator": 53801879,
+        "denominator": 357744464
+      },
+      "union_upper_bound": {
+        "numerator": 179188907,
+        "denominator": 201231261
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 817224408,
+      "anchor_prime": 5,
+      "edge_count": 131,
+      "overlap_sum": {
+        "numerator": 44800129,
+        "denominator": 297172512
+      },
+      "union_upper_bound": {
+        "numerator": 2911323313,
+        "denominator": 3268897632
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 254702448,
+      "anchor_prime": 5,
+      "edge_count": 127,
+      "overlap_sum": {
+        "numerator": 4585045,
+        "denominator": 30873024
+      },
+      "union_upper_bound": {
+        "numerator": 101186431,
+        "denominator": 113201088
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 13818521808,
+      "anchor_prime": 5,
+      "edge_count": 191,
+      "overlap_sum": {
+        "numerator": 22408537,
+        "denominator": 151851888
+      },
+      "union_upper_bound": {
+        "numerator": 588985861,
+        "denominator": 658024848
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 79423344,
+      "anchor_prime": 5,
+      "edge_count": 91,
+      "overlap_sum": {
+        "numerator": 5268955,
+        "denominator": 35299264
+      },
+      "union_upper_bound": {
+        "numerator": 237117,
+        "denominator": 265408
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 12540528,
+      "anchor_prime": 5,
+      "edge_count": 70,
+      "overlap_sum": {
+        "numerator": 2506531,
+        "denominator": 16720704
+      },
+      "union_upper_bound": {
+        "numerator": 14930353,
+        "denominator": 16720704
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 18107028576,
+      "anchor_prime": 5,
+      "edge_count": 230,
+      "overlap_sum": {
+        "numerator": 1518739393,
+        "denominator": 10346873472
+      },
+      "union_upper_bound": {
+        "numerator": 21633543703,
+        "denominator": 24142704768
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4979432858400,
+      "anchor_prime": 5,
+      "edge_count": 839,
+      "overlap_sum": {
+        "numerator": 8996593129,
+        "denominator": 34639532928
+      },
+      "union_upper_bound": {
+        "numerator": 5217027479189,
+        "denominator": 3983546286720
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 2620754136,
+      "anchor_prime": 5,
+      "edge_count": 168,
+      "overlap_sum": {
+        "numerator": 525749009,
+        "denominator": 3494338848
+      },
+      "union_upper_bound": {
+        "numerator": 9357413305,
+        "denominator": 10483016544
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 84943266408,
+      "anchor_prime": 5,
+      "edge_count": 246,
+      "overlap_sum": {
+        "numerator": 51726900283,
+        "denominator": 339773065632
+      },
+      "union_upper_bound": {
+        "numerator": 302712048169,
+        "denominator": 339773065632
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 16598109528,
+      "anchor_prime": 5,
+      "edge_count": 199,
+      "overlap_sum": {
+        "numerator": 9955272385,
+        "denominator": 66392438112
+      },
+      "union_upper_bound": {
+        "numerator": 59317447675,
+        "denominator": 66392438112
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 48134517631200,
+      "anchor_prime": 5,
+      "edge_count": 921,
+      "overlap_sum": {
+        "numerator": 27144108571,
+        "denominator": 103515091680
+      },
+      "union_upper_bound": {
+        "numerator": 63413680100087,
+        "denominator": 48134517631200
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 32798304,
+      "anchor_prime": 5,
+      "edge_count": 82,
+      "overlap_sum": {
+        "numerator": 3327713,
+        "denominator": 21865536
+      },
+      "union_upper_bound": {
+        "numerator": 19505441,
+        "denominator": 21865536
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 666144864,
+      "anchor_prime": 5,
+      "edge_count": 144,
+      "overlap_sum": {
+        "numerator": 402883727,
+        "denominator": 2664579456
+      },
+      "union_upper_bound": {
+        "numerator": 2379961289,
+        "denominator": 2664579456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 87517304784,
+      "anchor_prime": 5,
+      "edge_count": 230,
+      "overlap_sum": {
+        "numerator": 17185891633,
+        "denominator": 116689739712
+      },
+      "union_upper_bound": {
+        "numerator": 314204986765,
+        "denominator": 350069219136
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 891517536,
+      "anchor_prime": 5,
+      "edge_count": 152,
+      "overlap_sum": {
+        "numerator": 66315503,
+        "denominator": 445758768
+      },
+      "union_upper_bound": {
+        "numerator": 798900547,
+        "denominator": 891517536
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2450448,
+      "anchor_prime": 5,
+      "edge_count": 60,
+      "overlap_sum": {
+        "numerator": 726007,
+        "denominator": 4900896
+      },
+      "union_upper_bound": {
+        "numerator": 4395031,
+        "denominator": 4900896
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 207722592,
+      "anchor_prime": 5,
+      "edge_count": 111,
+      "overlap_sum": {
+        "numerator": 151189,
+        "denominator": 993888
+      },
+      "union_upper_bound": {
+        "numerator": 185548423,
+        "denominator": 207722592
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 16432416,
+      "anchor_prime": 5,
+      "edge_count": 96,
+      "overlap_sum": {
+        "numerator": 9857173,
+        "denominator": 65729664
+      },
+      "union_upper_bound": {
+        "numerator": 8408497,
+        "denominator": 9389952
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 23290895628,
+      "anchor_prime": 5,
+      "edge_count": 215,
+      "overlap_sum": {
+        "numerator": 6995460965,
+        "denominator": 46581791256
+      },
+      "union_upper_bound": {
+        "numerator": 41721276491,
+        "denominator": 46581791256
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 5646277728,
+      "anchor_prime": 5,
+      "edge_count": 189,
+      "overlap_sum": {
+        "numerator": 1676106265,
+        "denominator": 11292555456
+      },
+      "union_upper_bound": {
+        "numerator": 1448496911,
+        "denominator": 1613222208
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 259170912,
+      "anchor_prime": 5,
+      "edge_count": 106,
+      "overlap_sum": {
+        "numerator": 11269333,
+        "denominator": 74048832
+      },
+      "union_upper_bound": {
+        "numerator": 16067347,
+        "denominator": 17873856
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 311583888,
+      "anchor_prime": 5,
+      "edge_count": 127,
+      "overlap_sum": {
+        "numerator": 95271419,
+        "denominator": 623167776
+      },
+      "union_upper_bound": {
+        "numerator": 560358691,
+        "denominator": 623167776
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4658179125600,
+      "anchor_prime": 5,
+      "edge_count": 852,
+      "overlap_sum": {
+        "numerator": 28123942723,
+        "denominator": 106472665728
+      },
+      "union_upper_bound": {
+        "numerator": 8229383664169,
+        "denominator": 6210905500800
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 72201776446800,
+      "anchor_prime": 5,
+      "edge_count": 1003,
+      "overlap_sum": {
+        "numerator": 2124142501337,
+        "denominator": 8022419605200
+      },
+      "union_upper_bound": {
+        "numerator": 19213064129299,
+        "denominator": 14440355289360
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 25333956648,
+      "anchor_prime": 5,
+      "edge_count": 194,
+      "overlap_sum": {
+        "numerator": 15535495463,
+        "denominator": 101335826592
+      },
+      "union_upper_bound": {
+        "numerator": 7025113981,
+        "denominator": 7795063584
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1606268664,
+      "anchor_prime": 5,
+      "edge_count": 185,
+      "overlap_sum": {
+        "numerator": 2692763,
+        "denominator": 17651304
+      },
+      "union_upper_bound": {
+        "numerator": 131739245,
+        "denominator": 146024424
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8469416592,
+      "anchor_prime": 5,
+      "edge_count": 210,
+      "overlap_sum": {
+        "numerator": 5075479105,
+        "denominator": 33877666368
+      },
+      "union_upper_bound": {
+        "numerator": 30666506131,
+        "denominator": 33877666368
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 388756368,
+      "anchor_prime": 5,
+      "edge_count": 122,
+      "overlap_sum": {
+        "numerator": 16928485,
+        "denominator": 111073248
+      },
+      "union_upper_bound": {
+        "numerator": 234007673,
+        "denominator": 259170912
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2462123664,
+      "anchor_prime": 5,
+      "edge_count": 145,
+      "overlap_sum": {
+        "numerator": 498494237,
+        "denominator": 3282831552
+      },
+      "union_upper_bound": {
+        "numerator": 141346287,
+        "denominator": 156325312
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1016747424,
+      "anchor_prime": 5,
+      "edge_count": 133,
+      "overlap_sum": {
+        "numerator": 629059307,
+        "denominator": 4066989696
+      },
+      "union_upper_bound": {
+        "numerator": 215787149,
+        "denominator": 239234688
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 27637043616,
+      "anchor_prime": 5,
+      "edge_count": 216,
+      "overlap_sum": {
+        "numerator": 16692770021,
+        "denominator": 110548174464
+      },
+      "union_upper_bound": {
+        "numerator": 100157247587,
+        "denominator": 110548174464
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 75963888,
+      "anchor_prime": 5,
+      "edge_count": 98,
+      "overlap_sum": {
+        "numerator": 15240331,
+        "denominator": 101285184
+      },
+      "union_upper_bound": {
+        "numerator": 275481119,
+        "denominator": 303855552
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 722017764468,
+      "anchor_prime": 5,
+      "edge_count": 304,
+      "overlap_sum": {
+        "numerator": 440893852093,
+        "denominator": 2888071057872
+      },
+      "union_upper_bound": {
+        "numerator": 2441168009,
+        "denominator": 2696611632
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 509404896,
+      "anchor_prime": 5,
+      "edge_count": 148,
+      "overlap_sum": {
+        "numerator": 34493699,
+        "denominator": 226402176
+      },
+      "union_upper_bound": {
+        "numerator": 263743307,
+        "denominator": 291088512
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 6439400352,
+      "anchor_prime": 5,
+      "edge_count": 169,
+      "overlap_sum": {
+        "numerator": 3984593923,
+        "denominator": 25757601408
+      },
+      "union_upper_bound": {
+        "numerator": 7761323767,
+        "denominator": 8585867136
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 175034609568,
+      "anchor_prime": 5,
+      "edge_count": 260,
+      "overlap_sum": {
+        "numerator": 17586320627,
+        "denominator": 116689739712
+      },
+      "union_upper_bound": {
+        "numerator": 18707949245,
+        "denominator": 20592307008
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4900896,
+      "anchor_prime": 5,
+      "edge_count": 69,
+      "overlap_sum": {
+        "numerator": 2977379,
+        "denominator": 19603584
+      },
+      "union_upper_bound": {
+        "numerator": 17802401,
+        "denominator": 19603584
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 158846688,
+      "anchor_prime": 5,
+      "edge_count": 113,
+      "overlap_sum": {
+        "numerator": 48802645,
+        "denominator": 317693376
+      },
+      "union_upper_bound": {
+        "numerator": 288012365,
+        "denominator": 317693376
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 25081056,
+      "anchor_prime": 5,
+      "edge_count": 85,
+      "overlap_sum": {
+        "numerator": 15472241,
+        "denominator": 100324224
+      },
+      "union_upper_bound": {
+        "numerator": 3366621,
+        "denominator": 3715712
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2451673224,
+      "anchor_prime": 5,
+      "edge_count": 168,
+      "overlap_sum": {
+        "numerator": 15415373,
+        "denominator": 99057504
+      },
+      "union_upper_bound": {
+        "numerator": 424711117,
+        "denominator": 466985376
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 9659100528,
+      "anchor_prime": 5,
+      "edge_count": 193,
+      "overlap_sum": {
+        "numerator": 3003741043,
+        "denominator": 19318201056
+      },
+      "union_upper_bound": {
+        "numerator": 17572785479,
+        "denominator": 19318201056
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 238270032,
+      "anchor_prime": 5,
+      "edge_count": 126,
+      "overlap_sum": {
+        "numerator": 6118951,
+        "denominator": 39711672
+      },
+      "union_upper_bound": {
+        "numerator": 108616009,
+        "denominator": 119135016
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 144403552893600,
+      "anchor_prime": 5,
+      "edge_count": 1115,
+      "overlap_sum": {
+        "numerator": 4330839929113,
+        "denominator": 16044839210400
+      },
+      "union_upper_bound": {
+        "numerator": 4052991274793,
+        "denominator": 3008407351950
+      },
+      "proved_no_cover": false,
+      "valid": true
+    },
+    {
+      "period": 15527263752,
+      "anchor_prime": 5,
+      "edge_count": 210,
+      "overlap_sum": {
+        "numerator": 9657646595,
+        "denominator": 62109055008
+      },
+      "union_upper_bound": {
+        "numerator": 18865755947,
+        "denominator": 20703018336
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 7351344,
+      "anchor_prime": 5,
+      "edge_count": 79,
+      "overlap_sum": {
+        "numerator": 345407,
+        "denominator": 2261952
+      },
+      "union_upper_bound": {
+        "numerator": 26891741,
+        "denominator": 29405376
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 46558512,
+      "anchor_prime": 5,
+      "edge_count": 102,
+      "overlap_sum": {
+        "numerator": 161209,
+        "denominator": 1058148
+      },
+      "union_upper_bound": {
+        "numerator": 645595,
+        "denominator": 705432
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 262551914352,
+      "anchor_prime": 5,
+      "edge_count": 291,
+      "overlap_sum": {
+        "numerator": 79880656855,
+        "denominator": 525103828704
+      },
+      "union_upper_bound": {
+        "numerator": 480729604645,
+        "denominator": 525103828704
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 49794328584,
+      "anchor_prime": 5,
+      "edge_count": 264,
+      "overlap_sum": {
+        "numerator": 51985187,
+        "denominator": 335315344
+      },
+      "union_upper_bound": {
+        "numerator": 8266803169,
+        "denominator": 9053514288
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 16938833184,
+      "anchor_prime": 5,
+      "edge_count": 240,
+      "overlap_sum": {
+        "numerator": 5193349823,
+        "denominator": 33877666368
+      },
+      "union_upper_bound": {
+        "numerator": 31030816325,
+        "denominator": 33877666368
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 623167776,
+      "anchor_prime": 5,
+      "edge_count": 150,
+      "overlap_sum": {
+        "numerator": 18664957,
+        "denominator": 118698624
+      },
+      "union_upper_bound": {
+        "numerator": 2275071923,
+        "denominator": 2492671104
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 151927776,
+      "anchor_prime": 5,
+      "edge_count": 109,
+      "overlap_sum": {
+        "numerator": 13388201,
+        "denominator": 86815872
+      },
+      "union_upper_bound": {
+        "numerator": 558083077,
+        "denominator": 607711104
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 777512736,
+      "anchor_prime": 5,
+      "edge_count": 139,
+      "overlap_sum": {
+        "numerator": 16808039,
+        "denominator": 107243136
+      },
+      "union_upper_bound": {
+        "numerator": 2850182281,
+        "denominator": 3110050944
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4924247328,
+      "anchor_prime": 5,
+      "edge_count": 170,
+      "overlap_sum": {
+        "numerator": 93234277,
+        "denominator": 596878464
+      },
+      "union_upper_bound": {
+        "numerator": 18076741363,
+        "denominator": 19696989312
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 71062992,
+      "anchor_prime": 5,
+      "edge_count": 95,
+      "overlap_sum": {
+        "numerator": 2598331,
+        "denominator": 16720704
+      },
+      "union_upper_bound": {
+        "numerator": 23848315,
+        "denominator": 25841088
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 76001869944,
+      "anchor_prime": 5,
+      "edge_count": 249,
+      "overlap_sum": {
+        "numerator": 3006119917,
+        "denominator": 19000467486
+      },
+      "union_upper_bound": {
+        "numerator": 8742194882,
+        "denominator": 9500233743
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 7386370992,
+      "anchor_prime": 5,
+      "edge_count": 195,
+      "overlap_sum": {
+        "numerator": 20043403,
+        "denominator": 127902528
+      },
+      "union_upper_bound": {
+        "numerator": 879317125,
+        "denominator": 953080128
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 227891664,
+      "anchor_prime": 5,
+      "edge_count": 128,
+      "overlap_sum": {
+        "numerator": 47119025,
+        "denominator": 303855552
+      },
+      "union_upper_bound": {
+        "numerator": 842708693,
+        "denominator": 911566656
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1443313872,
+      "anchor_prime": 5,
+      "edge_count": 156,
+      "overlap_sum": {
+        "numerator": 81247601,
+        "denominator": 524841408
+      },
+      "union_upper_bound": {
+        "numerator": 1781877187,
+        "denominator": 1924418496
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 481345176312,
+      "anchor_prime": 5,
+      "edge_count": 292,
+      "overlap_sum": {
+        "numerator": 1780942573,
+        "denominator": 11259536288
+      },
+      "union_upper_bound": {
+        "numerator": 1776763801441,
+        "denominator": 1925380705248
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 525103828704,
+      "anchor_prime": 5,
+      "edge_count": 328,
+      "overlap_sum": {
+        "numerator": 326872387103,
+        "denominator": 2100415314816
+      },
+      "union_upper_bound": {
+        "numerator": 1946531804153,
+        "denominator": 2100415314816
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 14702688,
+      "anchor_prime": 5,
+      "edge_count": 93,
+      "overlap_sum": {
+        "numerator": 1150561,
+        "denominator": 7351344
+      },
+      "union_upper_bound": {
+        "numerator": 6808553,
+        "denominator": 7351344
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 93117024,
+      "anchor_prime": 5,
+      "edge_count": 123,
+      "overlap_sum": {
+        "numerator": 92791,
+        "denominator": 594048
+      },
+      "union_upper_bound": {
+        "numerator": 345251875,
+        "denominator": 372468096
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 19318201056,
+      "anchor_prime": 5,
+      "edge_count": 220,
+      "overlap_sum": {
+        "numerator": 12352500535,
+        "denominator": 77272804224
+      },
+      "union_upper_bound": {
+        "numerator": 71365878293,
+        "denominator": 77272804224
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 476540064,
+      "anchor_prime": 5,
+      "edge_count": 151,
+      "overlap_sum": {
+        "numerator": 302087803,
+        "denominator": 1906160256
+      },
+      "union_upper_bound": {
+        "numerator": 1763537201,
+        "denominator": 1906160256
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2202952752,
+      "anchor_prime": 5,
+      "edge_count": 152,
+      "overlap_sum": {
+        "numerator": 463986895,
+        "denominator": 2937270336
+      },
+      "union_upper_bound": {
+        "numerator": 632735255,
+        "denominator": 677831616
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 139675536,
+      "anchor_prime": 5,
+      "edge_count": 139,
+      "overlap_sum": {
+        "numerator": 2253329,
+        "denominator": 14325696
+      },
+      "union_upper_bound": {
+        "numerator": 47451107,
+        "denominator": 50791104
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 46581791256,
+      "anchor_prime": 5,
+      "edge_count": 272,
+      "overlap_sum": {
+        "numerator": 195729797,
+        "denominator": 1217824608
+      },
+      "union_upper_bound": {
+        "numerator": 173546966183,
+        "denominator": 186327165024
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 455783328,
+      "anchor_prime": 5,
+      "edge_count": 145,
+      "overlap_sum": {
+        "numerator": 289662287,
+        "denominator": 1823133312
+      },
+      "union_upper_bound": {
+        "numerator": 1707416705,
+        "denominator": 1823133312
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 142125984,
+      "anchor_prime": 5,
+      "edge_count": 110,
+      "overlap_sum": {
+        "numerator": 90786599,
+        "denominator": 568503936
+      },
+      "union_upper_bound": {
+        "numerator": 76012835,
+        "denominator": 81214848
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2886627744,
+      "anchor_prime": 5,
+      "edge_count": 182,
+      "overlap_sum": {
+        "numerator": 70460491,
+        "denominator": 444096576
+      },
+      "union_upper_bound": {
+        "numerator": 257896679,
+        "denominator": 274916928
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 14772741984,
+      "anchor_prime": 5,
+      "edge_count": 224,
+      "overlap_sum": {
+        "numerator": 9520089641,
+        "denominator": 59090967936
+      },
+      "union_upper_bound": {
+        "numerator": 55339447927,
+        "denominator": 59090967936
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 213188976,
+      "anchor_prime": 5,
+      "edge_count": 122,
+      "overlap_sum": {
+        "numerator": 34143827,
+        "denominator": 213188976
+      },
+      "union_upper_bound": {
+        "numerator": 66889177,
+        "denominator": 71062992
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1350196848,
+      "anchor_prime": 5,
+      "edge_count": 160,
+      "overlap_sum": {
+        "numerator": 45551861,
+        "denominator": 284251968
+      },
+      "union_upper_bound": {
+        "numerator": 5096347877,
+        "denominator": 5400787392
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4329941616,
+      "anchor_prime": 5,
+      "edge_count": 208,
+      "overlap_sum": {
+        "numerator": 922494611,
+        "denominator": 5773255488
+      },
+      "union_upper_bound": {
+        "numerator": 496038575,
+        "denominator": 524841408
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 1444035528936,
+      "anchor_prime": 5,
+      "edge_count": 376,
+      "overlap_sum": {
+        "numerator": 472035508765,
+        "denominator": 2888071057872
+      },
+      "union_upper_bound": {
+        "numerator": 82538315705,
+        "denominator": 87517304784
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 279351072,
+      "anchor_prime": 5,
+      "edge_count": 165,
+      "overlap_sum": {
+        "numerator": 2370211,
+        "denominator": 14702688
+      },
+      "union_upper_bound": {
+        "numerator": 88122473,
+        "denominator": 93117024
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4405905504,
+      "anchor_prime": 5,
+      "edge_count": 169,
+      "overlap_sum": {
+        "numerator": 317745525,
+        "denominator": 1958180224
+      },
+      "union_upper_bound": {
+        "numerator": 1854225367,
+        "denominator": 1958180224
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 6608858256,
+      "anchor_prime": 5,
+      "edge_count": 194,
+      "overlap_sum": {
+        "numerator": 614678035,
+        "denominator": 3776490432
+      },
+      "union_upper_bound": {
+        "numerator": 1935817495,
+        "denominator": 2033494848
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 41856102288,
+      "anchor_prime": 5,
+      "edge_count": 236,
+      "overlap_sum": {
+        "numerator": 3031247257,
+        "denominator": 18602712128
+      },
+      "union_upper_bound": {
+        "numerator": 7614976195,
+        "denominator": 7972590912
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 426377952,
+      "anchor_prime": 5,
+      "edge_count": 142,
+      "overlap_sum": {
+        "numerator": 7794233,
+        "denominator": 47375328
+      },
+      "union_upper_bound": {
+        "numerator": 14537075,
+        "denominator": 15227784
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8659883232,
+      "anchor_prime": 5,
+      "edge_count": 240,
+      "overlap_sum": {
+        "numerator": 44303593,
+        "denominator": 270621351
+      },
+      "union_upper_bound": {
+        "numerator": 436499309,
+        "denominator": 455783328
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 2700393696,
+      "anchor_prime": 5,
+      "edge_count": 188,
+      "overlap_sum": {
+        "numerator": 889293467,
+        "denominator": 5400787392
+      },
+      "union_upper_bound": {
+        "numerator": 272061583,
+        "denominator": 284251968
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 4050590544,
+      "anchor_prime": 5,
+      "edge_count": 209,
+      "overlap_sum": {
+        "numerator": 78816473,
+        "denominator": 476540064
+      },
+      "union_upper_bound": {
+        "numerator": 78832423,
+        "denominator": 81830112
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 13217716512,
+      "anchor_prime": 5,
+      "edge_count": 217,
+      "overlap_sum": {
+        "numerator": 101567723,
+        "denominator": 607711104
+      },
+      "union_upper_bound": {
+        "numerator": 2431459475,
+        "denominator": 2517660288
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 83712204576,
+      "anchor_prime": 5,
+      "edge_count": 269,
+      "overlap_sum": {
+        "numerator": 56040278387,
+        "denominator": 334848818304
+      },
+      "union_upper_bound": {
+        "numerator": 1004581843,
+        "denominator": 1036683648
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 125568306864,
+      "anchor_prime": 5,
+      "edge_count": 304,
+      "overlap_sum": {
+        "numerator": 84447595853,
+        "denominator": 502273227456
+      },
+      "union_upper_bound": {
+        "numerator": 489723911951,
+        "denominator": 502273227456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 8101181088,
+      "anchor_prime": 5,
+      "edge_count": 243,
+      "overlap_sum": {
+        "numerator": 172015901,
+        "denominator": 1012647636
+      },
+      "union_upper_bound": {
+        "numerator": 494792101,
+        "denominator": 506323818
+      },
+      "proved_no_cover": true,
+      "valid": true
+    },
+    {
+      "period": 251136613728,
+      "anchor_prime": 5,
+      "edge_count": 344,
+      "overlap_sum": {
+        "numerator": 4128484645,
+        "denominator": 23917772736
+      },
+      "union_upper_bound": {
+        "numerator": 496908963773,
+        "denominator": 502273227456
+      },
+      "proved_no_cover": true,
+      "valid": true
+    }
+  ],
+  "verified": true
+}

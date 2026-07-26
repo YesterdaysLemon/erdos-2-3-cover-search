@@ -1,0 +1,266 @@
+{
+  "schema": "projected_triple_event_block_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    67,
+    23
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 67,
+      "h": 66,
+      "a": 1,
+      "b": 39
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "tail_prime": 647,
+  "independent_projected_primes": [
+    53,
+    67
+  ],
+  "third_shared_lifted_prime": 23,
+  "shared_paired_index": 1,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_moduli": [
+    4,
+    4,
+    6
+  ],
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "tail_residual_modulus": 19,
+  "independent_residual_moduli": [
+    13,
+    11
+  ],
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "tail_determinant": 3116,
+  "tail_pair_jointly_surjective": true,
+  "third_shared_determinant": -31,
+  "third_shared_pair_jointly_surjective": true,
+  "event_active_residual_densities": [
+    {
+      "numerator": 1,
+      "denominator": 13,
+      "decimal": 0.07692307692307693
+    },
+    {
+      "numerator": 21,
+      "denominator": 121,
+      "decimal": 0.17355371900826447
+    }
+  ],
+  "event_inactive_residual_densities": [
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    },
+    {
+      "numerator": 1,
+      "denominator": 11,
+      "decimal": 0.09090909090909091
+    }
+  ],
+  "active_main_residual_union_density": {
+    "numerator": 5869,
+    "denominator": 38437,
+    "decimal": 0.15269141712412518
+  },
+  "inactive_main_residual_union_density": {
+    "numerator": 63,
+    "denominator": 5491,
+    "decimal": 0.011473319978146056
+  },
+  "residual_union_weights": {
+    "000": {
+      "numerator": 6121,
+      "denominator": 60401,
+      "decimal": 0.1013393817983146
+    },
+    "001": {
+      "numerator": 121611,
+      "denominator": 664411,
+      "decimal": 0.18303580163483146
+    },
+    "010": {
+      "numerator": 133853,
+      "denominator": 785213,
+      "decimal": 0.1704671216599827
+    },
+    "011": {
+      "numerator": 2123743,
+      "denominator": 8637343,
+      "decimal": 0.2458792015090752
+    },
+    "100": {
+      "numerator": 97127,
+      "denominator": 422807,
+      "decimal": 0.22971947011284108
+    },
+    "101": {
+      "numerator": 1394077,
+      "denominator": 4650877,
+      "decimal": 0.2997449728298555
+    },
+    "110": {
+      "numerator": 1588331,
+      "denominator": 5496491,
+      "decimal": 0.2889718185656995
+    },
+    "111": {
+      "numerator": 21379801,
+      "denominator": 60461401,
+      "decimal": 0.35361074415063587
+    }
+  },
+  "enumerated_period": 232792560,
+  "target_tuples": 34560,
+  "projection_target_combinations_per_base": 96,
+  "target_combinations_checked": 3317760,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_targets": [
+    1,
+    3,
+    5
+  ],
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_uncovered_category_counts": {
+    "000": 80460,
+    "001": 0,
+    "010": 46080,
+    "011": 25440,
+    "100": 46080,
+    "101": 25440,
+    "110": 0,
+    "111": 0
+  },
+  "maximum_block_union_density": {
+    "numerator": 72212411,
+    "denominator": 111621048,
+    "decimal": 0.6469425999297194
+  },
+  "block_individual_density_sum": {
+    "numerator": 29616553,
+    "denominator": 33256080,
+    "decimal": 0.8905605531379526
+  },
+  "forced_overlap_loss": {
+    "numerator": 558169873,
+    "denominator": 2291168880,
+    "decimal": 0.24361795320823318
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 951023706634543,
+    "denominator": 692396522848800,
+    "decimal": 1.373524671559074
+  },
+  "proved_no_cover": false
+}

@@ -1,0 +1,26 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_conditional_fibre103_vs_chain311_59block_anchors_certificate.json",
+  "outside_prime": 103,
+  "anchor_primes": [
+    5,
+    11,
+    13,
+    19,
+    239,
+    647,
+    311,
+    59,
+    23,
+    47
+  ],
+  "base_period": 3060,
+  "outside_base_points": 91800,
+  "target_combinations": 6242400,
+  "maximum_uncovered_score": 1542688667520,
+  "forced_intersection_density": {
+    "numerator": 133582547,
+    "denominator": 30655099890
+  },
+  "verified": true
+}

@@ -1,0 +1,170 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "base_certificate": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_311_plus71normalized_plus23_certificate.json",
+  "base_anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    53,
+    311,
+    71,
+    23
+  ],
+  "base_period": 379819440,
+  "base_maximum_union_density": {
+    "numerator": 432931487,
+    "denominator": 664684020,
+    "decimal": 0.6513342791060329
+  },
+  "base_individual_density_sum": {
+    "numerator": 344623891,
+    "denominator": 379819440,
+    "decimal": 0.9073361042288935
+  },
+  "extra_row": {
+    "p": 47,
+    "h": 23,
+    "a": 9,
+    "b": 10
+  },
+  "coprime_factorization": true,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    53,
+    311,
+    71,
+    23,
+    47
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "enumerated_period": 8735847120,
+  "extended_maximum_union_density": {
+    "numerator": 463144397,
+    "denominator": 694896930,
+    "decimal": 0.6664936582753359
+  },
+  "extended_individual_density_sum": {
+    "numerator": 8306168933,
+    "denominator": 8735847120,
+    "decimal": 0.9508143650984588
+  },
+  "maximum_block_union_density": {
+    "numerator": 463144397,
+    "denominator": 694896930,
+    "decimal": 0.6664936582753359
+  },
+  "block_individual_density_sum": {
+    "numerator": 8306168933,
+    "denominator": 8735847120,
+    "decimal": 0.9508143650984588
+  },
+  "forced_overlap_loss": {
+    "numerator": 1159098373,
+    "denominator": 4076728656,
+    "decimal": 0.28432070682312294
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 449083180759739,
+    "denominator": 336941623418400,
+    "decimal": 1.3328219179441845
+  },
+  "proved_no_cover": false,
+  "argument": "The extra row depends on a CRT component coprime to the entire base block. If the base block covers density U, adding one surjective line of density 1/h on the independent component covers exactly U + (1-U)/h."
+}

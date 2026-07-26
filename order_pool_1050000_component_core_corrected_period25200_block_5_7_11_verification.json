@@ -1,0 +1,31 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period25200.json",
+  "certificate": "order_pool_1050000_component_core_corrected_period25200_block_5_7_11_certificate.json",
+  "anchor_primes": [
+    5,
+    7,
+    11
+  ],
+  "period": 60,
+  "cells": 3600,
+  "target_tuples": 240,
+  "maximum_covered_cells": 1590,
+  "maximizing_targets": [
+    0,
+    0,
+    0
+  ],
+  "maximum_union_density": {
+    "numerator": 53,
+    "denominator": 120
+  },
+  "forced_overlap_loss": {
+    "numerator": 3,
+    "denominator": 40
+  },
+  "pool_union_upper_bound": {
+    "numerator": 8321,
+    "denominator": 8400
+  },
+  "verified": true
+}

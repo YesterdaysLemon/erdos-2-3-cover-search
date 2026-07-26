@@ -1,0 +1,7 @@
+gmpy2
+numpy
+ortools
+python-sat
+scipy
+sympy
+z3-solver

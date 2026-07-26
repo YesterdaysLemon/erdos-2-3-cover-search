@@ -1,0 +1,65 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period55440.json",
+  "row_count": 55,
+  "base_certificate": "order_pool_1050000_component_core_corrected_anchorblock_5_7_11_13_17_certificate.json",
+  "base_anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17
+  ],
+  "base_period": 240,
+  "base_maximum_union_density": {
+    "numerator": 1529,
+    "denominator": 2880,
+    "decimal": 0.5309027777777777
+  },
+  "base_individual_density_sum": {
+    "numerator": 53,
+    "denominator": 80,
+    "decimal": 0.6625
+  },
+  "extra_row": {
+    "p": 23,
+    "h": 11,
+    "a": 1,
+    "b": 8
+  },
+  "coprime_factorization": true,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    23
+  ],
+  "extended_maximum_union_density": {
+    "numerator": 1817,
+    "denominator": 3168,
+    "decimal": 0.5735479797979798
+  },
+  "extended_individual_density_sum": {
+    "numerator": 663,
+    "denominator": 880,
+    "decimal": 0.7534090909090909
+  },
+  "forced_overlap_loss": {
+    "numerator": 259,
+    "denominator": 1440,
+    "decimal": 0.1798611111111111
+  },
+  "total_pool_density": {
+    "numerator": 21493,
+    "denominator": 18480,
+    "decimal": 1.1630411255411255
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 21803,
+    "denominator": 22176,
+    "decimal": 0.9831800144300145
+  },
+  "proved_no_cover": true,
+  "argument": "The extra row depends on a CRT component coprime to the entire base block. If the base block covers density U, adding one surjective line of density 1/h on the independent component covers exactly U + (1-U)/h."
+}

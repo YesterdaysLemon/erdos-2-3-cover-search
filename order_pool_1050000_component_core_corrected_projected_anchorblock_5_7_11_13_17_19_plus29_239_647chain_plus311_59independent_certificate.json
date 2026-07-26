@@ -1,0 +1,258 @@
+{
+  "schema": "projected_triple_event_block_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    311,
+    59
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 59,
+      "h": 58,
+      "a": 1,
+      "b": 50
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "tail_prime": 647,
+  "independent_projected_primes": [
+    311,
+    59
+  ],
+  "third_shared_lifted_prime": null,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_moduli": [
+    4,
+    5,
+    2
+  ],
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "tail_residual_modulus": 19,
+  "independent_residual_moduli": [
+    31,
+    29
+  ],
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "tail_determinant": 3116,
+  "tail_pair_jointly_surjective": true,
+  "third_shared_determinant": null,
+  "third_shared_pair_jointly_surjective": false,
+  "event_active_residual_densities": [
+    {
+      "numerator": 1,
+      "denominator": 31,
+      "decimal": 0.03225806451612903
+    },
+    {
+      "numerator": 1,
+      "denominator": 29,
+      "decimal": 0.034482758620689655
+    }
+  ],
+  "event_inactive_residual_densities": [
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    },
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    }
+  ],
+  "active_main_residual_union_density": {
+    "numerator": 5869,
+    "denominator": 38437,
+    "decimal": 0.15269141712412518
+  },
+  "inactive_main_residual_union_density": {
+    "numerator": 63,
+    "denominator": 5491,
+    "decimal": 0.011473319978146056
+  },
+  "residual_union_weights": {
+    "000": {
+      "numerator": 63,
+      "denominator": 5491,
+      "decimal": 0.011473319978146056
+    },
+    "001": {
+      "numerator": 7255,
+      "denominator": 159239,
+      "decimal": 0.04556044687545137
+    },
+    "010": {
+      "numerator": 7381,
+      "denominator": 170221,
+      "decimal": 0.04336127739820586
+    },
+    "011": {
+      "numerator": 376889,
+      "denominator": 4936409,
+      "decimal": 0.07634881955688842
+    },
+    "100": {
+      "numerator": 5869,
+      "denominator": 38437,
+      "decimal": 0.15269141712412518
+    },
+    "101": {
+      "numerator": 28967,
+      "denominator": 159239,
+      "decimal": 0.1819089544646726
+    },
+    "110": {
+      "numerator": 214507,
+      "denominator": 1191547,
+      "decimal": 0.18002395205560504
+    },
+    "111": {
+      "numerator": 1028249,
+      "denominator": 4936409,
+      "decimal": 0.20829898819161866
+    }
+  },
+  "enumerated_period": 1463500080,
+  "target_tuples": 34560,
+  "projection_target_combinations_per_base": 40,
+  "target_combinations_checked": 1382400,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_targets": [
+    1,
+    0,
+    0
+  ],
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_uncovered_category_counts": {
+    "000": 61680,
+    "001": 59904,
+    "010": 15420,
+    "011": 14976,
+    "100": 24960,
+    "101": 32256,
+    "110": 6240,
+    "111": 8064
+  },
+  "maximum_block_union_density": {
+    "numerator": 16075768847,
+    "denominator": 26656608600,
+    "decimal": 0.6030687957432065
+  },
+  "block_individual_density_sum": {
+    "numerator": 164949457,
+    "denominator": 209071440,
+    "decimal": 0.7889621700601479
+  },
+  "forced_overlap_loss": {
+    "numerator": 9910573841,
+    "denominator": 53313217200,
+    "decimal": 0.18589337431694142
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 3513517106302691,
+    "denominator": 2454860399191200,
+    "decimal": 1.431249250450366
+  },
+  "proved_no_cover": false
+}

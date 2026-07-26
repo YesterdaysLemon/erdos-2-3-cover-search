@@ -1,0 +1,181 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period627841534320.json",
+  "row_count": 798,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    1103
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 1103,
+      "h": 551,
+      "a": 95,
+      "b": 178
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "tail_prime": 647,
+  "second_tail_prime": 1103,
+  "independent_projected_prime": 53,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_modulus": 4,
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "pair_component_union_density": {
+    "numerator": 125,
+    "denominator": 833,
+    "decimal": 0.15006002400960383
+  },
+  "tail_residual_modulus": 19,
+  "tail_determinant": 3116,
+  "tail_pair_jointly_surjective": true,
+  "second_tail_residual_modulus": 29,
+  "second_tail_determinant": -3323,
+  "second_tail_pair_jointly_surjective": true,
+  "independent_projection_modulus": 4,
+  "independent_residual_modulus": 13,
+  "active_residual_union_density": {
+    "numerator": 3266387,
+    "denominator": 21178787,
+    "decimal": 0.15422918224731189
+  },
+  "inactive_residual_union_density": {
+    "numerator": 40141,
+    "denominator": 3025541,
+    "decimal": 0.013267379288530548
+  },
+  "enumerated_period": 613725840,
+  "target_tuples": 34560,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_target": 1,
+  "maximizing_independent_projection_target": 3,
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_projected_compatible_uncovered_cells": 71520,
+  "maximizing_uncovered_category_counts": {
+    "both": 0,
+    "projected_only": 71520,
+    "independent_only": 71520,
+    "neither": 80460
+  },
+  "maximum_block_union_density": {
+    "numerator": 3994437019,
+    "denominator": 6607781544,
+    "decimal": 0.6045050055607589
+  },
+  "block_individual_density_sum": {
+    "numerator": 68940247,
+    "denominator": 87675120,
+    "decimal": 0.7863148291100144
+  },
+  "forced_overlap_loss": {
+    "numerator": 36040787897,
+    "denominator": 198233446320,
+    "decimal": 0.18180982354925543
+  },
+  "total_pool_density": {
+    "numerator": 114243556289,
+    "denominator": 78480191790,
+    "decimal": 1.4556992494959344
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 7381017812347,
+    "denominator": 5794080445296,
+    "decimal": 1.273889425946679
+  },
+  "proved_no_cover": false,
+  "argument": "The base targets and projected lower target are exhaustively enumerated. Above every uncovered base cell, ordinary inclusion-exclusion gives the exact residual-chain union. The adjacent two-target maps are jointly surjective on their shared components."
+}

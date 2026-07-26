@@ -1,0 +1,401 @@
+{
+  "schema": "projected_pair_conditional_fibre_overlap_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "block_certificate": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_plus67_23sharedpair_plus71normalized_plus47_certificate.json",
+  "structured_base_certificate": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_plus67_23sharedpair_plus71normalized_certificate.json",
+  "row_count": 1577,
+  "outside_prime": 31,
+  "outside_row": {
+    "p": 31,
+    "h": 30,
+    "a": 24,
+    "b": 1
+  },
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    53,
+    67,
+    23,
+    71,
+    47
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 67,
+      "h": 66,
+      "a": 1,
+      "b": 39
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "independent_projected_primes": [
+    53,
+    47
+  ],
+  "core_independent_projected_primes": [
+    53
+  ],
+  "extra_independent_primes": [
+    47
+  ],
+  "paired_projected_prime": 67,
+  "paired_shared_prime": 23,
+  "normalized_start_shared_prime": 71,
+  "normalization_primes": [
+    19
+  ],
+  "normalization_period": 630,
+  "normalization_target_count": 18900,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "outside_base_points": 17280,
+  "projection_moduli": [
+    4,
+    4,
+    1,
+    6
+  ],
+  "fixed_leaf_projection_modulus": 5,
+  "fixed_leaf_projection_target": 0,
+  "residual_moduli": [
+    7,
+    17,
+    13,
+    23,
+    11
+  ],
+  "residual_target_relation": "incompatible",
+  "path_leaf_densities": {
+    "inactive": {
+      "numerator": 1,
+      "denominator": 119,
+      "decimal": 0.008403361344537815
+    },
+    "one": {
+      "numerator": 125,
+      "denominator": 833,
+      "decimal": 0.15006002400960383
+    },
+    "both_compatible": {
+      "numerator": 227,
+      "denominator": 833,
+      "decimal": 0.2725090036014406
+    },
+    "both_incompatible": {
+      "numerator": 226,
+      "denominator": 833,
+      "decimal": 0.27130852340936373
+    }
+  },
+  "residual_union_weights": {
+    "00000": {
+      "numerator": 129,
+      "denominator": 1309,
+      "decimal": 0.0985485103132162
+    },
+    "00001": {
+      "numerator": 2083,
+      "denominator": 9163,
+      "decimal": 0.22732729455418532
+    },
+    "00010": {
+      "numerator": 2599,
+      "denominator": 14399,
+      "decimal": 0.18049864573928745
+    },
+    "00011": {
+      "numerator": 29993,
+      "denominator": 100793,
+      "decimal": 0.2975702677765321
+    },
+    "00100": {
+      "numerator": 377,
+      "denominator": 2737,
+      "decimal": 0.13774205334307635
+    },
+    "00101": {
+      "numerator": 4999,
+      "denominator": 19159,
+      "decimal": 0.26092176000835116
+    },
+    "00110": {
+      "numerator": 6507,
+      "denominator": 30107,
+      "decimal": 0.21612913940279668
+    },
+    "00111": {
+      "numerator": 69149,
+      "denominator": 210749,
+      "decimal": 0.3281106909166829
+    },
+    "01000": {
+      "numerator": 2857,
+      "denominator": 17017,
+      "decimal": 0.16789093259681495
+    },
+    "01001": {
+      "numerator": 34159,
+      "denominator": 119119,
+      "decimal": 0.28676365651155566
+    },
+    "01010": {
+      "numerator": 45587,
+      "denominator": 187187,
+      "decimal": 0.24353721145164994
+    },
+    "01011": {
+      "numerator": 460709,
+      "denominator": 1310309,
+      "decimal": 0.35160332410141426
+    },
+    "01100": {
+      "numerator": 7261,
+      "denominator": 35581,
+      "decimal": 0.20406958770130126
+    },
+    "01101": {
+      "numerator": 79147,
+      "denominator": 249067,
+      "decimal": 0.3177739323154011
+    },
+    "01110": {
+      "numerator": 108191,
+      "denominator": 391391,
+      "decimal": 0.27642689791027386
+    },
+    "01111": {
+      "numerator": 1040537,
+      "denominator": 2739737,
+      "decimal": 0.3797944839230919
+    },
+    "10000": {
+      "numerator": 2083,
+      "denominator": 9163,
+      "decimal": 0.22732729455418532
+    },
+    "10001": {
+      "numerator": 3093,
+      "denominator": 9163,
+      "decimal": 0.3375532030994216
+    },
+    "10010": {
+      "numerator": 29993,
+      "denominator": 100793,
+      "decimal": 0.2975702677765321
+    },
+    "10011": {
+      "numerator": 40093,
+      "denominator": 100793,
+      "decimal": 0.39777563918129233
+    },
+    "10100": {
+      "numerator": 4999,
+      "denominator": 19159,
+      "decimal": 0.26092176000835116
+    },
+    "10101": {
+      "numerator": 7019,
+      "denominator": 19159,
+      "decimal": 0.3663552377472728
+    },
+    "10110": {
+      "numerator": 69149,
+      "denominator": 210749,
+      "decimal": 0.3281106909166829
+    },
+    "10111": {
+      "numerator": 89349,
+      "denominator": 210749,
+      "decimal": 0.4239593070429753
+    },
+    "11000": {
+      "numerator": 34159,
+      "denominator": 119119,
+      "decimal": 0.28676365651155566
+    },
+    "11001": {
+      "numerator": 46279,
+      "denominator": 119119,
+      "decimal": 0.3885106490148507
+    },
+    "11010": {
+      "numerator": 460709,
+      "denominator": 1310309,
+      "decimal": 0.35160332410141426
+    },
+    "11011": {
+      "numerator": 581909,
+      "denominator": 1310309,
+      "decimal": 0.4441005900135006
+    },
+    "11100": {
+      "numerator": 79147,
+      "denominator": 249067,
+      "decimal": 0.3177739323154011
+    },
+    "11101": {
+      "numerator": 103387,
+      "denominator": 249067,
+      "decimal": 0.41509714253594415
+    },
+    "11110": {
+      "numerator": 1040537,
+      "denominator": 2739737,
+      "decimal": 0.3797944839230919
+    },
+    "11111": {
+      "numerator": 1282937,
+      "denominator": 2739737,
+      "decimal": 0.468270129578131
+    }
+  },
+  "target_tuples": 46080,
+  "projection_target_combinations_per_base": 96,
+  "target_combinations_checked": 4423680,
+  "minimizing_base_targets": [
+    0,
+    1,
+    0,
+    0,
+    1,
+    0
+  ],
+  "minimizing_projection_targets": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "minimizing_base_covered_cells": 5952,
+  "minimizing_uncovered_category_counts": {
+    "00000": 0,
+    "00001": 0,
+    "00010": 0,
+    "00011": 0,
+    "00100": 9216,
+    "00101": 1728,
+    "00110": 384,
+    "00111": 0,
+    "01000": 0,
+    "01001": 0,
+    "01010": 0,
+    "01011": 0,
+    "01100": 0,
+    "01101": 0,
+    "01110": 0,
+    "01111": 0,
+    "10000": 0,
+    "10001": 0,
+    "10010": 0,
+    "10011": 0,
+    "10100": 0,
+    "10101": 0,
+    "10110": 0,
+    "10111": 0,
+    "11000": 0,
+    "11001": 0,
+    "11010": 0,
+    "11011": 0,
+    "11100": 0,
+    "11101": 0,
+    "11110": 0,
+    "11111": 0
+  },
+  "minimum_intersection_score": 233722220160,
+  "score_denominator": 30137107,
+  "forced_intersection_density": {
+    "numerator": 851261,
+    "denominator": 56902230,
+    "decimal": 0.01496006395531423
+  },
+  "argument": "Translate the outside fibre, the named base anchors, and the start leaf to target zero; the recorded joint image is surjective. Restrict the exact base-plane partition to the outside fibre and enumerate every remaining anchor target. Residual weights count the exact projected union. Incompatible targets minimize the shared residual triangle pointwise. The smallest score is therefore the exact minimum intersection of the outside fibre with the full anchor-block union."
+}

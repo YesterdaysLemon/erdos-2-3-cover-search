@@ -1,0 +1,44 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period274010536800_projected29_71_23_1103_599_47_plus19conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_projected29_plus71normalized_factorized_plus23_plus1103_plus47_599pair_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre31_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre37_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre97_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre43_vs_base71_projected23_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre53_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre59_vs_projected71_23_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre61_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre67_vs_base23_projected71_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre79_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre89_vs_base23_projected71_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre601_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre101_vs_projected71_23_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre193_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre241_vs_projected71_23_1103_599_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre109_vs_projected71_23_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre113_vs_base71_projected23_1103_47block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre191_vs_projected71_23_1103_47block_anchors_verification.json"
+  ],
+  "period": 274010536800,
+  "row_count": 821,
+  "anchor_count": 12,
+  "outside_rows_checked": 809,
+  "conditional_edges_checked": 19,
+  "block_overlap_loss": {
+    "numerator": 1180696470851,
+    "denominator": 4411569642480
+  },
+  "star_overlap_sum": {
+    "numerator": 86640857648024047549,
+    "denominator": 357532258463924544000
+  },
+  "union_density_upper_bound": {
+    "numerator": 2501623385216309010677,
+    "denominator": 2502725809247471808000
+  },
+  "verified": true
+}

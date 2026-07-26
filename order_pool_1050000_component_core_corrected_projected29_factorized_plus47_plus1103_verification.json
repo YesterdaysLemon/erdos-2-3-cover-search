@@ -1,0 +1,44 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period1312759571760.json",
+  "certificate": "order_pool_1050000_component_core_corrected_projected29_factorized_plus47_plus1103_certificate.json",
+  "base_verification": "order_pool_1050000_component_core_corrected_projected29_factorized_plus47_verification.json",
+  "base_verified": true,
+  "base_period": 115920,
+  "extra_prime": 1103,
+  "extra_modulus": 551,
+  "coprime": true,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    47,
+    1103
+  ],
+  "enumerated_period": 63871920,
+  "extended_maximum_union_density": {
+    "numerator": 23268937,
+    "denominator": 38323152
+  },
+  "maximum_block_union_density": {
+    "numerator": 23268937,
+    "denominator": 38323152
+  },
+  "block_individual_density_sum": {
+    "numerator": 51037687,
+    "denominator": 63871920
+  },
+  "forced_overlap_loss": {
+    "numerator": 4596047,
+    "denominator": 23951970
+  },
+  "pool_union_upper_bound": {
+    "numerator": 309834173423,
+    "denominator": 262551914352
+  },
+  "proved_no_cover": false,
+  "verified": true
+}

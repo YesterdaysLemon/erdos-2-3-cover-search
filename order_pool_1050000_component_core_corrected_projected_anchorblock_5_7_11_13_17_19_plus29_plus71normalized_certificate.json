@@ -1,0 +1,132 @@
+{
+  "schema": "projected_row_normalized_shared_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    71
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "extra_prime": 29,
+  "normalized_shared_prime": 71,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 420,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_modulus": 4,
+  "residual_modulus": 7,
+  "normalized_projection_modulus": 5,
+  "normalized_projection_target": 0,
+  "normalized_residual_modulus": 7,
+  "shared_determinant": -2,
+  "shared_maps_jointly_surjective": true,
+  "enumerated_period": 5040,
+  "target_tuples": 34560,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_target": 1,
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_projected_new_base_cells": 101916,
+  "maximizing_projected_single_base_cells": 87612,
+  "maximizing_projected_both_base_cells": 14304,
+  "maximum_block_union_density": {
+    "numerator": 635389,
+    "denominator": 1058400,
+    "decimal": 0.6003297430083144
+  },
+  "block_individual_density_sum": {
+    "numerator": 3943,
+    "denominator": 5040,
+    "decimal": 0.7823412698412698
+  },
+  "forced_overlap_loss": {
+    "numerator": 192641,
+    "denominator": 1058400,
+    "decimal": 0.1820115268329554
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 725333102934347,
+    "denominator": 505412435127600,
+    "decimal": 1.435131097934352
+  },
+  "proved_no_cover": false,
+  "argument": "The extra row projects to one affine line modulo the gcd of its modulus and the base period. Above every compatible base cell, its primitive top-component equation covers exactly 1/residual_modulus of the lifts. The listed maximum exhausts all normalized base targets and all projected extra targets."
+}

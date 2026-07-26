@@ -1,0 +1,451 @@
+{
+  "schema": "projected_triple_event_block_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    311,
+    139,
+    59,
+    47
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 139,
+      "h": 138,
+      "a": 1,
+      "b": 41
+    },
+    {
+      "p": 59,
+      "h": 58,
+      "a": 1,
+      "b": 50
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "tail_prime": 647,
+  "independent_projected_primes": [
+    53,
+    311,
+    139,
+    59
+  ],
+  "third_shared_lifted_prime": 47,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_moduli": [
+    4,
+    4,
+    5,
+    6,
+    2
+  ],
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "tail_residual_modulus": 19,
+  "independent_residual_moduli": [
+    13,
+    31,
+    23,
+    29
+  ],
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "tail_determinant": 3116,
+  "tail_pair_jointly_surjective": true,
+  "third_shared_determinant": -359,
+  "third_shared_pair_jointly_surjective": true,
+  "event_active_residual_densities": [
+    {
+      "numerator": 1,
+      "denominator": 13,
+      "decimal": 0.07692307692307693
+    },
+    {
+      "numerator": 1,
+      "denominator": 31,
+      "decimal": 0.03225806451612903
+    },
+    {
+      "numerator": 45,
+      "denominator": 529,
+      "decimal": 0.08506616257088846
+    },
+    {
+      "numerator": 1,
+      "denominator": 29,
+      "decimal": 0.034482758620689655
+    }
+  ],
+  "event_inactive_residual_densities": [
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    },
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    },
+    {
+      "numerator": 1,
+      "denominator": 23,
+      "decimal": 0.043478260869565216
+    },
+    {
+      "numerator": 0,
+      "denominator": 1,
+      "decimal": 0.0
+    }
+  ],
+  "active_main_residual_union_density": {
+    "numerator": 5869,
+    "denominator": 38437,
+    "decimal": 0.15269141712412518
+  },
+  "inactive_main_residual_union_density": {
+    "numerator": 63,
+    "denominator": 5491,
+    "decimal": 0.011473319978146056
+  },
+  "residual_union_weights": {
+    "00000": {
+      "numerator": 299,
+      "denominator": 5491,
+      "decimal": 0.054452740848661446
+    },
+    "00001": {
+      "numerator": 13863,
+      "denominator": 159239,
+      "decimal": 0.08705781875043174
+    },
+    "00010": {
+      "numerator": 12069,
+      "denominator": 126293,
+      "decimal": 0.09556349124654573
+    },
+    "00011": {
+      "numerator": 464225,
+      "denominator": 3662497,
+      "decimal": 0.12675095706563036
+    },
+    "00100": {
+      "numerator": 14461,
+      "denominator": 170221,
+      "decimal": 0.0849542653374143
+    },
+    "00101": {
+      "numerator": 575129,
+      "denominator": 4936409,
+      "decimal": 0.11650756653267588
+    },
+    "00110": {
+      "numerator": 488363,
+      "denominator": 3915083,
+      "decimal": 0.12473886249665717
+    },
+    "00111": {
+      "numerator": 17589247,
+      "denominator": 113537407,
+      "decimal": 0.15492028103125519
+    },
+    "01000": {
+      "numerator": 9079,
+      "denominator": 71383,
+      "decimal": 0.1271871453987644
+    },
+    "01001": {
+      "numerator": 325595,
+      "denominator": 2070107,
+      "decimal": 0.15728414038501393
+    },
+    "01010": {
+      "numerator": 271121,
+      "denominator": 1641809,
+      "decimal": 0.16513553038142684
+    },
+    "01011": {
+      "numerator": 9233197,
+      "denominator": 47612461,
+      "decimal": 0.19392396036827417
+    },
+    "01100": {
+      "numerator": 343753,
+      "denominator": 2212873,
+      "decimal": 0.15534239877299783
+    },
+    "01101": {
+      "numerator": 11837957,
+      "denominator": 64173317,
+      "decimal": 0.18446852295323926
+    },
+    "01110": {
+      "numerator": 9775439,
+      "denominator": 50896079,
+      "decimal": 0.1920666423046066
+    },
+    "01111": {
+      "numerator": 324608371,
+      "denominator": 1475986291,
+      "decimal": 0.21992641325962017
+    },
+    "10000": {
+      "numerator": 7285,
+      "denominator": 38437,
+      "decimal": 0.18953092072742408
+    },
+    "10001": {
+      "numerator": 34631,
+      "denominator": 159239,
+      "decimal": 0.21747813035751293
+    },
+    "10010": {
+      "numerator": 198707,
+      "denominator": 884051,
+      "decimal": 0.22476870678275349
+    },
+    "10011": {
+      "numerator": 921121,
+      "denominator": 3662497,
+      "decimal": 0.25150082034196886
+    },
+    "10100": {
+      "numerator": 256987,
+      "denominator": 1191547,
+      "decimal": 0.21567508457492654
+    },
+    "10101": {
+      "numerator": 1198169,
+      "denominator": 4936409,
+      "decimal": 0.2427207713137222
+    },
+    "10110": {
+      "numerator": 6845261,
+      "denominator": 27405581,
+      "decimal": 0.24977616785427756
+    },
+    "10111": {
+      "numerator": 31296127,
+      "denominator": 113537407,
+      "decimal": 0.2756459551696473
+    },
+    "11000": {
+      "numerator": 125857,
+      "denominator": 499681,
+      "decimal": 0.25187469605608376
+    },
+    "11001": {
+      "numerator": 574811,
+      "denominator": 2070107,
+      "decimal": 0.27767212033001193
+    },
+    "11010": {
+      "numerator": 3268535,
+      "denominator": 11492663,
+      "decimal": 0.28440188318408016
+    },
+    "11011": {
+      "numerator": 14715949,
+      "denominator": 47612461,
+      "decimal": 0.30907768031566357
+    },
+    "11100": {
+      "numerator": 4275391,
+      "denominator": 15490111,
+      "decimal": 0.27600777037685525
+    },
+    "11101": {
+      "numerator": 19314437,
+      "denominator": 64173317,
+      "decimal": 0.3009730196742051
+    },
+    "11110": {
+      "numerator": 109548713,
+      "denominator": 356272553,
+      "decimal": 0.30748569340394855
+    },
+    "11111": {
+      "numerator": 489090931,
+      "denominator": 1475986291,
+      "decimal": 0.33136549707967444
+    }
+  },
+  "enumerated_period": 437586523920,
+  "target_tuples": 34560,
+  "projection_target_combinations_per_base": 960,
+  "target_combinations_checked": 33177600,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_targets": [
+    1,
+    3,
+    0,
+    1,
+    0
+  ],
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_uncovered_category_counts": {
+    "00000": 36720,
+    "00001": 27648,
+    "00010": 0,
+    "00011": 0,
+    "00100": 9180,
+    "00101": 6912,
+    "00110": 0,
+    "00111": 0,
+    "01000": 12480,
+    "01001": 21504,
+    "01010": 12480,
+    "01011": 10752,
+    "01100": 3120,
+    "01101": 5376,
+    "01110": 3120,
+    "01111": 2688,
+    "10000": 12480,
+    "10001": 21504,
+    "10010": 12480,
+    "10011": 10752,
+    "10100": 3120,
+    "10101": 5376,
+    "10110": 3120,
+    "10111": 2688,
+    "11000": 0,
+    "11001": 0,
+    "11010": 0,
+    "11011": 0,
+    "11100": 0,
+    "11101": 0,
+    "11110": 0,
+    "11111": 0
+  },
+  "maximum_block_union_density": {
+    "numerator": 93593928823,
+    "denominator": 147598629100,
+    "decimal": 0.6341110984139893
+  },
+  "block_individual_density_sum": {
+    "numerator": 53692965263,
+    "denominator": 62512360560,
+    "decimal": 0.8589175769720765
+  },
+  "forced_overlap_loss": {
+    "numerator": 1194520609727,
+    "denominator": 5313550647600,
+    "decimal": 0.22480647855808725
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 1139330289230501,
+    "denominator": 818286799730400,
+    "decimal": 1.39233614620922
+  },
+  "proved_no_cover": false
+}

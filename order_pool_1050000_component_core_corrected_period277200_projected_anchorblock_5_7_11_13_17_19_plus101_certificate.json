@@ -1,0 +1,116 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period277200.json",
+  "row_count": 81,
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    101
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 101,
+      "h": 100,
+      "a": 1,
+      "b": 69
+    }
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "extra_prime": 101,
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_modulus": 20,
+  "residual_modulus": 5,
+  "enumerated_period": 3600,
+  "target_tuples": 34560,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_target": 19,
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_projected_new_base_cells": 14304,
+  "maximum_block_union_density": {
+    "numerator": 124067,
+    "denominator": 216000,
+    "decimal": 0.5743842592592593
+  },
+  "block_individual_density_sum": {
+    "numerator": 2621,
+    "denominator": 3600,
+    "decimal": 0.7280555555555556
+  },
+  "forced_overlap_loss": {
+    "numerator": 33193,
+    "denominator": 216000,
+    "decimal": 0.1536712962962963
+  },
+  "total_pool_density": {
+    "numerator": 335017,
+    "denominator": 277200,
+    "decimal": 1.208575036075036
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 17545159,
+    "denominator": 16632000,
+    "decimal": 1.0549037397787397
+  },
+  "proved_no_cover": false,
+  "argument": "The extra row projects to one affine line modulo the gcd of its modulus and the base period. Above every compatible base cell, its primitive top-component equation covers exactly 1/residual_modulus of the lifts. The listed maximum exhausts all normalized base targets and all projected extra targets."
+}

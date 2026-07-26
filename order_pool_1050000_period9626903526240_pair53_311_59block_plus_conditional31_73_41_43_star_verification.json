@@ -1,0 +1,29 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period9626903526240_pair53_311_59block_plus_conditional31_73_41_43_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_projected_pair_29_239_plus53_311_59_plus71normalized_plus23_plus47_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre31_vs_pair53_311_59block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs_pair53_311_59block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs5_11_13_19_23_71_47_verification.json",
+    "order_pool_1050000_conditional_fibre43_vs_pair53_311_59block_anchors_verification.json"
+  ],
+  "period": 9626903526240,
+  "row_count": 1023,
+  "anchor_count": 14,
+  "outside_rows_checked": 1009,
+  "conditional_edges_checked": 4,
+  "block_overlap_loss": {
+    "numerator": 8322967337,
+    "denominator": 28148840720
+  },
+  "star_overlap_sum": {
+    "numerator": 42620746857192429189497,
+    "denominator": 187605812760186531110400
+  },
+  "union_density_upper_bound": {
+    "numerator": 9872363416620982493917,
+    "denominator": 9873990145272975321600
+  },
+  "verified": true
+}

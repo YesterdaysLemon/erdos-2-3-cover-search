@@ -1,0 +1,43 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period7220177644680.json",
+  "certificate": "order_pool_1050000_component_core_corrected_anchorblock_lowbinary_5_7_11_13_19_certificate.json",
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    19
+  ],
+  "normalization_primes": [
+    5,
+    7
+  ],
+  "normalization_period": 12,
+  "normalization_cells": 144,
+  "normalization_jointly_surjective": true,
+  "period": 180,
+  "cells": 32400,
+  "target_tuples": 2160,
+  "maximum_covered_cells": 17220,
+  "maximizing_targets": [
+    0,
+    0,
+    1,
+    0,
+    1
+  ],
+  "maximum_union_density": {
+    "numerator": 287,
+    "denominator": 540
+  },
+  "forced_overlap_loss": {
+    "numerator": 67,
+    "denominator": 540
+  },
+  "pool_union_upper_bound": {
+    "numerator": 9377675362817,
+    "denominator": 7220177644680
+  },
+  "proved_no_cover": false,
+  "verified": true
+}

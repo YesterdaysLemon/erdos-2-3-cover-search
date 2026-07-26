@@ -1,0 +1,21 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_conditional_fibre41_vs5_11_13_19_23_71_47_certificate.json",
+  "outside_prime": 41,
+  "anchor_primes": [
+    5,
+    11,
+    13,
+    19,
+    23,
+    71,
+    47
+  ],
+  "kernel_image_size": 318780,
+  "target_combinations": 19126800,
+  "forced_intersection_density": {
+    "numerator": 613,
+    "denominator": 57960
+  },
+  "verified": true
+}

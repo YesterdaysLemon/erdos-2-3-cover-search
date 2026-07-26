@@ -1,0 +1,24 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period83160.json",
+  "certificate": "order_pool_1050000_component_core_corrected_period83160_factorized_anchorblock_5_7_11_13_plus23_certificate.json",
+  "base_verification": "order_pool_1050000_component_core_corrected_anchorblock_5_7_11_13_verification.json",
+  "base_verified": true,
+  "base_period": 60,
+  "extra_prime": 23,
+  "extra_modulus": 11,
+  "coprime": true,
+  "extended_maximum_union_density": {
+    "numerator": 425,
+    "denominator": 792
+  },
+  "forced_overlap_loss": {
+    "numerator": 611,
+    "denominator": 3960
+  },
+  "pool_union_upper_bound": {
+    "numerator": 15473,
+    "denominator": 16632
+  },
+  "proved_no_cover": true,
+  "verified": true
+}

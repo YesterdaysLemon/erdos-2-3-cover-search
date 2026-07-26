@@ -1,0 +1,160 @@
+{
+  "schema": "projected_conditional_fibre_overlap_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "outside_prime": 409,
+  "outside_row": {
+    "p": 409,
+    "h": 204,
+    "a": 41,
+    "b": 43
+  },
+  "anchor_primes": [
+    17,
+    5,
+    7,
+    11,
+    13,
+    19,
+    71,
+    53,
+    47,
+    67,
+    23
+  ],
+  "anchor_rows": [
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    },
+    {
+      "p": 67,
+      "h": 66,
+      "a": 1,
+      "b": 39
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    }
+  ],
+  "normalizer_anchor_prime": 17,
+  "base_anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    19
+  ],
+  "projected_anchors": [
+    {
+      "prime": 71,
+      "projection_modulus": 5,
+      "residual_modulus": 7
+    },
+    {
+      "prime": 53,
+      "projection_modulus": 4,
+      "residual_modulus": 13
+    },
+    {
+      "prime": 47,
+      "projection_modulus": 1,
+      "residual_modulus": 23
+    }
+  ],
+  "paired_projected_prime": 67,
+  "paired_shared_prime": 23,
+  "paired_projection_modulus": 6,
+  "paired_residual_modulus": 11,
+  "paired_determinant": -31,
+  "base_period": 12240,
+  "base_cells": 149817600,
+  "outside_base_points": 734400,
+  "normalizer_covered_base_points": 45900,
+  "uncovered_count_tensor_shape": [
+    4,
+    6,
+    10,
+    12,
+    18,
+    5,
+    4,
+    1,
+    6
+  ],
+  "uncovered_count_tensor_sum": 688500,
+  "uncovered_count_tensor_nonzero": 900,
+  "residual_denominator": 253253,
+  "target_combinations": 6220800,
+  "maximizing_targets": [
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    1
+  ],
+  "maximum_uncovered_score": 125686978560,
+  "forced_intersection_density": {
+    "numerator": 87,
+    "denominator": 54740,
+    "decimal": 0.0015893313847278041
+  },
+  "argument": "Normalize the outside fibre and the named anchor to target zero. On the base plane, points covered by that anchor are removed. Complement transforms enumerate every remaining base-anchor target, while residual matrices give the exact uncovered count for each projected target. The shared pair uses two independent residual lines. Therefore the maximum uncovered score gives the minimum intersection of the outside fibre with this anchor subunion."
+}

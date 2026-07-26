@@ -1,0 +1,23 @@
+# This public repository is a curated, reproducible research snapshot.
+# The local workspace also contains several gigabytes of transient searches.
+*
+
+# Human-readable status and environment.
+!.gitignore
+!README.md
+!RESEARCH_LOG.md
+!PUBLICATION_MANIFEST.md
+!requirements.txt
+
+# Source and independent verifiers.
+!*.py
+
+# Stable input, ranked finite frontier, and its independent replay.
+!order_pool_1050000_component_core_corrected_max32_stable.json
+!order_pool_1050000_max32_period_divisor_family_ranking_all.json
+!order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json
+!order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_scan_v26.json
+!order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_verification_v26.json
+
+# Exact arithmetic certificates and verification reports are force-added from
+# an audited stable-pool dependency closure. Other local JSON stays ignored.

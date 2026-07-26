@@ -1,0 +1,175 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "base_certificate": "order_pool_1050000_component_core_corrected_projected29_plus71normalized_factorized_plus23_plus1103_certificate.json",
+  "base_anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    71,
+    23,
+    1103
+  ],
+  "base_period": 30547440,
+  "base_maximum_union_density": {
+    "numerator": 3716729,
+    "denominator": 5831784,
+    "decimal": 0.6373228157970185
+  },
+  "base_individual_density_sum": {
+    "numerator": 26731003,
+    "denominator": 30547440,
+    "decimal": 0.8750652427830287
+  },
+  "factor_row": {
+    "p": 47,
+    "h": 23,
+    "a": 9,
+    "b": 10
+  },
+  "lifted_row": {
+    "p": 599,
+    "h": 299,
+    "a": 131,
+    "b": 201
+  },
+  "shared_modulus": 23,
+  "residual_modulus": 13,
+  "shared_determinant": 499,
+  "shared_pair_jointly_surjective": true,
+  "pair_component_union_density": {
+    "numerator": 321,
+    "denominator": 6877,
+    "decimal": 0.04667733023120547
+  },
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    71,
+    23,
+    1103,
+    47,
+    599
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "a": 3,
+      "b": 13
+    },
+    {
+      "p": 23,
+      "h": 11,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 1103,
+      "h": 551,
+      "a": 95,
+      "b": 178
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    },
+    {
+      "p": 599,
+      "h": 299,
+      "a": 131,
+      "b": 201
+    }
+  ],
+  "enumerated_period": 9133684560,
+  "extended_maximum_union_density": {
+    "numerator": 6559719497,
+    "denominator": 10026294642,
+    "decimal": 0.6542516184913848
+  },
+  "extended_individual_density_sum": {
+    "numerator": 8420234057,
+    "denominator": 9133684560,
+    "decimal": 0.921887985257945
+  },
+  "maximum_block_union_density": {
+    "numerator": 6559719497,
+    "denominator": 10026294642,
+    "decimal": 0.6542516184913848
+  },
+  "block_individual_density_sum": {
+    "numerator": 8420234057,
+    "denominator": 9133684560,
+    "decimal": 0.921887985257945
+  },
+  "forced_overlap_loss": {
+    "numerator": 1180696470851,
+    "denominator": 4411569642480,
+    "decimal": 0.26763636676656016
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 1651296485657909,
+    "denominator": 1223630106098400,
+    "decimal": 1.349506258000747
+  },
+  "proved_no_cover": false,
+  "argument": "The base block is independent of the shared and residual CRT components. The factor line and lifted line have a jointly surjective two-target map on the shared component, so their intersection has density 1/shared^2 there. The lifted line also has density 1/residual on the new coprime component."
+}

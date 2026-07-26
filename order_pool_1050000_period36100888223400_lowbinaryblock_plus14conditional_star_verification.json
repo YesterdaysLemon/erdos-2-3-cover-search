@@ -1,0 +1,39 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period36100888223400_lowbinaryblock_plus14conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_anchorblock_lowbinary_5_7_11_13_19_plus23_plus47_plus239_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre71_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre31_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre29_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre59_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre601_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre191_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre53_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre103_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre127_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre61_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre89_vs_lowbinaryblock_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre101_vs_lowbinaryblock_anchors_verification.json"
+  ],
+  "period": 36100888223400,
+  "row_count": 1228,
+  "anchor_count": 8,
+  "outside_rows_checked": 1220,
+  "conditional_edges_checked": 14,
+  "block_overlap_loss": {
+    "numerator": 1644719,
+    "denominator": 8128890
+  },
+  "star_overlap_sum": {
+    "numerator": 17750915915208720397,
+    "denominator": 65213366504514228000
+  },
+  "union_density_upper_bound": {
+    "numerator": 65212664589123122303,
+    "denominator": 65213366504514228000
+  },
+  "verified": true
+}

@@ -1,0 +1,104 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period497943285840.json",
+  "certificate": "order_pool_1050000_component_core_corrected_projected_anchorblock_5_7_11_13_17_19_plus29_239_647chain_plus53_311independent_certificate.json",
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    311
+  ],
+  "base_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "projected_prime": 29,
+  "lifted_prime": 239,
+  "tail_prime": 647,
+  "second_tail_prime": null,
+  "independent_projected_prime": 53,
+  "second_independent_projected_prime": 311,
+  "normalization_jointly_surjective": true,
+  "base_period": 720,
+  "base_cells": 518400,
+  "projection_modulus": 4,
+  "shared_residual_modulus": 7,
+  "lifted_residual_modulus": 17,
+  "shared_determinant": -128,
+  "shared_pair_jointly_surjective": true,
+  "pair_component_union_density": {
+    "numerator": 125,
+    "denominator": 833
+  },
+  "tail_residual_modulus": 19,
+  "tail_determinant": 3116,
+  "tail_pair_jointly_surjective": true,
+  "second_tail_residual_modulus": null,
+  "second_tail_determinant": null,
+  "second_tail_pair_jointly_surjective": false,
+  "independent_projection_modulus": 4,
+  "independent_residual_modulus": 13,
+  "second_independent_projection_modulus": 5,
+  "second_independent_residual_modulus": 31,
+  "active_residual_union_density": {
+    "numerator": 5869,
+    "denominator": 38437
+  },
+  "inactive_residual_union_density": {
+    "numerator": 63,
+    "denominator": 5491
+  },
+  "enumerated_period": 656051760,
+  "target_tuples": 34560,
+  "maximizing_base_targets": [
+    0,
+    0,
+    0,
+    1,
+    3,
+    3
+  ],
+  "maximizing_projection_target": 1,
+  "maximizing_independent_projection_target": 3,
+  "maximizing_second_independent_projection_target": 0,
+  "maximizing_base_covered_cells": 294900,
+  "maximizing_projected_compatible_uncovered_cells": 71520,
+  "maximizing_uncovered_category_counts": {
+    "111": 0,
+    "110": 0,
+    "101": 14304,
+    "011": 14304,
+    "100": 57216,
+    "010": 57216,
+    "001": 16092,
+    "000": 64368
+  },
+  "maximum_block_union_density": {
+    "numerator": 161010979,
+    "denominator": 265544760
+  },
+  "block_individual_density_sum": {
+    "numerator": 74129309,
+    "denominator": 93721680
+  },
+  "forced_overlap_loss": {
+    "numerator": 294132379,
+    "denominator": 1593268560
+  },
+  "pool_union_upper_bound": {
+    "numerator": 3697428068479,
+    "denominator": 2821678619760
+  },
+  "proved_no_cover": false,
+  "verified": true
+}
