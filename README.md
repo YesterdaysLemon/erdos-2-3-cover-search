@@ -382,16 +382,36 @@ the first exact finite repair was found in about 0.003 seconds.  Subsequent
 single-hole rounds grew the branch corpus to 38 points.  Every repaired
 phase checked so far still has a genuine full-domain hole.
 
-The mask engine is intentionally one-sided.  A returned phase is an exact
-finite repair, but exhaustion does not exclude repairs that use a row with
-zero gain on the base-missed points solely to compensate for a loss
-elsewhere.  `finite_sample_sat_repair.py` and
-`finite_sample_z3_repair.py` retain complete bounded-repair encodings for
-that purpose; their current 29-point runs timed out rather than proving
-UNSAT.  A resumable `sparse_anchor_quotient_sweep.py` enumerates all 162
-low-anchor quotient representatives.  The first cross-branch sample also
-showed why each branch needs its own exact adversary: the phase-one corpus is
-already covered by the opposite `p=41` anchor in phase-zero branches.
+The mask engine now closes the secondary-loss gap explicitly.  After
+selecting one distinct source row for every gain mask, it recursively tries
+all remaining zero-gain or duplicate-mask moves that could cover a newly
+created deficit.  A 40-point subcore in low-anchor branch `(1,1,0,1,0)` is
+therefore a complete radius-four obstruction.  It has 25 base misses,
+76,239 deficit-hitting moves, 660 gain masks, and relaxed mask-cover number
+three.  An independent scalar verifier enumerates 416 full mask skeletons,
+rejects 415 by row ownership and the last by exact replay, and returns
+`verified=true` with no repair.
+
+The proof object and replay are:
+
+```
+power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_certificate.json
+power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_verification.json
+```
+
+The certificate SHA-256 is
+`0e0bd78b4996614fe57f13b91402887e36ab7015e9582cc22cd9a35f44911219`.
+This rules out only four-row repairs around the declared base phase with all
+five low anchors fixed.  Radius five, distant full-pool assignments, the
+other 161 quotient classes, and the original problem remain open.
+
+`finite_sample_sat_repair.py` and `finite_sample_z3_repair.py` retain
+independent complete bounded-repair encodings; their current larger runs
+timed out rather than contributing another result.  A resumable
+`sparse_anchor_quotient_sweep.py` enumerates all 162 low-anchor quotient
+representatives.  The first cross-branch sample also showed why each branch
+needs its own exact adversary: the phase-one corpus is already covered by
+the opposite `p=41` anchor in phase-zero branches.
 
 An experimental 62-row extension with prime-power components above 16,384
 was admitted by widening finite target matrices to 64 bits.  None of those
@@ -460,7 +480,9 @@ or fibres of higher index.
   tiles (including multiple digits of one prime component), and adversarial
   witness diversity.
 - `finite_sample_mask_repair.py`: fast gain-mask construction search with
-  exact full-corpus replay of every emitted phase.
+  exact full-corpus replay and complete bounded secondary-loss search.
+- `certify_sparse_radius_obstruction.py` and its independent scalar verifier:
+  self-contained finite Hamming-ball obstruction certificates.
 - `finite_sample_sat_repair.py` and `finite_sample_z3_repair.py`: complete
   bounded-change finite repair encodings in SAT and pseudo-Boolean spaces.
 - `sparse_anchor_quotient_sweep.py`: resumable driver over the 162 exact

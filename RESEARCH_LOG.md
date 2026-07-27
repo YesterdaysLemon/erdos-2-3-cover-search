@@ -4056,12 +4056,49 @@ one second and used several qualitatively different quartets, including only
 medium-scale rows.  Every exact phase checked so far was rejected by a
 genuine uncovered exponent pair.
 
-The gain-mask solver is construction-sound but deliberately not
-obstruction-complete: a negative search can miss a row whose retargeting has
-zero gain on the initial deficits but compensates for coverage lost by
-another move.  Its output records `complete_negative=false`.  The SAT and
-Z3 encodings retain the complete finite-radius semantics for future proof
-work.
+The first gain-mask implementation was construction-sound but deliberately
+not obstruction-complete: a negative search could miss a row whose
+retargeting had zero gain on the initial deficits but compensated for
+coverage lost by another move.  The completed search now closes that gap.
+For every gain-mask skeleton it recursively selects any remaining
+zero-gain or duplicate-mask move that covers a current deficit.  Every
+radius-`R` repair is represented: its distinct nonzero gain masks form one
+enumerated skeleton, and its remaining moves can be ordered by the deficits
+they repair.
+
+A four-hole batch diversified over the current changed rows raised the
+phase-one branch to a 42-point core.  The completed search exhausted all
+radius-four repairs in about 3.6 seconds.  Removing two redundant earlier
+points gives a 40-point certificate with:
+
+```
+base misses                 25
+legal deficit-hitting moves 76239
+distinct gain masks         660
+relaxed minimum masks       3
+independent full skeletons  416
+row-matching failures       415
+exact replay failures       1
+```
+
+The independent verifier uses scalar Python integer arithmetic and no
+NumPy, PySAT, Z3, SciPy, or discovery-engine code.  It reconstructs every
+affine target, recursively enumerates the mask skeletons, assigns distinct
+row owners, and exhausts compensator chains.  It returns
+`verified=true`, `repair_exists=false` in about 1.1 seconds.
+
+```
+power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_certificate.json
+power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_verification.json
+```
+
+The certificate SHA-256 is
+`0e0bd78b4996614fe57f13b91402887e36ab7015e9582cc22cd9a35f44911219`.
+This is an exact finite Hamming-ball theorem, not full-pool UNSAT: it fixes
+the five low anchors to `(1,1,0,1,0)` and excludes only assignments within
+four nonanchor changes of the declared base phase.  Radius five and distant
+assignments remain open.  The separate complete SAT and Z3 encodings timed
+out on the larger core and contributed no additional theorem.
 
 The five-low-anchor quotient driver now enumerates the exact 162
 representatives and checkpoints every branch.  A ten-branch shared-corpus

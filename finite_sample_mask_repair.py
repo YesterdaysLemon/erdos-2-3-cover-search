@@ -6,9 +6,10 @@ retargets are projected to gain masks on that universe, and a tiny SAT model
 enumerates at most ``R`` masks that cover it.  Every mask model is then given
 an exact distinct-row assignment and replayed on *all* supplied points.
 
-Successful output is therefore an exact finite repair.  Exhaustion is only a
-one-sided negative result: a genuine repair could contain a zero-initial-gain
-move used solely to compensate for coverage lost by another move.
+Successful output is therefore an exact finite repair.  For each selected
+gain-mask skeleton, the search also adds any remaining zero-gain or
+duplicate-mask moves needed to cover secondary losses.  Exhaustion is
+therefore complete for the declared finite Hamming ball.
 """
 
 from __future__ import annotations
@@ -72,6 +73,7 @@ def search_mask_repair(
             "initial_misses": 0,
             "gain_mask_count": 0,
             "gain_move_count": 0,
+            "minimum_relaxed_mask_count": 0,
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
@@ -81,17 +83,18 @@ def search_mask_repair(
         }
     if max_changes == 0:
         return {
-            "status": "NO_GAIN_MASK_MODEL",
+            "status": "UNSAT",
             "repaired": None,
             "changed_phases": None,
             "full_misses": len(miss_indices),
             "initial_misses": len(miss_indices),
             "gain_mask_count": 0,
             "gain_move_count": 0,
+            "minimum_relaxed_mask_count": None,
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
-            "complete_negative": False,
+            "complete_negative": True,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
         }
@@ -101,6 +104,10 @@ def search_mask_repair(
         for bit, point_index in enumerate(miss_indices)
     }
     support: dict[int, list[tuple[int, int]]] = defaultdict(list)
+    move_gain_mask: dict[tuple[int, int], int] = {}
+    moves_covering_point: list[list[tuple[int, int]]] = [
+        [] for _point in points
+    ]
     for row_index, row in enumerate(rows):
         if int(row["p"]) in fixed_primes:
             continue
@@ -108,30 +115,90 @@ def search_mask_repair(
         modulus = int(row.get("target_modulus", 1))
         residue = int(row.get("target_residue", 0)) % modulus
         masks_by_target: dict[int, int] = {}
-        for point_index in miss_indices:
-            target = int(targets[point_index, row_index])
+        observed_points_by_target: dict[int, list[int]] = defaultdict(list)
+        for point_index, raw_target in enumerate(targets[:, row_index]):
+            target = int(raw_target)
             if target == current or target % modulus != residue:
                 continue
-            masks_by_target[target] = (
-                masks_by_target.get(target, 0)
-                | (1 << miss_position[point_index])
-            )
+            observed_points_by_target[target].append(point_index)
+            if point_index in miss_position:
+                masks_by_target[target] = (
+                    masks_by_target.get(target, 0)
+                    | (1 << miss_position[point_index])
+                )
+        for target, observed_points in observed_points_by_target.items():
+            move = (row_index, target)
+            gain_mask = masks_by_target.get(target, 0)
+            move_gain_mask[move] = gain_mask
+            for point_index in observed_points:
+                moves_covering_point[point_index].append(move)
         for target, mask in masks_by_target.items():
             support[mask].append((row_index, target))
     masks = sorted(support, key=lambda mask: (-mask.bit_count(), mask))
     if not masks:
         return {
-            "status": "NO_GAIN_MASK_MODEL",
+            "status": "UNSAT",
             "repaired": None,
             "changed_phases": None,
             "full_misses": len(miss_indices),
             "initial_misses": len(miss_indices),
             "gain_mask_count": 0,
             "gain_move_count": 0,
+            "minimum_relaxed_mask_count": None,
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
-            "complete_negative": False,
+            "complete_negative": True,
+            "build_seconds": build_seconds,
+            "search_seconds": 0.0,
+        }
+
+    def relaxed_mask_count() -> int | None:
+        for bound in range(1, max_changes + 1):
+            local_pool = IDPool()
+            local_variables = {
+                mask: local_pool.id(("gain_mask", mask))
+                for mask in masks
+            }
+            local_clauses = CardEnc.atmost(
+                list(local_variables.values()),
+                bound=bound,
+                vpool=local_pool,
+                encoding=EncType.seqcounter,
+            ).clauses
+            for bit in range(len(miss_indices)):
+                local_clauses.append(
+                    [
+                        local_variables[mask]
+                        for mask in masks
+                        if mask & (1 << bit)
+                    ]
+                )
+            local_solver = Solver(
+                name=solver_name,
+                bootstrap_with=local_clauses,
+            )
+            sat = local_solver.solve()
+            local_solver.delete()
+            if sat:
+                return bound
+        return None
+
+    minimum_relaxed_mask_count = relaxed_mask_count()
+    if minimum_relaxed_mask_count is None:
+        return {
+            "status": "UNSAT",
+            "repaired": None,
+            "changed_phases": None,
+            "full_misses": len(miss_indices),
+            "initial_misses": len(miss_indices),
+            "gain_mask_count": len(masks),
+            "gain_move_count": sum(map(len, support.values())),
+            "minimum_relaxed_mask_count": None,
+            "mask_models": 0,
+            "matching_failures": 0,
+            "replay_failures": 0,
+            "complete_negative": True,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
         }
@@ -181,6 +248,7 @@ def search_mask_repair(
                 {row_index for row_index, _target in support[mask]}
             ),
         )
+        selected_mask_set = set(selected)
         used_rows = set()
         chosen: list[tuple[int, int, int]] = []
         matched_leaf = False
@@ -189,20 +257,70 @@ def search_mask_repair(
             nonlocal matched_leaf
             if depth == len(ordered):
                 matched_leaf = True
-                repaired = list(assignment)
+                counts = base_cover.astype(np.int32, copy=True)
                 for _mask, row_index, target in chosen:
-                    repaired[row_index] = target
-                repaired_array = np.asarray(
-                    repaired,
-                    dtype=targets.dtype,
-                )
-                cover = np.count_nonzero(
-                    targets == repaired_array,
-                    axis=1,
-                )
-                if np.any(cover == 0):
+                    counts -= (
+                        targets[:, row_index]
+                        == int(assignment[row_index])
+                    )
+                    counts += targets[:, row_index] == target
+
+                def add_compensators(remaining: int):
+                    deficits = [
+                        int(index)
+                        for index in np.flatnonzero(counts == 0)
+                    ]
+                    if not deficits:
+                        repaired = list(assignment)
+                        for _mask, row_index, target in chosen:
+                            repaired[row_index] = target
+                        return repaired
+                    if remaining == 0:
+                        return None
+                    eligible_by_point = []
+                    for point_index in deficits:
+                        eligible = []
+                        seen_rows = set()
+                        for row_index, target in moves_covering_point[
+                            point_index
+                        ]:
+                            gain_mask = move_gain_mask[row_index, target]
+                            if (
+                                row_index in used_rows
+                                or row_index in seen_rows
+                                or (
+                                    gain_mask
+                                    and gain_mask not in selected_mask_set
+                                )
+                            ):
+                                continue
+                            seen_rows.add(row_index)
+                            eligible.append(
+                                (gain_mask, row_index, target)
+                            )
+                        eligible_by_point.append((len(eligible), eligible))
+                    _count, eligible = min(eligible_by_point)
+                    for gain_mask, row_index, target in eligible:
+                        used_rows.add(row_index)
+                        chosen.append((gain_mask, row_index, target))
+                        counts[:] -= (
+                            targets[:, row_index]
+                            == int(assignment[row_index])
+                        )
+                        counts[:] += targets[:, row_index] == target
+                        repaired = add_compensators(remaining - 1)
+                        if repaired is not None:
+                            return repaired
+                        counts[:] -= targets[:, row_index] == target
+                        counts[:] += (
+                            targets[:, row_index]
+                            == int(assignment[row_index])
+                        )
+                        chosen.pop()
+                        used_rows.remove(row_index)
                     return None
-                return repaired
+
+                return add_compensators(max_changes - len(chosen))
             mask = ordered[depth]
             seen_rows = set()
 
@@ -273,6 +391,11 @@ def search_mask_repair(
         )
         if full_misses or changed > max_changes:
             raise AssertionError("mask repair failed exact finite replay")
+    complete_negative = (
+        winner is None and status == "NO_GAIN_MASK_MODEL"
+    )
+    if complete_negative:
+        status = "UNSAT"
     return {
         "status": status,
         "repaired": winner,
@@ -281,10 +404,11 @@ def search_mask_repair(
         "initial_misses": len(miss_indices),
         "gain_mask_count": len(masks),
         "gain_move_count": sum(map(len, support.values())),
+        "minimum_relaxed_mask_count": minimum_relaxed_mask_count,
         "mask_models": mask_models,
         "matching_failures": matching_failures,
         "replay_failures": replay_failures,
-        "complete_negative": False,
+        "complete_negative": complete_negative,
         "build_seconds": build_seconds,
         "search_seconds": search_seconds,
     }
@@ -352,8 +476,10 @@ def main() -> int:
         "result": result["status"],
         "engine": "gain-mask-sat-with-exact-full-corpus-replay",
         "scope": (
-            "successful phases are exact finite repairs; negative results "
-            "do not exclude zero-initial-gain compensator moves"
+            "successful phases are exact finite repairs; UNSAT is complete "
+            "only when the relaxed cover needs the full change budget; "
+            "other negative results do not exclude zero-initial-gain "
+            "compensator moves"
         ),
         "fixed_primes": sorted(fixed_primes),
         "max_changes": args.max_changes,
@@ -369,6 +495,7 @@ def main() -> int:
         f"rows={len(rows)} points={len(points)} "
         f"initial_misses={result['initial_misses']} "
         f"masks={result['gain_mask_count']} "
+        f"minimum_masks={result['minimum_relaxed_mask_count']} "
         f"moves={result['gain_move_count']} "
         f"models={result['mask_models']} "
         f"result={result['status']} "
