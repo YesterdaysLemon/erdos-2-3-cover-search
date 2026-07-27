@@ -2286,3 +2286,59 @@ This is the strongest certified bound currently assembled for that finite
 family, but it does not eliminate the family because the upper bound remains
 greater than one.  It also does not imply a corresponding percentage of
 progress on the unrestricted Erdős problem.
+
+## Period-2,533,395,664,800 elimination (2026-07-26)
+
+The preceding checkpoint has now been superseded by a strict no-cover
+certificate.  The corrected 14-anchor block was first extended by the
+`p=31` and `p=37` fibres.  The resulting 16-anchor exact block has forced
+overlap loss
+
+```
+146904738209 / 456011219664
+= 0.32215158722902243.
+```
+
+The conditional projected-pair generator and its independent verifier now
+support appended base-period anchors.  They quotient adversarial base targets
+by the exact translation stabilizer; the verifier reconstructs the
+stabilizer independently by residue lifting and checks that its orbits are
+disjoint and exhaustive.  On the `p=31` regression this reduces 7,372,800
+raw target tuples to 460,800 orbit representatives without changing the exact
+answer.
+
+Forty independently replayed conditional-fibre edges were assembled around
+the enlarged block.  The decisive new `p=599`, `h=299` certificate uses a
+compact period-17,940 decomposition with 1,076,400 outside base points and
+63,590,400 target states.  Its exact forced intersection is
+
+```
+370879 / 185472690
+= 0.001999642103643399,
+```
+
+improving the previous generic edge by
+
+```
+18630527429 / 81575340406560
+= 0.00022838430506263383.
+```
+
+The complete period certificate and the independently recomputed replay now
+give
+
+```
+40107466081993334654251 / 40113084965171462244000
+= 0.9998599239329758 < 1.
+```
+
+The no-cover margin is approximately `0.00014007606702417014`.  Therefore no
+choice of phases from this 933-row divisor-period family can cover the full
+exponent lattice.  The ranked finite frontier is reduced from 28 to 27
+families: 4,610 of 4,637 are now certified no-cover.  All four changed or new
+certificate programs compile, all 30 regression tests pass, and the complete
+period replay reports `verified=True`.
+
+This is a rigorous finite-family elimination only.  It does not produce an
+integer `m`, rule out all possible finite prime-fibre systems, or prove a
+global impossibility theorem for the original Erdős problem.

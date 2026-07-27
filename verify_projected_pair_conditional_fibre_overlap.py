@@ -64,7 +64,9 @@ def main() -> int:
     has_paired_projection = (
         structured_schema == "projected_pair_normalized_start_leaf_v3"
     )
-    base_primes = tuple(int(value) for value in structured["base_primes"])
+    core_base_primes = tuple(
+        int(value) for value in structured["base_primes"]
+    )
     projected_prime = int(structured["projected_prime"])
     lifted_prime = int(structured["lifted_prime"])
     core_independent_primes = tuple(
@@ -81,7 +83,7 @@ def main() -> int:
     leaf_prime = int(structured["normalized_start_shared_prime"])
     outside_prime = int(cert["outside_prime"])
     structured_anchor_primes = (
-        *base_primes,
+        *core_base_primes,
         projected_prime,
         lifted_prime,
         *core_independent_primes,
@@ -90,11 +92,25 @@ def main() -> int:
         leaf_prime,
     )
     block_anchor_primes = tuple(int(value) for value in block["anchor_primes"])
+    structured_prefix_valid = (
+        block_anchor_primes[:len(structured_anchor_primes)]
+        == structured_anchor_primes
+    )
+    extra_primes = block_anchor_primes[len(structured_anchor_primes):]
+    core_base_period = math.lcm(
+        *(int(by_prime[prime]["h"]) for prime in core_base_primes)
+    )
+    extra_base_primes = tuple(
+        prime
+        for prime in extra_primes
+        if core_base_period % int(by_prime[prime]["h"]) == 0
+    )
     extra_independent_primes = tuple(
         prime
-        for prime in block_anchor_primes
-        if prime not in structured_anchor_primes
+        for prime in extra_primes
+        if prime not in extra_base_primes
     )
+    base_primes = (*core_base_primes, *extra_base_primes)
     independent_primes = (
         *core_independent_primes,
         *extra_independent_primes,
@@ -173,8 +189,24 @@ def main() -> int:
         structured.get("schema") in structured_schemas
         and len(by_prime) == len(rows)
         and len(set(anchor_primes)) == len(anchor_primes)
-        and block_anchor_primes
-        == (*structured_anchor_primes, *extra_independent_primes)
+        and structured_prefix_valid
+        and tuple(
+            int(value)
+            for value in cert.get("core_base_primes", core_base_primes)
+        )
+        == core_base_primes
+        and tuple(
+            int(value)
+            for value in cert.get("extra_base_primes", ())
+        )
+        == extra_base_primes
+        and tuple(int(value) for value in cert["base_primes"])
+        == base_primes
+        and tuple(
+            int(value)
+            for value in cert["extra_independent_primes"]
+        )
+        == extra_independent_primes
         and outside_prime not in anchor_primes
         and base_period % int(outside["h"]) == 0
         and all(int(row.get("target_modulus", 1)) == 1 for row in anchors)
@@ -238,25 +270,129 @@ def main() -> int:
     )
     # The verifier reverses the plane-loop order and reconstructs the image
     # directly, independently of the certificate's recorded image size.
-    normalization_image = {
-        tuple(
-            (int(row["a"]) * first + int(row["b"]) * second) % int(row["h"])
-            for row in normalizers
-        )
-        for second in range(normalization_period)
-        for first in range(normalization_period)
-    }
+    normalization_image = set()
+    for second in range(normalization_period):
+        for first in range(normalization_period):
+            values = tuple(
+                (
+                    int(row["a"]) * first
+                    + int(row["b"]) * second
+                ) % int(row["h"])
+                for row in normalizers
+            )
+            normalization_image.add(values)
     normalization_target_count = math.prod(
         int(row["h"]) for row in normalizers
     )
     normalization_surjective = (
         len(normalization_image) == normalization_target_count
     )
+    stabilizer_period = int(
+        cert.get(
+            "translation_stabilizer_period",
+            normalization_period,
+        )
+    )
+    stabilizer_base_shifts = set()
+    outside_h = int(outside["h"])
+    outside_residues = [
+        (first, second)
+        for second in range(outside_h)
+        for first in range(outside_h)
+        if (
+            int(outside["a"]) * first
+            + int(outside["b"]) * second
+        ) % outside_h == 0
+    ]
+    if stabilizer_period % outside_h:
+        raise RuntimeError("stabilizer period misses the outside modulus")
+    lift_count = stabilizer_period // outside_h
+    for residue_first, residue_second in outside_residues:
+        for first_lift in range(lift_count):
+            first = residue_first + outside_h * first_lift
+            for second_lift in range(lift_count):
+                second = residue_second + outside_h * second_lift
+                if any(
+                    (
+                        int(row["a"]) * first
+                        + int(row["b"]) * second
+                    ) % int(row["h"])
+                    for row in normalizers[1:]
+                ):
+                    continue
+                stabilizer_base_shifts.add(
+                    tuple(
+                        (
+                            int(row["a"]) * first
+                            + int(row["b"]) * second
+                        ) % int(row["h"])
+                        for row in bases
+                    )
+                )
     target_ranges = [
         range(1) if index in normalized_indices else range(int(row["h"]))
         for index, row in enumerate(bases)
     ]
-    target_tuples = math.prod(len(values) for values in target_ranges)
+    raw_target_tuples = math.prod(
+        len(values) for values in target_ranges
+    )
+    use_target_orbits = "target_orbit_count" in cert
+    if use_target_orbits:
+        unnormalized_indices = tuple(
+            index
+            for index in range(len(bases))
+            if index not in normalized_indices
+        )
+        unnormalized_moduli = tuple(
+            int(bases[index]["h"]) for index in unnormalized_indices
+        )
+        stabilizer_shifts = {
+            tuple(shift[index] for index in unnormalized_indices)
+            for shift in stabilizer_base_shifts
+        }
+
+        def encode_target(values: tuple[int, ...]) -> int:
+            code = 0
+            for value, modulus in zip(values, unnormalized_moduli):
+                code = code * modulus + value
+            return code
+
+        seen_targets = bytearray(raw_target_tuples)
+        target_representatives = []
+        for values in itertools.product(
+            *(range(modulus) for modulus in unnormalized_moduli)
+        ):
+            code = encode_target(values)
+            if seen_targets[code]:
+                continue
+            full_target = [0] * len(bases)
+            for index, value in zip(unnormalized_indices, values):
+                full_target[index] = value
+            target_representatives.append(tuple(full_target))
+            for shift in stabilizer_shifts:
+                translated = tuple(
+                    (value + delta) % modulus
+                    for value, delta, modulus in zip(
+                        values,
+                        shift,
+                        unnormalized_moduli,
+                    )
+                )
+                seen_targets[encode_target(translated)] = 1
+        orbit_partition_valid = (
+            bool(stabilizer_shifts)
+            and all(seen_targets)
+            and raw_target_tuples % len(stabilizer_shifts) == 0
+            and len(target_representatives)
+            == raw_target_tuples // len(stabilizer_shifts)
+        )
+        target_tuples = len(target_representatives)
+        target_iterator = target_representatives
+    else:
+        stabilizer_shifts = set()
+        orbit_partition_valid = True
+        target_tuples = raw_target_tuples
+        target_iterator = itertools.product(*target_ranges)
 
     path_values = {
         "inactive": brute_path_leaf_density(
@@ -441,7 +577,7 @@ def main() -> int:
     minimizing_base_covered = None
     minimizing_counts = None
     checked = 0
-    for targets in itertools.product(*target_ranges):
+    for targets in target_iterator:
         base_union = 0
         for masks, target in zip(base_masks, targets):
             base_union |= masks[target]
@@ -516,6 +652,23 @@ def main() -> int:
         "".join("1" if flag else "0" for flag in state): value
         for state, value in weights.items()
     }
+    orbit_metadata_valid = (
+        not use_target_orbits
+        or (
+            int(cert["raw_target_tuples"]) == raw_target_tuples
+            and int(
+                cert.get(
+                    "translation_stabilizer_period",
+                    normalization_period,
+                )
+            )
+            == stabilizer_period
+            and int(cert["translation_stabilizer_size"])
+            == len(stabilizer_shifts)
+            and int(cert["target_orbit_count"]) == target_tuples
+            and orbit_partition_valid
+        )
+    )
     verified = (
         cert.get("schema")
         == "projected_pair_conditional_fibre_overlap_v1"
@@ -549,6 +702,7 @@ def main() -> int:
         )
         and recorded_weights == expected_weights
         and partition_valid
+        and orbit_metadata_valid
         and int(cert["target_tuples"]) == target_tuples
         and int(cert["projection_target_combinations_per_base"])
         == len(choices)

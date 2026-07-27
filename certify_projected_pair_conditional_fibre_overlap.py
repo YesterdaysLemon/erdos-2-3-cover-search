@@ -28,6 +28,9 @@ from certify_projected_pair_start_leaf_block import (
     fraction_payload,
     path_leaf_densities,
 )
+from certify_projected_conditional_fibre_overlap import (
+    primitive_fibre_points,
+)
 
 
 def parse_primes(value: str) -> tuple[int, ...]:
@@ -55,6 +58,12 @@ def main() -> int:
     )
     parser.add_argument("--max-base-cells", type=int, default=1_000_000)
     parser.add_argument("--max-target-tuples", type=int, default=1_000_000)
+    parser.add_argument(
+        "--max-raw-target-tuples",
+        type=int,
+        default=30_000_000,
+        help="guard before quotienting base targets by stabilizer translations",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if np is None:
@@ -91,7 +100,9 @@ def main() -> int:
         structured_schema == "projected_pair_normalized_start_leaf_v3"
     )
 
-    base_primes = tuple(int(value) for value in structured["base_primes"])
+    core_base_primes = tuple(
+        int(value) for value in structured["base_primes"]
+    )
     projected_prime = int(structured["projected_prime"])
     lifted_prime = int(structured["lifted_prime"])
     core_independent_primes = tuple(
@@ -107,7 +118,7 @@ def main() -> int:
     )
     leaf_prime = int(structured["normalized_start_shared_prime"])
     structured_anchor_primes = (
-        *base_primes,
+        *core_base_primes,
         projected_prime,
         lifted_prime,
         *core_independent_primes,
@@ -116,16 +127,27 @@ def main() -> int:
         leaf_prime,
     )
     block_anchor_primes = tuple(int(value) for value in block["anchor_primes"])
+    if block_anchor_primes[:len(structured_anchor_primes)] != (
+        structured_anchor_primes
+    ):
+        raise RuntimeError(
+            "factorized extension does not preserve the structured prefix"
+        )
+    extra_primes = block_anchor_primes[len(structured_anchor_primes):]
+    core_base_period = math.lcm(
+        *(int(by_prime[prime]["h"]) for prime in core_base_primes)
+    )
+    extra_base_primes = tuple(
+        prime
+        for prime in extra_primes
+        if core_base_period % int(by_prime[prime]["h"]) == 0
+    )
     extra_independent_primes = tuple(
         prime
-        for prime in block_anchor_primes
-        if prime not in structured_anchor_primes
+        for prime in extra_primes
+        if prime not in extra_base_primes
     )
-    if block_anchor_primes != (
-        *structured_anchor_primes,
-        *extra_independent_primes,
-    ):
-        raise RuntimeError("factorized extension does not append its extra rows")
+    base_primes = (*core_base_primes, *extra_base_primes)
     independent_primes = (
         *core_independent_primes,
         *extra_independent_primes,
@@ -287,27 +309,101 @@ def main() -> int:
     normalization_period = math.lcm(
         *(int(row["h"]) for row in normalizers)
     )
-    normalization_image = {
-        tuple(
-            (int(row["a"]) * k + int(row["b"]) * l) % int(row["h"])
-            for row in normalizers
-        )
-        for k in range(normalization_period)
-        for l in range(normalization_period)
-    }
+    normalization_image = set()
+    for k in range(normalization_period):
+        for l in range(normalization_period):
+            values = tuple(
+                (
+                    int(row["a"]) * k + int(row["b"]) * l
+                ) % int(row["h"])
+                for row in normalizers
+            )
+            normalization_image.add(values)
     normalization_target_count = math.prod(
         int(row["h"]) for row in normalizers
     )
     if len(normalization_image) != normalization_target_count:
         raise RuntimeError("outside/anchor normalization is not surjective")
+    stabilizer_period = math.lcm(normalization_period, base_period)
+    stabilizer_base_shifts = set()
+    for k, l in primitive_fibre_points(outside, stabilizer_period):
+        if any(
+            (
+                int(row["a"]) * k + int(row["b"]) * l
+            ) % int(row["h"])
+            for row in normalizers[1:]
+        ):
+            continue
+        stabilizer_base_shifts.add(
+            tuple(
+                (
+                    int(row["a"]) * k + int(row["b"]) * l
+                ) % int(row["h"])
+                for row in bases
+            )
+        )
 
     target_ranges = [
         range(1) if index in normalized_indices else range(int(row["h"]))
         for index, row in enumerate(bases)
     ]
-    target_tuples = math.prod(len(values) for values in target_ranges)
+    raw_target_tuples = math.prod(
+        len(values) for values in target_ranges
+    )
+    if raw_target_tuples > args.max_raw_target_tuples:
+        raise RuntimeError("raw base target space exceeds guard")
+    unnormalized_indices = tuple(
+        index
+        for index in range(len(bases))
+        if index not in normalized_indices
+    )
+    unnormalized_moduli = tuple(
+        int(bases[index]["h"]) for index in unnormalized_indices
+    )
+    stabilizer_shifts = {
+        tuple(shift[index] for index in unnormalized_indices)
+        for shift in stabilizer_base_shifts
+    }
+    if not stabilizer_shifts:
+        raise RuntimeError("normalizer stabilizer image is empty")
+
+    def encode_target(values: tuple[int, ...]) -> int:
+        code = 0
+        for value, modulus in zip(values, unnormalized_moduli):
+            code = code * modulus + value
+        return code
+
+    seen_targets = bytearray(raw_target_tuples)
+    target_representatives = []
+    for values in itertools.product(
+        *(range(modulus) for modulus in unnormalized_moduli)
+    ):
+        code = encode_target(values)
+        if seen_targets[code]:
+            continue
+        full_target = [0] * len(bases)
+        for index, value in zip(unnormalized_indices, values):
+            full_target[index] = value
+        target_representatives.append(tuple(full_target))
+        for shift in stabilizer_shifts:
+            translated = tuple(
+                (value + delta) % modulus
+                for value, delta, modulus in zip(
+                    values,
+                    shift,
+                    unnormalized_moduli,
+                )
+            )
+            seen_targets[encode_target(translated)] = 1
+    if not all(seen_targets):
+        raise RuntimeError("stabilizer target orbits do not cover the space")
+    target_tuples = len(target_representatives)
+    if raw_target_tuples % len(stabilizer_shifts):
+        raise RuntimeError("stabilizer size does not divide target space")
+    if target_tuples != raw_target_tuples // len(stabilizer_shifts):
+        raise RuntimeError("unexpected stabilizer orbit count")
     if target_tuples > args.max_target_tuples:
-        raise RuntimeError("base target space exceeds guard")
+        raise RuntimeError("base target orbit space exceeds guard")
 
     def line_masks(row: dict, modulus: int) -> list[int]:
         masks = [0] * modulus
@@ -451,7 +547,7 @@ def main() -> int:
     minimizing_base_covered = None
     minimizing_counts = None
     checked = 0
-    for targets in itertools.product(*target_ranges):
+    for targets in target_representatives:
         base_union = 0
         for masks, target in zip(base_masks, targets):
             base_union |= masks[target]
@@ -512,6 +608,8 @@ def main() -> int:
         "anchor_primes": list(anchor_primes),
         "anchor_rows": [recorded_row(row) for row in anchors],
         "base_primes": list(base_primes),
+        "core_base_primes": list(core_base_primes),
+        "extra_base_primes": list(extra_base_primes),
         "projected_prime": projected_prime,
         "lifted_prime": lifted_prime,
         "independent_projected_primes": list(independent_primes),
@@ -526,6 +624,8 @@ def main() -> int:
         "normalization_period": normalization_period,
         "normalization_target_count": normalization_target_count,
         "normalization_jointly_surjective": True,
+        "translation_stabilizer_period": stabilizer_period,
+        "translation_stabilizer_size": len(stabilizer_shifts),
         "base_period": base_period,
         "base_cells": base_cells,
         "outside_base_points": outside_base_points,
@@ -545,6 +645,8 @@ def main() -> int:
             fraction_payload(value)
             for state, value in weights.items()
         },
+        "raw_target_tuples": raw_target_tuples,
+        "target_orbit_count": target_tuples,
         "target_tuples": target_tuples,
         "projection_target_combinations_per_base": len(choices),
         "target_combinations_checked": checked,
@@ -558,8 +660,10 @@ def main() -> int:
         "argument": (
             "Translate the outside fibre, the named base anchors, and the "
             "start leaf to target zero; the recorded joint image is "
-            "surjective. Restrict the exact base-plane partition to the "
-            "outside fibre and enumerate every remaining anchor target. "
+            "surjective. Residual translations that preserve those zero "
+            "targets partition the remaining base targets into the recorded "
+            "orbits. Restrict the exact base-plane partition to the outside "
+            "fibre and enumerate one representative of every orbit. "
             "Residual weights count the exact projected union. Incompatible "
             "targets minimize the shared residual triangle pointwise. The "
             "smallest score is therefore the exact minimum intersection of "

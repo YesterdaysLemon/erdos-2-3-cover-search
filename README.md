@@ -25,23 +25,25 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,609 of 4,637 ranked finite divisor-period families have independently
+- 4,610 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 28 ranked finite families remain in the intersection of the aggregate
-  block-star and separately verified single-anchor frontiers.
-- for the closest remaining family, at period `2533395664800`, 22
-  independently replayed conditional-overlap bounds reduce the exact
-  period-level upper bound to
-  `730799865304831267447/729328817548572040800`, or
-  `1.0020169883883154`. Because this is still greater than one, that family
-  remains unresolved.
+- 27 ranked finite families remain after intersecting the aggregate
+  block-star and separately verified single-anchor frontiers and applying
+  16 exact period certificates;
+- the former closest family, at period `2533395664800`, is now eliminated.
+  A 16-anchor block and 40 independently replayed conditional-overlap bounds
+  give the exact period-level upper bound
+  `40107466081993334654251/40113084965171462244000`, or
+  `0.9998599239329758`, which is strictly less than one.
 
-The fraction \(4{,}609/4{,}637\) measures only this deliberately chosen
+The fraction \(4{,}610/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is 99.4% solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
+The 27 unresolved periods are indexed in
+[CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
 
@@ -57,6 +59,8 @@ parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
   and its verification: the independent single-anchor frontier.
 - the `order_pool_1050000` exact rational certificates and replay reports
   needed by the current checkpoint and its dependency closure.
+- [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md): a compact table
+  of the 27 ranked finite families not yet eliminated.
 - [PUBLICATION_MANIFEST.md](PUBLICATION_MANIFEST.md): what the public snapshot
   includes and deliberately excludes.
 
@@ -82,8 +86,17 @@ python verify_projected_pair_conditional_fibre_overlap.py `
   --output replay.json
 ```
 
-Successful replay prints `verified=True`. This proves only the finite
-intersection claim encoded by that certificate.
+The assembled current period checkpoint can be replayed without manually
+listing its 40 dependency reports:
+
+```powershell
+python replay_ranked_period_conditional_star.py `
+  order_pool_1050000_period2533395664800_conditional_star_v3_certificate.json `
+  --output replay-period2533395664800.json
+```
+
+Successful replay prints `verified=True`. These checks prove only the finite
+claims encoded by their certificates.
 
 ## Evidence policy
 
