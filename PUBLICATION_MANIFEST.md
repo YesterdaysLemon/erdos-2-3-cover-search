@@ -47,7 +47,7 @@ This repository is a curated snapshot of the active workspace, published on
 - PID files, bytecode, caches, and temporary files;
 - local-search checkpoints and intermediate solver phase assignments;
 - the max-32 and max-128 direct-cover CEGIS lesson sets and current phase
-  assignments, including the 962,000-point continuation checkpoint; their
+  assignments, including the 1,685,600-point continuation checkpoint; their
   parameters and measured repair curves are recorded in `RESEARCH_LOG.md`;
 - superseded discovery-only period-`3139207671600` design JSON, CEGIS witnesses,
   phases, and checker logs; their exact aggregate checkpoint and caveats are

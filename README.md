@@ -116,14 +116,20 @@ Because all four include the original point, their union has 1,236 points
 per hole.  Exact witness-diversity constraints make each 100-hole batch
 range across additional component residues.
 
-The latest five-round pass began with 344,000 accumulated lessons.  Its
-completed repairs used `0, 98, 64, 62, 107` phase changes at
+One five-round pass began with 344,000 accumulated lessons.  Its completed
+repairs used `0, 98, 64, 62, 107` phase changes at
 `344000, 467600, 591200, 714800, 838400` points, respectively.  After every
 repair, the separate exact SAT checker returned 100 genuine uncovered
-points.  The final witness expansion leaves a 962,000-point continuation
-checkpoint locally.  Consequently this experiment has found neither a
-cover nor a no-cover proof.  The method, the earlier max-32 experiment, and
-the measured null results are recorded in
+points.
+
+A continuation added separate lowest-digit tiles for components 17, 19, and
+23, raising the union to 2,412 points per exact hole.  Repairs at
+`962000, 1203200, 1444400` points took `45, 138, 149` phase changes, and the
+exact checker again returned 100 holes after each repair.  The final
+expansion leaves a 1,685,600-point continuation checkpoint locally.
+Consequently this experiment has found neither a cover nor a no-cover proof.
+The method, the earlier max-32 experiment, and the measured null results are
+recorded in
 [RESEARCH_LOG.md](RESEARCH_LOG.md).
 
 The exact checkpoint and the prominent correction to an earlier invalid

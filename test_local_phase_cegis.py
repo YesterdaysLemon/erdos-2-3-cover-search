@@ -194,6 +194,78 @@ class StreamingRepairTests(unittest.TestCase):
         self.assertIs(returned_state, state)
         np.testing.assert_array_equal(returned_cover, cover)
 
+    def test_streaming_component_state_appends_without_recomputing_old_rows(
+        self,
+    ) -> None:
+        candidates = [
+            (6, 7, 1, 5, 3, 6),
+            (10, 11, 3, 7, 10, 5),
+        ]
+        old_points = [
+            (1 << 80, (1 << 79) + 3),
+            ((1 << 85) + 5, (1 << 83) + 7),
+        ]
+        new_points = [
+            ((1 << 90) + 11, (1 << 88) + 13),
+        ]
+        old_state = local_phase_cegis.streaming_coordinate_state(
+            old_points,
+            candidates,
+            np,
+        )
+        new_state = local_phase_cegis.streaming_coordinate_state(
+            new_points,
+            candidates,
+            np,
+        )
+        appended = local_phase_cegis.append_streaming_coordinate_state(
+            old_state,
+            new_state,
+            np,
+        )
+        rebuilt = local_phase_cegis.streaming_coordinate_state(
+            [*old_points, *new_points],
+            candidates,
+            np,
+        )
+
+        self.assertIsNotNone(appended)
+        self.assertEqual(appended["mode"], "components")
+        self.assertEqual(appended["spec_by_h"], rebuilt["spec_by_h"])
+        np.testing.assert_array_equal(
+            appended["k_components"],
+            rebuilt["k_components"],
+        )
+        np.testing.assert_array_equal(
+            appended["l_components"],
+            rebuilt["l_components"],
+        )
+
+    def test_streaming_append_reports_raw_to_component_transition(
+        self,
+    ) -> None:
+        candidates = [(6, 7, 1, 5, 3, 6)]
+        raw = local_phase_cegis.streaming_coordinate_state(
+            [(2, 3)],
+            candidates,
+            np,
+        )
+        components = local_phase_cegis.streaming_coordinate_state(
+            [(1 << 80, 1 << 79)],
+            candidates,
+            np,
+        )
+
+        self.assertEqual(raw["mode"], "raw")
+        self.assertEqual(components["mode"], "components")
+        self.assertIsNone(
+            local_phase_cegis.append_streaming_coordinate_state(
+                raw,
+                components,
+                np,
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

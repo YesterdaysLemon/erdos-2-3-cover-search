@@ -3306,3 +3306,64 @@ sign of mathematical convergence: repair counts remain modest rather than
 growing toward an obvious contradiction.  The authoritative result is
 therefore still unresolved.  No finite cover, CRT value of `m`, or global
 impossibility proof has been produced.
+
+The next continuation added separate lowest-digit tiles for components 17,
+19, and 23.  Together with the earlier groups, each exact hole expanded to
+
+```
+900 + 49 + 121 + 169 + 289 + 361 + 529 - 6 = 2412
+```
+
+distinct lesson points.  Three complete rounds gave:
+
+```
+points before repair   initial misses   phase changes   exact holes after
+962000                 45937            45              100
+1203200                153291           138             100
+1444400                148605           149             100
+```
+
+The final expansion leaves 1,685,600 local lessons.  The higher move counts
+show that the wider lessons exert more pressure, but 149 changes among
+14,629 phases is still modest, and the exact checker found a full 100-hole
+batch every time.  This suggests that unions of one-component slices still
+permit holes to move through joint component combinations.  The next
+structural test therefore uses Cartesian tiles on component pairs rather
+than simply increasing the number of singleton slices.
+
+The streaming cache update was also changed to append residue rows for only
+the newly generated lessons.  A full rebuild remains necessary when a raw
+64-bit checkpoint first transitions to compressed component residues, but
+ordinary same-mode rounds no longer recompute old coordinates.
+
+## Homogeneous-refinement lead (2026-07-27)
+
+Cochrane and Myerson construct a homogeneous cover of `Z^2` from a
+20-congruence composite cover of `Z`; with the three prime-divisor rows, it
+has 23 subgroup rows.  Cremona and Koymans recently placed such lattice
+covers in a systematic refinement framework:
+
+- https://www.math.ksu.edu/~cochrane/research/covering.pdf
+- https://arxiv.org/abs/2601.03212
+
+If every row of one such homogeneous cover could be realized, or recursively
+refined, by distinct prime signatures from this search, choosing target zero
+would give a particularly transparent CRT construction.  The exact
+Cochrane--Myerson congruence table was extracted from the primary paper and
+checked against the complete corrected 26,032-row pool.
+
+In the paper's published orientation, only the index-2 parent has total
+compatible conditional refiner density above one
+(`1.297777211265`).  The index-3 and index-5 parents have
+`0.617728582315` and `0.267058401716`; every one of the 20 composite-index
+parents is also below one.  Thus no parent-by-parent refinement of that
+orientation can work.
+
+An invertible linear change of exponent coordinates preserves the
+homogeneous cover.  A deterministic random scan tested 170,713 matrices
+invertible modulo 720.  Its best capped, parent-weighted refiner score was
+approximately `1.54998`, and a separate objective found an orientation with
+six parent classes individually above conditional density one.  Neither
+quantity is a coverage certificate, and many required parents remain far
+below one.  The transformed construction is therefore only a lead for a
+joint refinement solver, not a candidate `m` or a proof.

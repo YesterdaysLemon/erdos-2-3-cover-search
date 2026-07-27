@@ -189,6 +189,44 @@ def streaming_coordinate_state(points, candidates, np):
     }
 
 
+def append_streaming_coordinate_state(state, addition, np):
+    """Append compatible state rows without recomputing old residues.
+
+    A raw uint64 checkpoint can become unsuitable when an exact checker first
+    returns a larger coordinate.  That one-time mode transition needs a full
+    rebuild.  Once both states use the same representation, their row arrays
+    can be concatenated directly.
+    """
+    if state["mode"] != addition["mode"]:
+        return None
+    if state["mode"] == "raw":
+        return {
+            "mode": "raw",
+            "ks": np.concatenate((state["ks"], addition["ks"])),
+            "ls": np.concatenate((state["ls"], addition["ls"])),
+        }
+    if state["spec_by_h"] != addition["spec_by_h"]:
+        raise ValueError("incompatible streaming component specifications")
+    return {
+        "mode": "components",
+        "k_components": np.concatenate(
+            (
+                state["k_components"],
+                addition["k_components"],
+            ),
+            axis=0,
+        ),
+        "l_components": np.concatenate(
+            (
+                state["l_components"],
+                addition["l_components"],
+            ),
+            axis=0,
+        ),
+        "spec_by_h": state["spec_by_h"],
+    }
+
+
 def streaming_state_target_values(
     state,
     candidate,
@@ -1881,24 +1919,30 @@ def main() -> int:
             continue
         if args.stream_targets:
             update_started = time.monotonic()
-            old_point_count = len(points) - len(new_points)
-            stream_coordinate_state = streaming_coordinate_state(
-                points,
+            new_coordinate_state = streaming_coordinate_state(
+                new_points,
                 candidates,
                 np,
             )
-            new_indices = np.arange(
-                old_point_count,
-                len(points),
-                dtype=np.int64,
-            )
             new_cover = streaming_cover_counts(
-                stream_coordinate_state,
+                new_coordinate_state,
                 candidates,
                 assignment,
                 np,
-                new_indices,
             )
+            extended_coordinate_state = append_streaming_coordinate_state(
+                stream_coordinate_state,
+                new_coordinate_state,
+                np,
+            )
+            if extended_coordinate_state is None:
+                stream_coordinate_state = streaming_coordinate_state(
+                    points,
+                    candidates,
+                    np,
+                )
+            else:
+                stream_coordinate_state = extended_coordinate_state
             stream_cover = np.concatenate(
                 (stream_cover, new_cover)
             )
