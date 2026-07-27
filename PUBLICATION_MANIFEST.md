@@ -15,6 +15,9 @@ This repository is a curated snapshot of the active workspace, published on
   search;
 - the exact bounded homogeneous-refinement sibling obstruction over all
   129,497 raw rows, together with its independently oriented replay;
+- the explicit exponent pair outside all 129,497 bounded homogeneous fibres,
+  together with an independent modular-exponentiation replay over every
+  source prime;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its

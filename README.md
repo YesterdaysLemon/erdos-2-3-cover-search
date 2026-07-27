@@ -141,17 +141,32 @@ parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 The 17 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
-## Bounded homogeneous-refinement obstruction
+## Bounded homogeneous obstructions
 
 The complete raw pool through subgroup index `1050000` contains 129,497 leaf
-lattices.  Grouping all 429,197 possible parent reductions found no complete
+lattices.  The explicit exponent pair
+
+```
+(k,l) = (552897490806962158, 6049004616530593493)
+```
+
+lies in none of them.  The discovery check uses the stored signature
+equations, while an independent replay recomputes
+`2^k * 3^l mod p` for every source prime and returns `verified=True`.
+Consequently, even the union of every homogeneous fibre in this bounded pool
+is not a cover.
+
+A separate refinement-specific certificate groups all 429,197 possible
+parent reductions and finds no complete
 set of prime-\(q\) siblings, and an independently oriented replay returns
 `verified=True`.  Every nontrivial finite refinement tree has a deepest
 internal node whose children are all leaves, so no homogeneous refinement of
 the trivial cover can use only this finite pool.
 
-This is a narrow finite obstruction.  It does not exclude non-refinement
-homogeneous covers, general affine covers, or fibres of higher index.
+These are bounded finite obstructions.  The explicit witness rules out every
+homogeneous subfamily of this pool, including non-refinement families, but
+does not exclude homogeneous fibres beyond the bound, general affine covers,
+or fibres of higher index.
 
 ## Repository contents
 
@@ -163,6 +178,9 @@ homogeneous covers, general affine covers, or fibres of higher index.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.
+- `certify_bounded_homogeneous_noncover.py` and its modular-exponentiation
+  verifier: an explicit point outside the union of all bounded homogeneous
+  fibres.
 - `search_projected_conditional_designs.py`: checkpointable projected
   conditional-overlap discovery, including a proof-structural shared
   residual pair.
@@ -222,6 +240,16 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python -m unittest discover -v
+```
+
+The bounded homogeneous non-cover witness can be replayed directly from the
+complete source pool:
+
+```powershell
+python verify_bounded_homogeneous_noncover.py `
+  order_pool_1050000_bounded_homogeneous_noncover_certificate.json `
+  --pool order_pool_1050000.json `
+  --output replay-bounded-homogeneous.json
 ```
 
 An independently replayed conditional-fibre certificate can be checked with:

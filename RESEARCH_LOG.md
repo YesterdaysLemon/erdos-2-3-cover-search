@@ -3414,3 +3414,44 @@ counts, returning `verified=True`.  This rules out only homogeneous
 refinements of the trivial cover whose leaves come from this bounded pool.
 It does not constrain non-refinement homogeneous covers, general affine
 phase assignments, or higher-index prime fibres.
+
+### Exact bounded homogeneous-union obstruction
+
+The refinement obstruction leaves open homogeneous covers that are not
+refinement trees.  That entire bounded homogeneous route can be tested more
+directly because every homogeneous fibre has target zero.  A deterministic
+search found the explicit exponent pair
+
+```
+(k,l) = (552897490806962158, 6049004616530593493)
+```
+
+outside every one of the 129,497 source lattices in
+`order_pool_1050000.json`.  The certificate is
+
+```
+order_pool_1050000_bounded_homogeneous_noncover_certificate.json
+```
+
+and records source SHA-256
+`3be851ac19002a25711f9ca99f31efb128b07b06f8fd9a22ff84bc64009b4d9f`.
+The discovery program checks all stored linear signature equations.  The
+independent verifier deliberately avoids those equations and instead
+computes
+
+```
+2^k * 3^l mod p
+```
+
+for every source prime.  It finds zero values equal to one and records
+`verified=True` in
+
+```
+order_pool_1050000_bounded_homogeneous_noncover_verification.json
+```
+
+Thus the union of all homogeneous fibres in the complete declared
+`h <= 1,050,000` pool is not a cover, and no homogeneous subfamily of that
+pool can cover.  This is broader than the sibling-tree obstruction but still
+finite: it does not rule out higher-index homogeneous fibres or any affine
+phase assignment, and it does not resolve the original problem.
