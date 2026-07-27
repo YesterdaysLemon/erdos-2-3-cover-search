@@ -97,24 +97,34 @@ that the original infinite problem is nearly solved.
 
 ## Exploratory direct-cover checkpoint
 
-A separate exact counterexample-guided search attacks one fixed
-1,577-fibre family directly.  Its common period is
-`144403552893600`, with components
-`32,27,25,7,11,13,17,19,23,29,31`, and its raw density sum is
-approximately `1.617142624767`.
+A separate exact counterexample-guided search now attacks a 14,629-fibre
+family directly.  Its component cap is 128 and its raw density sum is
+approximately `2.092255659167`.  A cover by this finite family would yield
+the requested integer `m`; failure of the search would not prove that no
+such integer exists.
 
-The checker now turns each exact uncovered point into a 900-point Cartesian
-tile over the lowest binary, ternary, and quinary digits.  This is a
-structural lesson rather than a list of isolated sampled points.  An
-adversarial target-cap option also forces a returned witness batch to resist
-repair by merely moving one selected fibre.
+The learner evaluates candidate columns on demand and stores enormous exact
+checker coordinates as residues modulo the relevant prime-power components.
+It also reuses exact cover counts between rounds.  This reduced the learner
+from multi-gigabyte dense matrices to less than 1 GB of private memory during
+the main experiment.
 
-The latest accumulated experiment contains 324,000 exact lesson points.
-Its last four completed repairs required 5, 52, 77, and 71 phase changes,
-respectively, but the separate exact SAT checker still returned 10 uncovered
-points after every repair.  Consequently this experiment has found neither
-a cover nor a no-cover proof.  The method, null results, and resource stop
-are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
+Each exact hole is expanded into the union of four structural tiles: one
+900-point Cartesian tile over the lowest binary, ternary, and quinary digits,
+plus separate 49-, 121-, and 169-point tiles for components 7, 11, and 13.
+Because all four include the original point, their union has 1,236 points
+per hole.  Exact witness-diversity constraints make each 100-hole batch
+range across additional component residues.
+
+The latest five-round pass began with 344,000 accumulated lessons.  Its
+completed repairs used `0, 98, 64, 62, 107` phase changes at
+`344000, 467600, 591200, 714800, 838400` points, respectively.  After every
+repair, the separate exact SAT checker returned 100 genuine uncovered
+points.  The final witness expansion leaves a 962,000-point continuation
+checkpoint locally.  Consequently this experiment has found neither a
+cover nor a no-cover proof.  The method, the earlier max-32 experiment, and
+the measured null results are recorded in
+[RESEARCH_LOG.md](RESEARCH_LOG.md).
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
@@ -126,7 +136,8 @@ The 17 unresolved periods are indexed in
 - `*.py`: search programs, exact certificate generators, independent
   verifiers, and regression tests.
 - `local_phase_cegis.py` and `exact_uncovered.py`: direct finite-cover CEGIS,
-  including exact component-digit tiles and adversarial witness diversity.
+  including streaming low-memory repair, unions of exact component-digit
+  tiles, and adversarial witness diversity.
 - `search_projected_conditional_designs.py`: checkpointable projected
   conditional-overlap discovery, including a proof-structural shared
   residual pair.
@@ -142,6 +153,8 @@ The 17 unresolved periods are indexed in
   star subsets without an exhaustive `2^20` optimization.
 - `order_pool_1050000_component_core_corrected_max32_stable.json`: stable
   finite candidate pool used by the current frontier.
+- `order_pool_1050000_component_core_corrected_max128.json`: 14,629-row
+  candidate pool used by the current exploratory direct-cover search.
 - `order_pool_1050000_period3139207671600_conditional_fibre6553_paired_`
   `autodesign_{certificate,verification}.json`: permanent proof object and
   independent replay for the strongest paired conditional edge in the

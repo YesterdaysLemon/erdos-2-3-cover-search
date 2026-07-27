@@ -89,6 +89,383 @@ def build_targets(points, candidates, np):
     return targets, time.monotonic() - started
 
 
+def streaming_coordinate_arrays(points, candidates, np):
+    """Return coordinate arrays safe for on-demand target evaluation."""
+    max_h = max((int(candidate[0]) for candidate in candidates), default=1)
+    uint64_limit = (1 << 64) - 1
+    safe_products = 2 * max(0, max_h - 1) ** 2 <= uint64_limit
+    safe_coordinates = all(
+        0 <= int(coordinate) <= uint64_limit
+        for point in points
+        for coordinate in point
+    )
+    dtype = np.uint64 if safe_products and safe_coordinates else object
+    ks = np.asarray([int(point[0]) for point in points], dtype=dtype)
+    ls = np.asarray([int(point[1]) for point in points], dtype=dtype)
+    return ks, ls
+
+
+def streaming_target_values(ks, ls, candidate, np):
+    """Evaluate one candidate column without retaining the full matrix."""
+    h, _p, a, b, _ord2, _ord3 = candidate
+    h = int(h)
+    a = int(a) % h
+    b = int(b) % h
+    return (
+        (a * (ks % h) + b * (ls % h)) % h
+    ).astype(np.uint32, copy=False)
+
+
+def streaming_coordinate_state(points, candidates, np):
+    """Prepare either raw uint64 coordinates or compact CRT residues.
+
+    Exact checker witnesses can be far larger than 64 bits.  Retaining them
+    as NumPy object arrays would make every candidate evaluation execute
+    Python big-integer arithmetic point by point.  Instead, store residues
+    modulo the prime-power factors that actually occur in candidate moduli.
+    """
+    ks, ls = streaming_coordinate_arrays(points, candidates, np)
+    if ks.dtype != object:
+        return {
+            "mode": "raw",
+            "ks": ks,
+            "ls": ls,
+        }
+
+    component_moduli = sorted(
+        {
+            prime**exponent
+            for candidate in candidates
+            for prime, exponent in exact_uncovered.factor(
+                int(candidate[0])
+            ).items()
+        }
+    )
+    component_index = {
+        modulus: index
+        for index, modulus in enumerate(component_moduli)
+    }
+    max_residue = max(component_moduli, default=1) - 1
+    residue_dtype = np.min_scalar_type(max_residue)
+    k_components = np.empty(
+        (len(points), len(component_moduli)),
+        dtype=residue_dtype,
+        order="F",
+    )
+    l_components = np.empty_like(k_components, order="F")
+    for column, modulus in enumerate(component_moduli):
+        k_components[:, column] = np.fromiter(
+            (int(point[0]) % modulus for point in points),
+            dtype=residue_dtype,
+            count=len(points),
+        )
+        l_components[:, column] = np.fromiter(
+            (int(point[1]) % modulus for point in points),
+            dtype=residue_dtype,
+            count=len(points),
+        )
+
+    spec_by_h = {}
+    for candidate in candidates:
+        h = int(candidate[0])
+        if h in spec_by_h:
+            continue
+        spec = []
+        for prime, exponent in exact_uncovered.factor(h).items():
+            modulus = prime**exponent
+            cofactor = h // modulus
+            coefficient = (
+                cofactor * pow(cofactor, -1, modulus)
+            ) % h
+            spec.append(
+                (component_index[modulus], modulus, coefficient)
+            )
+        spec_by_h[h] = tuple(spec)
+    return {
+        "mode": "components",
+        "k_components": k_components,
+        "l_components": l_components,
+        "spec_by_h": spec_by_h,
+    }
+
+
+def streaming_state_target_values(
+    state,
+    candidate,
+    np,
+    indices=None,
+):
+    """Evaluate one target column from a compact streaming state."""
+    if state["mode"] == "raw":
+        ks = state["ks"] if indices is None else state["ks"][indices]
+        ls = state["ls"] if indices is None else state["ls"][indices]
+        return streaming_target_values(ks, ls, candidate, np)
+
+    h, _p, a, b, _ord2, _ord3 = candidate
+    h = int(h)
+    a = int(a) % h
+    b = int(b) % h
+    k_components = state["k_components"]
+    l_components = state["l_components"]
+    length = (
+        len(k_components)
+        if indices is None
+        else len(indices)
+    )
+    result = np.zeros(length, dtype=np.uint64)
+    for column, modulus, coefficient in state["spec_by_h"][h]:
+        kres = (
+            k_components[:, column]
+            if indices is None
+            else k_components[indices, column]
+        )
+        lres = (
+            l_components[:, column]
+            if indices is None
+            else l_components[indices, column]
+        )
+        local_target = (
+            a * kres.astype(np.uint64, copy=False)
+            + b * lres.astype(np.uint64, copy=False)
+        ) % modulus
+        result += local_target * coefficient
+    return (result % h).astype(np.uint32, copy=False)
+
+
+def streaming_cover_counts(
+    coordinate_state,
+    candidates,
+    assignment,
+    np,
+    indices=None,
+):
+    """Count selected-fibre coverage on all or selected retained points."""
+    if coordinate_state["mode"] == "raw":
+        total = len(coordinate_state["ks"])
+    else:
+        total = len(coordinate_state["k_components"])
+    length = total if indices is None else len(indices)
+    cover = np.zeros(length, dtype=np.int32)
+    for candidate_index, candidate in enumerate(candidates):
+        values = streaming_state_target_values(
+            coordinate_state,
+            candidate,
+            np,
+            indices,
+        )
+        cover += (
+            values == assignment[candidate_index]
+        ).astype(np.int32)
+    return cover
+
+
+def repair_streaming(
+    points,
+    candidates,
+    assignment,
+    mutable,
+    rng,
+    np,
+    max_steps,
+    sample_size,
+    valid_moduli=None,
+    valid_residues=None,
+    candidate_moduli=None,
+    required_coverage=1,
+    coordinate_descent=False,
+    coordinate_state=None,
+    initial_cover=None,
+    return_state=False,
+):
+    """Point-wise min-conflicts with candidate columns computed on demand.
+
+    The dense learner retains one uint32 target for every point/candidate
+    pair.  This variant keeps only the coordinates and current cover counts.
+    Candidate columns are evaluated over the uncovered and fragile points
+    while scoring, then once over all points for the selected move.
+    """
+    if coordinate_state is None:
+        coordinate_state = streaming_coordinate_state(
+            points,
+            candidates,
+            np,
+        )
+    if initial_cover is None:
+        cover = streaming_cover_counts(
+            coordinate_state,
+            candidates,
+            assignment,
+            np,
+        )
+    else:
+        if len(initial_cover) != len(points):
+            raise ValueError("initial streaming cover has the wrong length")
+        cover = initial_cover.copy()
+
+    def outcome(result):
+        if return_state:
+            return (*result, coordinate_state, cover)
+        return result
+
+    start_uncovered = int(np.count_nonzero(cover < required_coverage))
+    best_uncovered = start_uncovered
+    best_deficit = int(
+        np.maximum(required_coverage - cover, 0).sum()
+    )
+    best_assignment = assignment.copy()
+    stagnant = 0
+    for step in range(max_steps + 1):
+        uncovered = np.flatnonzero(cover < required_coverage)
+        if not len(uncovered):
+            return outcome((True, step, start_uncovered, 0))
+        if step == max_steps:
+            break
+
+        point = int(uncovered[rng.randrange(len(uncovered))])
+        selected = rng.sample(mutable, min(sample_size, len(mutable)))
+        fragile = np.flatnonzero(cover <= required_coverage)
+        moves = []
+        best_score = None
+        for candidate_index in selected:
+            candidate = candidates[candidate_index]
+            h, _p, a, b, _ord2, _ord3 = candidate
+            h = int(h)
+            old_value = int(assignment[candidate_index])
+            uncovered_values = streaming_state_target_values(
+                coordinate_state,
+                candidate,
+                np,
+                uncovered,
+            )
+            if coordinate_descent:
+                observed_targets, observed_counts = np.unique(
+                    uncovered_values,
+                    return_counts=True,
+                )
+                usable = observed_targets != old_value
+                if valid_moduli is not None:
+                    usable &= (
+                        observed_targets
+                        % int(valid_moduli[candidate_index])
+                        == int(valid_residues[candidate_index])
+                    )
+                if not np.any(usable):
+                    continue
+                observed_targets = observed_targets[usable]
+                observed_counts = observed_counts[usable]
+                top_count = int(observed_counts.max())
+                top_targets = observed_targets[
+                    observed_counts == top_count
+                ]
+                new_value = int(
+                    top_targets[rng.randrange(len(top_targets))]
+                )
+                gains = top_count
+            else:
+                new_value = (
+                    int(
+                        streaming_state_target_values(
+                            coordinate_state,
+                            candidate,
+                            np,
+                            np.asarray([point], dtype=np.int64),
+                        )[0]
+                    )
+                )
+                if new_value == old_value:
+                    continue
+                if (
+                    valid_moduli is not None
+                    and new_value % int(valid_moduli[candidate_index])
+                    != int(valid_residues[candidate_index])
+                ):
+                    continue
+                gains = int(
+                    np.count_nonzero(uncovered_values == new_value)
+                )
+            fragile_values = streaming_state_target_values(
+                coordinate_state,
+                candidate,
+                np,
+                fragile,
+            )
+            losses = int(np.count_nonzero(fragile_values == old_value))
+            score = gains - losses
+            if best_score is None or score > best_score:
+                best_score = score
+                moves = [(candidate_index, new_value)]
+            elif score == best_score:
+                moves.append((candidate_index, new_value))
+        if not moves:
+            continue
+
+        candidate_index, new_value = moves[rng.randrange(len(moves))]
+        old_value = int(assignment[candidate_index])
+        values = streaming_state_target_values(
+            coordinate_state,
+            candidates[candidate_index],
+            np,
+        )
+        cover -= (values == old_value).astype(np.int32)
+        cover += (values == new_value).astype(np.int32)
+        assignment[candidate_index] = new_value
+
+        current = int(np.count_nonzero(cover < required_coverage))
+        current_deficit = int(
+            np.maximum(required_coverage - cover, 0).sum()
+        )
+        if current_deficit < best_deficit:
+            best_deficit = current_deficit
+            best_uncovered = current
+            best_assignment[:] = assignment
+            stagnant = 0
+        else:
+            stagnant += 1
+        if (step + 1) % 250 == 0:
+            print(
+                f"stream_step={step + 1} "
+                f"mode={'coordinate' if coordinate_descent else 'point'} "
+                f"misses={current} best={best_uncovered} "
+                f"deficit={current_deficit} best_deficit={best_deficit}",
+                flush=True,
+            )
+        if stagnant >= 2500:
+            # Preserve the dense learner's cycle-breaking neighborhood while
+            # still materializing only one candidate column at a time.
+            for candidate_index in rng.sample(
+                mutable, min(25, len(mutable))
+            ):
+                old_value = int(assignment[candidate_index])
+                if valid_moduli is None:
+                    new_value = rng.randrange(
+                        int(candidate_moduli[candidate_index])
+                    )
+                else:
+                    modulus = int(valid_moduli[candidate_index])
+                    residue = int(valid_residues[candidate_index])
+                    choices = (
+                        int(candidate_moduli[candidate_index])
+                        - 1
+                        - residue
+                    ) // modulus + 1
+                    new_value = residue + modulus * rng.randrange(choices)
+                if new_value == old_value:
+                    continue
+                values = streaming_state_target_values(
+                    coordinate_state,
+                    candidates[candidate_index],
+                    np,
+                )
+                cover -= (values == old_value).astype(np.int32)
+                cover += (values == new_value).astype(np.int32)
+                assignment[candidate_index] = new_value
+            stagnant = 0
+    assignment[:] = best_assignment
+    return outcome(
+        (False, max_steps, start_uncovered, best_uncovered)
+    )
+
+
 def merge_congruences(residue_a, modulus_a, residue_b, modulus_b):
     """Return the intersection of two congruences, or None if it is empty."""
     common = math.gcd(modulus_a, modulus_b)
@@ -175,6 +552,26 @@ def expand_top_component_tiles(points, candidate_moduli, components):
             for prime in components
         ],
     )
+
+
+def expand_component_digit_tile_groups(
+    points,
+    candidate_moduli,
+    component_digit_groups,
+):
+    """Return the union of several independent component-digit tiles."""
+    expanded = []
+    seen = set()
+    for component_digits in component_digit_groups:
+        for point in expand_component_digit_tiles(
+            points,
+            candidate_moduli,
+            component_digits,
+        ):
+            if point not in seen:
+                seen.add(point)
+                expanded.append(point)
+    return expanded
 
 
 def repair(
@@ -700,6 +1097,15 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--stream-targets",
+        action="store_true",
+        help=(
+            "compute candidate target columns on demand instead of retaining "
+            "the full points-by-candidates uint32 matrix; supports "
+            "--repair-mode point and coordinate"
+        ),
+    )
+    parser.add_argument(
         "--required-coverage",
         type=int,
         default=1,
@@ -739,6 +1145,15 @@ def main() -> int:
             "comma-separated prime:zero_based_digit pairs; replace each "
             "exact witness lesson by its Cartesian tile over those CRT "
             "digits, for example 2:0,3:0,5:0"
+        ),
+    )
+    parser.add_argument(
+        "--expand-exact-component-digit-groups",
+        default="",
+        help=(
+            "semicolon-separated unions of component-digit tiles, with "
+            "comma-separated prime:digit pairs inside each group; for "
+            "example 2:0,3:0,5:0;7:0;11:0"
         ),
     )
     parser.add_argument(
@@ -831,6 +1246,10 @@ def main() -> int:
         raise SystemExit("--diversity-target-cap must be nonnegative")
     if args.required_coverage < 1:
         raise SystemExit("--required-coverage must be positive")
+    if args.stream_targets and args.repair_mode == "component":
+        raise SystemExit(
+            "--stream-targets does not support --repair-mode component"
+        )
     if args.exact_when_random_misses_at_most < 0:
         raise SystemExit("--exact-when-random-misses-at-most must be nonnegative")
     raw_count = len(candidates)
@@ -886,7 +1305,37 @@ def main() -> int:
             )
         exact_component_digits.append((prime, digit))
     exact_component_digits = tuple(exact_component_digits)
-    if exact_top_components and exact_component_digits:
+    exact_component_digit_groups = []
+    for raw_group in args.expand_exact_component_digit_groups.split(";"):
+        if not raw_group:
+            continue
+        group = []
+        for raw_spec in raw_group.split(","):
+            parts = raw_spec.split(":")
+            if len(parts) != 2:
+                raise SystemExit(
+                    "--expand-exact-component-digit-groups entries "
+                    "must be prime:digit"
+                )
+            prime, digit = map(int, parts)
+            if prime < 2 or digit < 0:
+                raise SystemExit(
+                    "--expand-exact-component-digit-groups contains "
+                    "an invalid pair"
+                )
+            group.append((prime, digit))
+        exact_component_digit_groups.append(tuple(group))
+    exact_component_digit_groups = tuple(
+        exact_component_digit_groups
+    )
+    if sum(
+        bool(mode)
+        for mode in (
+            exact_top_components,
+            exact_component_digits,
+            exact_component_digit_groups,
+        )
+    ) > 1:
         raise SystemExit(
             "choose only one exact component-tile expansion mode"
         )
@@ -902,6 +1351,11 @@ def main() -> int:
             [(0, 0)],
             [item[0] for item in candidates],
             exact_component_digits,
+        )
+        expand_component_digit_tile_groups(
+            [(0, 0)],
+            [item[0] for item in candidates],
+            exact_component_digit_groups,
         )
     except ValueError as error:
         raise SystemExit(str(error)) from error
@@ -1133,27 +1587,60 @@ def main() -> int:
         flush=True,
     )
 
-    targets, build_seconds = build_targets(points, candidates, np)
+    targets = None
+    stream_coordinate_state = None
+    stream_cover = None
+    if args.stream_targets:
+        build_seconds = 0.0
+    else:
+        targets, build_seconds = build_targets(points, candidates, np)
     for round_no in range(1, args.rounds + 1):
         repair_started = time.monotonic()
-        repair_function = {
-            "point": repair,
-            "coordinate": repair_coordinate,
-            "component": repair_component,
-        }[args.repair_mode]
-        solved, steps, before, after = repair_function(
-            targets,
-            assignment,
-            mutable,
-            rng,
-            np,
-            args.max_steps,
-            args.sample_size,
-            valid_moduli,
-            valid_residues,
-            candidate_moduli,
-            args.required_coverage,
-        )
+        if args.stream_targets:
+            (
+                solved,
+                steps,
+                before,
+                after,
+                stream_coordinate_state,
+                stream_cover,
+            ) = repair_streaming(
+                points,
+                candidates,
+                assignment,
+                mutable,
+                rng,
+                np,
+                args.max_steps,
+                args.sample_size,
+                valid_moduli,
+                valid_residues,
+                candidate_moduli,
+                args.required_coverage,
+                coordinate_descent=args.repair_mode == "coordinate",
+                coordinate_state=stream_coordinate_state,
+                initial_cover=stream_cover,
+                return_state=True,
+            )
+        else:
+            repair_function = {
+                "point": repair,
+                "coordinate": repair_coordinate,
+                "component": repair_component,
+            }[args.repair_mode]
+            solved, steps, before, after = repair_function(
+                targets,
+                assignment,
+                mutable,
+                rng,
+                np,
+                args.max_steps,
+                args.sample_size,
+                valid_moduli,
+                valid_residues,
+                candidate_moduli,
+                args.required_coverage,
+            )
         repair_seconds = time.monotonic() - repair_started
         print(
             f"round={round_no} points={len(points)} matrix_s={build_seconds:.3f} "
@@ -1216,8 +1703,11 @@ def main() -> int:
                 exact_greedy.as_row(item, int(assignment[index]))
                 for index, item in enumerate(candidates)
             ]
-            if not args.retain_target_matrix_during_exact:
-                del targets
+            if (
+                not args.retain_target_matrix_during_exact
+                and targets is not None
+            ):
+                targets = None
                 gc.collect()
             exact_misses, exact_meta = exact_uncovered.find_uncovered(
                 rows,
@@ -1311,9 +1801,19 @@ def main() -> int:
             )
         expanded_exact_misses = []
         if exact_misses and (
-            exact_top_components or exact_component_digits
+            exact_top_components
+            or exact_component_digits
+            or exact_component_digit_groups
         ):
-            if exact_component_digits:
+            if exact_component_digit_groups:
+                expanded_exact_misses = (
+                    expand_component_digit_tile_groups(
+                        exact_misses,
+                        candidate_moduli,
+                        exact_component_digit_groups,
+                    )
+                )
+            elif exact_component_digits:
                 expanded_exact_misses = expand_component_digit_tiles(
                     exact_misses,
                     candidate_moduli,
@@ -1374,7 +1874,36 @@ def main() -> int:
         )
         if not new_points:
             raise RuntimeError("checker returned no new point")
-        if engine != "random":
+        if round_no == args.rounds:
+            # The final witness batch is retained in the points checkpoint
+            # for a later continuation, but no next learner round exists in
+            # this invocation, so rebuilding its coordinate state is wasted.
+            continue
+        if args.stream_targets:
+            update_started = time.monotonic()
+            old_point_count = len(points) - len(new_points)
+            stream_coordinate_state = streaming_coordinate_state(
+                points,
+                candidates,
+                np,
+            )
+            new_indices = np.arange(
+                old_point_count,
+                len(points),
+                dtype=np.int64,
+            )
+            new_cover = streaming_cover_counts(
+                stream_coordinate_state,
+                candidates,
+                assignment,
+                np,
+                new_indices,
+            )
+            stream_cover = np.concatenate(
+                (stream_cover, new_cover)
+            )
+            build_seconds = time.monotonic() - update_started
+        elif engine != "random":
             if args.retain_target_matrix_during_exact:
                 new_targets, build_seconds = build_targets(
                     new_points, candidates, np

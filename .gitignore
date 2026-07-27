@@ -15,6 +15,7 @@
 
 # Stable input, ranked finite frontier, and its independent replay.
 !order_pool_1050000_component_core_corrected_max32_stable.json
+!order_pool_1050000_component_core_corrected_max128.json
 !order_pool_1050000_max32_period_divisor_family_ranking_all.json
 !order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json
 !order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_scan_v26.json

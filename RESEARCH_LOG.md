@@ -3229,3 +3229,80 @@ completed repair.  No phase cover, candidate `m`, or finite no-cover
 certificate was produced.  Large lesson sets, solver phases, and transient
 logs remain local; the public repository contains the algorithm, regression
 tests, parameters, and this measured checkpoint.
+
+## Streaming max-128 direct-cover checkpoint (2026-07-27)
+
+The dense target matrix scales as the number of lesson points times the
+number of candidate fibres.  Continuing the max-32 run therefore required a
+different learner representation.  `local_phase_cegis.py` now has a
+streaming repair mode which evaluates one candidate column at a time and
+retains only current cover counts.  When exact checker coordinates exceed
+64 bits, it stores their residues modulo the prime-power components actually
+used by candidate moduli and reconstructs each target by CRT arithmetic.
+Cover counts and this compact coordinate state are retained between CEGIS
+rounds; only newly appended lessons are scanned.
+
+Regression tests compare streamed columns with the dense matrix, compare
+compressed residue evaluation with exact Python big-integer evaluation, and
+exercise repair plus retained cover-state reuse.  On the max-32 family, the
+new representation repaired the prior 324,000-point checkpoint in 144 moves
+and about 47 seconds while using roughly 0.63 GB of private memory, rather
+than the approximately 3.4 GB dense matrix.  Further 10-hole lowest-digit
+rounds reached 369,000 points, with exact holes still present after every
+completed repair.
+
+The larger direct-search input is
+
+```
+order_pool_1050000_component_core_corrected_max128.json
+```
+
+It contains 14,629 fibres and has raw density sum
+
+```
+2.09225565916652.
+```
+
+An earlier pointwise run accumulated 47,000 isolated lessons but continued
+to receive exact holes.  Structural 900-point lowest-`2,3,5` digit tiles
+then reached 74,000 points.  Switching to 100-hole batches and adding exact
+witness diversity reached 344,000 points.  Those phases covered all 344,000
+lessons after a 65-move repair.
+
+The next experiment expanded every exact hole by the union of the following
+component-digit groups:
+
+```
+2:0,3:0,5:0 ; 7:0 ; 11:0 ; 13:0
+```
+
+The first group has 900 points and the three singleton groups have 49, 121,
+and 169.  They share the original point, so the exact union size is
+
+```
+900 + 49 + 121 + 169 - 3 = 1236
+```
+
+per checker witness.  Five complete learner/checker rounds gave:
+
+```
+points before repair   initial misses   phase changes   exact holes after
+344000                 0                0               100
+467600                 44366            98              100
+591200                 43912            64              100
+714800                 42370            62              100
+838400                 42969            107             100
+```
+
+Every repair reached zero misses on its retained lesson set.  Every
+subsequent exact checker call nevertheless found 100 genuine uncovered
+points.  The final expansion leaves 962,000 local continuation lessons.  The
+streaming process remained under approximately 0.9 GB of private memory
+during the repair loop, although a transient exact-checker allocation rose
+above that level.
+
+This makes the computation sustainable enough to continue, but it is not a
+sign of mathematical convergence: repair counts remain modest rather than
+growing toward an obvious contradiction.  The authoritative result is
+therefore still unresolved.  No finite cover, CRT value of `m`, or global
+impossibility proof has been produced.

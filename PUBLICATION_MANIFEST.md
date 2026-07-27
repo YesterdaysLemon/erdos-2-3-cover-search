@@ -7,9 +7,12 @@ This repository is a curated snapshot of the active workspace, published on
 
 - all Python source and regression tests present at publication time;
 - the complete research log, including superseded approaches and corrections;
-- the exact component-digit lesson generator, adversarial witness-diversity
-  checker, and their regression tests;
+- the streaming low-memory repair engine, exact component-digit tile-union
+  generator, adversarial witness-diversity checker, and their regression
+  tests;
 - the stable 1,050,000-order candidate pool used by the current finite sweep;
+- the 14,629-row max-128 pool used by the current exploratory direct-cover
+  search;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its
@@ -43,9 +46,9 @@ This repository is a curated snapshot of the active workspace, published on
 - transient standard-output and standard-error logs;
 - PID files, bytecode, caches, and temporary files;
 - local-search checkpoints and intermediate solver phase assignments;
-- the 324,000-point direct-cover CEGIS lesson set and current phase
-  assignment; their parameters and measured repair curve are recorded in
-  `RESEARCH_LOG.md`;
+- the max-32 and max-128 direct-cover CEGIS lesson sets and current phase
+  assignments, including the 962,000-point continuation checkpoint; their
+  parameters and measured repair curves are recorded in `RESEARCH_LOG.md`;
 - superseded discovery-only period-`3139207671600` design JSON, CEGIS witnesses,
   phases, and checker logs; their exact aggregate checkpoint and caveats are
   recorded in `RESEARCH_LOG.md`;
