@@ -10,7 +10,11 @@ import unittest
 import numpy as np
 
 from search_mitm_pairwise_conditional_bounds import (
+    exact_pairwise_subset_lower,
     mitm_quadratic_subset,
+)
+from verify_ranked_period_conditional_star import (
+    witnessed_pairwise_lower,
 )
 
 
@@ -38,6 +42,18 @@ def brute_quadratic_subset(
 
 
 class MitmPairwiseConditionalTests(unittest.TestCase):
+    def test_generator_and_verifier_exact_witness_values_match(self) -> None:
+        outside = {"h": 6, "a": 1, "b": 1}
+        anchors = (
+            {"h": 5, "a": 1, "b": 2},
+            {"h": 7, "a": 2, "b": 1},
+            {"h": 11, "a": 1, "b": 3},
+        )
+        self.assertEqual(
+            exact_pairwise_subset_lower(outside, anchors),
+            witnessed_pairwise_lower(outside, anchors),
+        )
+
     def test_random_small_instances_match_complete_enumeration(self) -> None:
         rng = random.Random(901)
         for size in range(1, 10):

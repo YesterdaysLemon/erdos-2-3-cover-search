@@ -17,9 +17,29 @@ from search_projected_conditional_designs import (
     projectable,
     search_output_payload,
 )
+from verify_projected_conditional_fibre_overlap import (
+    primitive_kernel_residues,
+)
 
 
 class ProjectedConditionalDesignTests(unittest.TestCase):
+    def test_cyclic_kernel_enumeration_matches_brute_force(self) -> None:
+        for h in range(2, 18):
+            for a in range(h):
+                for b in range(h):
+                    if math.gcd(a, b, h) != 1:
+                        continue
+                    row = {"h": h, "a": a, "b": b}
+                    expected = {
+                        (k, ell)
+                        for k in range(h)
+                        for ell in range(h)
+                        if (a * k + b * ell) % h == 0
+                    }
+                    actual = set(primitive_kernel_residues(row))
+                    self.assertEqual(actual, expected)
+                    self.assertEqual(len(actual), h)
+
     def test_checkpoint_payload_records_completed_primes(self) -> None:
         args = argparse.Namespace(
             pool=Path("pool.json"),

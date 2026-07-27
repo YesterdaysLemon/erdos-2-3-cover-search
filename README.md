@@ -25,11 +25,11 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,617 of 4,637 ranked finite divisor-period families have independently
+- 4,618 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 20 ranked finite families remain after intersecting the aggregate
+- 19 ranked finite families remain after intersecting the aggregate
   block-star and separately verified single-anchor frontiers and applying
-  23 exact period certificates;
+  24 exact period certificates;
 - the former closest family, at period `2533395664800`, is now eliminated.
   A 16-anchor block and 40 independently replayed conditional-overlap bounds
   give the exact period-level upper bound
@@ -70,15 +70,12 @@ As of 2026-07-26:
   `602703301209279912260669/602739799060432793760000`, or
   `0.999939446754288`. The exact no-cover margin is approximately
   `0.000060553245712`.
-- the closest currently developed survivor, period `3139207671600`, remains
-  unresolved. A discovery-only 24-anchor composition plus the strongest
-  valid edge found for each screened outside prime gives
-  `11740484081115098732531/11731696196943206484000`, or
-  `1.0007490719180216`. This is still above one. The strongest paired edge,
-  on outside fibre `6553`, has been promoted to a permanent certificate and
-  independently replayed across all `1,990,656` target combinations; the
-  other temporary dependencies in the aggregate have not. Five bounded
-  constructive CEGIS basins also retained exact uncovered witnesses.
+- period `3139207671600` is eliminated by a 24-anchor block, 165 promoted
+  projected-conditional edges, and 1,007 explicit pairwise star-subset
+  witnesses. The complete independent replay gives exact upper bound
+  `11731653453882582685001/11731696196943206484000`, or
+  `0.9999963566171587`. The exact no-cover margin is approximately
+  `0.00000364338284134`.
 
 The fraction \(4{,}617/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
@@ -86,7 +83,7 @@ that the original infinite problem is 99.4% solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
-The 20 unresolved periods are indexed in
+The 19 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
@@ -101,12 +98,21 @@ The 20 unresolved periods are indexed in
   arithmetic.
 - `search_sixterm_conditional_bounds.py`: discovery-only sixth-order
   Bonferroni screening.
+- `promote_projected_conditional_designs.py`: resumable regeneration and
+  independent replay of selected discovery designs.
+- `certify_pairwise_star_witnesses.py` and
+  `verify_pairwise_star_witnesses.py`: proof-producing replay of explicit
+  star subsets without an exhaustive `2^20` optimization.
 - `order_pool_1050000_component_core_corrected_max32_stable.json`: stable
   finite candidate pool used by the current frontier.
 - `order_pool_1050000_period3139207671600_conditional_fibre6553_paired_`
   `autodesign_{certificate,verification}.json`: permanent proof object and
-  independent replay for the strongest presently known paired conditional
-  edge in that unresolved family.
+  independent replay for the strongest paired conditional edge in the
+  now-eliminated family.
+- `order_pool_1050000_period3139207671600_conditional_star_`
+  `{certificate,verification}.json`: assembled period proof and independent
+  replay; its promoted conditional manifest and pairwise-star witness
+  certificate identify the complete dependency closure.
 - `order_pool_1050000_max32_period_divisor_family_ranking_all.json`: the
   4,637 ranked divisor-period families.
 - `order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json`: aggregate
