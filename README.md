@@ -365,6 +365,41 @@ checker nevertheless returned all ten requested holes.  This controlled
 column-generation path is still active but has not produced a conditioned
 cover, an integer `m`, or a global obstruction.
 
+The continuation now also has a sparse full-pool repair path.  Stable MaxSAT
+column generation promoted six further rows, giving a 20-anchor phase that
+covers 526 accumulated exact points.  Checker-side target caps produced
+finite packs of four mutually target-distinct holes at cap one and eight at
+cap two after excluding the tiny `h < 7` anchors.  These are packing
+statements, not bounds on the total number of holes.
+
+Direct MILP repair of the growing pack repeatedly found four-row repairs
+with `p=41,p=17` frozen, but became solver-hard at 29 supplied points.
+The replacement `finite_sample_mask_repair.py` projects the current base
+misses to bit masks, enumerates a tiny mask cover, assigns distinct source
+rows, and exact-replays every supplied point.  On the 29-point instance,
+57,454 deficit-hitting moves collapsed to 198 masks; after six mask models
+the first exact finite repair was found in about 0.003 seconds.  Subsequent
+single-hole rounds grew the branch corpus to 38 points.  Every repaired
+phase checked so far still has a genuine full-domain hole.
+
+The mask engine is intentionally one-sided.  A returned phase is an exact
+finite repair, but exhaustion does not exclude repairs that use a row with
+zero gain on the base-missed points solely to compensate for a loss
+elsewhere.  `finite_sample_sat_repair.py` and
+`finite_sample_z3_repair.py` retain complete bounded-repair encodings for
+that purpose; their current 29-point runs timed out rather than proving
+UNSAT.  A resumable `sparse_anchor_quotient_sweep.py` enumerates all 162
+low-anchor quotient representatives.  The first cross-branch sample also
+showed why each branch needs its own exact adversary: the phase-one corpus is
+already covered by the opposite `p=41` anchor in phase-zero branches.
+
+An experimental 62-row extension with prime-power components above 16,384
+was admitted by widening finite target matrices to 64 bits.  None of those
+rows covered any of the latest three adversarial holes at its base phase,
+and no one retargeting covered more than one.  A full Z3 bit-vector check
+reached a five-minute cap without a model or proof.  The extension is
+therefore not part of the active exact-checker loop.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus
@@ -424,6 +459,12 @@ or fibres of higher index.
   including streaming low-memory repair, unions of exact component-digit
   tiles (including multiple digits of one prime component), and adversarial
   witness diversity.
+- `finite_sample_mask_repair.py`: fast gain-mask construction search with
+  exact full-corpus replay of every emitted phase.
+- `finite_sample_sat_repair.py` and `finite_sample_z3_repair.py`: complete
+  bounded-change finite repair encodings in SAT and pseudo-Boolean spaces.
+- `sparse_anchor_quotient_sweep.py`: resumable driver over the 162 exact
+  low-anchor quotient representatives.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.

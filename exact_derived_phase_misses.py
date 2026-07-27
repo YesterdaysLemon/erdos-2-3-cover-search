@@ -17,16 +17,25 @@ def expanded_diversity_primes(
     rows: list[dict],
     explicit_primes: tuple[int, ...],
     coprime_to: int = 0,
+    min_modulus: int = 0,
 ) -> tuple[int, ...]:
-    """Add every row whose modulus is coprime to a selected component."""
+    """Expand explicit diversity rows by exact modulus predicates."""
     if coprime_to and coprime_to < 2:
         raise ValueError("diversity coprime modulus must be at least two")
+    if min_modulus and min_modulus < 2:
+        raise ValueError("diversity minimum modulus must be at least two")
     ordered = list(explicit_primes)
     if coprime_to:
         ordered.extend(
             int(row["p"])
             for row in rows
             if math.gcd(int(row["h"]), coprime_to) == 1
+        )
+    if min_modulus:
+        ordered.extend(
+            int(row["p"])
+            for row in rows
+            if int(row["h"]) >= min_modulus
         )
     return tuple(dict.fromkeys(ordered))
 
@@ -91,6 +100,15 @@ def main() -> int:
             "integer; useful for capping all full-weight residual rows"
         ),
     )
+    parser.add_argument(
+        "--diversity-min-modulus",
+        type=int,
+        default=0,
+        help=(
+            "also diversify every row with modulus at least this value; "
+            "useful for broad witnesses while omitting tiny fixed anchors"
+        ),
+    )
     parser.add_argument("--diversity-coordinate-moduli", default="")
     parser.add_argument("--diversity-quota", type=int, default=1)
     parser.add_argument(
@@ -151,6 +169,7 @@ def main() -> int:
         rows,
         explicit_diversity_primes,
         args.diversity_coprime_to,
+        args.diversity_min_modulus,
     )
     diversity_coordinate_moduli = tuple(
         int(value)

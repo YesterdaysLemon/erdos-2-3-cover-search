@@ -4002,3 +4002,85 @@ latest ten are not yet absorbed.
 This is better-controlled construction dynamics, not a solution.  There is
 still no conditioned-cell cover, no CRT integer `m`, and no global
 impossibility proof.
+
+## Sparse full-pool repair and gain-mask quotient search (2026-07-27)
+
+Stable column generation expanded the controlled phase from 14 to 20
+anchors.  The promoted rows are
+
+```
+97,107,179,193,263,277,293,439,557,2131,59,
+4297,653,577,167,509,233,149,6521,15121
+```
+
+and the last phase covers 526 accumulated exact lessons.  An exact checker
+selector now permits diversity over every row with `h` above a declared
+threshold.  With `h >= 7`, target cap one produced at most four mutually
+target-distinct holes in the tested phase, while target cap two produced at
+most eight.  These exact finite packings do not imply that the phase has
+only four or eight holes.
+
+A sparse MILP then searched the complete 12,577-row conditioned pool for
+repairs within Hamming radius four of the stable phase.  It repeatedly
+covered growing unions of adversarial packs while freezing `p=41,p=17`.
+Once all supplied points, including multiply base-covered points, were
+explicitly constrained, the finite replay remained exact.  At 29 points the
+MILP and two complete alternative encodings became solver-hard:
+
+* HiGHS reached 240 seconds with no integer model or infeasibility proof;
+* a one-hot bounded SAT model reached its controlled deadline;
+* a 95,423-move Z3 pseudo-Boolean model reached 60 seconds.
+
+None of those deadlines is an obstruction result.
+
+The successful shift was to the gain-mask quotient implemented in
+`finite_sample_mask_repair.py`.  On the 29-point branch with low phases
+`(1,1,0,1,0)`, the base phase missed 17 points.  Projecting legal retargets
+onto those deficits reduced 57,454 moves to 198 distinct bit masks.  The
+first relaxed four-mask cover was spurious because all four masks belonged
+to different targets of `p=97`.  Exact row matching and full-corpus replay
+then examined only six mask models: two failed matching, three failed replay,
+and the sixth gave
+
+```
+p=1777: 29 -> 4
+p=109:    2 -> 7
+p=223:   30 -> 13
+p=373:   30 -> 0
+```
+
+in about 0.003 seconds.  It exactly covered all 29 finite lessons, but the
+full checker found a genuine hole.  Repeating the one-hole CEGIS loop grew
+the corpus to 38 points.  Repairs through the 37-point stage remained below
+one second and used several qualitatively different quartets, including only
+medium-scale rows.  Every exact phase checked so far was rejected by a
+genuine uncovered exponent pair.
+
+The gain-mask solver is construction-sound but deliberately not
+obstruction-complete: a negative search can miss a row whose retargeting has
+zero gain on the initial deficits but compensates for coverage lost by
+another move.  Its output records `complete_negative=false`.  The SAT and
+Z3 encodings retain the complete finite-radius semantics for future proof
+work.
+
+The five-low-anchor quotient driver now enumerates the exact 162
+representatives and checkpoints every branch.  A ten-branch shared-corpus
+smoke test finished in seven seconds but was intentionally non-dispositive:
+all phase-one branch lessons were already covered by the opposite `p=41`
+phase in the sampled phase-zero branches.  Branch-specific exact
+counterexamples are therefore mandatory for a genuine Benders sweep.
+Branch `(0,0,0,0,0)` immediately supplied such a hole, and the mask learner
+repaired it with one nonanchor move.
+
+A separate high-component detour restored 62 mathematically valid rows that
+the one-hot checker omits only because their largest prime-power components
+exceed 16,384.  Dynamic 32/64-bit target matrices made finite repair exact
+for those rows.  None covered any of the latest three holes at its base
+phase, and no single legal retargeting covered more than one.  The full
+12,639-row Z3 bit-vector checker reached five minutes without a model or
+proof.  Generic admission of these rows is therefore paused; a future row
+must first demonstrate multi-hole or missing-direction leverage.
+
+No result in this section is a conditioned-cell cover, a CRT integer `m`, a
+global nonexistence proof, or evidence that the original problem is nearly
+settled.

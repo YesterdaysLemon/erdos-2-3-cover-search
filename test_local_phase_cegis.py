@@ -123,6 +123,44 @@ class StreamingRepairTests(unittest.TestCase):
             )
             np.testing.assert_array_equal(streamed, dense[:, column])
 
+    def test_dense_targets_widen_for_large_moduli_without_overflow(self) -> None:
+        h = (1 << 40) + 87
+        points = [
+            ((1 << 63) + 12345, (1 << 62) + 6789),
+            ((1 << 100) + 77, (1 << 111) + 91),
+        ]
+        candidate = (h, 97, h - 2, h - 3, h, h)
+        dense, _seconds = local_phase_cegis.build_targets(
+            points,
+            [candidate],
+            np,
+        )
+        self.assertEqual(dense.dtype, np.dtype(np.uint64))
+        expected = np.asarray(
+            [
+                ((h - 2) * (k % h) + (h - 3) * (l % h)) % h
+                for k, l in points
+            ],
+            dtype=np.uint64,
+        )
+        np.testing.assert_array_equal(dense[:, 0], expected)
+
+    def test_dense_targets_use_python_integers_above_uint64(self) -> None:
+        h = (1 << 70) + 39
+        point = ((1 << 100) + 5, (1 << 101) + 7)
+        candidate = (h, 101, h - 1, h - 2, h, h)
+        dense, _seconds = local_phase_cegis.build_targets(
+            [point],
+            [candidate],
+            np,
+        )
+        self.assertEqual(dense.dtype, np.dtype(object))
+        self.assertEqual(
+            dense[0, 0],
+            ((h - 1) * (point[0] % h) + (h - 2) * (point[1] % h))
+            % h,
+        )
+
     def test_component_residue_state_matches_big_integer_targets(self) -> None:
         points = [
             ((1 << 100) + 12345, (1 << 96) + 6789),

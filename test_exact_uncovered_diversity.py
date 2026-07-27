@@ -104,6 +104,27 @@ class PerTargetDiversityTests(unittest.TestCase):
                 1,
             )
 
+    def test_minimum_modulus_selector_adds_all_large_rows(self) -> None:
+        rows = [
+            {"h": 2, "p": 5},
+            {"h": 5, "p": 7},
+            {"h": 8, "p": 11},
+        ]
+        selected = exact_derived_phase_misses.expanded_diversity_primes(
+            rows,
+            (5,),
+            min_modulus=5,
+        )
+        self.assertEqual(selected, (5, 7, 11))
+
+    def test_minimum_modulus_selector_rejects_one(self) -> None:
+        with self.assertRaisesRegex(ValueError, "at least two"):
+            exact_derived_phase_misses.expanded_diversity_primes(
+                [],
+                (),
+                min_modulus=1,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

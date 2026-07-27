@@ -10,13 +10,14 @@ import sys
 import time
 from pathlib import Path
 
+from certify_anchor_phase_quotient import load_cells
 from local_phase_cegis import build_targets
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
-    parser.add_argument("points", type=Path)
+    parser.add_argument("points", type=Path, nargs="+")
     parser.add_argument("--initial-phases", type=Path, required=True)
     parser.add_argument("--phase-output", type=Path, required=True)
     parser.add_argument("--result-output", type=Path, required=True)
@@ -46,9 +47,13 @@ def main() -> int:
 
     payload = json.loads(args.pool.read_text())
     rows = payload["choices"]
-    points = [
-        (int(k), int(l)) for k, l in json.loads(args.points.read_text())
-    ]
+    points = []
+    seen_points = set()
+    for path in args.points:
+        for point in load_cells(path):
+            if point not in seen_points:
+                seen_points.add(point)
+                points.append(point)
     initial = {
         int(prime): int(target)
         for prime, target in json.loads(args.initial_phases.read_text()).items()
@@ -67,7 +72,14 @@ def main() -> int:
         )
         for row in rows
     ]
-    assignment = np.empty(len(rows), dtype=np.uint32)
+    max_h = max((int(row["h"]) for row in rows), default=1)
+    if max_h <= 1 << 32:
+        assignment_dtype = np.uint32
+    elif max_h <= 1 << 64:
+        assignment_dtype = np.uint64
+    else:
+        assignment_dtype = object
+    assignment = np.empty(len(rows), dtype=assignment_dtype)
     for row_index, row in enumerate(rows):
         prime = int(row["p"])
         h = int(row["h"])
@@ -206,7 +218,7 @@ def main() -> int:
     if result.x is None:
         output = {
             "pool": str(args.pool),
-            "points": str(args.points),
+            "points": [str(path) for path in args.points],
             "initial_phases": str(args.initial_phases),
             "result": "NO_INTEGER_MODEL",
             "milp_status": int(result.status),
@@ -259,7 +271,7 @@ def main() -> int:
     args.phase_output.write_text(json.dumps(phase_map) + "\n")
     output = {
         "pool": str(args.pool),
-        "points": str(args.points),
+        "points": [str(path) for path in args.points],
         "initial_phases": str(args.initial_phases),
         "result": "INTEGER_MODEL",
         "milp_status": int(result.status),

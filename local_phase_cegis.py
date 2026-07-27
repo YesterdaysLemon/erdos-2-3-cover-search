@@ -31,13 +31,26 @@ def build_targets(points, candidates, np):
     started = time.monotonic()
     # Repair is column-oriented: each move inspects all retained points for
     # one candidate.  Fortran order keeps those candidate columns contiguous.
+    max_h = max((int(candidate[0]) for candidate in candidates), default=1)
+    if max_h <= 1 << 32:
+        target_dtype = np.uint32
+    elif max_h <= 1 << 64:
+        target_dtype = np.uint64
+    else:
+        target_dtype = object
     targets = np.empty(
-        (len(points), len(candidates)), dtype=np.uint32, order="F"
+        (len(points), len(candidates)), dtype=target_dtype, order="F"
     )
-    uint64_flags = [
-        all(0 <= coordinate < (1 << 64) for coordinate in point)
-        for point in points
-    ]
+    uint64_limit = (1 << 64) - 1
+    safe_products = 2 * max(0, max_h - 1) ** 2 <= uint64_limit
+    uint64_flags = (
+        [
+            all(0 <= coordinate <= uint64_limit for coordinate in point)
+            for point in points
+        ]
+        if safe_products and target_dtype is not object
+        else [False] * len(points)
+    )
     uint64_count = sum(uint64_flags)
     uint64_prefix = (
         uint64_count == len(points)
@@ -80,13 +93,20 @@ def build_targets(points, candidates, np):
         if uint64_count:
             targets[uint64_selector, column] = (
                 (a * (ks % h) + b * (ls % h)) % h
-            ).astype(np.uint32)
+            ).astype(target_dtype)
         if big_points:
-            targets[big_selector, column] = np.fromiter(
-                ((a * (k % h) + b * (l % h)) % h for k, l in big_points),
-                dtype=np.uint32,
-                count=len(big_points),
+            values = (
+                (a * (k % h) + b * (l % h)) % h
+                for k, l in big_points
             )
+            if target_dtype is object:
+                targets[big_selector, column] = list(values)
+            else:
+                targets[big_selector, column] = np.fromiter(
+                    values,
+                    dtype=target_dtype,
+                    count=len(big_points),
+                )
     return targets, time.monotonic() - started
 
 
