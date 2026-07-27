@@ -169,39 +169,66 @@ def best_anchor_lower(
         Fraction(1, outside_h * int(anchor["h"]))
         for anchor in compatible
     ]
-    triple_uppers = {
-        (first, second): Fraction(
-            triple_image_index_minors(
-                (
-                    outside,
-                    compatible[first],
-                    compatible[second],
-                )
-            ),
-            outside_h
-            * int(compatible[first]["h"])
-            * int(compatible[second]["h"]),
+    triple_indices = {
+        (first, second): triple_image_index_minors(
+            (
+                outside,
+                compatible[first],
+                compatible[second],
+            )
         )
         for first in range(len(compatible))
         for second in range(first)
     }
-    best = Fraction(0)
-    subset_values = [Fraction(0)] * (1 << len(compatible))
+    triple_uppers = {
+        (first, second): Fraction(
+            index,
+            outside_h
+            * int(compatible[first]["h"])
+            * int(compatible[second]["h"]),
+        )
+        for (first, second), index in triple_indices.items()
+    }
+
+    # Maximize the pairwise Bonferroni polynomial with one common integer
+    # denominator.  The earlier Fraction-valued subset table was exact but
+    # made promoted blocks needlessly expensive once 17-20 anchors were
+    # present.
+    anchor_moduli = [int(anchor["h"]) for anchor in compatible]
+    anchor_product = math.prod(anchor_moduli)
+    single_numerators = [
+        anchor_product // modulus for modulus in anchor_moduli
+    ]
+    penalty_numerators = {
+        pair: index
+        * anchor_product
+        // (
+            anchor_moduli[pair[0]]
+            * anchor_moduli[pair[1]]
+        )
+        for pair, index in triple_indices.items()
+    }
+    best_numerator = 0
+    subset_values = [0] * (1 << len(compatible))
     for mask in range(1, 1 << len(compatible)):
         bit = mask & -mask
         added = bit.bit_length() - 1
         previous = mask ^ bit
-        lower = subset_values[previous] + singles[added]
+        numerator = subset_values[previous] + single_numerators[added]
         remaining = previous
         while remaining:
             other_bit = remaining & -remaining
             other = other_bit.bit_length() - 1
-            lower -= triple_uppers[
+            numerator -= penalty_numerators[
                 (max(added, other), min(added, other))
             ]
             remaining ^= other_bit
-        subset_values[mask] = lower
-        best = max(best, lower)
+        subset_values[mask] = numerator
+        best_numerator = max(best_numerator, numerator)
+    best = Fraction(
+        best_numerator,
+        outside_h * anchor_product,
+    )
 
     if fourway_triples:
         for selected in itertools.combinations(range(len(compatible)), 3):

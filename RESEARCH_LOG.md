@@ -2573,3 +2573,48 @@ checkpoint, not a cover and not an impossibility certificate.
 The public finite frontier therefore remains at 4,614 of 4,637 ranked
 families eliminated, with 23 unresolved.  There is still no integer `m` and
 no global impossibility proof.
+
+## Resistant-family and search-scaling checkpoint (2026-07-26)
+
+The long-running exact binary CEGIS search was stopped after round 55.  It
+had accumulated 11,800 exact counterexamples without advancing, used about
+7.4 GB of working memory, and had roughly 15 GB of page-file allocation.
+Its points, phases, and progress were preserved.  This is a stopped search,
+not an UNSAT result.
+
+The compact period-`330442912800` CEGIS run was separately checkpointed at
+45,000 exact counterexamples.  It remained near 250 MB, so its storage model
+is sustainable, but every exact whole-period check continued to return 200
+new uncovered points.  More rounds of the same repair loop are therefore a
+poor immediate tradeoff.
+
+The exact-overlap route made a more useful exploratory improvement on the
+closest remaining ranked family, period `776363187600`.  Promoting `p=599`
+and `p=601` into the existing block reduces its calculated upper bound from
+
+```
+1.0018889069868673
+```
+
+to
+
+```
+67030620777582640217161 / 66971088784492532640000
+= 1.0008889207891136.
+```
+
+This is still above one and therefore does not eliminate the family.  The
+new period-level composition is also exploratory until its full dependency
+chain and independent period replay are published.  Additional fourth-order
+terms made no improvement on this promoted block.  Recorded small-anchor
+conditional templates were screened as another discovery route; the best
+new template found so far improves a single edge by only about
+`0.000003014`, far short of the remaining period gap.
+
+The generic pairwise subset calculation was rewritten with one common
+integer denominator.  It reproduces the previous exact rational output while
+making 17-20-anchor exploratory blocks materially cheaper to evaluate.
+
+The certified public frontier is unchanged: 4,614 of 4,637 ranked finite
+families are eliminated, 23 remain, and the original infinite problem is
+unresolved.
