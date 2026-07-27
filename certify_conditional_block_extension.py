@@ -32,10 +32,6 @@ def recorded_row(row: dict) -> dict:
     return {key: int(row[key]) for key in ("p", "h", "a", "b")}
 
 
-def same_path(left: str | Path, right: str | Path) -> bool:
-    return Path(left).resolve() == Path(right).resolve()
-
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
@@ -63,21 +59,30 @@ def main() -> int:
         ):
             raise RuntimeError("base anchor differs from the pool")
 
-    if not same_path(
-        conditional["block_certificate"],
-        args.base_certificate,
-    ):
-        raise RuntimeError("conditional certificate uses another base block")
-    if tuple(int(value) for value in conditional["anchor_primes"]) != (
-        base_primes
-    ):
-        raise RuntimeError(
-            "conditional certificate does not use the complete base block"
-        )
-    if [
+    conditional_primes = tuple(
+        int(value) for value in conditional["anchor_primes"]
+    )
+    conditional_rows = [
         recorded_row(row) for row in conditional["anchor_rows"]
-    ] != [recorded_row(row) for row in base_anchor_rows]:
-        raise RuntimeError("conditional anchor rows differ from the base")
+    ]
+    if not conditional_primes:
+        raise RuntimeError("conditional certificate has no anchors")
+    if len(set(conditional_primes)) != len(conditional_primes):
+        raise RuntimeError("conditional certificate repeats an anchor")
+    if not set(conditional_primes) <= set(base_primes):
+        raise RuntimeError(
+            "conditional certificate uses a non-base anchor"
+        )
+    if [int(row["p"]) for row in conditional_rows] != list(
+        conditional_primes
+    ):
+        raise RuntimeError("conditional anchor order is inconsistent")
+    if any(
+        prime not in by_prime
+        or recorded_row(by_prime[prime]) != row
+        for prime, row in zip(conditional_primes, conditional_rows)
+    ):
+        raise RuntimeError("conditional anchor rows differ from the pool")
 
     extra_prime = int(conditional["outside_prime"])
     if extra_prime in base_primes or extra_prime not in by_prime:
@@ -117,11 +122,12 @@ def main() -> int:
     )
     pool_upper = total_density - extended_loss
     result = {
-        "schema": "conditional_block_extension_v1",
+        "schema": "conditional_block_extension_v2",
         "pool": str(args.pool),
         "row_count": len(rows),
         "base_certificate": str(args.base_certificate),
         "conditional_certificate": str(args.conditional_certificate),
+        "conditional_anchor_primes": list(conditional_primes),
         "base_anchor_primes": list(base_primes),
         "base_anchor_rows": [
             recorded_row(row) for row in base_anchor_rows
@@ -146,10 +152,11 @@ def main() -> int:
         "argument": (
             "The base block contributes its certified forced overlap loss. "
             "The independently checkable conditional certificate proves "
-            "that every target of the appended row intersects the complete "
-            "base union by at least the recorded density. Adding that "
-            "intersection to the base loss gives a valid upper bound for "
-            "the enlarged block union."
+            "that every target of the appended row intersects a recorded "
+            "subunion of base anchors by at least the recorded density. "
+            "That subunion lies inside the complete base union. Adding the "
+            "intersection lower bound to the base loss therefore gives a "
+            "valid upper bound for the enlarged block union."
         ),
     }
     args.output.write_text(json.dumps(result, indent=2) + "\n")

@@ -25,24 +25,28 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,610 of 4,637 ranked finite divisor-period families have independently
+- 4,611 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 27 ranked finite families remain after intersecting the aggregate
+- 26 ranked finite families remain after intersecting the aggregate
   block-star and separately verified single-anchor frontiers and applying
-  16 exact period certificates;
+  17 exact period certificates;
 - the former closest family, at period `2533395664800`, is now eliminated.
   A 16-anchor block and 40 independently replayed conditional-overlap bounds
   give the exact period-level upper bound
   `40107466081993334654251/40113084965171462244000`, or
   `0.9998599239329758`, which is strictly less than one.
+- period `101264763600` is also eliminated. Promoting `p=71`, `p=31`, and
+  `p=191` into a 17-anchor block gives the independently replayed upper bound
+  `2102349443216882789/2103497917325925120`, or
+  `0.9994540169973154`.
 
-The fraction \(4{,}610/4{,}637\) measures only this deliberately chosen
+The fraction \(4{,}611/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is 99.4% solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
-The 27 unresolved periods are indexed in
+The 26 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
@@ -60,7 +64,7 @@ The 27 unresolved periods are indexed in
 - the `order_pool_1050000` exact rational certificates and replay reports
   needed by the current checkpoint and its dependency closure.
 - [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md): a compact table
-  of the 27 ranked finite families not yet eliminated.
+  of the 26 ranked finite families not yet eliminated.
 - [PUBLICATION_MANIFEST.md](PUBLICATION_MANIFEST.md): what the public snapshot
   includes and deliberately excludes.
 

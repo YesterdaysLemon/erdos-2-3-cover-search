@@ -1,0 +1,38 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period101264763600_endpointpath_plus71_31_191conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_endpointpath_plus71_31_191conditional_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre101_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre109_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre113_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre127_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre131_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre37_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre43_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre601_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre61_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs5_11_13_23_19_71_verification.json",
+    "order_pool_1050000_conditional_fibre89_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre97_vs_projected29block_anchors_verification.json"
+  ],
+  "period": 101264763600,
+  "row_count": 759,
+  "anchor_count": 17,
+  "outside_rows_checked": 742,
+  "conditional_edges_checked": 13,
+  "block_overlap_loss": {
+    "numerator": 18400185926609,
+    "denominator": 63236469376080
+  },
+  "star_overlap_sum": {
+    "numerator": 2035126001331460007,
+    "denominator": 10517489586629625600
+  },
+  "union_density_upper_bound": {
+    "numerator": 2102349443216882789,
+    "denominator": 2103497917325925120
+  },
+  "verified": true
+}

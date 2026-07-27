@@ -2342,3 +2342,53 @@ period replay reports `verified=True`.
 This is a rigorous finite-family elimination only.  It does not produce an
 integer `m`, rule out all possible finite prime-fibre systems, or prove a
 global impossibility theorem for the original Erdős problem.
+
+## Period-101,264,763,600 elimination (2026-07-26)
+
+The next ranked survivor began with aggregate block-star upper bound
+`1.0096749113138785`.  Reusing every compatible verified conditional edge
+lowered it only to `1.0061146977205686`.
+
+A stronger transformation promotes an outside fibre into the exact block.
+For this purpose, `conditional_block_extension_v2` permits the intersection
+witness to use any recorded subunion of the existing block: an intersection
+lower bound against a subunion is automatically a lower bound against the
+whole block.  The independent verifier checks that every conditional anchor
+is an actual base-block anchor, that all recorded affine rows match the stable
+pool, and that the supplied conditional report independently verified the
+same exact fraction.  Legacy complete-block extension certificates remain
+replayable under the original schema.
+
+Starting from the 14-anchor projected endpoint-path block, the independently
+verified promotion chain adds:
+
+```
+p=71  with intersection 659/41580
+p=31  with intersection 4/297
+p=191 with intersection 659/112860.
+```
+
+Promoting `p=71` reduced the assembled upper bound to
+`1.0011385289539028`.  Promoting `p=31` next gave
+`1.0010877783324745`.  The final `p=191` promotion, together with 13
+independently verified conditional-fibre edges around the 17-anchor block,
+gives
+
+```
+2102349443216882789 / 2103497917325925120
+= 0.9994540169973154 < 1.
+```
+
+The exact no-cover margin is
+
+```
+1148474109042331 / 2103497917325925120
+= 0.0005459830026845619.
+```
+
+The complete 759-row period certificate independently replays with
+`verified=True`.  The ranked finite frontier is therefore reduced again:
+4,611 of 4,637 families are certified no-cover and 26 remain.
+
+This remains a finite divisor-family theorem, not a value of `m` and not a
+global impossibility proof.

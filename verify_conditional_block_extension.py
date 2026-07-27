@@ -53,6 +53,12 @@ def main() -> int:
 
     base_anchor_rows = recorded_anchor_rows(base)
     base_primes = tuple(int(row["p"]) for row in base_anchor_rows)
+    conditional_primes = tuple(
+        int(value) for value in conditional["anchor_primes"]
+    )
+    conditional_rows = [
+        recorded_row(row) for row in conditional["anchor_rows"]
+    ]
     extra_prime = int(conditional["outside_prime"])
     extra = by_prime.get(extra_prime)
     base_loss = read_fraction(base["forced_overlap_loss"])
@@ -84,19 +90,40 @@ def main() -> int:
             for row in base_anchor_rows
         )
     )
-    conditional_matches = (
-        same_path(
+    conditional_rows_match = (
+        bool(conditional_primes)
+        and len(set(conditional_primes)) == len(conditional_primes)
+        and set(conditional_primes) <= set(base_primes)
+        and [int(row["p"]) for row in conditional_rows]
+        == list(conditional_primes)
+        and all(
+            prime in by_prime
+            and recorded_row(by_prime[prime]) == row
+            for prime, row in zip(conditional_primes, conditional_rows)
+        )
+    )
+    schema = certificate.get("schema")
+    legacy_complete_block_match = (
+        schema == "conditional_block_extension_v1"
+        and same_path(
             conditional["block_certificate"],
             certificate["base_certificate"],
         )
-        and tuple(
-            int(value) for value in conditional["anchor_primes"]
-        )
-        == base_primes
-        and [
-            recorded_row(row) for row in conditional["anchor_rows"]
-        ]
+        and conditional_primes == base_primes
+        and conditional_rows
         == [recorded_row(row) for row in base_anchor_rows]
+    )
+    subset_block_match = (
+        schema == "conditional_block_extension_v2"
+        and tuple(
+            int(value)
+            for value in certificate["conditional_anchor_primes"]
+        )
+        == conditional_primes
+    )
+    conditional_matches = (
+        conditional_rows_match
+        and (legacy_complete_block_match or subset_block_match)
         and extra is not None
         and extra_prime not in base_primes
         and recorded_row(extra) == recorded_row(conditional["outside_row"])
@@ -129,7 +156,10 @@ def main() -> int:
         ) if extra is not None else ()),
     ]
     verified = (
-        certificate.get("schema") == "conditional_block_extension_v1"
+        schema in {
+            "conditional_block_extension_v1",
+            "conditional_block_extension_v2",
+        }
         and same_path(certificate["pool"], args.pool)
         and len(by_prime) == len(rows)
         and int(certificate["row_count"]) == len(rows)
