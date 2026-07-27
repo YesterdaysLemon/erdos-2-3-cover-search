@@ -3057,3 +3057,88 @@ with 18 remaining.
 This remains a finite-family result.  It neither constructs the requested
 integer `m` nor proves that no such integer exists in the original infinite
 problem.
+
+## Period-931,635,825,120 certified elimination (2026-07-26)
+
+The next closest ranked survivor has 945 rows and period components
+
+```
+32, 27, 5, 7, 11, 13, 17, 19, 23, 29.
+```
+
+Its earlier 13-anchor block-star upper bound was
+
+```
+315102118440656273 / 310693954562449920
+= 1.0141881224705978.
+```
+
+Nine independently replayed conditional extensions promoted, in order,
+`p=31`, `p=41`, `p=59`, `p=191`, `p=73`, `p=6553`, `p=103`, `p=131`, and
+`p=127`.  The resulting 22-anchor block has exact forced overlap loss
+
+```
+7612626607 / 21311930640
+= 0.3571945675408919.
+```
+
+The top-level pairwise-star calculation was changed from exhaustive subset
+optimization to proof-producing meet-in-the-middle witnesses.  A discovery
+pass selects one compatible anchor subset for each of the 923 outside rows.
+The certificate generator recomputes every selected subset using exact
+rational arithmetic, and the independent witness verifier reconstructs all
+923 values with separate target-map code and returns `verified=True`.
+Optimality of the subsets is not required.
+
+Combining these witnesses with the strongest 100 already replayed compatible
+conditional edges gave
+
+```
+2261783054660801145797 / 2260274246476622976600
+= 1.0006675332369646,
+```
+
+leaving an exact positive excess above one.
+
+Three projected-design discovery batches then screened 44 outside fibres and
+found 17 distinct strict improvements.  The dedicated promotion program
+regenerated all 17 certificates, and the independent projected-fibre
+verifier replayed 17 of 17 successfully.  Their total exact improvement is
+
+```
+6771191620924637 / 8790565858927070400
+= 0.0007702793801434636.
+```
+
+Ten promoted fibres overlap the prior conditional set.  Replacing the older
+edge on each overlap leaves 107 distinct conditional certificates in the
+assembled period proof.
+
+The assembled certificate is
+
+```
+order_pool_1050000_period931635825120_conditional_star_certificate.json
+```
+
+Its independent top-level replay checks the 22-row block, 107 conditional
+reports, and all 923 explicit star witnesses, obtaining
+
+```
+6026778698707389062689 / 6027397990604327937600
+= 0.999897253856821.
+```
+
+The exact strict margin below one is
+
+```
+619291896938874911 / 6027397990604327937600
+= 0.00010274614317890472.
+```
+
+The replay returns `verified=True`, so period `931635825120` is eliminated
+from the ranked finite menu.  The certified frontier is now 4,620 of 4,637,
+with 17 remaining.
+
+This remains a finite-family result.  It neither constructs the requested
+integer `m` nor proves that no such integer exists in the original infinite
+problem.

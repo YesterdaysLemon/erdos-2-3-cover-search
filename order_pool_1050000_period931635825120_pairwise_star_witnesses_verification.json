@@ -1,0 +1,13 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period931635825120_pairwise_star_witnesses_certificate.json",
+  "period": 931635825120,
+  "row_count": 945,
+  "anchor_count": 22,
+  "outside_witnesses_checked": 923,
+  "pairwise_lower_sum": {
+    "numerator": 881087583349281638851,
+    "denominator": 5166341134803709660800
+  },
+  "verified": true
+}
