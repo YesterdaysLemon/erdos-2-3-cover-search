@@ -3344,7 +3344,7 @@ change invalidates only the counts, while an appended point file reuses the
 validated coordinate prefix and evaluates only the suffix.  The compressed
 representation is forced for a small suffix when the existing prefix is
 already compressed, avoiding an unnecessary full rebuild.  Fifteen focused
-streaming/tile tests and the complete 64-test suite pass.  Cache files remain
+streaming/tile tests and the complete 67-test suite pass.  Cache files remain
 transient and are not proof artifacts.
 
 ## Homogeneous-refinement lead (2026-07-27)
@@ -3378,3 +3378,39 @@ six parent classes individually above conditional density one.  Neither
 quantity is a coverage certificate, and many required parents remain far
 below one.  The transformed construction is therefore only a lead for a
 joint refinement solver, not a candidate `m` or a proof.
+
+### Exact bounded sibling obstruction
+
+The refinement framework also gives a short necessary condition that avoids
+phase search.  In a nontrivial finite refinement tree, choose an internal
+node of greatest depth.  Its children are leaves and must be the complete set
+of prime-\(q\) descendants of their parent.  Consequently any candidate leaf
+pool supporting such a refinement must contain at least one complete sibling
+group.
+
+The complete unpeeled pool
+
+```
+order_pool_1050000.json
+```
+
+has 129,497 rows and reports zero unresolved source cofactors.  Canonicalizing
+each homogeneous fibre as a projective lattice direction and reducing it
+over every prime divisor of its index produces 429,197 parent buckets across
+19,369 possible refinement primes.  No bucket is complete.  The best
+completion ratio is only `1/2`; 144 buckets have more than one observed
+child, and the largest observed child count is two.
+
+The certificate and independent replay are
+
+```
+order_pool_1050000_homogeneous_refinement_obstruction_certificate.json
+order_pool_1050000_homogeneous_refinement_obstruction_verification.json
+```
+
+The generator uses CRT-normalized lattice directions `(b,-a)`.  The verifier
+independently groups equation normals `(a,b)` and reproduces all aggregate
+counts, returning `verified=True`.  This rules out only homogeneous
+refinements of the trivial cover whose leaves come from this bounded pool.
+It does not constrain non-refinement homogeneous covers, general affine
+phase assignments, or higher-index prime fibres.

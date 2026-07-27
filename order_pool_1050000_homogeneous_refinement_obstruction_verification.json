@@ -1,0 +1,30 @@
+{
+  "schema": "erdos203-homogeneous-refinement-verification-v1",
+  "certificate": "order_pool_1050000_homogeneous_refinement_obstruction_certificate.json",
+  "source_pool": "order_pool_1050000.json",
+  "source_sha256": "3be851ac19002a25711f9ca99f31efb128b07b06f8fd9a22ff84bc64009b4d9f",
+  "replay": {
+    "rows": 129497,
+    "unique_leaf_lattices": 129497,
+    "duplicate_leaf_rows": 0,
+    "parent_buckets": 429197,
+    "complete_sibling_groups": [],
+    "best_completion": {
+      "child_index": 4,
+      "parent_index": 2,
+      "refinement_prime": 2,
+      "observed_children": 1,
+      "required_children": 2
+    },
+    "best_completion_fraction": {
+      "numerator": 1,
+      "denominator": 2
+    },
+    "refinement_primes": 19369,
+    "multi_child_buckets": 144,
+    "max_observed_children": 2
+  },
+  "mismatches": {},
+  "verified": true,
+  "scope": "Finite pool only; this does not obstruct general affine covers, non-refinement homogeneous covers, or higher-index fibres."
+}

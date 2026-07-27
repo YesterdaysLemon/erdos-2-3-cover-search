@@ -141,6 +141,18 @@ parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 The 17 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
+## Bounded homogeneous-refinement obstruction
+
+The complete raw pool through subgroup index `1050000` contains 129,497 leaf
+lattices.  Grouping all 429,197 possible parent reductions found no complete
+set of prime-\(q\) siblings, and an independently oriented replay returns
+`verified=True`.  Every nontrivial finite refinement tree has a deepest
+internal node whose children are all leaves, so no homogeneous refinement of
+the trivial cover can use only this finite pool.
+
+This is a narrow finite obstruction.  It does not exclude non-refinement
+homogeneous covers, general affine covers, or fibres of higher index.
+
 ## Repository contents
 
 - `*.py`: search programs, exact certificate generators, independent
@@ -148,6 +160,9 @@ The 17 unresolved periods are indexed in
 - `local_phase_cegis.py` and `exact_uncovered.py`: direct finite-cover CEGIS,
   including streaming low-memory repair, unions of exact component-digit
   tiles, and adversarial witness diversity.
+- `certify_homogeneous_refinement_obstruction.py` and its independent
+  verifier: the deepest-node sibling test for bounded homogeneous
+  refinement trees.
 - `search_projected_conditional_designs.py`: checkpointable projected
   conditional-overlap discovery, including a proof-structural shared
   residual pair.

@@ -13,6 +13,8 @@ This repository is a curated snapshot of the active workspace, published on
 - the stable 1,050,000-order candidate pool used by the current finite sweep;
 - the 14,629-row max-128 pool used by the current exploratory direct-cover
   search;
+- the exact bounded homogeneous-refinement sibling obstruction over all
+  129,497 raw rows, together with its independently oriented replay;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its
