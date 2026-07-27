@@ -105,11 +105,61 @@ def quadruple_index_explicit(rows: tuple[dict, dict, dict, dict]) -> int:
     return math.gcd(*determinants)
 
 
+def determinant5_explicit(
+    matrix: tuple[
+        tuple[int, int, int, int, int],
+        tuple[int, int, int, int, int],
+        tuple[int, int, int, int, int],
+        tuple[int, int, int, int, int],
+        tuple[int, int, int, int, int],
+    ],
+) -> int:
+    """Independent Leibniz-form 5-by-5 determinant."""
+    if len(matrix) != 5 or any(len(row) != 5 for row in matrix):
+        raise ValueError("determinant5_explicit requires a 5-by-5 matrix")
+    total = 0
+    for permutation in itertools.permutations(range(5)):
+        inversions = sum(
+            permutation[i] > permutation[j]
+            for i in range(5)
+            for j in range(i + 1, 5)
+        )
+        product = math.prod(
+            matrix[row][permutation[row]] for row in range(5)
+        )
+        total += (-1 if inversions % 2 else 1) * product
+    return total
+
+
+def quintuple_index_explicit(
+    rows: tuple[dict, dict, dict, dict, dict],
+) -> int:
+    moduli = [int(row["h"]) for row in rows]
+    generators = (
+        (moduli[0], 0, 0, 0, 0),
+        (0, moduli[1], 0, 0, 0),
+        (0, 0, moduli[2], 0, 0),
+        (0, 0, 0, moduli[3], 0),
+        (0, 0, 0, 0, moduli[4]),
+        tuple(int(row["a"]) for row in rows),
+        tuple(int(row["b"]) for row in rows),
+    )
+    determinants = []
+    for selected in itertools.combinations(range(7), 5):
+        matrix = tuple(
+            tuple(generators[column][row] for column in selected)
+            for row in range(5)
+        )
+        determinants.append(abs(determinant5_explicit(matrix)))
+    return math.gcd(*determinants)
+
+
 def best_lower(
     outside: dict,
     anchors: list[dict],
     *,
     fourway_triples: bool = False,
+    fourterm_quads: bool = False,
 ) -> Fraction:
     compatible = [
         anchor for anchor in anchors if pair_index(outside, anchor) == 1
@@ -185,6 +235,59 @@ def best_lower(
                 continue
             if quadruple_index_explicit(rows) == 1:
                 answer = value + fixed_term
+
+    if fourterm_quads:
+        quadruple_indices: dict[tuple[int, int, int], int] = {}
+        for selected in itertools.combinations(range(count), 4):
+            value = sum((singles[index] for index in selected), Fraction(0))
+            value -= sum(
+                (
+                    penalties[(max(first, second), min(first, second))]
+                    for first, second in itertools.combinations(selected, 2)
+                ),
+                Fraction(0),
+            )
+            possible_triples = [
+                (
+                    triple,
+                    Fraction(
+                        1,
+                        outside_h
+                        * math.prod(
+                            int(compatible[index]["h"])
+                            for index in triple
+                        ),
+                    ),
+                )
+                for triple in itertools.combinations(selected, 3)
+            ]
+            if value + sum(
+                (term for _, term in possible_triples),
+                Fraction(0),
+            ) <= answer:
+                continue
+            for triple, term in possible_triples:
+                if triple not in quadruple_indices:
+                    rows = (
+                        outside,
+                        *(compatible[index] for index in triple),
+                    )
+                    quadruple_indices[triple] = (
+                        quadruple_index_explicit(rows)
+                    )
+                if quadruple_indices[triple] == 1:
+                    value += term
+            if value <= answer:
+                continue
+            rows = (
+                outside,
+                *(compatible[index] for index in selected),
+            )
+            value -= Fraction(
+                quintuple_index_explicit(rows),
+                math.prod(int(row["h"]) for row in rows),
+            )
+            answer = max(answer, value)
     return answer
 
 
@@ -205,6 +308,7 @@ def main() -> int:
     source = json.loads(args.pool.read_text())
     certificate = json.loads(args.certificate.read_text())
     fourway_triples = bool(certificate.get("fourway_triples", False))
+    fourterm_quads = bool(certificate.get("fourterm_quads", False))
     rows = source["choices"]
     by_prime = {int(row["p"]): row for row in rows}
     verification_paths = list(args.block_verification)
@@ -261,6 +365,7 @@ def main() -> int:
                         row,
                         block_rows,
                         fourway_triples=fourway_triples,
+                        fourterm_quads=fourterm_quads,
                     )
                 )
                 for row in rows
@@ -335,6 +440,7 @@ def main() -> int:
         "source": str(args.pool),
         "certificate": str(args.certificate),
         "fourway_triples": fourway_triples,
+        "fourterm_quads": fourterm_quads,
         "blocks_checked": len(certificate["block_certificates"]),
         "block_errors": block_errors,
         "families_checked": len(certificate["results"]),

@@ -2524,3 +2524,52 @@ replay with `verified=True`.  The ranked finite frontier is reduced to 23:
 
 As before, this proves a finite-family obstruction only, not a value of `m`
 or a global impossibility result.
+
+## Fourth-order overlap and compact finite CEGIS checkpoint (2026-07-26)
+
+The generic block-star bound now has an optional fourth-order correction on
+every outside-plus-four-anchor subsystem.  For the four events obtained by
+intersecting one outside fibre with four anchor fibres, it uses
+
+```
+S1 - S2_upper + S3_lower - S4_upper.
+```
+
+The positive triple term is retained only when the corresponding four-factor
+target map is surjective.  The final fourfold intersection is bounded above
+by the image index of the five-factor target map.  The generator computes
+that index as the gcd of its 21 five-by-five minors using fraction-free
+elimination.  The independent verifier recomputes every determinant by the
+120-term Leibniz formula.
+
+Random small maps were compared with complete image enumeration, and random
+four-anchor affine systems were compared with exact finite-torus unions.  A
+full 845-row regression on the already eliminated period `216497080800`
+independently replayed with `verified=True` and reproduced the published
+upper bound exactly.
+
+The correction is sound but not decisive on the resistant frontier.  On
+period `330442912800` it improves the best exploratory upper bound by only
+
+```
+139 / 4783086000
+= 0.000000029060736102173366
+```
+
+from `1.0021164703384675` to `1.0021164412777315`.  On period
+`776363187600` it makes no improvement.  Thus this branch changes no finite
+family status.
+
+The exact binary CEGIS master was also benchmarked on the 806-row
+`330442912800` family.  Loading all 11,800 inherited witnesses exceeded
+3.1 GB before SAT began, so that benchmark was stopped without a result.
+The compact multivalued repair engine stores the same kind of constraints in
+a dense integer matrix instead.  With a cycling exact-checker diversity
+schedule, it reached a persisted 43,000-witness checkpoint while using about
+250 MB.  Every finite repair succeeded, but every exact whole-torus check
+returned 200 fresh holes.  This is a sustainable constructive search
+checkpoint, not a cover and not an impossibility certificate.
+
+The public finite frontier therefore remains at 4,614 of 4,637 ranked
+families eliminated, with 23 unresolved.  There is still no integer `m` and
+no global impossibility proof.

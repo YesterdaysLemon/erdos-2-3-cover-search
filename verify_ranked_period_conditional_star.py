@@ -31,6 +31,8 @@ def main() -> int:
 
     source = json.loads(args.pool.read_text())
     cert = json.loads(args.certificate.read_text())
+    fourway_triples = bool(cert.get("fourway_triples", False))
+    fourterm_quads = bool(cert.get("fourterm_quads", False))
     block_path = Path(cert["block_certificate"])
     block = json.loads(block_path.read_text())
     block_verification = json.loads(args.block_verification.read_text())
@@ -116,7 +118,12 @@ def main() -> int:
         prime = int(row["p"])
         if prime in anchor_primes:
             continue
-        baseline = best_lower(row, anchors)
+        baseline = best_lower(
+            row,
+            anchors,
+            fourway_triples=fourway_triples,
+            fourterm_quads=fourterm_quads,
+        )
         path = None
         used = baseline
         if prime in conditional_values:
@@ -168,6 +175,8 @@ def main() -> int:
             str(path) for path in args.conditional_verification
         ],
         "period": period,
+        "fourway_triples": fourway_triples,
+        "fourterm_quads": fourterm_quads,
         "row_count": len(selected),
         "anchor_count": len(anchors),
         "outside_rows_checked": len(expected_lowers),

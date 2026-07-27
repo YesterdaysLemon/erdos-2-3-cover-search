@@ -74,12 +74,89 @@ def quadruple_image_index_minors(rows: tuple[dict, dict, dict, dict]) -> int:
     return math.gcd(*minors)
 
 
+def determinant_bareiss(matrix: tuple[tuple[int, ...], ...]) -> int:
+    """Return an exact square determinant by fraction-free elimination."""
+    size = len(matrix)
+    if size == 0 or any(len(row) != size for row in matrix):
+        raise ValueError("determinant_bareiss requires a nonempty square matrix")
+    work = [list(row) for row in matrix]
+    sign = 1
+    previous_pivot = 1
+    for pivot_index in range(size - 1):
+        pivot_row = next(
+            (
+                row
+                for row in range(pivot_index, size)
+                if work[row][pivot_index] != 0
+            ),
+            None,
+        )
+        if pivot_row is None:
+            return 0
+        if pivot_row != pivot_index:
+            work[pivot_index], work[pivot_row] = (
+                work[pivot_row],
+                work[pivot_index],
+            )
+            sign *= -1
+        pivot = work[pivot_index][pivot_index]
+        for row in range(pivot_index + 1, size):
+            for column in range(pivot_index + 1, size):
+                numerator = (
+                    work[row][column] * pivot
+                    - work[row][pivot_index]
+                    * work[pivot_index][column]
+                )
+                work[row][column] = numerator // previous_pivot
+            work[row][pivot_index] = 0
+        previous_pivot = pivot
+    return sign * work[-1][-1]
+
+
+def quintuple_image_index_minors(
+    rows: tuple[dict, dict, dict, dict, dict],
+) -> int:
+    """Index of the two-coordinate target map into five cyclic factors."""
+    moduli = [int(row["h"]) for row in rows]
+    columns = (
+        (moduli[0], 0, 0, 0, 0),
+        (0, moduli[1], 0, 0, 0),
+        (0, 0, moduli[2], 0, 0),
+        (0, 0, 0, moduli[3], 0),
+        (0, 0, 0, 0, moduli[4]),
+        tuple(int(row["a"]) for row in rows),
+        tuple(int(row["b"]) for row in rows),
+    )
+    minors = [
+        abs(
+            determinant_bareiss(
+                tuple(
+                    tuple(columns[column][row] for column in selected)
+                    for row in range(5)
+                )
+            )
+        )
+        for selected in itertools.combinations(range(7), 5)
+    ]
+    return math.gcd(*minors)
+
+
 def best_anchor_lower(
     outside: dict,
     anchors: list[dict],
     *,
     fourway_triples: bool = False,
+    fourterm_quads: bool = False,
 ) -> Fraction:
+    """Lower-bound one outside fibre's intersection with an anchor union.
+
+    The baseline maximizes the second-order Bonferroni bound over all anchor
+    subsets.  ``fourway_triples`` restores an exact positive triple term when
+    the outside-plus-three-anchor target map is surjective.
+    ``fourterm_quads`` applies the fourth-order bound to each four-anchor
+    subset: exact singles, upper-bounded pairs, guaranteed-surjective triples,
+    and an upper-bounded fourfold intersection.
+    """
     compatible = [
         anchor
         for anchor in anchors
@@ -154,6 +231,60 @@ def best_anchor_lower(
                 == 1
             ):
                 best = lower + fixed_term
+
+    if fourterm_quads:
+        quadruple_indices: dict[tuple[int, int, int], int] = {}
+        for selected in itertools.combinations(range(len(compatible)), 4):
+            lower = sum((singles[index] for index in selected), Fraction(0))
+            lower -= sum(
+                (
+                    triple_uppers[(max(first, second), min(first, second))]
+                    for first, second in itertools.combinations(selected, 2)
+                ),
+                Fraction(0),
+            )
+            possible_triples = [
+                (
+                    triple,
+                    Fraction(
+                        1,
+                        outside_h
+                        * math.prod(
+                            int(compatible[index]["h"])
+                            for index in triple
+                        ),
+                    ),
+                )
+                for triple in itertools.combinations(selected, 3)
+            ]
+            if lower + sum(
+                (term for _, term in possible_triples),
+                Fraction(0),
+            ) <= best:
+                continue
+            for triple, term in possible_triples:
+                if triple not in quadruple_indices:
+                    quadruple_indices[triple] = (
+                        quadruple_image_index_minors(
+                            (
+                                outside,
+                                *(compatible[index] for index in triple),
+                            )
+                        )
+                    )
+                if quadruple_indices[triple] == 1:
+                    lower += term
+            if lower <= best:
+                continue
+            five_rows = (
+                outside,
+                *(compatible[index] for index in selected),
+            )
+            lower -= Fraction(
+                quintuple_image_index_minors(five_rows),
+                math.prod(int(row["h"]) for row in five_rows),
+            )
+            best = max(best, lower)
     return best
 
 
@@ -182,17 +313,26 @@ def main() -> int:
             "outside-plus-three-anchor target maps"
         ),
     )
+    parser.add_argument(
+        "--fourterm-quads",
+        action="store_true",
+        help=(
+            "use the fourth-order Bonferroni lower bound on every "
+            "outside-plus-four-anchor subsystem"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
     source = json.loads(args.pool.read_text())
     ranking = json.loads(args.ranking.read_text())
     pool_sha256 = hashlib.sha256(args.pool.read_bytes()).hexdigest()
-    lower_method = (
-        "pair_bonferroni_plus_surjective_fourway"
-        if args.fourway_triples
-        else "pair_bonferroni"
-    )
+    lower_method_parts = ["pair_bonferroni"]
+    if args.fourway_triples:
+        lower_method_parts.append("surjective_fourway")
+    if args.fourterm_quads:
+        lower_method_parts.append("four_anchor_fourth_order")
+    lower_method = "_plus_".join(lower_method_parts)
     cache = {
         "pool_sha256": pool_sha256,
         "lower_method": lower_method,
@@ -275,6 +415,7 @@ def main() -> int:
                         row,
                         block["anchors"],
                         fourway_triples=args.fourway_triples,
+                        fourterm_quads=args.fourterm_quads,
                     )
                 )
                 for row in rows
@@ -354,6 +495,7 @@ def main() -> int:
         "ranking": str(args.ranking),
         "ranking_key": args.ranking_key,
         "fourway_triples": args.fourway_triples,
+        "fourterm_quads": args.fourterm_quads,
         "lower_method": lower_method,
         "block_certificates": [block["path"] for block in blocks],
         "lower_cache": str(args.lower_cache) if args.lower_cache else None,

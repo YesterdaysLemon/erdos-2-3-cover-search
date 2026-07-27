@@ -29,6 +29,8 @@ def main() -> int:
         type=Path,
         default=[],
     )
+    parser.add_argument("--fourway-triples", action="store_true")
+    parser.add_argument("--fourterm-quads", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -107,7 +109,12 @@ def main() -> int:
         prime = int(row["p"])
         if prime in anchor_primes:
             continue
-        baseline = best_anchor_lower(row, anchors)
+        baseline = best_anchor_lower(
+            row,
+            anchors,
+            fourway_triples=args.fourway_triples,
+            fourterm_quads=args.fourterm_quads,
+        )
         path = None
         enhanced = baseline
         if prime in conditionals:
@@ -128,6 +135,17 @@ def main() -> int:
         )
     block_loss = read_fraction(block["forced_overlap_loss"])
     upper = total_density - block_loss - star_loss
+    strengthened_note = ""
+    if args.fourway_triples:
+        strengthened_note += (
+            " Surjective outside-plus-three-anchor systems restore their "
+            "exact positive third-order term."
+        )
+    if args.fourterm_quads:
+        strengthened_note += (
+            " Four-anchor subsystems also use a fourth-order Bonferroni "
+            "bound with independently checkable target-map indices."
+        )
     result = {
         "schema": "ranked_period_conditional_star_v1",
         "pool": str(args.pool),
@@ -136,6 +154,8 @@ def main() -> int:
         "block_certificate": str(args.block_certificate),
         "block_anchor_primes": sorted(anchor_primes),
         "block_overlap_loss": fraction_payload(block_loss),
+        "fourway_triples": args.fourway_triples,
+        "fourterm_quads": args.fourterm_quads,
         "conditional_certificates": [
             str(path) for path in args.conditional_certificate
         ],
@@ -150,6 +170,7 @@ def main() -> int:
             "intersection with the block union. Conditional certificates may "
             "replace the generic Bonferroni edge by an exact stronger edge. "
             "Subtracting every star edge is pointwise valid."
+            + strengthened_note
         ),
     }
     args.output.write_text(json.dumps(result, indent=2) + "\n")
