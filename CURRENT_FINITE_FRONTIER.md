@@ -1,7 +1,7 @@
 # Current ranked finite frontier
 
-As of 2026-07-26, 4,612 of the 4,637 deliberately ranked divisor-period
-families have exact no-cover certificates.  The 25 entries below remain
+As of 2026-07-26, 4,613 of the 4,637 deliberately ranked divisor-period
+families have exact no-cover certificates.  The 24 entries below remain
 unresolved.
 
 This is an index of one finite search menu, not a classification of all
@@ -23,7 +23,6 @@ Erdős problem.
 | 2489716429200 | 16, 27, 25, 7, 11, 13, 17, 19, 23, 31 | 1054 |
 | 3139207671600 | 16, 27, 25, 7, 11, 13, 17, 19, 29, 31 | 1031 |
 | 3800093497200 | 16, 27, 25, 7, 11, 13, 17, 23, 29, 31 | 1018 |
-| 4247163320400 | 16, 27, 25, 7, 11, 13, 19, 23, 29, 31 | 996 |
 | 4658179125600 | 32, 27, 25, 7, 11, 13, 17, 19, 23, 29 | 1207 |
 | 4979432858400 | 32, 27, 25, 7, 11, 13, 17, 19, 23, 31 | 1184 |
 | 6278415343200 | 32, 27, 25, 7, 11, 13, 17, 19, 29, 31 | 1160 |
@@ -39,5 +38,5 @@ Erdős problem.
 The table is reconstructed by intersecting the unresolved periods in
 `order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json` and
 `order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_scan_v26.json`,
-then removing the 18 periods with independently verified exact period
+then removing the 19 periods with independently verified exact period
 certificates recorded in `RESEARCH_LOG.md`.

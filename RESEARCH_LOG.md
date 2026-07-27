@@ -2442,3 +2442,47 @@ replay with `verified=True`.  The ranked finite frontier is reduced to 25:
 
 This is again a finite-family elimination only.  It does not produce an
 integer `m` or prove a global obstruction.
+
+## Period-4,247,163,320,400 elimination (2026-07-26)
+
+This 996-row survivor began with aggregate block-star upper
+`1.0108343886812863`.  Reusing 20 compatible, independently verified
+conditional-fibre certificates reduced the bound to
+`1.0020796501317437`.
+
+Four outside fibres were then promoted into the exact block:
+
+```
+p=31  with intersection 106290101/7161639030
+p=601 with intersection 10291102/1377238275
+p=191 with intersection 1395572/227543715
+p=59  with intersection 1123597/138921426.
+```
+
+The first promotion alone changes the bound only slightly.  The structural
+benefit appears after `p=601` and `p=191` join the block, because their
+pairwise and higher Bonferroni terms strengthen hundreds of outside star
+edges simultaneously.  The final 16-anchor block is combined with the best
+18 still-external conditional edges.
+
+The complete independent period replay gives
+
+```
+17632397122197491960353 / 17632840928789005920000
+= 0.9999748306813799 < 1.
+```
+
+The exact no-cover margin is
+
+```
+443806591513959647 / 17632840928789005920000
+= 0.00002516931862008464.
+```
+
+All four block extensions and all 18 conditional dependencies have
+independent verification reports, and the assembled period replay reports
+`verified=True`.  The ranked finite frontier is reduced to 24: 4,613 of
+4,637 families are certified no-cover.
+
+This result remains confined to the ranked finite divisor menu.  It is not a
+global solution of the Erdős problem.
