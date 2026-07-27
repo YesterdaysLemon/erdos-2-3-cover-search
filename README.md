@@ -25,11 +25,11 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,618 of 4,637 ranked finite divisor-period families have independently
+- 4,619 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 19 ranked finite families remain after intersecting the aggregate
+- 18 ranked finite families remain after intersecting the aggregate
   block-star and separately verified single-anchor frontiers and applying
-  24 exact period certificates;
+  25 exact period certificates;
 - the former closest family, at period `2533395664800`, is now eliminated.
   A 16-anchor block and 40 independently replayed conditional-overlap bounds
   give the exact period-level upper bound
@@ -76,14 +76,21 @@ As of 2026-07-26:
   `11731653453882582685001/11731696196943206484000`, or
   `0.9999963566171587`. The exact no-cover margin is approximately
   `0.00000364338284134`.
+- period `14440355289360` is eliminated by a 19-anchor block, 136
+  independently replayed conditional edges, and 1,105 explicit pairwise
+  star-subset witnesses. Its complete independent replay gives exact upper
+  bound
+  `12234784315852076932153/12235161701751295507200`, or
+  `0.9999691556263482`. The exact no-cover margin is approximately
+  `0.0000308443736518`.
 
-The fraction \(4{,}617/4{,}637\) measures only this deliberately chosen
+The fraction \(4{,}619/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
-that the original infinite problem is 99.4% solved.
+that the original infinite problem is nearly solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
-The 19 unresolved periods are indexed in
+The 18 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
@@ -113,6 +120,11 @@ The 19 unresolved periods are indexed in
   `{certificate,verification}.json`: assembled period proof and independent
   replay; its promoted conditional manifest and pairwise-star witness
   certificate identify the complete dependency closure.
+- `order_pool_1050000_period14440355289360_conditional_star_`
+  `{certificate,verification}.json`: assembled period proof and independent
+  replay for the newly eliminated 1,124-row family; its block chain,
+  promoted conditional manifest, and 1,105 pairwise-star witnesses are
+  included.
 - `order_pool_1050000_max32_period_divisor_family_ranking_all.json`: the
   4,637 ranked divisor-period families.
 - `order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json`: aggregate
@@ -122,7 +134,7 @@ The 19 unresolved periods are indexed in
 - the `order_pool_1050000` exact rational certificates and replay reports
   needed by the current checkpoint and its dependency closure.
 - [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md): a compact table
-  of the 20 ranked finite families not yet eliminated.
+  of the 18 ranked finite families not yet eliminated.
 - [PUBLICATION_MANIFEST.md](PUBLICATION_MANIFEST.md): what the public snapshot
   includes and deliberately excludes.
 
