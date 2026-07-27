@@ -2392,3 +2392,53 @@ The complete 759-row period certificate independently replays with
 
 This remains a finite divisor-family theorem, not a value of `m` and not a
 global impossibility proof.
+
+## Period-13,127,595,717,600 elimination (2026-07-26)
+
+The next closest ranked survivor began at exact aggregate block-star upper
+`1.0096823805079538`.  None of the previously verified conditional-fibre
+certificates fit its 14-anchor projected-chain block, so four new projected
+subunion counts were constructed and independently replayed.
+
+The minimal successful extension promotes three fibres into the block:
+
+```
+p=31  with intersection 140885507/10914354450
+p=71  with intersection 890359/57271725
+p=191 with intersection 3231833732/555027024825.
+```
+
+The exact `p=71` count contracts 99,532,800 target states over 725,760
+outside base points.  The `p=191` count contracts 55,296,000 target states
+over 1,969,920 outside base points.  Each uses a different projected
+decomposition adapted to the outside order.
+
+A fourth candidate, `p=37`, was tested both as a promoted anchor and as an
+ordinary conditional edge.  Promotion is unnecessary.  Keeping its verified
+
+```
+778463/81105300
+```
+
+intersection as the sole conditional leaf produces a smaller 17-anchor
+certificate than the 18-anchor alternative.  The complete 1,061-row period
+replay gives
+
+```
+3065470386035078889247 / 3068621248660075836000
+= 0.9989731992417205 < 1.
+```
+
+The exact no-cover margin is
+
+```
+3150862624996946753 / 3068621248660075836000
+= 0.0010268007582795635.
+```
+
+The three block extensions and the final period certificate all independently
+replay with `verified=True`.  The ranked finite frontier is reduced to 25:
+4,612 of 4,637 families are now certified no-cover.
+
+This is again a finite-family elimination only.  It does not produce an
+integer `m` or prove a global obstruction.

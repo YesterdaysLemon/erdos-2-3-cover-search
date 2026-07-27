@@ -1,0 +1,285 @@
+{
+  "schema": "conditional_block_extension_v2",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "row_count": 1577,
+  "base_certificate": "order_pool_1050000_component_core_corrected_projected_anchorblock_5_7_11_13_17_19_plus29_239_647chain_plus53_311_plus139_47sharedpair_plus59independent_certificate.json",
+  "conditional_certificate": "order_pool_1050000_conditional_fibre31_vs_core_plus239_53_311_139_47pair_59_certificate.json",
+  "conditional_anchor_primes": [
+    19,
+    5,
+    7,
+    11,
+    13,
+    17,
+    239,
+    53,
+    311,
+    59,
+    139,
+    47
+  ],
+  "base_anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    311,
+    139,
+    59,
+    47
+  ],
+  "base_anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 139,
+      "h": 138,
+      "a": 1,
+      "b": 41
+    },
+    {
+      "p": 59,
+      "h": 58,
+      "a": 1,
+      "b": 50
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    }
+  ],
+  "base_individual_density_sum": {
+    "numerator": 53692965263,
+    "denominator": 62512360560,
+    "decimal": 0.8589175769720765
+  },
+  "base_forced_overlap_loss": {
+    "numerator": 1194520609727,
+    "denominator": 5313550647600,
+    "decimal": 0.22480647855808725
+  },
+  "base_union_density_upper_bound": {
+    "numerator": 93593928823,
+    "denominator": 147598629100,
+    "decimal": 0.6341110984139893
+  },
+  "extra_row": {
+    "p": 31,
+    "h": 30,
+    "a": 24,
+    "b": 1
+  },
+  "conditional_intersection_lower_bound": {
+    "numerator": 140885507,
+    "denominator": 10914354450,
+    "decimal": 0.012908276677783723
+  },
+  "anchor_primes": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    29,
+    239,
+    647,
+    53,
+    311,
+    139,
+    59,
+    47,
+    31
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "a": 1,
+      "b": 8
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "a": 1,
+      "b": 4
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "a": 14,
+      "b": 1
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "a": 1,
+      "b": 13
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "a": 1,
+      "b": 5
+    },
+    {
+      "p": 239,
+      "h": 119,
+      "a": 33,
+      "b": 37
+    },
+    {
+      "p": 647,
+      "h": 323,
+      "a": 79,
+      "b": 183
+    },
+    {
+      "p": 53,
+      "h": 52,
+      "a": 1,
+      "b": 17
+    },
+    {
+      "p": 311,
+      "h": 155,
+      "a": 11,
+      "b": 82
+    },
+    {
+      "p": 139,
+      "h": 138,
+      "a": 1,
+      "b": 41
+    },
+    {
+      "p": 59,
+      "h": 58,
+      "a": 1,
+      "b": 50
+    },
+    {
+      "p": 47,
+      "h": 23,
+      "a": 9,
+      "b": 10
+    },
+    {
+      "p": 31,
+      "h": 30,
+      "a": 24,
+      "b": 1
+    }
+  ],
+  "block_individual_density_sum": {
+    "numerator": 11155342123,
+    "denominator": 12502472112,
+    "decimal": 0.8922509103054098
+  },
+  "forced_overlap_loss": {
+    "numerator": 87154548022307,
+    "denominator": 366634994684400,
+    "decimal": 0.23771475523587096
+  },
+  "block_union_density_upper_bound": {
+    "numerator": 59993964933667,
+    "denominator": 91658748671100,
+    "decimal": 0.6545361550695389
+  },
+  "total_pool_density": {
+    "numerator": 77840380184027,
+    "denominator": 48134517631200,
+    "decimal": 1.6171426247673073
+  },
+  "pool_union_density_upper_bound": {
+    "numerator": 77884965560428393,
+    "denominator": 56461789181397600,
+    "decimal": 1.3794278695314364
+  },
+  "proved_no_cover": false,
+  "argument": "The base block contributes its certified forced overlap loss. The independently checkable conditional certificate proves that every target of the appended row intersects a recorded subunion of base anchors by at least the recorded density. That subunion lies inside the complete base union. Adding the intersection lower bound to the base loss therefore gives a valid upper bound for the enlarged block union."
+}

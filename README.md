@@ -25,11 +25,11 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,611 of 4,637 ranked finite divisor-period families have independently
+- 4,612 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 26 ranked finite families remain after intersecting the aggregate
+- 25 ranked finite families remain after intersecting the aggregate
   block-star and separately verified single-anchor frontiers and applying
-  17 exact period certificates;
+  18 exact period certificates;
 - the former closest family, at period `2533395664800`, is now eliminated.
   A 16-anchor block and 40 independently replayed conditional-overlap bounds
   give the exact period-level upper bound
@@ -39,14 +39,19 @@ As of 2026-07-26:
   `p=191` into a 17-anchor block gives the independently replayed upper bound
   `2102349443216882789/2103497917325925120`, or
   `0.9994540169973154`.
+- period `13127595717600` is eliminated by another 17-anchor block, built by
+  promoting `p=31`, `p=71`, and `p=191`, plus one conditional `p=37` edge.
+  Its independently replayed upper bound is
+  `3065470386035078889247/3068621248660075836000`, or
+  `0.9989731992417205`.
 
-The fraction \(4{,}611/4{,}637\) measures only this deliberately chosen
+The fraction \(4{,}612/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is 99.4% solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
-The 26 unresolved periods are indexed in
+The 25 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
@@ -64,7 +69,7 @@ The 26 unresolved periods are indexed in
 - the `order_pool_1050000` exact rational certificates and replay reports
   needed by the current checkpoint and its dependency closure.
 - [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md): a compact table
-  of the 26 ranked finite families not yet eliminated.
+  of the 25 ranked finite families not yet eliminated.
 - [PUBLICATION_MANIFEST.md](PUBLICATION_MANIFEST.md): what the public snapshot
   includes and deliberately excludes.
 

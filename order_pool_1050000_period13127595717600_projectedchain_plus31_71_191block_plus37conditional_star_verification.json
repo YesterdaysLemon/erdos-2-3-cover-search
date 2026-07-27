@@ -1,0 +1,26 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period13127595717600_projectedchain_plus31_71_191block_plus37conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_projectedchainblock_plus31_71_191conditional_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre37_vs_coreminus17_plus31_71_647_53_311_139_47pair_59_verification.json"
+  ],
+  "period": 13127595717600,
+  "row_count": 1061,
+  "anchor_count": 17,
+  "outside_rows_checked": 1044,
+  "conditional_edges_checked": 1,
+  "block_overlap_loss": {
+    "numerator": 10554354931163,
+    "denominator": 40737221631600
+  },
+  "star_overlap_sum": {
+    "numerator": 1317329753030203459,
+    "denominator": 7103289927453879250
+  },
+  "union_density_upper_bound": {
+    "numerator": 3065470386035078889247,
+    "denominator": 3068621248660075836000
+  },
+  "verified": true
+}
