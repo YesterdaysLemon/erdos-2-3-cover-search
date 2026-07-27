@@ -338,6 +338,33 @@ Thus this one low-anchor branch remains impossible even after all 11 repair
 rows are freed.  The other 215 low-anchor branches and all rows outside this
 16-coordinate quotient are not eliminated by this result.
 
+The hierarchical audit has now accumulated 4,044 distinct joint
+low/repair fingerprints.  An exact parity relation reduces the 216 nominal
+low branches to 162 genuinely different residual systems:
+
+```
+p=41 target = l (mod 2)
+p=17 target = 2k + 3l (mod 4), hence target = l (mod 2).
+```
+
+After fixing a `p=41` phase, every surviving point has the opposite
+`l`-parity.  The two `p=17` phases with the fixed `p=41` parity can therefore
+never cover a survivor and are indistinguishable.  The reusable
+`audit_two_level_anchor_quotient.py` checks this coefficient relation and
+audits all branches with one assumption-based SAT model.  On the current
+finite fingerprint corpus, 66/216 raw branches, or 43/162 quotient classes,
+are UNSAT.  Except for the independently certified branch above, these are
+exploratory finite-corpus results, not new proof certificates.
+
+A construction-oriented continuation freed three additional repair rows,
+`p=4297,653,577`, and switched the SAT master to minimum-Hamming-change
+MaxSAT.  The 14-anchor master covers 440 accumulated exact lessons.  Its
+last three 10-point repairs required only 1, 1, and 2 phase changes, instead
+of the 12--14 changes made by unconstrained solves.  Every resulting exact
+checker nevertheless returned all ten requested holes.  This controlled
+column-generation path is still active but has not produced a conditioned
+cover, an integer `m`, or a global obstruction.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus

@@ -58,6 +58,7 @@ def solve_anchor_master(
     points: list[tuple[int, int]],
     algebraic_primes: tuple[int, ...] = (),
     solver_name: str = "cadical195",
+    preferred_anchor_phases: dict[int, int] | None = None,
 ) -> tuple[dict[int, int] | None, dict]:
     if not anchor_primes:
         raise ValueError("at least one anchor row is required")
@@ -99,12 +100,13 @@ def solve_anchor_master(
     dependency_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dependency_path))
     from pysat.card import CardEnc, EncType  # type: ignore
-    from pysat.formula import IDPool  # type: ignore
+    from pysat.formula import IDPool, WCNF  # type: ignore
+    from pysat.examples.rc2 import RC2  # type: ignore
     from pysat.solvers import Solver  # type: ignore
 
     build_started = time.monotonic()
     variable_pool = IDPool()
-    solver = Solver(name=solver_name)
+    hard_clauses = []
     target_variable = {}
     option_count = 0
     for prime in anchor_primes:
@@ -123,7 +125,7 @@ def solve_anchor_master(
             vpool=variable_pool,
             encoding=EncType.seqcounter,
         )
-        solver.append_formula(encoding.clauses)
+        hard_clauses.extend(encoding.clauses)
 
     empty_point = None
     for k, l in eligible_points:
@@ -135,18 +137,50 @@ def solve_anchor_master(
                 clause.append(target_variable[prime, target])
         if not clause:
             empty_point = (k, l)
-            solver.add_clause([])
+            hard_clauses.append([])
         else:
-            solver.add_clause(clause)
+            hard_clauses.append(clause)
     build_seconds = time.monotonic() - build_started
 
     solve_started = time.monotonic()
-    sat = solver.solve()
+    engine = "pysat-exact-anchor-phase-master"
+    minimum_anchor_changes = None
+    solver = None
+    optimizer = None
+    if preferred_anchor_phases is None:
+        solver = Solver(name=solver_name, bootstrap_with=hard_clauses)
+        sat = solver.solve()
+        model_literals = solver.get_model() if sat else None
+        reported_clauses = solver.nof_clauses()
+    else:
+        if set(preferred_anchor_phases) != set(anchor_primes):
+            raise ValueError(
+                "preferred phases must specify every anchor exactly once"
+            )
+        preferred_variables = []
+        for prime in anchor_primes:
+            target = int(preferred_anchor_phases[prime])
+            variable = target_variable.get((prime, target))
+            if variable is None:
+                raise ValueError(
+                    f"preferred phase {target} is illegal for p={prime}"
+                )
+            preferred_variables.append(variable)
+        formula = WCNF()
+        formula.extend(hard_clauses)
+        for variable in preferred_variables:
+            formula.append([variable], weight=1)
+        optimizer = RC2(formula, solver=solver_name)
+        model_literals = optimizer.compute()
+        sat = model_literals is not None
+        minimum_anchor_changes = optimizer.cost if sat else None
+        reported_clauses = len(hard_clauses)
+        engine = "pysat-rc2-minimum-change-anchor-phase-master"
     solve_seconds = time.monotonic() - solve_started
     phases = None
     selected_targets = None
     if sat:
-        model = {literal for literal in solver.get_model() if literal > 0}
+        model = {literal for literal in model_literals if literal > 0}
         selected_targets = {}
         for prime in anchor_primes:
             targets = [
@@ -183,7 +217,7 @@ def solve_anchor_master(
         "empty_clause_point": list(empty_point) if empty_point else None,
         "target_options": option_count,
         "variables": variable_pool.top,
-        "clauses": solver.nof_clauses(),
+        "clauses": reported_clauses,
         "filter_seconds": filter_seconds,
         "build_seconds": build_seconds,
         "solve_seconds": solve_seconds,
@@ -192,9 +226,13 @@ def solve_anchor_master(
             if selected_targets
             else None
         ),
-        "engine": "pysat-exact-anchor-phase-master",
+        "minimum_anchor_changes": minimum_anchor_changes,
+        "engine": engine,
     }
-    solver.delete()
+    if solver is not None:
+        solver.delete()
+    if optimizer is not None:
+        optimizer.delete()
     return phases, metadata
 
 
@@ -202,9 +240,27 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
     parser.add_argument("--base-phases", type=Path, required=True)
+    parser.add_argument(
+        "--phase-override",
+        action="append",
+        default=[],
+        metavar="PRIME:TARGET",
+        help=(
+            "fix one saved nonanchor phase to another legal target; repeat "
+            "for several rows"
+        ),
+    )
     parser.add_argument("--anchors", required=True)
     parser.add_argument("--points-file", type=Path, action="append", required=True)
     parser.add_argument("--solver", default="cadical195")
+    parser.add_argument(
+        "--minimize-anchor-changes",
+        action="store_true",
+        help=(
+            "among covering assignments, minimize the number of anchor "
+            "targets changed from the overridden base phase"
+        ),
+    )
     parser.add_argument("--phase-output", type=Path, required=True)
     parser.add_argument("--result-output", type=Path, required=True)
     args = parser.parse_args()
@@ -214,6 +270,22 @@ def main() -> int:
         int(prime): int(target)
         for prime, target in json.loads(args.base_phases.read_text()).items()
     }
+    seen_overrides = set()
+    for item in args.phase_override:
+        try:
+            raw_prime, raw_target = item.split(":", 1)
+            prime = int(raw_prime)
+            target = int(raw_target)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                f"invalid phase override {item!r}; expected PRIME:TARGET"
+            ) from error
+        if prime not in phases:
+            raise ValueError(f"phase override prime {prime} is absent")
+        if prime in seen_overrides:
+            raise ValueError(f"phase override repeats prime {prime}")
+        phases[prime] = target
+        seen_overrides.add(prime)
     anchors = tuple(
         int(value) for value in args.anchors.split(",") if value
     )
@@ -231,6 +303,11 @@ def main() -> int:
         points,
         tuple(int(q) for q in payload.get("algebraic_primes", ())),
         args.solver,
+        (
+            {prime: phases[prime] for prime in anchors}
+            if args.minimize_anchor_changes
+            else None
+        ),
     )
     if solved_phases is not None:
         args.phase_output.write_text(
@@ -245,6 +322,9 @@ def main() -> int:
     result = {
         "pool": str(args.pool),
         "base_phases": str(args.base_phases),
+        "phase_overrides": {
+            str(prime): phases[prime] for prime in sorted(seen_overrides)
+        },
         "anchors": list(anchors),
         "points_files": [str(path) for path in args.points_file],
         "complete": False,

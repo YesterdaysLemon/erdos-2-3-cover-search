@@ -3931,3 +3931,74 @@ Thus the union of all homogeneous fibres in the complete declared
 pool can cover.  This is broader than the sibling-tree obstruction but still
 finite: it does not rule out higher-index homogeneous fibres or any affine
 phase assignment, and it does not resolve the original problem.
+
+## Two-level quotient, dual detours, and stable column generation (2026-07-27)
+
+The five-low-anchor/11-repair-anchor quotient was audited across all 216 low
+target assignments.  Fingerprint-diverse exact checks grew the common corpus
+to 4,044 distinct `(low targets, repair targets)` pairs.  Exact PySAT masters
+are UNSAT on 66 raw branches and SAT on 150.  This is a finite-corpus audit;
+only the previously published `(0,1,0,0,0)` branch has an independently
+replayed Z3 certificate.
+
+The apparent 216-way split has an exact algebraic quotient.  The low rows
+
+```
+p=41: h=2, (a,b)=(0,1)
+p=17: h=4, (a,b)=(2,3)
+```
+
+satisfy `2k+3l = l (mod 2)`.  Once the `p=41` phase `s` is fixed, a residual
+point has `l=1-s (mod 2)`.  Both `p=17` phases congruent to `s (mod 2)` are
+therefore inactive and produce the same residual clause system.  This
+reduces the low quotient from
+
+```
+2*4*3*3*3 = 216
+```
+
+to
+
+```
+6*3*3*3 = 162
+```
+
+classes.  The 66 raw UNSAT branches occupy 43 of those 162 classes; no class
+has mixed SAT status.  `audit_two_level_anchor_quotient.py` independently
+checks the binary coefficient refinement, caches exact fingerprints, and
+queries all low branches by assumptions in one SAT model.
+
+Several proposed shifts into dual spaces were tested against the certified
+258-point 11-anchor core:
+
+* the ordinary fractional phase LP is feasible, with 79 nonzero phase
+  weights and minimum point coverage one, so a first-level density/Farkas
+  certificate cannot see the contradiction;
+* a pairwise Sherali--Adams lift has 208,637 variables, 6,941 equalities,
+  and 179,052 inequalities; HiGHS reached a 240-second cap without a primal
+  solution or an infeasibility certificate, so this run proves nothing;
+* naive and unit-propagating multi-valued decision diagrams explored tens of
+  millions and 6.8 million states, respectively, before controlled
+  120-second caps.  They produced no result and were rejected as the main
+  engine.
+
+The obstruction campaign also showed diminishing returns.  A first
+fingerprint batch in the previously untouched `p=41` phase-one basin added
+100 clauses without closing a quotient class; a second batch did the same.
+Freeing the retrospectively strongest frozen row, `p=4297`, merely moved the
+holes, and the next batch concentrated on a different direction.  Greedy
+one-row repair was therefore rejected as sample memorization.
+
+The construction continuation now uses joint column generation.  It frees
+the original 11 repair rows plus `p=4297,653,577`.  The exact 14-anchor
+master has 1,047 legal target options and solves a 300--440-point corpus in
+roughly 0.005--0.027 seconds.  Unconstrained SAT changed 12--14 targets per
+round, so `anchor_phase_master.py` now optionally uses RC2 MaxSAT to minimize
+Hamming distance from the preceding anchor phase.  On 420, 430, and 440
+accumulated points, the exact minimum repair distances were 1, 1, and 2.
+Every repaired phase still returned ten exact full-domain holes, and the
+latest ten are not yet absorbed.
+
+This is better-controlled construction dynamics, not a solution.  There is
+still no conditioned-cell cover, no CRT integer `m`, and no global
+impossibility proof.
