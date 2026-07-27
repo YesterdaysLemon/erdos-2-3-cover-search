@@ -4171,3 +4171,55 @@ a rigorous counterexample to its declared augmented phase.
 This is the first construction-side improvement from the high-component
 space, but it has not produced a conditioned-cell cover, a CRT integer `m`,
 or a global obstruction.
+
+### Recursive promotion: a two-change survivor and a radius-two certificate
+
+The first promotions survived roughly 150 finite lessons at radius three.
+Rescanning only independently retained augmented-pool holes then exposed a
+much stronger common row:
+
+```
+p=11337409
+h=157464
+largest prime-power component=19683
+branch-27 target=12646, training hits=101/108
+branch-54 target=91378, training hits=70/117
+```
+
+Only this top row was admitted.  In branch 27 it reduced the exact finite
+repair from three ordinary changes to two.  After adding 100 fresh
+out-of-sample augmented misses, the complete mask engine still found a
+two-change phase covering 252 accumulated points:
+
+```
+p=59:  0 -> 21
+p=907: 81 -> 11
+```
+
+The two promoted rows retained their selected phases.  A subsequent
+changed-row-diverse checker batch produced an exact augmented miss, so this
+252-point phase is not a global cover.
+
+The large training hit counts did not generalize uniformly.  For the first
+two-change branch-27 phase, neither promoted row intercepted any of 100 new
+base-pool holes.  In branch 54, the recursive row did not reduce the minimum
+repair radius: the 151-point corpus has no repair within two nonanchor changes
+of the declared augmented base phase.  This statement allows the promoted
+rows themselves to be among the changed rows; only the five low anchors are
+fixed.
+
+The complete certifier recorded 24 initial misses, 47,661 deficit-hitting
+moves, 119 gain masks, and no relaxed two-mask cover.  The separately written
+scalar verifier therefore enumerates zero full skeletons and returns
+`verified=true`, `repair_exists=false`:
+
+```
+power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_certificate.json
+power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_verification.json
+```
+
+Certificate SHA-256:
+`7adaeca2359d63b5f2d08ac5d20ed7eb331776956a6a17a9eae0acc9ba5e7107`.
+This is a finite radius-two obstruction around one augmented base phase, not
+full-pool UNSAT for quotient class 54 and not a result about the other 161
+classes or the original problem.

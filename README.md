@@ -445,6 +445,37 @@ not covers while preserving a cheap base checker.  It does not prove that
 either targeted row belongs to a global construction, and the newest finite
 repairs have not produced an integer `m`.
 
+A recursive scan of the enlarged verified hole corpus found a stronger row,
+
+```
+p=11337409, h=157464, largest component=19683.
+```
+
+Its selected target hit 101/108 training holes in class 27 and 70/117 in
+class 54.  Large independent batches showed that this was residue-family
+leverage rather than a cover: one later class-27 phase intercepted 0/100
+fresh base holes, and a changed-row-diverse check retained another exact
+augmented miss.  Even so, adding this one row reduced the class-27 finite
+repair to two ordinary phase changes and it exactly covers 252 accumulated
+points.
+
+Class 54 moved in the opposite direction.  On its 151-point corpus the
+complete search found no repair within two changes of the augmented base
+phase, even when either targeted row is allowed to move.  The independent
+scalar verifier needs no mask skeleton enumeration because the relaxed
+two-mask cover is already impossible.  The proof object and replay are:
+
+```
+power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_certificate.json
+power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_verification.json
+```
+
+The certificate SHA-256 is
+`7adaeca2359d63b5f2d08ac5d20ed7eb331776956a6a17a9eae0acc9ba5e7107`.
+This is another finite Hamming-ball theorem, not a full quotient-class
+obstruction.  The class-27 two-change phase still has an exact full-domain
+hole, and neither branch yields an integer `m`.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus
