@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import random
+import tempfile
 import unittest
+from pathlib import Path
 
 import local_phase_cegis
 
@@ -265,6 +267,185 @@ class StreamingRepairTests(unittest.TestCase):
                 np,
             )
         )
+
+    def test_small_addition_can_match_existing_component_state(
+        self,
+    ) -> None:
+        candidates = [(6, 7, 1, 5, 3, 6)]
+        old_points = [(1 << 80, 1 << 79)]
+        new_points = [(2, 3)]
+        old_state = local_phase_cegis.streaming_coordinate_state(
+            old_points,
+            candidates,
+            np,
+        )
+        new_state = local_phase_cegis.streaming_coordinate_state(
+            new_points,
+            candidates,
+            np,
+            force_components=True,
+        )
+        appended = local_phase_cegis.append_streaming_coordinate_state(
+            old_state,
+            new_state,
+            np,
+        )
+        rebuilt = local_phase_cegis.streaming_coordinate_state(
+            [*old_points, *new_points],
+            candidates,
+            np,
+        )
+
+        self.assertIsNotNone(appended)
+        np.testing.assert_array_equal(
+            appended["k_components"],
+            rebuilt["k_components"],
+        )
+        np.testing.assert_array_equal(
+            appended["l_components"],
+            rebuilt["l_components"],
+        )
+
+    def test_streaming_cache_round_trip_preserves_component_state(
+        self,
+    ) -> None:
+        candidates = [
+            (6, 7, 1, 5, 3, 6),
+            (10, 11, 3, 7, 10, 5),
+        ]
+        points = [
+            ((1 << 90) + 11, (1 << 88) + 13),
+            ((1 << 95) + 17, (1 << 92) + 19),
+        ]
+        assignment = np.asarray([2, 7], dtype=np.uint32)
+        state = local_phase_cegis.streaming_coordinate_state(
+            points,
+            candidates,
+            np,
+        )
+        cover = local_phase_cegis.streaming_cover_counts(
+            state,
+            candidates,
+            assignment,
+            np,
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "stream-cache.npz"
+            local_phase_cegis.save_streaming_cache(
+                path,
+                state,
+                cover,
+                candidates,
+                assignment,
+                points,
+                np,
+            )
+            loaded, loaded_cover, count, status = (
+                local_phase_cegis.load_streaming_cache(
+                    path,
+                    candidates,
+                    assignment,
+                    points,
+                    np,
+                )
+            )
+
+        self.assertEqual((count, status), (len(points), "exact"))
+        self.assertEqual(loaded["mode"], "components")
+        self.assertEqual(loaded["spec_by_h"], state["spec_by_h"])
+        np.testing.assert_array_equal(
+            loaded["k_components"],
+            state["k_components"],
+        )
+        np.testing.assert_array_equal(
+            loaded["l_components"],
+            state["l_components"],
+        )
+        np.testing.assert_array_equal(loaded_cover, cover)
+
+    def test_streaming_cache_reuses_coordinates_after_phase_change(
+        self,
+    ) -> None:
+        points = [(0, 0), (1, 0)]
+        assignment = np.asarray([0, 1], dtype=np.uint32)
+        state = local_phase_cegis.streaming_coordinate_state(
+            points,
+            self.candidates,
+            np,
+        )
+        cover = local_phase_cegis.streaming_cover_counts(
+            state,
+            self.candidates,
+            assignment,
+            np,
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "stream-cache.npz"
+            local_phase_cegis.save_streaming_cache(
+                path,
+                state,
+                cover,
+                self.candidates,
+                assignment,
+                points,
+                np,
+            )
+            changed = np.asarray([1, 0], dtype=np.uint32)
+            loaded, loaded_cover, count, status = (
+                local_phase_cegis.load_streaming_cache(
+                    path,
+                    self.candidates,
+                    changed,
+                    points,
+                    np,
+                )
+            )
+
+        self.assertEqual((count, status), (len(points), "coordinates-only"))
+        self.assertEqual(loaded["mode"], "raw")
+        self.assertIsNone(loaded_cover)
+
+    def test_streaming_cache_accepts_an_appended_point_suffix(
+        self,
+    ) -> None:
+        old_points = [(0, 0), (1, 0)]
+        current_points = [*old_points, (2, 0)]
+        assignment = np.asarray([0, 1], dtype=np.uint32)
+        state = local_phase_cegis.streaming_coordinate_state(
+            old_points,
+            self.candidates,
+            np,
+        )
+        cover = local_phase_cegis.streaming_cover_counts(
+            state,
+            self.candidates,
+            assignment,
+            np,
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "stream-cache.npz"
+            local_phase_cegis.save_streaming_cache(
+                path,
+                state,
+                cover,
+                self.candidates,
+                assignment,
+                old_points,
+                np,
+            )
+            loaded, loaded_cover, count, status = (
+                local_phase_cegis.load_streaming_cache(
+                    path,
+                    self.candidates,
+                    assignment,
+                    current_points,
+                    np,
+                )
+            )
+
+        self.assertEqual((count, status), (len(old_points), "exact"))
+        self.assertEqual(len(loaded["ks"]), len(old_points))
+        np.testing.assert_array_equal(loaded_cover, cover)
 
 
 if __name__ == "__main__":

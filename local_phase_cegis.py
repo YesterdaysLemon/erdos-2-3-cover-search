@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import gc
+import hashlib
 import json
 import math
 import os
@@ -116,7 +117,12 @@ def streaming_target_values(ks, ls, candidate, np):
     ).astype(np.uint32, copy=False)
 
 
-def streaming_coordinate_state(points, candidates, np):
+def streaming_coordinate_state(
+    points,
+    candidates,
+    np,
+    force_components=False,
+):
     """Prepare either raw uint64 coordinates or compact CRT residues.
 
     Exact checker witnesses can be far larger than 64 bits.  Retaining them
@@ -125,7 +131,7 @@ def streaming_coordinate_state(points, candidates, np):
     modulo the prime-power factors that actually occur in candidate moduli.
     """
     ks, ls = streaming_coordinate_arrays(points, candidates, np)
-    if ks.dtype != object:
+    if ks.dtype != object and not force_components:
         return {
             "mode": "raw",
             "ks": ks,
@@ -225,6 +231,182 @@ def append_streaming_coordinate_state(state, addition, np):
         ),
         "spec_by_h": state["spec_by_h"],
     }
+
+
+def streaming_candidate_digest(candidates) -> str:
+    """Return a stable fingerprint of the ordered streaming columns."""
+    payload = [
+        [int(value) for value in candidate]
+        for candidate in candidates
+    ]
+    return hashlib.sha256(
+        json.dumps(payload, separators=(",", ":")).encode("ascii")
+    ).hexdigest()
+
+
+def streaming_assignment_digest(assignment) -> str:
+    """Return a platform-independent fingerprint of a phase assignment."""
+    digest = hashlib.sha256(b"erdos203-stream-assignment-v1\0")
+    for value in assignment:
+        digest.update(int(value).to_bytes(8, "little", signed=False))
+    return digest.hexdigest()
+
+
+def streaming_points_digest(points) -> str:
+    """Fingerprint an ordered point prefix without a giant JSON copy."""
+    digest = hashlib.sha256(b"erdos203-stream-points-v1\0")
+    for point in points:
+        for raw_value in point:
+            value = int(raw_value)
+            magnitude = abs(value)
+            encoded = magnitude.to_bytes(
+                max(1, (magnitude.bit_length() + 7) // 8),
+                "little",
+                signed=False,
+            )
+            digest.update(b"\x01" if value < 0 else b"\x00")
+            digest.update(len(encoded).to_bytes(8, "little"))
+            digest.update(encoded)
+    return digest.hexdigest()
+
+
+def save_streaming_cache(
+    path,
+    state,
+    cover,
+    candidates,
+    assignment,
+    points,
+    np,
+) -> None:
+    """Atomically save reusable streaming coordinates and cover counts."""
+    metadata = {
+        "version": 1,
+        "candidate_digest": streaming_candidate_digest(candidates),
+        "assignment_digest": streaming_assignment_digest(assignment),
+        "point_count": len(points),
+        "point_digest": streaming_points_digest(points),
+        "mode": state["mode"],
+    }
+    arrays = {
+        "metadata": np.frombuffer(
+            json.dumps(metadata, separators=(",", ":")).encode("utf-8"),
+            dtype=np.uint8,
+        ),
+        "cover": np.asarray(cover),
+    }
+    if state["mode"] == "raw":
+        arrays["ks"] = state["ks"]
+        arrays["ls"] = state["ls"]
+    else:
+        arrays["k_components"] = state["k_components"]
+        arrays["l_components"] = state["l_components"]
+        specs = {
+            str(h): [
+                [int(value) for value in component]
+                for component in spec
+            ]
+            for h, spec in state["spec_by_h"].items()
+        }
+        arrays["spec_by_h"] = np.frombuffer(
+            json.dumps(specs, separators=(",", ":")).encode("utf-8"),
+            dtype=np.uint8,
+        )
+    temporary = path.with_name(path.name + ".tmp")
+    with temporary.open("wb") as stream:
+        np.savez(stream, **arrays)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, path)
+
+
+def load_streaming_cache(
+    path,
+    candidates,
+    assignment,
+    points,
+    np,
+):
+    """Load a validated point-prefix cache.
+
+    Coordinates remain reusable when phases change, but cover counts do not.
+    The returned prefix length lets the caller append any newer lessons.
+    """
+    if not path.exists():
+        return None, None, 0, "missing"
+    try:
+        with np.load(path, allow_pickle=False) as cache:
+            metadata = json.loads(
+                cache["metadata"].tobytes().decode("utf-8")
+            )
+            if int(metadata.get("version", -1)) != 1:
+                return None, None, 0, "version-mismatch"
+            if metadata.get(
+                "candidate_digest"
+            ) != streaming_candidate_digest(candidates):
+                return None, None, 0, "candidate-mismatch"
+            point_count = int(metadata["point_count"])
+            if not 0 <= point_count <= len(points):
+                return None, None, 0, "point-count-mismatch"
+            if metadata.get("point_digest") != streaming_points_digest(
+                points[:point_count]
+            ):
+                return None, None, 0, "point-prefix-mismatch"
+            mode = metadata.get("mode")
+            if mode == "raw":
+                state = {
+                    "mode": "raw",
+                    "ks": cache["ks"].copy(),
+                    "ls": cache["ls"].copy(),
+                }
+                row_count = len(state["ks"])
+                if len(state["ls"]) != row_count:
+                    return None, None, 0, "coordinate-shape-mismatch"
+            elif mode == "components":
+                raw_specs = json.loads(
+                    cache["spec_by_h"].tobytes().decode("utf-8")
+                )
+                state = {
+                    "mode": "components",
+                    "k_components": cache["k_components"].copy(),
+                    "l_components": cache["l_components"].copy(),
+                    "spec_by_h": {
+                        int(h): tuple(
+                            tuple(int(value) for value in component)
+                            for component in spec
+                        )
+                        for h, spec in raw_specs.items()
+                    },
+                }
+                row_count = state["k_components"].shape[0]
+                if (
+                    state["l_components"].shape
+                    != state["k_components"].shape
+                ):
+                    return None, None, 0, "coordinate-shape-mismatch"
+            else:
+                return None, None, 0, "mode-mismatch"
+            if row_count != point_count:
+                return None, None, 0, "coordinate-count-mismatch"
+            cover = cache["cover"].copy()
+            if len(cover) != point_count:
+                return None, None, 0, "cover-count-mismatch"
+            if metadata.get(
+                "assignment_digest"
+            ) != streaming_assignment_digest(assignment):
+                cover = None
+                status = "coordinates-only"
+            else:
+                status = "exact"
+            return state, cover, point_count, status
+    except (
+        OSError,
+        ValueError,
+        KeyError,
+        TypeError,
+        json.JSONDecodeError,
+    ):
+        return None, None, 0, "invalid"
 
 
 def streaming_state_target_values(
@@ -1144,6 +1326,15 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--stream-cache-file",
+        type=Path,
+        help=(
+            "validated NumPy checkpoint for streaming coordinate residues "
+            "and cover counts; exact point prefixes remain reusable after "
+            "lessons are appended"
+        ),
+    )
+    parser.add_argument(
         "--required-coverage",
         type=int,
         default=1,
@@ -1288,6 +1479,8 @@ def main() -> int:
         raise SystemExit(
             "--stream-targets does not support --repair-mode component"
         )
+    if args.stream_cache_file and not args.stream_targets:
+        raise SystemExit("--stream-cache-file requires --stream-targets")
     if args.exact_when_random_misses_at_most < 0:
         raise SystemExit("--exact-when-random-misses-at-most must be nonnegative")
     raw_count = len(candidates)
@@ -1630,6 +1823,74 @@ def main() -> int:
     stream_cover = None
     if args.stream_targets:
         build_seconds = 0.0
+        cache_prefix = 0
+        cache_status = "disabled"
+        if args.stream_cache_file:
+            (
+                stream_coordinate_state,
+                stream_cover,
+                cache_prefix,
+                cache_status,
+            ) = load_streaming_cache(
+                args.stream_cache_file,
+                candidates,
+                assignment,
+                points,
+                np,
+            )
+            if stream_coordinate_state is not None and cache_prefix < len(
+                points
+            ):
+                addition = streaming_coordinate_state(
+                    points[cache_prefix:],
+                    candidates,
+                    np,
+                    force_components=(
+                        stream_coordinate_state["mode"] == "components"
+                    ),
+                )
+                extended = append_streaming_coordinate_state(
+                    stream_coordinate_state,
+                    addition,
+                    np,
+                )
+                if extended is None:
+                    stream_coordinate_state = streaming_coordinate_state(
+                        points,
+                        candidates,
+                        np,
+                    )
+                    stream_cover = None
+                    cache_status = "mode-transition"
+                else:
+                    stream_coordinate_state = extended
+                    if stream_cover is not None:
+                        new_cover = streaming_cover_counts(
+                            addition,
+                            candidates,
+                            assignment,
+                            np,
+                        )
+                        stream_cover = np.concatenate(
+                            (stream_cover, new_cover)
+                        )
+                    cache_status = f"{cache_status}+appended"
+            if (
+                stream_coordinate_state is not None
+                and stream_cover is None
+            ):
+                stream_cover = streaming_cover_counts(
+                    stream_coordinate_state,
+                    candidates,
+                    assignment,
+                    np,
+                )
+                cache_status = f"{cache_status}+recounted"
+            print(
+                f"stream_cache={cache_status} prefix={cache_prefix} "
+                f"points={len(points)} file={args.stream_cache_file}",
+                flush=True,
+            )
     else:
         targets, build_seconds = build_targets(points, candidates, np)
     for round_no in range(1, args.rounds + 1):
@@ -1701,6 +1962,16 @@ def main() -> int:
             + "\n"
         )
         if args.repair_only:
+            if args.stream_cache_file:
+                save_streaming_cache(
+                    args.stream_cache_file,
+                    stream_coordinate_state,
+                    stream_cover,
+                    candidates,
+                    assignment,
+                    points,
+                    np,
+                )
             print(
                 f"round={round_no} repair_only=True checker=skipped",
                 flush=True,
@@ -1912,7 +2183,7 @@ def main() -> int:
         )
         if not new_points:
             raise RuntimeError("checker returned no new point")
-        if round_no == args.rounds:
+        if round_no == args.rounds and not args.stream_cache_file:
             # The final witness batch is retained in the points checkpoint
             # for a later continuation, but no next learner round exists in
             # this invocation, so rebuilding its coordinate state is wasted.
@@ -1923,6 +2194,9 @@ def main() -> int:
                 new_points,
                 candidates,
                 np,
+                force_components=(
+                    stream_coordinate_state["mode"] == "components"
+                ),
             )
             new_cover = streaming_cover_counts(
                 new_coordinate_state,
@@ -1947,6 +2221,16 @@ def main() -> int:
                 (stream_cover, new_cover)
             )
             build_seconds = time.monotonic() - update_started
+            if args.stream_cache_file:
+                save_streaming_cache(
+                    args.stream_cache_file,
+                    stream_coordinate_state,
+                    stream_cover,
+                    candidates,
+                    assignment,
+                    points,
+                    np,
+                )
         elif engine != "random":
             if args.retain_target_matrix_during_exact:
                 new_targets, build_seconds = build_targets(

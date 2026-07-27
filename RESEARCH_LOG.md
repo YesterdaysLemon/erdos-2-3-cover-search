@@ -3336,6 +3336,17 @@ the newly generated lessons.  A full rebuild remains necessary when a raw
 64-bit checkpoint first transitions to compressed component residues, but
 ordinary same-mode rounds no longer recompute old coordinates.
 
+The reusable state can now be persisted with `--stream-cache-file`.  The
+checkpoint stores the compact coordinate arrays and current cover counts in
+an atomic NumPy archive.  It fingerprints the ordered candidate columns,
+phase assignment, and exact ordered lesson prefix before reuse.  A phase
+change invalidates only the counts, while an appended point file reuses the
+validated coordinate prefix and evaluates only the suffix.  The compressed
+representation is forced for a small suffix when the existing prefix is
+already compressed, avoiding an unnecessary full rebuild.  Fifteen focused
+streaming/tile tests and the complete 64-test suite pass.  Cache files remain
+transient and are not proof artifacts.
+
 ## Homogeneous-refinement lead (2026-07-27)
 
 Cochrane and Myerson construct a homogeneous cover of `Z^2` from a

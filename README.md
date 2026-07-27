@@ -105,9 +105,13 @@ such integer exists.
 
 The learner evaluates candidate columns on demand and stores enormous exact
 checker coordinates as residues modulo the relevant prime-power components.
-It also reuses exact cover counts between rounds.  This reduced the learner
-from multi-gigabyte dense matrices to less than 1 GB of private memory during
-the main experiment.
+It also reuses exact cover counts between rounds.  An optional validated
+NumPy checkpoint now persists those coordinate residues and counts across
+process restarts; candidate, phase, and ordered point-prefix fingerprints
+prevent stale counts from being trusted.  Appended lesson batches reuse the
+cached prefix.  This reduced the learner from multi-gigabyte dense matrices
+to less than 1 GB of private memory during the main experiment and removes
+most repeated continuation startup work.
 
 Each exact hole is expanded into the union of four structural tiles: one
 900-point Cartesian tile over the lowest binary, ternary, and quinary digits,

@@ -7,9 +7,9 @@ This repository is a curated snapshot of the active workspace, published on
 
 - all Python source and regression tests present at publication time;
 - the complete research log, including superseded approaches and corrections;
-- the streaming low-memory repair engine, exact component-digit tile-union
-  generator, adversarial witness-diversity checker, and their regression
-  tests;
+- the streaming low-memory repair engine, validated restart cache, exact
+  component-digit tile-union generator, adversarial witness-diversity
+  checker, and their regression tests;
 - the stable 1,050,000-order candidate pool used by the current finite sweep;
 - the 14,629-row max-128 pool used by the current exploratory direct-cover
   search;
