@@ -3142,3 +3142,90 @@ with 17 remaining.
 This remains a finite-family result.  It neither constructs the requested
 integer `m` nor proves that no such integer exists in the original infinite
 problem.
+
+## Structural exact-lesson CEGIS checkpoint (2026-07-26)
+
+A direct search is also testing the complete 1,577-row pool
+
+```
+order_pool_1050000_component_core_corrected_max32.json
+```
+
+as one finite covering family.  Its common period and prime-power
+components are
+
+```
+144403552893600
+32, 27, 25, 7, 11, 13, 17, 19, 23, 29, 31
+```
+
+and its sum of individual fibre densities is approximately
+
+```
+1.6171426247673073.
+```
+
+A cover by this family would directly construct an `m` for the original
+problem.  A failed search, or even a certified no-cover result for this
+family, would remain only a finite-family result.
+
+The earlier pointwise counterexample-guided loop was memorizing isolated
+holes.  It accumulated 95,200 individual points while the exact checker
+continued to return 1,000 fresh holes per round.  An exact SAT master on an
+11,800-point subset took roughly 2.5 hours for a repair and still returned
+200 new holes.  Neither run produced a cover or a no-cover certificate.
+
+The revised learner expands an exact hole into a structured CRT digit tile.
+If `q^E` is the exact `q`-power in the common period, adding
+
+```
+(period / q^E) * q^j
+```
+
+to a coordinate cycles digit `j` while preserving the other prime-power
+components.  Varying the lowest digits (`j=0`) for `q=2,3,5` in both
+coordinates gives `(2*3*5)^2 = 900` exact points per hole.  Every row whose
+modulus is divisible by one of `2,3,5` responds to at least one direction of
+this tile, unlike the initially tested top-digit tiles, which lower-exponent
+rows could cover without changing phase.
+
+The exact checker also gained a per-target diversity cap.  In the current
+run it allows each selected row-target value to occur in only one witness
+of a checker batch.  The 18 selected rows are precisely those whose moduli
+are coprime to 30 and therefore remain constant on a lowest-digit tile.
+This is a counterexample-selection device only: if its extra constraints
+exhaust a batch after witnesses have been found, the checker returns the
+nonempty witness list and cannot report a cover.
+
+Top-digit experiments remained flat, usually needing only one to eight phase
+changes after adding a tile batch.  Lowest-digit lessons showed more
+resistance.  One accumulated pass had repair counts
+
+```
+9, 14, 13, 18, 20, 17, 19, 25, 20, 27, 26,
+27, 26, 33, 36, 37, 32, 35, 31, 49, 53.
+```
+
+A higher-digit detour again flattened.  Returning to lowest-digit tiles with
+all accumulated lessons began from 288,000 points.  Four completed rounds
+gave
+
+```
+points before repair   phase changes   exact holes after repair
+288000                 5               10
+297000                 52              10
+306000                 77              10
+315000                 71              10
+```
+
+Each set of 10 holes expanded to 9,000 new lesson points, leaving 324,000
+points in the checkpoint.  The final 9,000 were not yet repaired.  The run
+was stopped deliberately when total physical-memory use reached 99.1%;
+the search process itself was using about 3.4 GB.
+
+The rising repair cost is a useful structural signal, but the authoritative
+result is still negative: the exact checker found genuine holes after every
+completed repair.  No phase cover, candidate `m`, or finite no-cover
+certificate was produced.  Large lesson sets, solver phases, and transient
+logs remain local; the public repository contains the algorithm, regression
+tests, parameters, and this measured checkpoint.

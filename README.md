@@ -95,6 +95,27 @@ The fraction \(4{,}620/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is nearly solved.
 
+## Exploratory direct-cover checkpoint
+
+A separate exact counterexample-guided search attacks one fixed
+1,577-fibre family directly.  Its common period is
+`144403552893600`, with components
+`32,27,25,7,11,13,17,19,23,29,31`, and its raw density sum is
+approximately `1.617142624767`.
+
+The checker now turns each exact uncovered point into a 900-point Cartesian
+tile over the lowest binary, ternary, and quinary digits.  This is a
+structural lesson rather than a list of isolated sampled points.  An
+adversarial target-cap option also forces a returned witness batch to resist
+repair by merely moving one selected fibre.
+
+The latest accumulated experiment contains 324,000 exact lesson points.
+Its last four completed repairs required 5, 52, 77, and 71 phase changes,
+respectively, but the separate exact SAT checker still returned 10 uncovered
+points after every repair.  Consequently this experiment has found neither
+a cover nor a no-cover proof.  The method, null results, and resource stop
+are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
+
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 The 17 unresolved periods are indexed in
@@ -104,6 +125,8 @@ The 17 unresolved periods are indexed in
 
 - `*.py`: search programs, exact certificate generators, independent
   verifiers, and regression tests.
+- `local_phase_cegis.py` and `exact_uncovered.py`: direct finite-cover CEGIS,
+  including exact component-digit tiles and adversarial witness diversity.
 - `search_projected_conditional_designs.py`: checkpointable projected
   conditional-overlap discovery, including a proof-structural shared
   residual pair.

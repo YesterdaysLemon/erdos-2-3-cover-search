@@ -106,6 +106,77 @@ def merge_congruences(residue_a, modulus_a, residue_b, modulus_b):
     return (residue_a + modulus_a * multiplier) % modulus, modulus
 
 
+def expand_component_digit_tiles(
+    points, candidate_moduli, component_digits
+):
+    """Expand exact holes across selected independent component digits.
+
+    For a prime q whose largest exponent in the common candidate period is
+    q^e, adding a multiple of (period / q^e) * q^j preserves every other CRT
+    component and every lower q-adic digit while cycling digit j.  Applying
+    this independently to both coordinates and to several distinct primes
+    returns the complete Cartesian digit tile around each point.
+    """
+    component_digits = tuple(component_digits)
+    components = tuple(prime for prime, _digit in component_digits)
+    if len(set(components)) != len(components):
+        raise ValueError("tile components must be distinct")
+    period = math.lcm(1, *(int(modulus) for modulus in candidate_moduli))
+    factorization = exact_uncovered.factor(period)
+    missing = [prime for prime in components if prime not in factorization]
+    if missing:
+        raise ValueError(
+            f"tile components do not divide the candidate period: {missing}"
+        )
+
+    coordinate_offsets = [0]
+    for prime, digit in component_digits:
+        exponent = factorization[prime]
+        if not 0 <= digit < exponent:
+            raise ValueError(
+                f"digit {digit} is outside component {prime}^{exponent}"
+            )
+        prime_power = prime**exponent
+        step = (period // prime_power) * prime**digit
+        coordinate_offsets = [
+            (offset + digit * step) % period
+            for offset in coordinate_offsets
+            for digit in range(prime)
+        ]
+
+    expanded = []
+    seen = set()
+    for raw_k, raw_l in points:
+        k = int(raw_k)
+        l = int(raw_l)
+        for k_offset in coordinate_offsets:
+            for l_offset in coordinate_offsets:
+                point = ((k + k_offset) % period, (l + l_offset) % period)
+                if point not in seen:
+                    seen.add(point)
+                    expanded.append(point)
+    return expanded
+
+
+def expand_top_component_tiles(points, candidate_moduli, components):
+    """Expand holes over the top digit of each declared component."""
+    period = math.lcm(1, *(int(modulus) for modulus in candidate_moduli))
+    factorization = exact_uncovered.factor(period)
+    missing = [prime for prime in components if prime not in factorization]
+    if missing:
+        raise ValueError(
+            f"top-tile components do not divide the candidate period: {missing}"
+        )
+    return expand_component_digit_tiles(
+        points,
+        candidate_moduli,
+        [
+            (prime, factorization[prime] - 1)
+            for prime in components
+        ],
+    )
+
+
 def repair(
     targets,
     assignment,
@@ -538,6 +609,16 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--diversity-target-cap",
+        type=int,
+        default=0,
+        help=(
+            "after this many exact witnesses share one target value on a "
+            "declared diversity prime, forbid that row-target value for the "
+            "rest of the current checker batch; zero disables the cap"
+        ),
+    )
+    parser.add_argument(
         "--diversity-coordinate-moduli",
         default="",
         help=(
@@ -643,6 +724,24 @@ def main() -> int:
     )
     parser.add_argument("--exact-batch", type=int, default=200)
     parser.add_argument(
+        "--expand-exact-top-components",
+        default="",
+        help=(
+            "comma-separated prime components; replace each exact witness "
+            "lesson by its complete Cartesian tile over the top digit of "
+            "each selected component"
+        ),
+    )
+    parser.add_argument(
+        "--expand-exact-component-digits",
+        default="",
+        help=(
+            "comma-separated prime:zero_based_digit pairs; replace each "
+            "exact witness lesson by its Cartesian tile over those CRT "
+            "digits, for example 2:0,3:0,5:0"
+        ),
+    )
+    parser.add_argument(
         "--exact-when-random-misses-at-most",
         type=int,
         default=0,
@@ -728,6 +827,8 @@ def main() -> int:
         raise SystemExit("--random-coordinate-bits must be at least 32")
     if args.diversity_quota < 1:
         raise SystemExit("--diversity-quota must be positive")
+    if args.diversity_target_cap < 0:
+        raise SystemExit("--diversity-target-cap must be nonnegative")
     if args.required_coverage < 1:
         raise SystemExit("--required-coverage must be positive")
     if args.exact_when_random_misses_at_most < 0:
@@ -762,6 +863,48 @@ def main() -> int:
         for value in args.diversity_coordinate_moduli.split(",")
         if value
     )
+    exact_top_components = tuple(
+        int(value)
+        for value in args.expand_exact_top_components.split(",")
+        if value
+    )
+    if any(value < 2 for value in exact_top_components):
+        raise SystemExit("--expand-exact-top-components must contain primes")
+    exact_component_digits = []
+    for raw_spec in args.expand_exact_component_digits.split(","):
+        if not raw_spec:
+            continue
+        parts = raw_spec.split(":")
+        if len(parts) != 2:
+            raise SystemExit(
+                "--expand-exact-component-digits entries must be prime:digit"
+            )
+        prime, digit = map(int, parts)
+        if prime < 2 or digit < 0:
+            raise SystemExit(
+                "--expand-exact-component-digits contains an invalid pair"
+            )
+        exact_component_digits.append((prime, digit))
+    exact_component_digits = tuple(exact_component_digits)
+    if exact_top_components and exact_component_digits:
+        raise SystemExit(
+            "choose only one exact component-tile expansion mode"
+        )
+    try:
+        # Validate the components once before a long synthesis run.  The
+        # returned one-point tile is deliberately discarded.
+        expand_top_component_tiles(
+            [(0, 0)],
+            [item[0] for item in candidates],
+            exact_top_components,
+        )
+        expand_component_digit_tiles(
+            [(0, 0)],
+            [item[0] for item in candidates],
+            exact_component_digits,
+        )
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     diversity_coordinate_schedule = []
     if args.diversity_coordinate_schedule:
         if args.diversity_stage_rounds < 1:
@@ -844,6 +987,10 @@ def main() -> int:
         raise SystemExit("normalization prime missing from selected candidates")
     if not all(prime in by_prime for prime in diversity_primes):
         raise SystemExit("diversity prime missing from selected candidates")
+    if args.diversity_target_cap and not diversity_primes:
+        raise SystemExit(
+            "--diversity-target-cap requires --diversity-primes"
+        )
     if not all(prime in by_prime for prime in fixed_primes):
         raise SystemExit("fixed prime missing from selected candidates")
     zero_fixed = {by_prime[prime] for prime in normalizers}
@@ -1087,6 +1234,7 @@ def main() -> int:
                     round_diversity_coordinate_moduli
                 ),
                 diversity_quota=args.diversity_quota,
+                diversity_target_cap=args.diversity_target_cap,
                 algebraic_primes=algebraic_primes,
                 sophie_germain=sophie_germain,
                 fixed_coordinate_residues=checker_coordinate_cell,
@@ -1161,12 +1309,51 @@ def main() -> int:
                 )
                 + "\n"
             )
-        lesson_points = (
-            tested if engine == "random" and args.retain_random_tested else misses
-        )
+        expanded_exact_misses = []
+        if exact_misses and (
+            exact_top_components or exact_component_digits
+        ):
+            if exact_component_digits:
+                expanded_exact_misses = expand_component_digit_tiles(
+                    exact_misses,
+                    candidate_moduli,
+                    exact_component_digits,
+                )
+            else:
+                expanded_exact_misses = expand_top_component_tiles(
+                    exact_misses,
+                    candidate_moduli,
+                    exact_top_components,
+                )
+            lesson_points = [
+                *random_miss_points,
+                *expanded_exact_misses,
+            ]
+        else:
+            lesson_points = (
+                tested
+                if engine == "random" and args.retain_random_tested
+                else misses
+            )
         new_points = []
         for point in lesson_points:
             point = (int(point[0]), int(point[1]))
+            if any(
+                point[0] % modulus != kr or point[1] % modulus != lr
+                for modulus, kr, lr in checker_coordinate_cell
+            ):
+                continue
+            if any(
+                point[0] % prime == 0 and point[1] % prime == 0
+                for prime in algebraic_primes
+            ):
+                continue
+            if (
+                sophie_germain
+                and point[0] % 4 == 2
+                and point[1] % 4 == 0
+            ):
+                continue
             if args.drop_fixed_covered_points and fixed_covered(point):
                 continue
             if point not in seen:
@@ -1180,6 +1367,7 @@ def main() -> int:
             f"{len(tested) if engine == 'random' else 'exact'} "
             f"random={len(random_miss_points)} "
             f"exact={len(exact_misses) if engine != 'random' else 0} "
+            f"exact_tile={len(expanded_exact_misses) or '-'} "
             f"diversity={','.join(map(str, round_diversity_coordinate_moduli)) or '-'} "
             f"new={len(new_points)} total={len(points)}",
             flush=True,
