@@ -1,0 +1,39 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period216497080800_sharedpairblock_plus71_191_601_plus14conditional_star_certificate.json",
+  "block_verification": "order_pool_1050000_component_core_corrected_sharedpairblock_plus71_191_601conditional_verification.json",
+  "conditional_verifications": [
+    "order_pool_1050000_conditional_fibre101_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre109_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre113_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre127_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre131_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre193_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre31_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre37_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre41_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre43_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre61_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre73_vs5_11_13_23_19_71_verification.json",
+    "order_pool_1050000_conditional_fibre89_vs_projected29block_anchors_verification.json",
+    "order_pool_1050000_conditional_fibre97_vs_projected29block_anchors_verification.json"
+  ],
+  "period": 216497080800,
+  "row_count": 845,
+  "anchor_count": 17,
+  "outside_rows_checked": 828,
+  "conditional_edges_checked": 14,
+  "block_overlap_loss": {
+    "numerator": 423735618697,
+    "denominator": 1495182964275
+  },
+  "star_overlap_sum": {
+    "numerator": 20143251402325950953,
+    "denominator": 100151679476328480000
+  },
+  "union_density_upper_bound": {
+    "numerator": 1301657254484087906011,
+    "denominator": 1301971833192270240000
+  },
+  "verified": true
+}

@@ -2486,3 +2486,41 @@ independent verification reports, and the assembled period replay reports
 
 This result remains confined to the ranked finite divisor menu.  It is not a
 global solution of the Erdős problem.
+
+## Period-216,497,080,800 elimination (2026-07-26)
+
+This 845-row family began with aggregate upper `1.0110109570068908`.
+Twelve compatible verified conditional edges first reduced it to
+`1.0073116948241936`.
+
+The successful exact block extension promotes:
+
+```
+p=71  with intersection 659/41580
+p=191 with intersection 659/112860
+p=601 with intersection 839/118800.
+```
+
+After `p=71`, the bound is `1.0023890324747022`.  Testing `p=31`, `p=191`,
+and `p=601` as the second promotion shows that `p=191` is strongest, reducing
+the bound to `1.0007148909943824`.  Adding `p=601` and retaining the best 14
+external conditional edges gives
+
+```
+1301657254484087906011 / 1301971833192270240000
+= 0.999758382861931 < 1.
+```
+
+The exact no-cover margin is
+
+```
+314578708182333989 / 1301971833192270240000
+= 0.00024161713806897557.
+```
+
+All three block extensions and the complete period certificate independently
+replay with `verified=True`.  The ranked finite frontier is reduced to 23:
+4,614 of 4,637 families are certified no-cover.
+
+As before, this proves a finite-family obstruction only, not a value of `m`
+or a global impossibility result.
