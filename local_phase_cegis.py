@@ -711,13 +711,15 @@ def expand_component_digit_tiles(
     For a prime q whose largest exponent in the common candidate period is
     q^e, adding a multiple of (period / q^e) * q^j preserves every other CRT
     component and every lower q-adic digit while cycling digit j.  Applying
-    this independently to both coordinates and to several distinct primes
-    returns the complete Cartesian digit tile around each point.
+    this independently to both coordinates and to several distinct
+    prime-adic digits returns the complete Cartesian digit tile around each
+    point.  Multiple distinct digits of the same prime may be varied
+    together.
     """
     component_digits = tuple(component_digits)
-    components = tuple(prime for prime, _digit in component_digits)
-    if len(set(components)) != len(components):
-        raise ValueError("tile components must be distinct")
+    if len(set(component_digits)) != len(component_digits):
+        raise ValueError("tile component digits must be distinct")
+    components = tuple(sorted({prime for prime, _digit in component_digits}))
     period = math.lcm(1, *(int(modulus) for modulus in candidate_moduli))
     factorization = exact_uncovered.factor(period)
     missing = [prime for prime in components if prime not in factorization]

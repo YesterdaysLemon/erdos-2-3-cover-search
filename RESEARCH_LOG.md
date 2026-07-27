@@ -3347,6 +3347,90 @@ already compressed, avoiding an unnecessary full rebuild.  Fifteen focused
 streaming/tile tests and the complete 67-test suite pass.  Cache files remain
 transient and are not proof artifacts.
 
+### Paired-component continuation
+
+The next structural lesson replaced the separate component-7 and
+component-13 slices by Cartesian component pairs.  Each exact hole was
+expanded by the union
+
+```
+(2:0,3:0,5:0); (7:0,11:0); (11:0,13:0); 17:0; 19:0; 23:0
+```
+
+containing 28,332 distinct points.  Starting from 1,685,600 retained lessons,
+the repair had 146,427 misses and removed them with 61 phase changes in
+3,767.445 wall-clock seconds on the heavily contended host.  The independent
+exact checker then returned a full batch of 10 genuine holes.  Expanding
+those holes leaves 1,968,920 local continuation lessons.
+
+This rejects the tested paired-component phase but is not a finite-family
+no-cover theorem.  Sixty-one changes among 14,629 phases remain a sign of
+substantial flexibility, so the worker was stopped after preserving the
+checker result and expanded checkpoint.  Further compute is redirected to
+the structurally different `D=1616615` perfect-power branch.
+
+### Perfect-power binary--ternary interaction blocks
+
+The corrected `D=1616615` construction pool contains 12,577 fibres of
+density `7.737722692865`.  Its saved ordinary phase covered 77,988 exact
+lessons.  The first structural continuation expanded every exact hole by the
+union of all 112 one-binary-digit/one-ternary-digit pairs.  Each hole produces
+2,795 distinct points.  Four rounds gave:
+
+```
+points before repair   initial misses   phase changes   exact holes after
+77988                   0                0               25
+147863                  48752            1               25
+217738                  47753            1               25
+287613                  43896            1               25
+```
+
+Every 25-hole batch added exactly 69,875 new points, leaving 357,488 lessons.
+The one-change repairs show that unions of one-digit slices do not constrain
+joint higher-digit combinations.
+
+`local_phase_cegis.py` was therefore extended to vary several distinct
+digits of the same prime component in one Cartesian tile.  It rejects only a
+repeated `(prime,digit)` pair; two digits of one component are independent
+and are now covered by a regression test.  The complete suite passes 72
+tests.
+
+The next continuation used 28 blocks, pairing each adjacent pair of the 14
+binary digits with each adjacent pair of the eight ternary digits.  A single
+hole has a 34,026-point four-digit tile.  Three rounds gave:
+
+```
+points before repair   initial misses   phase changes   exact holes after
+357488                  41174            1               5
+527618                  105906           1               5
+678890                  97676            1               5
+```
+
+The first exact batch added 170,130 points; the next two overlapped earlier
+lessons and each added 151,272, leaving 830,162.  Even these four-digit blocks
+remain absorbable by one phase change, and every exact checker still found a
+full hole batch.  This is an informative construction failure, not a
+no-cover theorem.
+
+The separately saved margin phase was then tested with required coverage
+three.  It began with 87,107 retained lessons already meeting that margin.
+Using the same 28 four-digit blocks gave:
+
+```
+points before repair   initial misses below 3   phase changes   exact holes
+87107                   0                        0               5
+257237                  128638                   3               5
+417095                  131585                   3               5
+```
+
+The exact tile unions added `170130`, `159858`, and `170130` new points,
+leaving a 587,225-point local checkpoint.  Thus even threefold sampled
+coverage does not make these phases rigid: one phase change per requested
+coverage layer moves every exact hole outside the retained blocks.  This
+does not rule out the candidate family, but it is strong evidence that more
+pointwise CEGIS rounds are the wrong immediate escalation.  Subsequent work
+will target complete CRT-cell constraints or phase-independent obstructions.
+
 ## Homogeneous-refinement lead (2026-07-27)
 
 Cochrane and Myerson construct a homogeneous cover of `Z^2` from a

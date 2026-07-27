@@ -50,6 +50,28 @@ class TopComponentTileTests(unittest.TestCase):
         )
         self.assertEqual(set(points), {(0, 0), (0, 3), (3, 0), (3, 3)})
 
+    def test_two_digits_of_one_component_form_a_complete_block(self) -> None:
+        points = local_phase_cegis.expand_component_digit_tiles(
+            [(0, 0)],
+            [8],
+            [(2, 0), (2, 1)],
+        )
+        self.assertEqual(
+            set(points),
+            {(k, l) for k in range(4) for l in range(4)},
+        )
+
+    def test_repeated_component_digit_is_rejected(self) -> None:
+        with self.assertRaisesRegex(
+            ValueError,
+            "component digits must be distinct",
+        ):
+            local_phase_cegis.expand_component_digit_tiles(
+                [(0, 0)],
+                [8],
+                [(2, 1), (2, 1)],
+            )
+
     def test_multiple_tile_groups_are_unioned_without_duplicates(self) -> None:
         points = local_phase_cegis.expand_component_digit_tile_groups(
             [(0, 0)],

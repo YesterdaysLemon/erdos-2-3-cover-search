@@ -130,7 +130,15 @@ A continuation added separate lowest-digit tiles for components 17, 19, and
 23, raising the union to 2,412 points per exact hole.  Repairs at
 `962000, 1203200, 1444400` points took `45, 138, 149` phase changes, and the
 exact checker again returned 100 holes after each repair.  The final
-expansion leaves a 1,685,600-point continuation checkpoint locally.
+expansion left 1,685,600 local lessons.
+
+The next repair replaced the singleton 7- and 13-component slices by
+Cartesian `(7,11)` and `(11,13)` digit tiles.  It eliminated 146,427 retained
+misses with 61 phase changes, but the exact checker returned 10 fresh holes.
+Their 28,332-point tile unions leave a 1,968,920-point continuation
+checkpoint locally.  The low repair count still shows substantial phase
+flexibility, so this branch was paused in favour of the structurally
+different perfect-power construction.
 Consequently this experiment has found neither a cover nor a no-cover proof.
 The method, the earlier max-32 experiment, and the measured null results are
 recorded in
@@ -140,6 +148,30 @@ The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
 The 17 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
+
+## Exploratory perfect-power checkpoint
+
+The strongest structurally different construction writes
+`m = M^1616615`.  Algebraic factorization then handles every exponent pair
+whose two coordinates are divisible by one of `7,11,13,17,19`.  The current
+conditioned pool has 12,577 additional prime fibres and reciprocal-density
+sum `7.737722692865`.
+
+An ordinary phase covered 77,988 retained exact lessons.  Four rounds that
+varied every single binary--ternary digit pair grew the checkpoint to 357,488
+points; each new batch needed only one phase change and each exact checker
+still found 25 holes.  Stronger four-digit blocks, varying two binary and two
+ternary digits at once, then reached 830,162 points.  Again, each retained
+batch needed one phase change and all three exact checks returned five holes.
+
+A separate triple-coverage phase then required every retained lesson to lie
+on at least three selected fibres.  Starting from 87,107 lessons, three
+four-digit-block rounds grew that checkpoint to 587,225 points.  The new
+batches began with `128638` and `131585` points below triple coverage and
+were repaired with only three phase changes each; every exact checker still
+returned five holes.  The search has therefore found no conditioned-cell
+cover.  More point accumulation by itself is no longer the active tactic:
+the next experiments impose structural conditions on complete CRT cells.
 
 ## Bounded homogeneous obstructions
 
@@ -174,7 +206,8 @@ or fibres of higher index.
   verifiers, and regression tests.
 - `local_phase_cegis.py` and `exact_uncovered.py`: direct finite-cover CEGIS,
   including streaming low-memory repair, unions of exact component-digit
-  tiles, and adversarial witness diversity.
+  tiles (including multiple digits of one prime component), and adversarial
+  witness diversity.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.
