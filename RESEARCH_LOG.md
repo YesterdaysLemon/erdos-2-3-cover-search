@@ -2715,3 +2715,59 @@ This eliminates period `330442912800` from the ranked finite menu.
 The certified frontier is therefore 4,616 of 4,637 ranked finite families
 eliminated, with 21 remaining.  The original infinite Erdős problem remains
 unresolved.
+
+## Period-1,659,810,952,800 elimination (2026-07-26)
+
+This 958-row family initially had a developed 14-anchor upper bound of
+`1.0035109053092193`.  Promoting `p=601` and `p=31` reduced it to
+`1.0029934095573203`.
+
+The projected design search then found a `p=311` conditional intersection
+of
+
+```
+176 / 46345.
+```
+
+Promoting `p=311` reduced the period bound to `1.0020780729147714`.
+Further projected conditional certificates at `p=599` and `p=647` supported
+two more promotions, reducing the unstrengthened 19-anchor period bound to
+`1.0010273662913458`.
+
+The permanent block is therefore built from six independently replayed
+conditional extensions:
+
+```
+p = 191, 601, 31, 311, 599, 647.
+```
+
+Fourteen newly selected projected conditional edges at
+
+```
+p = 911, 1151, 34511, 919, 443, 1021, 281,
+    419, 1093, 1201, 331, 43, 401, 1801
+```
+
+complete the strict bound.  Every new conditional certificate independently
+replayed with `verified=True`.  Together with the retained dependencies, the
+40-edge exact star certificate gives
+
+```
+35318499010624116759961 / 35320158961985177280000
+= 0.9999530027211133 < 1.
+```
+
+The exact no-cover margin is
+
+```
+1659951361060520039 / 35320158961985177280000
+= 0.0000469972788867432.
+```
+
+The independent period replay checked all 19 block anchors, 939 outside
+rows, and all 40 conditional dependencies and reported `verified=True`.
+This eliminates period `1659810952800` from the ranked finite menu.
+
+The certified frontier is therefore 4,617 of 4,637 ranked finite families
+eliminated, with 20 remaining.  The original infinite problem is still
+unresolved.

@@ -25,11 +25,11 @@ As of 2026-07-26:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
-- 4,616 of 4,637 ranked finite divisor-period families have independently
+- 4,617 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
-- 21 ranked finite families remain after intersecting the aggregate
+- 20 ranked finite families remain after intersecting the aggregate
   block-star and separately verified single-anchor frontiers and applying
-  22 exact period certificates;
+  23 exact period certificates;
 - the former closest family, at period `2533395664800`, is now eliminated.
   A 16-anchor block and 40 independently replayed conditional-overlap bounds
   give the exact period-level upper bound
@@ -59,6 +59,11 @@ As of 2026-07-26:
   independently replayed upper bound is
   `2599707959748681404489/2599821871898771520000`, or
   `0.9999561846327545`.
+- period `1659810952800` is eliminated by a 19-anchor block promoting
+  `p=191`, `p=601`, `p=31`, `p=311`, `p=599`, and `p=647`, plus 40
+  conditional edges. Its independently replayed upper bound is
+  `35318499010624116759961/35320158961985177280000`, or
+  `0.9999530027211133`.
 - period `776363187600` is eliminated by an 18-anchor block promoting
   `p=31`, `p=191`, `p=59`, `p=599`, and `p=601`, plus 38 conditional
   edges. Its independently replayed upper bound is
@@ -66,13 +71,13 @@ As of 2026-07-26:
   `0.999939446754288`. The exact no-cover margin is approximately
   `0.000060553245712`.
 
-The fraction \(4{,}616/4{,}637\) measures only this deliberately chosen
+The fraction \(4{,}617/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is 99.4% solved.
 
 The exact checkpoint and the prominent correction to an earlier invalid
 parallel-class argument are recorded in [RESEARCH_LOG.md](RESEARCH_LOG.md).
-The 21 unresolved periods are indexed in
+The 20 unresolved periods are indexed in
 [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md).
 
 ## Repository contents
@@ -90,7 +95,7 @@ The 21 unresolved periods are indexed in
 - the `order_pool_1050000` exact rational certificates and replay reports
   needed by the current checkpoint and its dependency closure.
 - [CURRENT_FINITE_FRONTIER.md](CURRENT_FINITE_FRONTIER.md): a compact table
-  of the 21 ranked finite families not yet eliminated.
+  of the 20 ranked finite families not yet eliminated.
 - [PUBLICATION_MANIFEST.md](PUBLICATION_MANIFEST.md): what the public snapshot
   includes and deliberately excludes.
 

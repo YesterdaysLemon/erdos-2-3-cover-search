@@ -9,13 +9,16 @@ This repository is a curated snapshot of the active workspace, published on
 - the complete research log, including superseded approaches and corrections;
 - the stable 1,050,000-order candidate pool used by the current finite sweep;
 - the 4,637-family ranking and the two scans defining the current frontier;
-- a compact index of the 21 currently unresolved ranked finite families;
+- a compact index of the 20 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its
   independently replayed dependency certificates;
 - the exact period-`776363187600` conditional-star certificate, all five
   verified block extensions, all conditional dependencies, and the complete
   independent period replay;
 - the exact period-`330442912800` conditional-star certificate, all four
+  verified block extensions, all conditional dependencies, and the complete
+  independent period replay;
+- the exact period-`1659810952800` conditional-star certificate, all six
   verified block extensions, all conditional dependencies, and the complete
   independent period replay;
 - the exact `order_pool_1050000` certificate and independent-verification
