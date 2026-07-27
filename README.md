@@ -308,9 +308,35 @@ scope is still local: the other phases are frozen.  Freeing 11 additional
 rows suggested by the radius-two repairs gives a 16-anchor exact SAT master
 with 708 target options.  It solved each of the first three accumulated
 masters in about one millisecond, while the first two resulting phases each
-returned 100 new exact full-domain holes.  This phase-coordinate quotient is
-therefore computationally sustainable enough to extend, but it has not yet
-produced a cover or an obstruction with an unrestricted remainder.
+returned 100 new exact full-domain holes.
+
+The quotient was then split hierarchically.  Fix the low-anchor branch
+`(0,1,0,0,0)` in the displayed order and free only these 11 repair rows:
+
+```
+p = 97, 107, 179, 193, 263, 277, 293, 439, 557, 2131, 59.
+```
+
+Their legal target space has exactly
+`693636364523341088` assignments.  Coordinate-diverse counterexamples left
+the master SAT through 8,300 point clauses, but they were highly redundant
+as phase clauses.  Asking the exact checker for 100 distinct 11-anchor target
+fingerprints made the 8,400-point master UNSAT.  Independent Z3 core
+extraction reduced this to 258 points.  PySAT and the separately encoded Z3
+integer master both return UNSAT on that compact core; Z3 uses 269 assertions.
+
+The self-contained proof object and replay are:
+
+```
+power1616615_anchor11_lowbranch_0_1_0_0_0_unsat_certificate.json
+power1616615_anchor11_lowbranch_0_1_0_0_0_unsat_verification.json
+```
+
+The certificate SHA-256 is
+`7330119c171612c05fd634b8b51686e3d3156ad259f1c08dcafb7b2e29501f3f`.
+Thus this one low-anchor branch remains impossible even after all 11 repair
+rows are freed.  The other 215 low-anchor branches and all rows outside this
+16-coordinate quotient are not eliminated by this result.
 
 ## Exact small affine-subpool obstruction
 

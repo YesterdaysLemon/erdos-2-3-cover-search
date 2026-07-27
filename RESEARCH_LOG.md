@@ -3720,6 +3720,74 @@ because coordinated phase solving is negligible compared with the exact
 checker, but the first two complete checker batches are still negative
 evidence for a nearby cover.
 
+### Clause diversity and an exact 11-anchor obstruction
+
+The initial 16-coordinate loop still preferred to move among the five
+small-order anchors.  To force the second layer to carry the construction,
+the low-anchor branch `(0,1,0,0,0)` in `(p=41,17,19,37,73)` order was fixed,
+and only the 11 repair rows
+
+```
+p = 97, 107, 179, 193, 263, 277, 293, 439, 557, 2131, 59
+```
+
+were left free.  Their target-space sizes are
+
+```
+4, 53, 89, 8, 131, 23, 73, 73, 139, 71, 29,
+```
+
+whose product is exactly `693636364523341088`.
+
+The first 100-hole batches grew the exact master from 200 to 1,200 eligible
+clauses.  Batches of 200, then 500, and finally 1,000 points increased it to
+8,300 clauses.  Every corresponding master was SAT, with solve times below
+0.14 seconds, and every exact checker filled its requested hole quota.
+
+This apparent abundance was partly an artifact of the diversity metric.
+Among the latest 1,000 coordinate-diverse holes, a frozen `p=577,h=12` row
+had the same useful alternative target on 990 points; many other frozen rows
+showed the same `990/1000` concentration.  The points were different in the
+large `(2^14,3^8)` coordinates but often induced nearly identical anchor
+clauses.
+
+The exact checker was therefore rerun with all 11 free rows as its
+`diversity_primes`, blocking a complete anchor-target fingerprint after each
+witness.  It returned 100 genuinely distinct phase clauses.  Adding only
+those 100 clauses changed the 8,300-clause master from SAT to UNSAT:
+
+```
+anchor rows       11
+legal options     693
+eligible points   8400
+PySAT variables   1375
+PySAT clauses     7127
+PySAT solve       1.2846 s
+```
+
+An independently encoded Z3 integer model, with one exact target variable per
+anchor row and one disjunctive cover clause per point, also returned UNSAT.
+Its first tracked core contained 536 points.  Repeated independent core
+extraction stabilized at 258 points.  Replaying those 258 points gives:
+
+```
+PySAT             UNSAT in 2.0861 s
+independent Z3    UNSAT with 269 assertions
+joint assignments eliminated = 693636364523341088
+```
+
+`certify_anchor_phase_master_unsat.py` embeds all 12,577 row congruences,
+their base phases, the 11 free rows, and the 258 exponent pairs.
+`verify_anchor_phase_master_unsat.py` independently checks that no core point
+is algebraically covered or covered by any of the 12,566 frozen rows, rebuilds
+the integer target model, and requires Z3 UNSAT.  The certificate SHA-256 is
+`7330119c171612c05fd634b8b51686e3d3156ad259f1c08dcafb7b2e29501f3f`.
+
+This is an exact obstruction for one branch of the five-anchor quotient after
+11 additional rows are freed.  It does not eliminate the other 215 low-anchor
+branches, arbitrary movement in the remaining 12,561 rows, or the original
+problem.
+
 ### Exact low-modulus affine-subpool obstruction
 
 To test a non-refinement affine-cover route in a different space, every

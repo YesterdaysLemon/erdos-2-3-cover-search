@@ -24,6 +24,9 @@ This repository is a curated snapshot of the active workspace, updated on
 - the self-contained five-anchor frozen-remainder quotient certificate and
   independent replay of all 216 legal anchor phase assignments against all
   12,577 embedded rows;
+- the self-contained 258-point, 11-anchor UNSAT certificate for low branch
+  `(0,1,0,0,0)`, eliminating 693,636,364,523,341,088 joint assignments, and
+  its independent Z3 integer replay;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its
