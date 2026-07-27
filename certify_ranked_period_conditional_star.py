@@ -15,7 +15,26 @@ from certify_block_plus_overlap_forest import (
 from scan_all_ranked_pairanchor_star import (
     best_anchor_lower,
     fraction_payload,
+    joint_index,
 )
+
+
+def select_star_anchors(
+    outside: dict,
+    anchors: list[dict],
+    limit: int | None,
+) -> list[dict]:
+    """Choose a proof-safe compatible anchor subset for one star edge."""
+    if limit is None:
+        return anchors
+    compatible = [
+        anchor for anchor in anchors
+        if joint_index(outside, anchor) == 1
+    ]
+    compatible.sort(
+        key=lambda anchor: (int(anchor["h"]), int(anchor["p"]))
+    )
+    return compatible[:limit]
 
 
 def main() -> int:
@@ -31,8 +50,18 @@ def main() -> int:
     )
     parser.add_argument("--fourway-triples", action="store_true")
     parser.add_argument("--fourterm-quads", action="store_true")
+    parser.add_argument(
+        "--star-anchor-limit",
+        type=int,
+        help=(
+            "use at most this many smallest-modulus compatible anchors "
+            "for each outside star edge"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.star_anchor_limit is not None and args.star_anchor_limit < 1:
+        raise SystemExit("--star-anchor-limit must be positive")
 
     source = json.loads(args.pool.read_text())
     block = json.loads(args.block_certificate.read_text())
@@ -109,9 +138,14 @@ def main() -> int:
         prime = int(row["p"])
         if prime in anchor_primes:
             continue
-        baseline = best_anchor_lower(
+        edge_anchors = select_star_anchors(
             row,
             anchors,
+            args.star_anchor_limit,
+        )
+        baseline = best_anchor_lower(
+            row,
+            edge_anchors,
             fourway_triples=args.fourway_triples,
             fourterm_quads=args.fourterm_quads,
         )
@@ -156,6 +190,7 @@ def main() -> int:
         "block_overlap_loss": fraction_payload(block_loss),
         "fourway_triples": args.fourway_triples,
         "fourterm_quads": args.fourterm_quads,
+        "star_anchor_limit": args.star_anchor_limit,
         "conditional_certificates": [
             str(path) for path in args.conditional_certificate
         ],

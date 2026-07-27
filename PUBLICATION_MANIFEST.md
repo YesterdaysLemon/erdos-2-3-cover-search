@@ -21,6 +21,9 @@ This repository is a curated snapshot of the active workspace, published on
 - the exact period-`1659810952800` conditional-star certificate, all six
   verified block extensions, all conditional dependencies, and the complete
   independent period replay;
+- the exact period-`3139207671600`, outside-fibre-`6553` paired conditional
+  certificate and its independent `1,990,656`-target replay (one edge only;
+  the family remains unresolved);
 - the exact `order_pool_1050000` certificate and independent-verification
   dependency closure for the current checkpoint.
 
@@ -29,6 +32,9 @@ This repository is a curated snapshot of the active workspace, published on
 - transient standard-output and standard-error logs;
 - PID files, bytecode, caches, and temporary files;
 - local-search checkpoints and intermediate solver phase assignments;
+- other discovery-only period-`3139207671600` design JSON, CEGIS witnesses,
+  phases, and checker logs; their exact aggregate checkpoint and caveats are
+  recorded in `RESEARCH_LOG.md`;
 - large sampled or training point sets;
 - obsolete exploratory pools and redundant generated scans.
 

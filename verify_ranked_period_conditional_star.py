@@ -10,9 +10,28 @@ from pathlib import Path
 
 from verify_all_ranked_pairanchor_star import (
     best_lower,
+    pair_index,
     read_fraction,
     recorded_anchor_rows,
 )
+
+
+def select_star_anchors_independent(
+    outside: dict,
+    anchors: list[dict],
+    limit: int | None,
+) -> list[dict]:
+    """Independently reconstruct the certificate's compatible subset."""
+    if limit is None:
+        return anchors
+    compatible = [
+        anchor for anchor in anchors
+        if pair_index(outside, anchor) == 1
+    ]
+    compatible.sort(
+        key=lambda anchor: (int(anchor["h"]), int(anchor["p"]))
+    )
+    return compatible[:limit]
 
 
 def main() -> int:
@@ -33,6 +52,9 @@ def main() -> int:
     cert = json.loads(args.certificate.read_text())
     fourway_triples = bool(cert.get("fourway_triples", False))
     fourterm_quads = bool(cert.get("fourterm_quads", False))
+    star_anchor_limit = cert.get("star_anchor_limit")
+    if star_anchor_limit is not None:
+        star_anchor_limit = int(star_anchor_limit)
     block_path = Path(cert["block_certificate"])
     block = json.loads(block_path.read_text())
     block_verification = json.loads(args.block_verification.read_text())
@@ -118,9 +140,14 @@ def main() -> int:
         prime = int(row["p"])
         if prime in anchor_primes:
             continue
-        baseline = best_lower(
+        edge_anchors = select_star_anchors_independent(
             row,
             anchors,
+            star_anchor_limit,
+        )
+        baseline = best_lower(
+            row,
+            edge_anchors,
             fourway_triples=fourway_triples,
             fourterm_quads=fourterm_quads,
         )
@@ -177,6 +204,7 @@ def main() -> int:
         "period": period,
         "fourway_triples": fourway_triples,
         "fourterm_quads": fourterm_quads,
+        "star_anchor_limit": star_anchor_limit,
         "row_count": len(selected),
         "anchor_count": len(anchors),
         "outside_rows_checked": len(expected_lowers),

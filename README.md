@@ -70,6 +70,15 @@ As of 2026-07-26:
   `602703301209279912260669/602739799060432793760000`, or
   `0.999939446754288`. The exact no-cover margin is approximately
   `0.000060553245712`.
+- the closest currently developed survivor, period `3139207671600`, remains
+  unresolved. A discovery-only 24-anchor composition plus the strongest
+  valid edge found for each screened outside prime gives
+  `11740484081115098732531/11731696196943206484000`, or
+  `1.0007490719180216`. This is still above one. The strongest paired edge,
+  on outside fibre `6553`, has been promoted to a permanent certificate and
+  independently replayed across all `1,990,656` target combinations; the
+  other temporary dependencies in the aggregate have not. Five bounded
+  constructive CEGIS basins also retained exact uncovered witnesses.
 
 The fraction \(4{,}617/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
@@ -84,8 +93,20 @@ The 20 unresolved periods are indexed in
 
 - `*.py`: search programs, exact certificate generators, independent
   verifiers, and regression tests.
+- `search_projected_conditional_designs.py`: checkpointable projected
+  conditional-overlap discovery, including a proof-structural shared
+  residual pair.
+- `search_mitm_pairwise_conditional_bounds.py`: fast full-anchor subset
+  selection whose chosen subset is reevaluated with exact rational
+  arithmetic.
+- `search_sixterm_conditional_bounds.py`: discovery-only sixth-order
+  Bonferroni screening.
 - `order_pool_1050000_component_core_corrected_max32_stable.json`: stable
   finite candidate pool used by the current frontier.
+- `order_pool_1050000_period3139207671600_conditional_fibre6553_paired_`
+  `autodesign_{certificate,verification}.json`: permanent proof object and
+  independent replay for the strongest presently known paired conditional
+  edge in that unresolved family.
 - `order_pool_1050000_max32_period_divisor_family_ranking_all.json`: the
   4,637 ranked divisor-period families.
 - `order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json`: aggregate
