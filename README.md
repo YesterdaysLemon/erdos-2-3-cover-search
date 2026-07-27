@@ -231,8 +231,8 @@ density 18 but its 18 active rows represented only 17 distinct affine lines,
 covering 177 of the 289 points in the residual `F_17^2` plane.
 
 The scanner therefore now exact-replays complete residual-plane line unions,
-not only their total density.  Ten further checker/repair batches grew the
-joint core to 2,121 density cells and 1,000 residual planes.  Exact
+not only their total density.  Eleven further checker/repair batches grew the
+joint core to 2,221 density cells and 1,100 residual planes.  Exact
 radius-two repairs successively used
 
 ```
@@ -247,14 +247,15 @@ cells   changed pair
 1921    p=37, p=97
 2021    p=97, p=193
 2121    p=97, p=2131
+2221    p=277, p=59
 ```
 
 Every listed pair exactly satisfies the accumulated density and finite-plane
 constraints, but every corresponding full-domain checker again produced its
-complete 100-hole batch.  The latest batch has 99 density violations and one
-geometric violation.  Thus the method has exhausted whole one- and two-row
-repair families in succession, but it has not found a cover or proved that
-no larger coordinated repair exists.
+complete 100-hole batch.  The latest batch consists entirely of density
+violations, with scaled density `8..11`.  Thus the method has exhausted whole
+one- and two-row repair families in succession, but it has not found a cover
+or proved that no larger coordinated repair exists.
 
 The checker and master now support
 algebraic sublattices, restricted perfect-power targets, unioned cut files,
@@ -263,6 +264,53 @@ answer.  They also support phase overrides for adversarial branch queries,
 exhaustive exact one- and two-change scans, and first-level affine-plane
 bitset replay.  No conditioned-cell cover, global `m`, or global
 impossibility proof has been obtained.
+
+## Exact five-anchor quotient obstruction
+
+The most conspicuous phase oscillation was also moved into a different
+finite space.  The rows
+
+```
+p = 41, 17, 19, 37, 73
+h =  2,  4,  3,  3,  3
+```
+
+have exactly `2*4*3*3*3 = 216` joint target assignments.  Freeze all other
+12,572 row phases at the seed-13 checkpoint and regard each exact uncovered
+exponent pair as a set of anchor assignments that it defeats.  Of 2,722
+candidate points, 2,402 remain outside every frozen nonanchor row and every
+algebraic origin sublattice.  Their incidence sets defeat all 216 anchor
+assignments.  The resulting self-contained certificate records one witness
+per branch, using only 28 distinct witnesses, and has SHA-256
+`faba66c4a77cc74cfed7bcfdf75947b0b99967a6176b128e42eaacf4764c6c84`.
+
+The independent verifier does not trust the search files.  It replays every
+recorded branch witness against all 12,577 embedded affine rows, checks all
+five algebraic sublattices, reconstructs the complete legal target product,
+and returns:
+
+```
+verified = true
+legal_anchor_branches = 216
+verified_branch_witnesses = 216
+distinct_recorded_witnesses = 28
+```
+
+The proof object and replay are:
+
+```
+power1616615_anchor41_17_19_37_73_frozen_quotient_certificate.json
+power1616615_anchor41_17_19_37_73_frozen_quotient_verification.json
+```
+
+This is stronger than a small-radius statement for those five rows, but its
+scope is still local: the other phases are frozen.  Freeing 11 additional
+rows suggested by the radius-two repairs gives a 16-anchor exact SAT master
+with 708 target options.  It solved each of the first three accumulated
+masters in about one millisecond, while the first two resulting phases each
+returned 100 new exact full-domain holes.  This phase-coordinate quotient is
+therefore computationally sustainable enough to extend, but it has not yet
+produced a cover or an obstruction with an unrestricted remainder.
 
 ## Exact small affine-subpool obstruction
 

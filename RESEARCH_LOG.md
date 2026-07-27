@@ -3628,20 +3628,97 @@ density cells  plane cells  exact changed pair        scan seconds
 1921           800          p=37, p=97                22.4073
 2021           900          p=97, p=193               25.6119
 2121           1000         p=97, p=2131              27.6313
+2221           1100         p=277, p=59               29.4187
 ```
 
 Every row reports density violations zero and minimum residual-plane coverage
 289.  Each returned phase was then rejected by the exact whole-domain
-checker with a complete 100-hole batch.  The newest batch after the
-2,121-cell pair contains 99 density violations in the range `10..16` and
-one density-17 geometric hole whose active lines cover only 145 plane points.
-It has not yet been folded into the next radius-two scan.
+checker with a complete 100-hole batch.  The batch after the 2,121-cell pair
+contained 99 density violations in the range `10..16` and one density-17
+geometric hole whose active lines covered only 145 plane points.  Folding it
+into the next scan produced the `p=277,p=59` pair.  Its 100-hole checker batch
+consists entirely of density violations: 16 at density 8, 21 at density 9,
+61 at density 10, and 2 at density 11.  It has not yet been folded into the
+next radius-two scan.
 
 This progression has eliminated the entire `p=41` first-move family, then
 the `p=19` family, and then the `p=37` family on the growing exact core.
 Radius two still survives through other pairs.  These are local finite-radius
 facts around one frozen seed phase; they neither produce a conditioned-cell
 cover nor prove the full 12,577-row family impossible.
+
+### Five-anchor branch quotient
+
+The radius description is not invariant under the choice of seed, so the
+five visibly oscillating low-order rows were next treated as exact phase
+coordinates.  In the order `(p=41,17,19,37,73)`, their target-space sizes are
+`(2,4,3,3,3)`, hence only 216 joint branches.  Every other row was frozen at
+the seed-13 phase.
+
+The first eight exact branch files for `(p=41,p=17)` supplied 800 points.
+Incidence replay against the other three anchors defeated 113 of the 216
+branches.  Adding the exact points from the radius-two progression raised
+this to 200 branches.  Four targeted 100-hole exact checks and one final
+one-hole check closed the remaining 16 branches:
+
+```
+new exact branch batch        branches still open
+none                          16
+(1,2,0,0,0), 100 holes         7
+(1,2,1,1,1), 100 holes         5
+(1,2,0,2,1), 100 holes         2
+(0,1,0,0,0), 100 holes         1
+(1,0,0,0,0),   1 hole          0
+```
+
+Here each tuple lists targets in the fixed anchor order.  A deliberately
+attempted full residual-density query on one branch exceeded two minutes and
+used about 4.8 GB without returning; it was stopped without attributing a
+solver result.  The exact incidence calculation is both stronger for the
+supplied witnesses and much lighter.
+
+`certify_anchor_phase_quotient.py` embeds the complete 12,577-row phase
+assignment and one exact witness for every legal anchor branch.  It started
+with 2,722 distinct points: 2,402 are outside every frozen nonanchor row,
+320 are already covered by such a row, and none lies in an algebraic origin
+sublattice.  All 216 branches have a witness; the recorded branch map uses
+28 distinct points, with per-branch candidate multiplicity ranging from 1
+to 927.
+
+`verify_anchor_phase_quotient.py` was written separately.  It reconstructs
+the complete target product from the embedded row restrictions, checks the
+surjectivity and base phase of every row, and directly replays all 216
+witnesses against all 12,577 affine congruences and the algebraic
+sublattices.  It returns `verified=true`.  The certificate SHA-256 is
+`faba66c4a77cc74cfed7bcfdf75947b0b99967a6176b128e42eaacf4764c6c84`.
+
+This proves no assignment to those five anchor phases works when all 12,572
+other phases remain frozen.  It does not prove the full row pool impossible.
+
+### Larger phase-coordinate quotient
+
+The quotient was then expanded by freeing the 11 rows seen in the exact
+two-change repairs:
+
+```
+p = 97, 107, 179, 193, 263, 277, 293, 439, 557, 2131, 59.
+```
+
+`anchor_phase_master.py` encodes every eligible exact point as one clause
+over the chosen anchor target variables, with exactly one legal target per
+anchor.  Frozen-row and algebraic coverage are discharged by exact integer
+replay before the SAT instance is built.
+
+For all 16 anchors the first master had 708 target options, 2,607 eligible
+point clauses, 1,399 variables, and 4,682 solver clauses.  Filtering the
+12,561 frozen rows took 11.57 seconds; the SAT solve itself took 0.00142
+seconds.  Its phase returned 100 exact full-domain holes.  Adding them gave
+2,707 eligible clauses; the next solve took 0.00094 seconds and its phase
+again returned 100 holes.  The third master, with 2,807 eligible clauses,
+remains SAT and solved in 0.00101 seconds.  This new CEGIS axis is promising
+because coordinated phase solving is negligible compared with the exact
+checker, but the first two complete checker batches are still negative
+evidence for a nearby cover.
 
 ### Exact low-modulus affine-subpool obstruction
 
