@@ -1,7 +1,7 @@
 # Current ranked finite frontier
 
-As of 2026-07-26, 4,614 of the 4,637 deliberately ranked divisor-period
-families have exact no-cover certificates.  The 23 entries below remain
+As of 2026-07-26, 4,615 of the 4,637 deliberately ranked divisor-period
+families have exact no-cover certificates.  The 22 entries below remain
 unresolved.
 
 This is an index of one finite search menu, not a classification of all
@@ -14,7 +14,6 @@ Erdős problem.
 | 202529527200 | 32, 27, 25, 7, 11, 13, 17, 19, 29 | 862 |
 | 245167322400 | 32, 27, 25, 7, 11, 13, 17, 23, 29 | 833 |
 | 330442912800 | 32, 27, 25, 7, 11, 13, 17, 29, 31 | 806 |
-| 776363187600 | 16, 9, 25, 7, 11, 13, 17, 19, 23, 29 | 873 |
 | 931635825120 | 32, 27, 5, 7, 11, 13, 17, 19, 23, 29 | 945 |
 | 1552726375200 | 32, 9, 25, 7, 11, 13, 17, 19, 23, 29 | 982 |
 | 1659810952800 | 32, 9, 25, 7, 11, 13, 17, 19, 23, 31 | 958 |

@@ -2618,3 +2618,56 @@ making 17-20-anchor exploratory blocks materially cheaper to evaluate.
 The certified public frontier is unchanged: 4,614 of 4,637 ranked finite
 families are eliminated, 23 remain, and the original infinite problem is
 unresolved.
+
+## Period-776,363,187,600 elimination (2026-07-26)
+
+The closest remaining ranked family was revisited with a bounded
+projected-conditional design search.  The search enumerates choices of a
+normalizing anchor, a small exact base, and anchors whose moduli split into
+base projections and pairwise-coprime residual components.  Candidate
+designs are evaluated exactly, but remain discovery-only until regenerated
+by the dedicated certificate program and replayed by its independently
+structured verifier.
+
+Promoting `p=599` and `p=601` into the existing block first reduced the
+exploratory period upper bound from `1.0018889069868673` to
+`1.0008889207891136`.  Nine newly selected projected conditional edges for
+
+```
+p = 281, 419, 443, 647, 911, 919, 1103, 1151, 1201
+```
+
+then supplied enough additional forced overlap.  Every new edge was emitted
+by `certify_projected_conditional_fibre_overlap.py` and independently
+replayed by `verify_projected_conditional_fibre_overlap.py` with
+`verified=True`.
+
+The permanent 18-anchor block is built from five independently replayed
+conditional extensions, promoting
+
+```
+p = 31, 191, 59, 599, 601.
+```
+
+Together with 38 conditional star edges, the complete 873-row period
+certificate gives
+
+```
+602703301209279912260669 / 602739799060432793760000
+= 0.999939446754288 < 1.
+```
+
+The exact no-cover margin is
+
+```
+36497851152881499331 / 602739799060432793760000
+= 0.0000605532457119562.
+```
+
+The independent period replay checked all 18 block anchors, 855 outside
+rows, and all 38 conditional dependencies and reported `verified=True`.
+This eliminates period `776363187600` from the ranked finite menu.
+
+The certified frontier is therefore 4,615 of 4,637 ranked finite families
+eliminated, with 22 remaining.  This remains a finite-family theorem, not an
+integer `m` and not a proof about every possible prime-fibre construction.
