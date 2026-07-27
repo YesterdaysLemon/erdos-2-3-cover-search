@@ -4121,3 +4121,53 @@ must first demonstrate multi-hole or missing-direction leverage.
 No result in this section is a conditioned-cell cover, a CRT integer `m`, a
 global nonexistence proof, or evidence that the original problem is nearly
 settled.
+
+## Targeted signatures and layered exact checking (2026-07-27)
+
+Four representative quotient sectors, 27, 54, 108, and 135, were given
+branch-specific exact holes and repaired with the complete gain-mask engine.
+All four remained feasible within four nonanchor changes.  The fresh finite
+instances had 25--30 points, three to six initial misses, and between seven
+and 38 distinct gain masks.  Every proposed phase sent to the full checker
+again produced genuine holes.
+
+The earlier conclusion that the 62 high-component rows had no multi-hole
+leverage was branch-specific.  Scanning those rows against the accumulated
+sector-27 and sector-54 witnesses found:
+
+```
+branch 27: p=63700993,  h=884736, hits=2, target=763570
+branch 54: p=19131877, h=177147, hits=2, target=84275
+branch 54: p=258280327,h=4782969,hits=2, target=2427073
+```
+
+The `3^14` component of the last row made the exact checker exceed five
+minutes and it was rejected as too costly.  The new
+`select_targeted_signature_rows.py` makes this tradeoff explicit: it ranks
+rows by multi-hit count and largest prime-power component and supports a
+hard component guard.  Unit tests cover legal target restrictions, rejection
+of single-witness memorizers, score ties, and the cost guard.
+
+Admitting only `p=63700993` in branch 27 and only `p=19131877` in branch 54
+reduced the ordinary repair budget from four changes to three.  Repeated
+finite Benders rounds remained feasible at radius three:
+
+```
+branch 27: 54 accumulated points, 21 initial misses, 320 gain masks
+branch 54: 44 accumulated points, 20 initial misses,  53 gain masks
+```
+
+These are exact finite replays, but not global covers.  Directly including
+the new `3`-power component in the full checker was disproportionately slow.
+The proof-compatible replacement is `verify_layered_exact_misses.py`.
+It independently checks that the base pool is an unchanged subset of the
+extension, validates every target restriction, replays the algebraic
+exclusions, and tests every explicit base-pool hole against every augmented
+row using scalar modular arithmetic.  In the latest audited batches it
+retained 4/10 exact holes for branch 27 and 10/10 for branch 54.  An empty
+retained set would not certify a cover; every retained point is nevertheless
+a rigorous counterexample to its declared augmented phase.
+
+This is the first construction-side improvement from the high-component
+space, but it has not produced a conditioned-cell cover, a CRT integer `m`,
+or a global obstruction.

@@ -476,10 +476,9 @@ def main() -> int:
         "result": result["status"],
         "engine": "gain-mask-sat-with-exact-full-corpus-replay",
         "scope": (
-            "successful phases are exact finite repairs; UNSAT is complete "
-            "only when the relaxed cover needs the full change budget; "
-            "other negative results do not exclude zero-initial-gain "
-            "compensator moves"
+            "successful phases are exact finite repairs; UNSAT exhausts "
+            "all gain-mask skeletons, distinct row owners, and remaining "
+            "zero-gain or duplicate-mask compensator chains"
         ),
         "fixed_primes": sorted(fixed_primes),
         "max_changes": args.max_changes,

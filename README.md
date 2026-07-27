@@ -420,6 +420,31 @@ and no one retargeting covered more than one.  A full Z3 bit-vector check
 reached a five-minute cap without a model or proof.  The extension is
 therefore not part of the active exact-checker loop.
 
+That generic negative result did not hold uniformly across the quotient.
+`select_targeted_signature_rows.py` now scores an extension row only when
+several branch-specific exact holes share one legal target, and it can reject
+large prime-power components before they enter the checker.  In quotient
+class 27, the row
+
+```
+p=63700993, h=884736, largest component=32768
+```
+
+hits two of six accumulated branch holes at target 763570.  In class 54,
+`p=19131877`, with `h=177147`, similarly hits two of six at target 84275.
+Starting those rows at the selected targets reduced both finite masters from
+four ordinary phase changes to three.  The resulting radius-three searches
+remain feasible on 54 and 44 accumulated points, respectively.
+
+The large component is kept out of the expensive exact SAT encoding.
+`verify_layered_exact_misses.py` instead takes explicit holes from the stable
+12,577-row checker and scalar-replays every augmented row.  In the latest
+audited batches, four of ten base holes in class 27 and all ten in class 54
+remained exact augmented-pool holes.  This proves that the checked phases are
+not covers while preserving a cheap base checker.  It does not prove that
+either targeted row belongs to a global construction, and the newest finite
+repairs have not produced an integer `m`.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus
@@ -487,6 +512,10 @@ or fibres of higher index.
   bounded-change finite repair encodings in SAT and pseudo-Boolean spaces.
 - `sparse_anchor_quotient_sweep.py`: resumable driver over the 162 exact
   low-anchor quotient representatives.
+- `select_targeted_signature_rows.py`: verification-cost-aware promotion of
+  extension rows whose one legal target hits several adversarial points.
+- `verify_layered_exact_misses.py`: independent scalar replay of base-pool
+  holes against a small targeted extension.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.
