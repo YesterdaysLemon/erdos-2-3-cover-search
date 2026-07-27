@@ -189,6 +189,83 @@ def audit_density_cuts(
     }
 
 
+def audit_residual_plane_cells(
+    rows: list[dict],
+    phases: dict[int, int],
+    prime: int,
+    cells: list[tuple[int, int]],
+    algebraic_primes: tuple[int, ...] = (),
+) -> dict:
+    """Exactly test affine-line unions in selected first-level q-planes."""
+    residual_modulus = max(
+        (q_part(int(row["h"]), prime) for row in rows),
+        default=1,
+    )
+    if residual_modulus != prime:
+        raise ValueError(
+            "residual-plane audit currently requires a first-level "
+            "prime component"
+        )
+    full_mask = (1 << (prime * prime)) - 1
+    algebraic_mask = 1 if prime in algebraic_primes else 0
+    failures = []
+    minimum_covered = prime * prime
+    for k, l in cells:
+        covered = algebraic_mask
+        active_lines = 0
+        active_full_rows = 0
+        for row in rows:
+            h = int(row["h"])
+            residual = q_part(h, prime)
+            other = h // residual
+            coarse_target = (
+                int(row["a"]) * k + int(row["b"]) * l
+            ) % other
+            if phases[int(row["p"])] % other != coarse_target:
+                continue
+            if residual == 1:
+                active_full_rows += 1
+                covered = full_mask
+                break
+            if residual != prime:
+                raise ValueError("row has a higher residual prime power")
+            active_lines += 1
+            a = int(row["a"]) % prime
+            b = int(row["b"]) % prime
+            target = phases[int(row["p"])] % prime
+            for x in range(prime):
+                for y in range(prime):
+                    if (a * x + b * y) % prime == target:
+                        covered |= 1 << (x * prime + y)
+        covered_points = covered.bit_count()
+        minimum_covered = min(minimum_covered, covered_points)
+        if covered != full_mask:
+            missing = (~covered) & full_mask
+            missing_index = (missing & -missing).bit_length() - 1
+            failures.append(
+                {
+                    "cell": [k, l],
+                    "covered_points": covered_points,
+                    "uncovered_points": prime * prime - covered_points,
+                    "first_uncovered_residual_point": [
+                        missing_index // prime,
+                        missing_index % prime,
+                    ],
+                    "active_lines": active_lines,
+                    "active_full_rows": active_full_rows,
+                }
+            )
+    return {
+        "cells": len(cells),
+        "prime": prime,
+        "plane_points": prime * prime,
+        "minimum_covered_points": minimum_covered if cells else None,
+        "failed_cells": len(failures),
+        "first_failure": failures[0] if failures else None,
+        "engine": "python-exact-residual-plane-bitset-replay",
+    }
+
+
 def find_low_density_cells(
     rows: list[dict],
     phases: dict[int, int],
@@ -597,6 +674,362 @@ def scan_one_change(
         "required_scaled_density": required_weight,
         "solve_seconds": time.monotonic() - started,
         "engine": "python-exact-one-change-scan",
+    }
+    return winners, metadata
+
+
+def scan_two_changes(
+    rows: list[dict],
+    initial_phases: dict[int, int],
+    prime: int,
+    cells: list[tuple[int, int]],
+    fixed_targets: dict[int, int],
+    algebraic_primes: tuple[int, ...] = (),
+    geometry_cells: list[tuple[int, int]] | None = None,
+    limit: int = 1,
+) -> tuple[list[tuple[dict[int, int], dict]], dict]:
+    """Exactly enumerate phase maps at most two coarse-row changes away.
+
+    Every solution must repair one selected currently failing cell.  The
+    first changed row is therefore anchored to its unique useful target on
+    that cell.  After applying it, a single second row must use one common
+    target on every remaining failing cell.  Intersecting those target
+    classes leaves only the pairs that need full exact replay.
+    """
+    if limit < 0:
+        raise ValueError("two-change scan limit must be nonnegative")
+    if not cells:
+        raise ValueError("two-change scan requires at least one cell")
+
+    dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
+    sys.path.insert(0, str(dep_path))
+    import numpy as np  # type: ignore
+
+    started = time.monotonic()
+    geometry_cells = geometry_cells or []
+    row_count = len(rows)
+    cell_count = len(cells)
+    residual_modulus = max(
+        (q_part(int(row["h"]), prime) for row in rows),
+        default=1,
+    )
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
+    other_moduli = np.empty(row_count, dtype=np.int64)
+    residual_moduli = np.empty(row_count, dtype=np.int64)
+    weights = np.empty(row_count, dtype=np.int64)
+    old_targets = np.empty(row_count, dtype=np.int64)
+    allowed_residues = np.empty(row_count, dtype=np.int64)
+    allowed_moduli = np.empty(row_count, dtype=np.int64)
+    mutable = np.ones(row_count, dtype=np.bool_)
+    target_matrix = np.empty((row_count, cell_count), dtype=np.int64)
+
+    for row_index, row in enumerate(rows):
+        h = int(row["h"])
+        residual = q_part(h, prime)
+        other = h // residual
+        row_prime = int(row["p"])
+        restriction = coarse_target_restriction(
+            row,
+            prime,
+            initial_phases[row_prime],
+        )
+        other_moduli[row_index] = other
+        residual_moduli[row_index] = residual
+        weights[row_index] = residual_modulus // residual
+        old_targets[row_index] = initial_phases[row_prime] % other
+        allowed_residues[row_index] = restriction[0]
+        allowed_moduli[row_index] = restriction[1]
+        if other == 1 or row_prime in fixed_targets:
+            mutable[row_index] = False
+        a = int(row["a"])
+        b = int(row["b"])
+        if other == 1:
+            target_matrix[row_index, :] = 0
+        else:
+            target_matrix[row_index, :] = np.fromiter(
+                (
+                    (
+                        a * (int(k) % other)
+                        + b * (int(l) % other)
+                    )
+                    % other
+                    for k, l in cells
+                ),
+                dtype=np.int64,
+                count=cell_count,
+            )
+
+    base_densities = np.zeros(cell_count, dtype=np.int64)
+    for row_index in range(row_count):
+        base_densities[
+            target_matrix[row_index] == old_targets[row_index]
+        ] += weights[row_index]
+    failing = np.flatnonzero(base_densities < required_weight)
+    if not len(failing):
+        geometry_replay = (
+            audit_residual_plane_cells(
+                rows,
+                initial_phases,
+                prime,
+                geometry_cells,
+                algebraic_primes,
+            )
+            if geometry_cells
+            else None
+        )
+        if geometry_replay and geometry_replay["failed_cells"]:
+            raise ValueError(
+                "two-change scan needs a failing density anchor when the "
+                "initial phase fails only residual-plane geometry"
+            )
+        exact_replay = audit_density_cuts(
+            rows,
+            initial_phases,
+            prime,
+            cells,
+            algebraic_primes,
+        )
+        return [
+            (
+                dict(initial_phases),
+                {
+                    "changes": [],
+                    "exact_replay": exact_replay,
+                    "geometry_replay": geometry_replay,
+                },
+            )
+        ], {
+            "sat": True,
+            "cells": cell_count,
+            "initial_violations": 0,
+            "anchor_cell_index": None,
+            "first_moves_scanned": 0,
+            "second_candidates": 0,
+            "pairs_replayed": 0,
+            "winner_count": 1,
+            "limit": limit,
+            "residual_modulus": residual_modulus,
+            "required_scaled_density": required_weight,
+            "geometry_cells": len(geometry_cells),
+            "solve_seconds": time.monotonic() - started,
+            "engine": "numpy-exact-two-change-scan",
+        }
+
+    anchor_index = int(
+        failing[np.argmin(base_densities[failing])]
+    )
+    first_moves_scanned = 0
+    second_candidates = 0
+    pairs_replayed = 0
+    winners = []
+
+    def retarget(
+        phases: dict[int, int],
+        row_index: int,
+        target: int,
+    ) -> None:
+        row = rows[row_index]
+        row_prime = int(row["p"])
+        h = int(row["h"])
+        other = int(other_moduli[row_index])
+        residual = int(residual_moduli[row_index])
+        if residual == 1:
+            phases[row_prime] = target
+        else:
+            phases[row_prime] = exact_uncovered.crt(
+                [
+                    (target, other),
+                    (phases[row_prime] % residual, residual),
+                ]
+            ) % h
+
+    for first_index in np.flatnonzero(mutable):
+        first_index = int(first_index)
+        first_target = int(target_matrix[first_index, anchor_index])
+        if first_target == int(old_targets[first_index]):
+            continue
+        if (
+            first_target % int(allowed_moduli[first_index])
+            != int(allowed_residues[first_index])
+        ):
+            continue
+        first_moves_scanned += 1
+        trial = base_densities.copy()
+        first_row_targets = target_matrix[first_index]
+        first_weight = int(weights[first_index])
+        trial[first_row_targets == old_targets[first_index]] -= first_weight
+        trial[first_row_targets == first_target] += first_weight
+        deficits = np.flatnonzero(trial < required_weight)
+
+        if not len(deficits):
+            phases = dict(initial_phases)
+            retarget(phases, first_index, first_target)
+            phases.update(fixed_targets)
+            geometry_replay = (
+                audit_residual_plane_cells(
+                    rows,
+                    phases,
+                    prime,
+                    geometry_cells,
+                    algebraic_primes,
+                )
+                if geometry_cells
+                else None
+            )
+            if geometry_replay and geometry_replay["failed_cells"]:
+                raise ValueError(
+                    "geometry-aware two-change scan requires the supplied "
+                    "density core to reject every one-change phase"
+                )
+            exact_replay = audit_density_cuts(
+                rows,
+                phases,
+                prime,
+                cells,
+                algebraic_primes,
+            )
+            winners.append(
+                (
+                    phases,
+                    {
+                        "changes": [
+                            {
+                                "row_index": first_index,
+                                "prime": int(rows[first_index]["p"]),
+                                "old_coarse_target": int(
+                                    old_targets[first_index]
+                                ),
+                                "new_coarse_target": first_target,
+                            }
+                        ],
+                        "exact_replay": exact_replay,
+                        "geometry_replay": geometry_replay,
+                    },
+                )
+            )
+            if limit and len(winners) >= limit:
+                break
+            continue
+
+        first_deficit = int(deficits[0])
+        second_targets = target_matrix[:, first_deficit]
+        maximum_deficit = int(
+            np.max(required_weight - trial[deficits])
+        )
+        candidate_mask = (
+            mutable
+            & (np.arange(row_count) != first_index)
+            & (second_targets != old_targets)
+            & (
+                second_targets % allowed_moduli
+                == allowed_residues
+            )
+            & (weights >= maximum_deficit)
+        )
+        candidates = np.flatnonzero(candidate_mask)
+        # A useful second row must take the same target on every remaining
+        # failing cell.  Intersect a few columns at a time; candidate sets
+        # normally collapse after the second deficit.
+        for deficit_index in deficits[1:]:
+            if not len(candidates):
+                break
+            candidates = candidates[
+                target_matrix[candidates, int(deficit_index)]
+                == second_targets[candidates]
+            ]
+        second_candidates += len(candidates)
+
+        for second_index in candidates:
+            second_index = int(second_index)
+            second_target = int(second_targets[second_index])
+            second_weight = int(weights[second_index])
+            second_trial = trial.copy()
+            second_row_targets = target_matrix[second_index]
+            second_trial[
+                second_row_targets == old_targets[second_index]
+            ] -= second_weight
+            second_trial[
+                second_row_targets == second_target
+            ] += second_weight
+            pairs_replayed += 1
+            if np.any(second_trial < required_weight):
+                continue
+            phases = dict(initial_phases)
+            retarget(phases, first_index, first_target)
+            retarget(phases, second_index, second_target)
+            phases.update(fixed_targets)
+            exact_replay = audit_density_cuts(
+                rows,
+                phases,
+                prime,
+                cells,
+                algebraic_primes,
+            )
+            geometry_replay = (
+                audit_residual_plane_cells(
+                    rows,
+                    phases,
+                    prime,
+                    geometry_cells,
+                    algebraic_primes,
+                )
+                if geometry_cells
+                else None
+            )
+            if geometry_replay and geometry_replay["failed_cells"]:
+                continue
+            winners.append(
+                (
+                    phases,
+                    {
+                        "changes": [
+                            {
+                                "row_index": first_index,
+                                "prime": int(rows[first_index]["p"]),
+                                "old_coarse_target": int(
+                                    old_targets[first_index]
+                                ),
+                                "new_coarse_target": first_target,
+                            },
+                            {
+                                "row_index": second_index,
+                                "prime": int(rows[second_index]["p"]),
+                                "old_coarse_target": int(
+                                    old_targets[second_index]
+                                ),
+                                "new_coarse_target": second_target,
+                            },
+                        ],
+                        "exact_replay": exact_replay,
+                        "geometry_replay": geometry_replay,
+                    },
+                )
+            )
+            if limit and len(winners) >= limit:
+                break
+        if limit and len(winners) >= limit:
+            break
+
+    metadata = {
+        "sat": bool(winners),
+        "cells": cell_count,
+        "initial_violations": int(len(failing)),
+        "anchor_cell_index": anchor_index,
+        "first_moves_scanned": first_moves_scanned,
+        "second_candidates": int(second_candidates),
+        "pairs_replayed": pairs_replayed,
+        "winner_count": len(winners),
+        "limit": limit,
+        "residual_modulus": residual_modulus,
+        "required_scaled_density": required_weight,
+        "target_matrix_bytes": int(target_matrix.nbytes),
+        "geometry_cells": len(geometry_cells),
+        "solve_seconds": time.monotonic() - started,
+        "engine": "numpy-exact-two-change-scan",
     }
     return winners, metadata
 
@@ -1420,6 +1853,14 @@ def main() -> int:
         ),
     )
     parser.add_argument(
+        "--two-change-scan",
+        action="store_true",
+        help=(
+            "exactly scan every legal phase map at most two row retargets "
+            "from the initial phase against the supplied cells"
+        ),
+    )
+    parser.add_argument(
         "--direct-all-coarse-cells",
         action="store_true",
         help=(
@@ -1442,6 +1883,15 @@ def main() -> int:
             "cells; repeat to union several sources"
         ),
     )
+    parser.add_argument(
+        "--geometry-cells-file",
+        type=Path,
+        action="append",
+        help=(
+            "exact-hole file whose coarse cells must also have complete "
+            "first-level residual affine-plane line unions"
+        ),
+    )
     parser.add_argument("--phase-output", type=Path, required=True)
     parser.add_argument("--checkpoint-output", type=Path, required=True)
     parser.add_argument("--result-output", type=Path, required=True)
@@ -1454,14 +1904,20 @@ def main() -> int:
         parser.error(
             "--maximum-changes currently requires --master-engine milp"
         )
-    if args.one_change_scan and (
+    if args.one_change_scan and args.two_change_scan:
+        parser.error("choose at most one exact change-scan mode")
+    if (args.one_change_scan or args.two_change_scan) and (
         args.check_only
         or args.master_first
         or args.direct_all_coarse_cells
     ):
         parser.error(
-            "--one-change-scan is incompatible with checker/direct/master-first "
-            "modes"
+            "exact change scans are incompatible with "
+            "checker/direct/master-first modes"
+        )
+    if args.geometry_cells_file and not args.two_change_scan:
+        parser.error(
+            "--geometry-cells-file currently requires --two-change-scan"
         )
 
     payload = json.loads(args.pool.read_text())
@@ -1548,10 +2004,38 @@ def main() -> int:
                 cells.append(cell)
     if args.master_first and not cells:
         raise RuntimeError("--master-first requires nonempty supplied cells")
-    if args.one_change_scan and not cells:
-        raise RuntimeError("--one-change-scan requires supplied cells")
+    if (args.one_change_scan or args.two_change_scan) and not cells:
+        raise RuntimeError("exact change scan requires supplied cells")
     seen = set(cells)
     history = []
+    geometry_cells = []
+    seen_geometry_cells = set()
+    for geometry_file in args.geometry_cells_file or ():
+        geometry_payload = json.loads(geometry_file.read_text())
+        if isinstance(geometry_payload, dict):
+            geometry_key = next(
+                (
+                    key
+                    for key in (
+                        "cells",
+                        "exact_misses",
+                        "misses",
+                        "new_cells",
+                    )
+                    if key in geometry_payload
+                ),
+                None,
+            )
+            if geometry_key is None:
+                raise RuntimeError(
+                    "--geometry-cells-file has no supported cell-list field"
+                )
+            geometry_payload = geometry_payload[geometry_key]
+        for raw_k, raw_l in geometry_payload:
+            cell = (int(raw_k), int(raw_l))
+            if cell not in seen_geometry_cells:
+                seen_geometry_cells.add(cell)
+                geometry_cells.append(cell)
 
     if args.one_change_scan:
         winners, scan = scan_one_change(
@@ -1628,6 +2112,62 @@ def main() -> int:
             flush=True,
         )
         return 0
+
+    if args.two_change_scan:
+        winners, scan = scan_two_changes(
+            rows,
+            phases,
+            args.prime,
+            cells,
+            fixed_targets,
+            algebraic_primes,
+            geometry_cells,
+        )
+        winner = winners[0][1] if winners else None
+        args.checkpoint_output.write_text(
+            json.dumps(
+                {
+                    "pool": str(args.pool),
+                    "prime": args.prime,
+                    "cells": [[k, l] for k, l in cells],
+                    "scan": scan,
+                    "winner": winner,
+                },
+                indent=2,
+            )
+            + "\n"
+        )
+        if winners:
+            phases = winners[0][0]
+        args.phase_output.write_text(
+            json.dumps(
+                {
+                    str(row_prime): target
+                    for row_prime, target in phases.items()
+                }
+            )
+            + "\n"
+        )
+        result = {
+            "pool": str(args.pool),
+            "prime": args.prime,
+            "complete": False,
+            "two_change_feasible": bool(winners),
+            "scan": scan,
+            "winner": winner,
+        }
+        args.result_output.write_text(
+            json.dumps(result, indent=2) + "\n"
+        )
+        label = "TWO_CHANGE_SAT" if winners else "NO_TWO_CHANGE"
+        print(
+            f"{label} cells={len(cells)} "
+            f"first={scan['first_moves_scanned']} "
+            f"pairs={scan['pairs_replayed']} "
+            f"solve_s={scan['solve_seconds']}",
+            flush=True,
+        )
+        return 0 if winners else 2
 
     def invoke_master(
         current_phases: dict[int, int],

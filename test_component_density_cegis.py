@@ -105,6 +105,29 @@ class TargetModulusTests(unittest.TestCase):
         self.assertEqual(metadata["components"], {3: 3})
         self.assertEqual(metadata["algebraic_primes"], [3])
 
+    def test_residual_plane_audit_detects_density_without_cover(self):
+        rows = [
+            {"h": 3, "p": 7, "a": 1, "b": 0},
+            {"h": 3, "p": 13, "a": 1, "b": 0},
+            {"h": 3, "p": 19, "a": 1, "b": 0},
+        ]
+        failed = component_density_cegis.audit_residual_plane_cells(
+            rows,
+            {7: 0, 13: 0, 19: 1},
+            3,
+            [(0, 0)],
+        )
+        self.assertEqual(failed["failed_cells"], 1)
+        self.assertEqual(failed["minimum_covered_points"], 6)
+        covered = component_density_cegis.audit_residual_plane_cells(
+            rows,
+            {7: 0, 13: 1, 19: 2},
+            3,
+            [(0, 0)],
+        )
+        self.assertEqual(covered["failed_cells"], 0)
+        self.assertEqual(covered["minimum_covered_points"], 9)
+
     def test_exact_density_replay_rejects_a_bad_master_phase(self):
         rows = [
             {
@@ -268,6 +291,51 @@ class TargetModulusTests(unittest.TestCase):
             winner["exact_replay"]["minimum_scaled_density"],
             2,
         )
+
+    def test_exact_two_change_scan_finds_a_required_pair(self):
+        rows = [
+            {"h": 3, "p": 7, "a": 1, "b": 0},
+            {"h": 3, "p": 13, "a": 1, "b": 0},
+            {"h": 3, "p": 19, "a": 1, "b": 0},
+        ]
+        phases = {7: 0, 13: 0, 19: 0}
+        winners, metadata = component_density_cegis.scan_two_changes(
+            rows,
+            phases,
+            5,
+            [(0, 0), (1, 0), (2, 0)],
+            {7: 0},
+        )
+        self.assertTrue(metadata["sat"])
+        self.assertEqual(len(winners[0][1]["changes"]), 2)
+        self.assertEqual(
+            {
+                change["new_coarse_target"]
+                for change in winners[0][1]["changes"]
+            },
+            {1, 2},
+        )
+        self.assertEqual(
+            winners[0][1]["exact_replay"]["violations"],
+            0,
+        )
+
+    def test_exact_two_change_scan_can_prove_no_pair(self):
+        rows = [
+            {"h": 4, "p": 7, "a": 1, "b": 0},
+            {"h": 4, "p": 13, "a": 1, "b": 0},
+            {"h": 4, "p": 19, "a": 1, "b": 0},
+        ]
+        phases = {7: 0, 13: 0, 19: 0}
+        winners, metadata = component_density_cegis.scan_two_changes(
+            rows,
+            phases,
+            5,
+            [(0, 0), (1, 0), (2, 0), (3, 0)],
+            {7: 0},
+        )
+        self.assertFalse(metadata["sat"])
+        self.assertEqual(winners, [])
 
 
 if __name__ == "__main__":

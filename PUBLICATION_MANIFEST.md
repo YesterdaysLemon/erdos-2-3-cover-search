@@ -60,9 +60,9 @@ This repository is a curated snapshot of the active workspace, updated on
 - the local `D=1616615` perfect-power phase assignments, stream caches, and
   lesson sets, including the 830,162-point ordinary and 587,225-point
   triple-coverage multi-digit continuations, the transient 17-adic phase
-  assignments, and the growing 319-cell density core; their exact checker
-  outcomes and structural measurements are recorded in `README.md` and
-  `RESEARCH_LOG.md`;
+  assignments, the 2,121-cell/1,000-plane exact radius-two core, and its
+  newest 100-hole checker batch; their exact checker outcomes and structural
+  measurements are recorded in `README.md` and `RESEARCH_LOG.md`;
 - superseded discovery-only period-`3139207671600` design JSON, CEGIS witnesses,
   phases, and checker logs; their exact aggregate checkpoint and caveats are
   recorded in `RESEARCH_LOG.md`;

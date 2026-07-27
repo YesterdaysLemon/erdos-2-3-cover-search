@@ -10,6 +10,25 @@ import exact_uncovered
 
 
 class PerTargetDiversityTests(unittest.TestCase):
+    def test_phase_overrides_are_explicit_and_unique(self):
+        self.assertEqual(
+            exact_derived_phase_misses.parse_phase_overrides(
+                ["41:1", "73:0"],
+                {41, 73},
+            ),
+            {41: 1, 73: 0},
+        )
+        with self.assertRaises(ValueError):
+            exact_derived_phase_misses.parse_phase_overrides(
+                ["41:0", "41:1"],
+                {41},
+            )
+        with self.assertRaises(ValueError):
+            exact_derived_phase_misses.parse_phase_overrides(
+                ["19:0"],
+                {41},
+            )
+
     rows = [
         {"h": 2, "p": 5, "a": 1, "b": 0, "c": 0},
         {"h": 3, "p": 7, "a": 0, "b": 1, "c": 0},

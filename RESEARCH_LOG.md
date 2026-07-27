@@ -3553,6 +3553,96 @@ The exact checker under the final `p=73` phase again returned a genuine
 hole.  Hence the one-change strategy is not exhausted and no candidate
 cover has been found.
 
+### Adversarial branch quotient and exact radius-two search
+
+The one-hole target cap was replaced by an explicit game over the small
+oscillating rows.  `exact_derived_phase_misses.py` now accepts repeatable
+`--phase-override PRIME:TARGET` arguments, so all other phases can be frozen
+while both targets of `p=41` are checked.  Removing the per-target witness
+cap and retaining exact `(16384,6561)` coordinate diversity produced 100
+genuine holes in each binary branch.
+
+The same experiment was lifted to all eight target pairs of `(p=41,p=17)`.
+Two branches reused the previous files and six additional exact checks each
+returned 100 holes.  All 800 branch holes are distinct, as are the 321 older
+cells; reducing away the 17-adic coordinate still leaves exactly 1,121
+distinct coarse cells.  Against their union, `--one-change-scan` examined
+1,198,544 legal retargets in `130.2553` seconds and returned
+`NO_ONE_CHANGE`.  This is an exact radius-one obstruction around the frozen
+seed phase, not an obstruction to arbitrary phase assignments.
+
+A first sparse MILP with a hard two-change budget spent more than 27 minutes
+building and solving a 2.7--3.1 GB model without returning.  It was stopped
+after its exact replacement had already decided the case; host memory
+remained above 52 percent free throughout.  No solver conclusion was
+attributed to the stopped run.
+
+`component_density_cegis.py` now implements `--two-change-scan`.  It chooses
+a minimum-density anchor cell.  Every valid one- or two-change repair must
+move some row to that cell's unique useful target.  For each legal first
+move, the scanner intersects second-row target classes across every
+remaining deficit, then exact-integer replays each surviving pair.  This is
+an exhaustive radius-two decision, not a heuristic.  Small positive and
+negative regression instances exercise both outcomes.
+
+On the 1,121-cell core it found the pair
+
+```
+p=41:  0 -> 1
+p=107: 31 -> 0
+```
+
+after `17.5684` seconds.  Only one first move and one surviving pair needed
+full replay; the exact density range was `23..99`.  The next whole-domain
+checker nevertheless returned 100 distinct holes.
+
+### Residual finite-plane geometry
+
+Of those first 100 holes, 99 had scaled 17-adic density 12.  The last had
+density 18, demonstrating that the scalar necessary condition is genuinely
+weak.  It had no active full-plane row.  Its 18 active residual rows reduced
+to 17 distinct affine lines in 11 directions; together with the algebraic
+origin they covered only 177 of 289 points in `F_17^2`, leaving 112 holes.
+The recorded full-checker point has residual coordinate `(0,1)` and is one
+of them.
+
+The new exact residual-plane replay enumerates each `17 x 17` line union as
+a Python bitset.  A geometry-aware two-change result is accepted only when
+every supplied coarse cell has all 289 points covered.  Subsequent exact
+checker batches repeatedly contained both low-density holes and holes of
+density 17--20 whose line unions remained incomplete.  The geometry check is
+therefore material, not cosmetic.
+
+Alternating 100-hole full-domain batches with geometry-aware radius-two scans
+gave:
+
+```
+density cells  plane cells  exact changed pair        scan seconds
+1221           100          p=41, p=293               13.2383
+1321           200          p=41, p=439               15.8640
+1421           300          p=41, p=179               18.2451
+1521           400          p=41, p=263               21.6391
+1621           500          p=19, p=97                18.1898
+1721           600          p=19, p=193               20.8043
+1821           700          p=19, p=557               21.0386
+1921           800          p=37, p=97                22.4073
+2021           900          p=97, p=193               25.6119
+2121           1000         p=97, p=2131              27.6313
+```
+
+Every row reports density violations zero and minimum residual-plane coverage
+289.  Each returned phase was then rejected by the exact whole-domain
+checker with a complete 100-hole batch.  The newest batch after the
+2,121-cell pair contains 99 density violations in the range `10..16` and
+one density-17 geometric hole whose active lines cover only 145 plane points.
+It has not yet been folded into the next radius-two scan.
+
+This progression has eliminated the entire `p=41` first-move family, then
+the `p=19` family, and then the `p=37` family on the growing exact core.
+Radius two still survives through other pairs.  These are local finite-radius
+facts around one frozen seed phase; they neither produce a conditioned-cell
+cover nor prove the full 12,577-row family impossible.
+
 ### Exact low-modulus affine-subpool obstruction
 
 To test a non-refinement affine-cover route in a different space, every

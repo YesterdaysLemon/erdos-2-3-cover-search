@@ -31,10 +31,42 @@ def expanded_diversity_primes(
     return tuple(dict.fromkeys(ordered))
 
 
+def parse_phase_overrides(
+    items: list[str],
+    row_primes: set[int],
+) -> dict[int, int]:
+    overrides = {}
+    for item in items:
+        try:
+            raw_prime, raw_target = item.split(":", 1)
+            prime = int(raw_prime)
+            target = int(raw_target)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                f"invalid phase override {item!r}; expected PRIME:TARGET"
+            ) from error
+        if prime not in row_primes:
+            raise ValueError(f"phase override prime {prime} is absent")
+        if prime in overrides:
+            raise ValueError(f"phase override repeats prime {prime}")
+        overrides[prime] = target
+    return overrides
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
     parser.add_argument("--phase-file", type=Path, required=True)
+    parser.add_argument(
+        "--phase-override",
+        action="append",
+        default=[],
+        metavar="PRIME:TARGET",
+        help=(
+            "override one saved phase without rewriting the phase file; "
+            "repeat for several rows"
+        ),
+    )
     parser.add_argument(
         "--period",
         type=int,
@@ -88,6 +120,11 @@ def main() -> int:
     row_by_prime = {
         int(row["p"]): row for row in payload["choices"]
     }
+    phase_overrides = parse_phase_overrides(
+        args.phase_override,
+        set(row_by_prime),
+    )
+    phases.update(phase_overrides)
     rows = []
     for candidate in candidates:
         h, prime, *_rest = candidate
@@ -149,6 +186,10 @@ def main() -> int:
     result = {
         "pool": str(args.pool),
         "phase_file": str(args.phase_file),
+        "phase_overrides": {
+            str(prime): target
+            for prime, target in phase_overrides.items()
+        },
         "row_count": len(rows),
         "diversity_coprime_to": args.diversity_coprime_to,
         "expanded_diversity_prime_count": len(diversity_primes),

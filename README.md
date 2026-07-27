@@ -209,13 +209,60 @@ an exact full-domain hole.  In particular, `p=41` flipped back once the
 other movers protected the older half-plane.  This remains an oscillating
 necessary-condition search, not a cover.
 
+The binary oscillation was then quotiented out explicitly.  With every other
+phase frozen, the checker generated 100 coordinate-diverse holes for each of
+the eight target pairs of `(p=41,p=17)`.  Their union with the earlier core
+contains 1,121 distinct exact coarse cells.  The exhaustive one-change scan
+tested 1,198,544 legal retargets in `130.255` seconds and found none.
+
+An exact two-change scanner replaces the million-variable MILP for the next
+radius.  It anchors one failing cell, intersects the possible second-row
+target classes over all remaining deficits, and exact-integer replays every
+surviving pair.  The first 1,121-cell run found
+
+```
+p=41: 0 -> 1
+p=107: 31 -> 0
+```
+
+in `17.568` seconds, with density range `23..99`.  The full checker still
+returned 100 holes.  Ninety-nine had density 12; the remaining hole had
+density 18 but its 18 active rows represented only 17 distinct affine lines,
+covering 177 of the 289 points in the residual `F_17^2` plane.
+
+The scanner therefore now exact-replays complete residual-plane line unions,
+not only their total density.  Ten further checker/repair batches grew the
+joint core to 2,121 density cells and 1,000 residual planes.  Exact
+radius-two repairs successively used
+
+```
+cells   changed pair
+1221    p=41, p=293
+1321    p=41, p=439
+1421    p=41, p=179
+1521    p=41, p=263
+1621    p=19, p=97
+1721    p=19, p=193
+1821    p=19, p=557
+1921    p=37, p=97
+2021    p=97, p=193
+2121    p=97, p=2131
+```
+
+Every listed pair exactly satisfies the accumulated density and finite-plane
+constraints, but every corresponding full-domain checker again produced its
+complete 100-hole batch.  The latest batch has 99 density violations and one
+geometric violation.  Thus the method has exhausted whole one- and two-row
+repair families in succession, but it has not found a cover or proved that
+no larger coordinated repair exists.
+
 The checker and master now support
 algebraic sublattices, restricted perfect-power targets, unioned cut files,
 hard phase-change budgets, and exact integer replay of every accepted MILP
-answer.  It also has an exhaustive exact one-change scanner, so a negative
-result means that no legal single-row retarget repairs the supplied core.
-Work is continuing from the `p=73` phase.  No conditioned-cell cover, global
-`m`, or global impossibility proof has been obtained.
+answer.  They also support phase overrides for adversarial branch queries,
+exhaustive exact one- and two-change scans, and first-level affine-plane
+bitset replay.  No conditioned-cell cover, global `m`, or global
+impossibility proof has been obtained.
 
 ## Exact small affine-subpool obstruction
 
