@@ -30,12 +30,163 @@ def target_modulus(row: dict) -> int:
     return int(row.get("target_modulus", 1))
 
 
+def target_residue(row: dict) -> int:
+    """Return the canonical allowed phase residue for a row."""
+    modulus = target_modulus(row)
+    if modulus < 1:
+        raise ValueError("target modulus must be positive")
+    return int(row.get("target_residue", 0)) % modulus
+
+
 def q_part(value: int, prime: int) -> int:
     result = 1
     while value % prime == 0:
         result *= prime
         value //= prime
     return result
+
+
+def coarse_target_restriction(
+    row: dict,
+    prime: int,
+    initial_phase: int,
+) -> tuple[int, int]:
+    """Project a full phase restriction onto the frozen coarse coordinates.
+
+    For the selected residual ``prime`` component, a phase modulo ``h``
+    decomposes by CRT into a residual target and a coprime coarse target.
+    The residual target is deliberately held at ``initial_phase`` by every
+    density-master move.  This helper validates that fixed part and returns
+    the remaining congruence on the coarse target.
+    """
+    h = int(row["h"])
+    modulus = target_modulus(row)
+    residue = target_residue(row)
+    if h % modulus:
+        raise ValueError("target modulus must divide the row modulus")
+    residual = q_part(h, prime)
+    residual_restriction = q_part(modulus, prime)
+    coarse_modulus = modulus // residual_restriction
+    if (
+        residual % residual_restriction
+        or (h // residual) % coarse_modulus
+    ):
+        raise AssertionError("target restriction does not split over CRT")
+    if initial_phase % residual_restriction != residue % residual_restriction:
+        raise ValueError(
+            "initial phase violates the residual target restriction"
+        )
+    return residue % coarse_modulus, coarse_modulus
+
+
+def coarse_target_allowed(
+    target: int,
+    restriction: tuple[int, int],
+) -> bool:
+    residue, modulus = restriction
+    return target % modulus == residue
+
+
+def required_scaled_density(
+    residual_modulus: int,
+    prime: int,
+    algebraic_primes: tuple[int, ...] = (),
+) -> int:
+    """Return the union-bound weight required on one residual component.
+
+    Ordinarily the selected fibres need total line density at least one.
+    When ``prime`` is an algebraic factor of the perfect-power exponent,
+    ``X^prime + 1`` already covers the origin sublattice ``prime*Z^2``.
+    Its density inside the residual plane is exactly ``1 / prime^2``.
+    Scaled row weights are integral with denominator ``residual_modulus``,
+    so round the remaining required measure upward.
+    """
+    if residual_modulus < 1:
+        raise ValueError("residual modulus must be positive")
+    if prime not in algebraic_primes:
+        return residual_modulus
+    square = prime * prime
+    numerator = residual_modulus * (square - 1)
+    return (numerator + square - 1) // square
+
+
+def scaled_density_at_cell(
+    rows: list[dict],
+    phases: dict[int, int],
+    prime: int,
+    cell: tuple[int, int],
+) -> tuple[int, int]:
+    """Recompute one residual-density cut using exact integer arithmetic."""
+    residual_modulus = max(
+        (q_part(int(row["h"]), prime) for row in rows),
+        default=1,
+    )
+    k, l = cell
+    scaled_density = 0
+    for row in rows:
+        h = int(row["h"])
+        residual = q_part(h, prime)
+        other = h // residual
+        required_target = (
+            int(row["a"]) * k + int(row["b"]) * l
+        ) % other
+        if phases[int(row["p"])] % other == required_target:
+            scaled_density += residual_modulus // residual
+    return scaled_density, residual_modulus
+
+
+def audit_density_cuts(
+    rows: list[dict],
+    phases: dict[int, int],
+    prime: int,
+    cells: list[tuple[int, int]],
+    algebraic_primes: tuple[int, ...] = (),
+) -> dict:
+    """Fail closed unless a proposed phase map satisfies every exact cut."""
+    densities = []
+    residual_modulus = 1
+    for cell in cells:
+        density, cell_modulus = scaled_density_at_cell(
+            rows,
+            phases,
+            prime,
+            cell,
+        )
+        residual_modulus = max(residual_modulus, cell_modulus)
+        densities.append(density)
+    if not cells:
+        residual_modulus = max(
+            (q_part(int(row["h"]), prime) for row in rows),
+            default=1,
+        )
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
+    violations = [
+        {
+            "cell": list(cell),
+            "scaled_density": density,
+        }
+        for cell, density in zip(cells, densities)
+        if density < required_weight
+    ]
+    if violations:
+        first = violations[0]
+        raise AssertionError(
+            "master phase failed exact residual-density replay at "
+            f"{first['cell']}: {first['scaled_density']} < {required_weight}"
+        )
+    return {
+        "cells": len(cells),
+        "residual_modulus": residual_modulus,
+        "required_scaled_density": required_weight,
+        "minimum_scaled_density": min(densities) if densities else None,
+        "maximum_scaled_density": max(densities) if densities else None,
+        "violations": 0,
+        "engine": "python-exact-integer-replay",
+    }
 
 
 def find_low_density_cells(
@@ -45,6 +196,7 @@ def find_low_density_cells(
     limit: int,
     max_component: int,
     diversity_modulus: int = 0,
+    algebraic_primes: tuple[int, ...] = (),
 ) -> tuple[list[tuple[int, int]], dict]:
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
@@ -65,6 +217,12 @@ def find_low_density_cells(
                 exponent,
             )
         row_data.append((other, residual, factors))
+    for algebraic_prime in algebraic_primes:
+        if algebraic_prime != prime:
+            maximal[algebraic_prime] = max(
+                maximal.get(algebraic_prime, 0),
+                1,
+            )
     components = {
         component_prime: component_prime**exponent
         for component_prime, exponent in maximal.items()
@@ -124,6 +282,27 @@ def find_low_density_cells(
             value,
         )
 
+    for algebraic_prime in algebraic_primes:
+        if algebraic_prime == prime:
+            continue
+        width = expression_width
+        modulus = z3.BitVecVal(algebraic_prime, width)
+        zero = z3.BitVecVal(0, width)
+        solver.add(
+            z3.Or(
+                z3.URem(
+                    widened(kval[algebraic_prime], algebraic_prime),
+                    modulus,
+                )
+                != zero,
+                z3.URem(
+                    widened(lval[algebraic_prime], algebraic_prime),
+                    modulus,
+                )
+                != zero,
+            )
+        )
+
     activations = []
     weights = []
     for row, (other, residual, factors) in zip(rows, row_data):
@@ -169,12 +348,20 @@ def find_low_density_cells(
             )
         activations.append(z3.And(*equalities))
 
-    solver.add(
-        z3.PbLe(
-            list(zip(activations, weights)),
-            residual_modulus - 1,
-        )
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
     )
+    if activations:
+        solver.add(
+            z3.PbLe(
+                list(zip(activations, weights)),
+                required_weight - 1,
+            )
+        )
+    elif required_weight <= 0:
+        solver.add(z3.BoolVal(False))
     cells = []
     scaled_densities = []
     for _ in range(limit):
@@ -252,6 +439,7 @@ def find_low_density_cells(
     return cells, {
         "prime": prime,
         "residual_modulus": residual_modulus,
+        "required_scaled_density": required_weight,
         "components": components,
         "period": math.prod(components.values()),
         "row_count": len(rows),
@@ -261,9 +449,156 @@ def find_low_density_cells(
             min(scaled_densities) if scaled_densities else None
         ),
         "diversity_modulus": diversity_modulus,
+        "algebraic_primes": list(algebraic_primes),
         "sat": bool(cells),
         "engine": "z3-bitvector-pb",
     }
+
+
+def scan_one_change(
+    rows: list[dict],
+    initial_phases: dict[int, int],
+    prime: int,
+    cells: list[tuple[int, int]],
+    fixed_targets: dict[int, int],
+    algebraic_primes: tuple[int, ...] = (),
+    limit: int = 1,
+) -> tuple[list[tuple[dict[int, int], dict]], dict]:
+    """Exactly enumerate phase maps one coarse-row change away.
+
+    The current density of every cell is computed once.  Changing one row
+    subtracts its weight where its old target was active and adds the same
+    weight where a candidate new target is active.  Targets absent from all
+    supplied cells cannot improve any cut and need not be considered.
+    """
+    if limit < 0:
+        raise ValueError("one-change scan limit must be nonnegative")
+    started = time.monotonic()
+    residual_modulus = max(
+        (q_part(int(row["h"]), prime) for row in rows),
+        default=1,
+    )
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
+    base_densities = [
+        scaled_density_at_cell(rows, initial_phases, prime, cell)[0]
+        for cell in cells
+    ]
+    row_data = []
+    restrictions = []
+    for row in rows:
+        h = int(row["h"])
+        residual = q_part(h, prime)
+        row_data.append((h // residual, residual))
+        restrictions.append(
+            coarse_target_restriction(
+                row,
+                prime,
+                initial_phases[int(row["p"])],
+            )
+        )
+
+    scanned_rows = 0
+    scanned_targets = 0
+    winners = []
+    for row_index, (row, (other, residual)) in enumerate(
+        zip(rows, row_data)
+    ):
+        row_prime = int(row["p"])
+        if other == 1 or row_prime in fixed_targets:
+            continue
+        scanned_rows += 1
+        current_target = initial_phases[row_prime] % other
+        weight = residual_modulus // residual
+        required_targets = [
+            (
+                int(row["a"]) * k + int(row["b"]) * l
+            ) % other
+            for k, l in cells
+        ]
+        candidates = sorted(
+            {
+                target
+                for target in required_targets
+                if target != current_target
+                and coarse_target_allowed(
+                    target,
+                    restrictions[row_index],
+                )
+            }
+        )
+        for target in candidates:
+            scanned_targets += 1
+            trial_densities = [
+                density
+                - (weight if required == current_target else 0)
+                + (weight if required == target else 0)
+                for density, required in zip(
+                    base_densities,
+                    required_targets,
+                )
+            ]
+            if any(
+                density < required_weight
+                for density in trial_densities
+            ):
+                continue
+            phases = dict(initial_phases)
+            h = int(row["h"])
+            if residual == 1:
+                phases[row_prime] = target
+            else:
+                phases[row_prime] = exact_uncovered.crt(
+                    [
+                        (target, other),
+                        (phases[row_prime] % residual, residual),
+                    ]
+                ) % h
+            phases.update(fixed_targets)
+            exact_replay = audit_density_cuts(
+                rows,
+                phases,
+                prime,
+                cells,
+                algebraic_primes,
+            )
+            winners.append(
+                (
+                    phases,
+                    {
+                        "row_index": row_index,
+                        "prime": row_prime,
+                        "h": h,
+                        "old_phase": initial_phases[row_prime],
+                        "new_phase": phases[row_prime],
+                        "old_coarse_target": current_target,
+                        "new_coarse_target": target,
+                        "weight": weight,
+                        "exact_replay": exact_replay,
+                    },
+                )
+            )
+            if limit and len(winners) >= limit:
+                break
+        if limit and len(winners) >= limit:
+            break
+
+    metadata = {
+        "sat": bool(winners),
+        "cells": len(cells),
+        "scanned_rows": scanned_rows,
+        "scanned_targets": scanned_targets,
+        "winner_count": len(winners),
+        "limit": limit,
+        "residual_modulus": residual_modulus,
+        "required_scaled_density": required_weight,
+        "solve_seconds": time.monotonic() - started,
+        "engine": "python-exact-one-change-scan",
+    }
+    return winners, metadata
 
 
 def solve_master(
@@ -273,6 +608,7 @@ def solve_master(
     cells: list[tuple[int, int]],
     fixed_targets: dict[int, int],
     solver_name: str,
+    algebraic_primes: tuple[int, ...] = (),
 ) -> tuple[dict[int, int] | None, dict]:
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
@@ -287,6 +623,19 @@ def solve_master(
         residual = q_part(h, prime)
         residual_modulus = max(residual_modulus, residual)
         row_data.append((h // residual, residual))
+    coarse_restrictions = [
+        coarse_target_restriction(
+            row,
+            prime,
+            initial_phases[int(row["p"])],
+        )
+        for row in rows
+    ]
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
 
     options: dict[int, set[int]] = defaultdict(set)
     required_by_cell = []
@@ -299,7 +648,14 @@ def solve_master(
                 int(row["a"]) * k + int(row["b"]) * l
             ) % other
             required.append(target)
-            if other > 1 and int(row["p"]) not in fixed_targets:
+            if (
+                other > 1
+                and int(row["p"]) not in fixed_targets
+                and coarse_target_allowed(
+                    target,
+                    coarse_restrictions[row_index],
+                )
+            ):
                 options[row_index].add(target)
         required_by_cell.append(required)
 
@@ -341,11 +697,16 @@ def solve_master(
                 if fixed_targets[row_prime] % other == required[row_index]:
                     constant += weight
             else:
+                if not coarse_target_allowed(
+                    required[row_index],
+                    coarse_restrictions[row_index],
+                ):
+                    continue
                 literals.append(
                     variable[(row_index, required[row_index])]
                 )
                 weights.append(weight)
-        bound = residual_modulus - constant
+        bound = required_weight - constant
         if bound <= 0:
             continue
         if sum(weights) < bound:
@@ -445,6 +806,11 @@ def solve_master(
         "hints": len(hints),
         "solver": solver_name,
         "solve_seconds": solve_seconds,
+        "required_scaled_density": required_weight,
+        "algebraic_primes": list(algebraic_primes),
+        "restricted_rows": sum(
+            modulus > 1 for _residue, modulus in coarse_restrictions
+        ),
     }
     if not sat:
         solver.delete()
@@ -487,6 +853,7 @@ def solve_master_z3(
     cells: list[tuple[int, int]],
     fixed_targets: dict[int, int],
     maximize_preserved: bool = True,
+    algebraic_primes: tuple[int, ...] = (),
 ) -> tuple[dict[int, int] | None, dict]:
     """Solve the accumulated weighted density cuts without weight expansion.
 
@@ -513,6 +880,19 @@ def solve_master_z3(
         residual = q_part(h, prime)
         residual_modulus = max(residual_modulus, residual)
         row_data.append((h // residual, residual))
+    coarse_restrictions = [
+        coarse_target_restriction(
+            row,
+            prime,
+            initial_phases[int(row["p"])],
+        )
+        for row in rows
+    ]
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
 
     # Preserve as much of the previous exact phase assignment as possible.
     # A merely arbitrary satisfying model tends to repair the accumulated
@@ -531,6 +911,9 @@ def solve_master_z3(
         variable = z3.Int(f"coarse_target_{row_index}")
         coarse_targets[row_index] = variable
         solver.add(variable >= 0, variable < other)
+        allowed_residue, allowed_modulus = coarse_restrictions[row_index]
+        if allowed_modulus > 1:
+            solver.add(variable % allowed_modulus == allowed_residue)
         preservation_terms.append(
             z3.If(
                 variable == initial_phases[row_prime] % other,
@@ -559,6 +942,11 @@ def solve_master_z3(
                 if fixed_targets[row_prime] % other == required:
                     constant += weight
             else:
+                if not coarse_target_allowed(
+                    required,
+                    coarse_restrictions[row_index],
+                ):
+                    continue
                 available_weight += weight
                 weighted_matches.append(
                     z3.If(
@@ -567,7 +955,7 @@ def solve_master_z3(
                         0,
                     )
                 )
-        bound = residual_modulus - constant
+        bound = required_weight - constant
         if bound <= 0:
             continue
         if available_weight < bound:
@@ -625,6 +1013,11 @@ def solve_master_z3(
         "solve_seconds": solve_seconds,
         "maximum_preserved": maximum_preserved,
         "maximize_preserved": maximize_preserved,
+        "required_scaled_density": required_weight,
+        "algebraic_primes": list(algebraic_primes),
+        "restricted_rows": sum(
+            modulus > 1 for _residue, modulus in coarse_restrictions
+        ),
     }
     if status == z3.unknown:
         result_meta["reason"] = solver.reason_unknown()
@@ -669,8 +1062,13 @@ def solve_master_milp(
     fixed_targets: dict[int, int],
     time_limit: float,
     maximize_preserved: bool = True,
+    algebraic_primes: tuple[int, ...] = (),
+    maximum_changes: int = 0,
 ) -> tuple[dict[int, int] | None, dict]:
     """Solve exact weighted density cuts as a sparse binary MILP."""
+
+    if maximum_changes < 0:
+        raise ValueError("maximum changes must be nonnegative")
 
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
@@ -685,6 +1083,19 @@ def solve_master_milp(
         residual = q_part(h, prime)
         residual_modulus = max(residual_modulus, residual)
         row_data.append((h // residual, residual))
+    coarse_restrictions = [
+        coarse_target_restriction(
+            row,
+            prime,
+            initial_phases[int(row["p"])],
+        )
+        for row in rows
+    ]
+    required_weight = required_scaled_density(
+        residual_modulus,
+        prime,
+        algebraic_primes,
+    )
 
     mutable_rows = []
     target_options = {}
@@ -720,9 +1131,14 @@ def solve_master_milp(
                 if fixed_targets[row_prime] % other == required:
                     constant += weight
             else:
+                if not coarse_target_allowed(
+                    required,
+                    coarse_restrictions[row_index],
+                ):
+                    continue
                 available_weight += weight
                 entries.append((row_index, required, float(weight)))
-        bound = residual_modulus - constant
+        bound = required_weight - constant
         if bound <= 0:
             continue
         if available_weight < bound:
@@ -750,6 +1166,8 @@ def solve_master_milp(
     for row_index in mutable_rows:
         other, _residual = row_data[row_index]
         targets = sorted(target_options[row_index])
+        allowed_residue, allowed_modulus = coarse_restrictions[row_index]
+        allowed_target_count = other // allowed_modulus
         target_columns = {}
         indices = []
         for target in targets:
@@ -758,7 +1176,7 @@ def solve_master_milp(
             indices.append(variable_count)
             variable_count += 1
         sentinel_column = None
-        if len(targets) < other:
+        if len(targets) < allowed_target_count:
             sentinel_column = variable_count
             indices.append(variable_count)
             variable_count += 1
@@ -770,6 +1188,8 @@ def solve_master_milp(
                 "target_columns": target_columns,
                 "sentinel_column": sentinel_column,
                 "other": other,
+                "allowed_residue": allowed_residue,
+                "allowed_modulus": allowed_modulus,
             }
         )
 
@@ -786,6 +1206,24 @@ def solve_master_milp(
             matrix_values.append(1.0)
         lower_bounds.append(1.0)
         upper_bounds.append(1.0)
+        constraint_index += 1
+
+    if maximum_changes:
+        for record in variable_rows:
+            row_index = record["row_index"]
+            other = record["other"]
+            initial_target = (
+                initial_phases[int(rows[row_index]["p"])] % other
+            )
+            matrix_rows.append(constraint_index)
+            matrix_cols.append(
+                record["target_columns"][initial_target]
+            )
+            matrix_values.append(1.0)
+        lower_bounds.append(
+            float(max(0, len(variable_rows) - maximum_changes))
+        )
+        upper_bounds.append(np.inf)
         constraint_index += 1
 
     for bound, entries in cut_records:
@@ -817,7 +1255,7 @@ def solve_master_milp(
     if time_limit > 0:
         options["time_limit"] = float(time_limit)
     objective = np.zeros(variable_count, dtype=np.float64)
-    if maximize_preserved:
+    if maximize_preserved and not maximum_changes:
         for record in variable_rows:
             row_index = record["row_index"]
             other = record["other"]
@@ -851,6 +1289,12 @@ def solve_master_milp(
         "message": str(answer.message),
         "solve_seconds": solve_seconds,
         "maximize_preserved": maximize_preserved,
+        "maximum_changes": maximum_changes,
+        "required_scaled_density": required_weight,
+        "algebraic_primes": list(algebraic_primes),
+        "restricted_rows": sum(
+            modulus > 1 for _residue, modulus in coarse_restrictions
+        ),
     }
     if answer.status == 2:
         return None, result_meta
@@ -878,9 +1322,15 @@ def solve_master_milp(
             )
         if sentinel_selected:
             represented = record["target_columns"]
+            allowed_residue = record["allowed_residue"]
+            allowed_modulus = record["allowed_modulus"]
             target = next(
                 candidate
-                for candidate in range(record["other"])
+                for candidate in range(
+                    allowed_residue,
+                    record["other"],
+                    allowed_modulus,
+                )
                 if candidate not in represented
             )
         else:
@@ -940,9 +1390,34 @@ def main() -> int:
         help="optional positive HiGHS time limit in seconds",
     )
     parser.add_argument(
+        "--maximum-changes",
+        type=int,
+        default=0,
+        help=(
+            "MILP-only hard bound on phase changes from --initial-phases; "
+            "zero disables the bound and retains the preservation objective"
+        ),
+    )
+    parser.add_argument(
         "--check-only",
         action="store_true",
         help="run the exact density checker once without solving a master",
+    )
+    parser.add_argument(
+        "--master-first",
+        action="store_true",
+        help=(
+            "solve the supplied --cells-file cuts before asking the checker "
+            "for additional violations"
+        ),
+    )
+    parser.add_argument(
+        "--one-change-scan",
+        action="store_true",
+        help=(
+            "exactly scan every legal one-row retarget against the supplied "
+            "cells, without invoking a general master"
+        ),
     )
     parser.add_argument(
         "--direct-all-coarse-cells",
@@ -961,7 +1436,11 @@ def main() -> int:
     parser.add_argument(
         "--cells-file",
         type=Path,
-        help="optional JSON list of previously learned coarse cells",
+        action="append",
+        help=(
+            "optional JSON list or checker object containing learned coarse "
+            "cells; repeat to union several sources"
+        ),
     )
     parser.add_argument("--phase-output", type=Path, required=True)
     parser.add_argument("--checkpoint-output", type=Path, required=True)
@@ -969,13 +1448,29 @@ def main() -> int:
     args = parser.parse_args()
     if args.prime < 2:
         raise SystemExit("--prime must be at least two")
+    if args.maximum_changes < 0:
+        parser.error("--maximum-changes must be nonnegative")
+    if args.maximum_changes and args.master_engine != "milp":
+        parser.error(
+            "--maximum-changes currently requires --master-engine milp"
+        )
+    if args.one_change_scan and (
+        args.check_only
+        or args.master_first
+        or args.direct_all_coarse_cells
+    ):
+        parser.error(
+            "--one-change-scan is incompatible with checker/direct/master-first "
+            "modes"
+        )
 
     payload = json.loads(args.pool.read_text())
     rows = payload["choices"]
-    if any(target_modulus(row) != 1 for row in rows):
-        raise RuntimeError(
-            "component-density CEGIS currently requires target_modulus=1"
-        )
+    algebraic_primes = tuple(
+        int(value) for value in payload.get("algebraic_primes", ())
+    )
+    if len(set(algebraic_primes)) != len(algebraic_primes):
+        raise RuntimeError("pool repeats an algebraic prime")
     phases = {
         int(row_prime): int(target)
         for row_prime, target in json.loads(
@@ -994,24 +1489,192 @@ def main() -> int:
     if fixed_targets.keys() - row_primes:
         raise RuntimeError("a fixed prime is absent from the pool")
     phases.update(fixed_targets)
+    for row in rows:
+        row_prime = int(row["p"])
+        h = int(row["h"])
+        modulus = target_modulus(row)
+        residue = target_residue(row)
+        if h % modulus:
+            raise RuntimeError(
+                f"target modulus does not divide h for prime {row_prime}"
+            )
+        if phases[row_prime] % modulus != residue:
+            raise RuntimeError(
+                f"phase for prime {row_prime} violates its target restriction"
+            )
+        # Validate that the restriction decomposes across the selected
+        # residual component before invoking either checker or master.
+        coarse_target_restriction(
+            row,
+            args.prime,
+            phases[row_prime],
+        )
 
     cells: list[tuple[int, int]] = []
-    if args.cells_file:
-        cells_payload = json.loads(args.cells_file.read_text())
+    loaded_cells = set()
+    for cells_file in args.cells_file or ():
+        cells_payload = json.loads(cells_file.read_text())
         if isinstance(cells_payload, dict):
-            if "cells" not in cells_payload:
+            cell_key = next(
+                (
+                    key
+                    for key in (
+                        "cells",
+                        "exact_misses",
+                        "misses",
+                        "new_cells",
+                    )
+                    if key in cells_payload
+                ),
+                None,
+            )
+            if cell_key is None:
                 raise RuntimeError(
-                    "--cells-file checkpoint object has no cells field"
+                    "--cells-file checkpoint object has no supported "
+                    "cell-list field"
                 )
-            cells_payload = cells_payload["cells"]
-        cells = [
-            (int(k), int(l))
-            for k, l in cells_payload
-        ]
-        if len(cells) != len(set(cells)):
-            raise RuntimeError("--cells-file contains duplicate cells")
+            cells_payload = cells_payload[cell_key]
+        for raw_k, raw_l in cells_payload:
+            cell = (int(raw_k), int(raw_l))
+            if not all(
+                algebraic_prime == args.prime
+                or cell[0] % algebraic_prime
+                or cell[1] % algebraic_prime
+                for algebraic_prime in algebraic_primes
+            ):
+                continue
+            if cell not in loaded_cells:
+                loaded_cells.add(cell)
+                cells.append(cell)
+    if args.master_first and not cells:
+        raise RuntimeError("--master-first requires nonempty supplied cells")
+    if args.one_change_scan and not cells:
+        raise RuntimeError("--one-change-scan requires supplied cells")
     seen = set(cells)
     history = []
+
+    if args.one_change_scan:
+        winners, scan = scan_one_change(
+            rows,
+            phases,
+            args.prime,
+            cells,
+            fixed_targets,
+            algebraic_primes,
+        )
+        checkpoint = {
+            "pool": str(args.pool),
+            "prime": args.prime,
+            "cells": [[k, l] for k, l in cells],
+            "scan": scan,
+            "winner": winners[0][1] if winners else None,
+        }
+        args.checkpoint_output.write_text(
+            json.dumps(checkpoint, indent=2) + "\n"
+        )
+        if not winners:
+            args.phase_output.write_text(
+                json.dumps(
+                    {
+                        str(row_prime): target
+                        for row_prime, target in phases.items()
+                    }
+                )
+                + "\n"
+            )
+            result = {
+                "pool": str(args.pool),
+                "prime": args.prime,
+                "complete": False,
+                "one_change_feasible": False,
+                "scan": scan,
+            }
+            args.result_output.write_text(
+                json.dumps(result, indent=2) + "\n"
+            )
+            print(
+                f"NO_ONE_CHANGE cells={len(cells)} "
+                f"targets={scan['scanned_targets']} "
+                f"solve_s={scan['solve_seconds']}",
+                flush=True,
+            )
+            return 2
+        phases, winner = winners[0]
+        args.phase_output.write_text(
+            json.dumps(
+                {
+                    str(row_prime): target
+                    for row_prime, target in phases.items()
+                }
+            )
+            + "\n"
+        )
+        result = {
+            "pool": str(args.pool),
+            "prime": args.prime,
+            "complete": False,
+            "one_change_feasible": True,
+            "scan": scan,
+            "winner": winner,
+        }
+        args.result_output.write_text(
+            json.dumps(result, indent=2) + "\n"
+        )
+        print(
+            f"ONE_CHANGE_SAT cells={len(cells)} "
+            f"prime={winner['prime']} h={winner['h']} "
+            f"targets={scan['scanned_targets']} "
+            f"solve_s={scan['solve_seconds']}",
+            flush=True,
+        )
+        return 0
+
+    def invoke_master(
+        current_phases: dict[int, int],
+        current_cells: list[tuple[int, int]],
+        maximize_preserved: bool = True,
+    ) -> tuple[dict[int, int] | None, dict]:
+        if args.master_engine == "z3":
+            next_phases, master = solve_master_z3(
+                rows,
+                current_phases,
+                args.prime,
+                current_cells,
+                fixed_targets,
+                maximize_preserved=maximize_preserved,
+                algebraic_primes=algebraic_primes,
+            )
+        elif args.master_engine == "milp":
+            next_phases, master = solve_master_milp(
+                rows,
+                current_phases,
+                args.prime,
+                current_cells,
+                fixed_targets,
+                args.milp_time_limit,
+                maximize_preserved=maximize_preserved,
+                algebraic_primes=algebraic_primes,
+                maximum_changes=args.maximum_changes,
+            )
+        else:
+            next_phases, master = solve_master(
+                rows,
+                current_phases,
+                args.prime,
+                current_cells,
+                fixed_targets,
+                args.solver,
+                algebraic_primes,
+            )
+        if next_phases is not None:
+            master["exact_replay"] = audit_density_cuts(
+                rows,
+                next_phases,
+                args.prime,
+                current_cells,
+                algebraic_primes,
+            )
+        return next_phases, master
 
     if args.direct_all_coarse_cells:
         if args.check_only:
@@ -1034,42 +1697,25 @@ def main() -> int:
             (k, l)
             for k in range(coarse_period)
             for l in range(coarse_period)
+            if all(
+                algebraic_prime == args.prime
+                or k % algebraic_prime
+                or l % algebraic_prime
+                for algebraic_prime in algebraic_primes
+            )
         ]
         print(
             f"direct_all coarse_period={coarse_period} "
             f"cells={len(cells)}",
             flush=True,
         )
-        if args.master_engine == "z3":
-            next_phases, master = solve_master_z3(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-                maximize_preserved=False,
-            )
-        elif args.master_engine == "milp":
-            next_phases, master = solve_master_milp(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-                args.milp_time_limit,
-                maximize_preserved=False,
-            )
-        else:
-            next_phases, master = solve_master(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-                args.solver,
-            )
-        if args.cells_file:
-            args.cells_file.write_text(
+        next_phases, master = invoke_master(
+            phases,
+            cells,
+            maximize_preserved=False,
+        )
+        if args.cells_file and len(args.cells_file) == 1:
+            args.cells_file[0].write_text(
                 json.dumps([[k, l] for k, l in cells]) + "\n"
             )
         if next_phases is None:
@@ -1105,6 +1751,7 @@ def main() -> int:
             args.prime,
             1,
             args.max_component,
+            algebraic_primes=algebraic_primes,
         )
         if misses:
             raise AssertionError(
@@ -1135,6 +1782,62 @@ def main() -> int:
         )
         return 0
 
+    if args.master_first:
+        next_phases, master = invoke_master(phases, cells)
+        print(
+            f"seed_master master_sat={master.get('sat')} "
+            f"cuts={master.get('cuts', master.get('cells'))} "
+            f"options={master.get('options')} "
+            f"variables={master.get('variables')} "
+            f"clauses={master.get('clauses')} "
+            f"solve_s={master.get('solve_seconds')}",
+            flush=True,
+        )
+        history.append(
+            {
+                "round": 0,
+                "source": "supplied_cells",
+                "master": master,
+            }
+        )
+        args.checkpoint_output.write_text(
+            json.dumps(
+                {
+                    "pool": str(args.pool),
+                    "prime": args.prime,
+                    "cells": [[k, l] for k, l in cells],
+                    "history": history,
+                    "master": master,
+                },
+                indent=2,
+            )
+            + "\n"
+        )
+        if next_phases is None:
+            result = {
+                "pool": str(args.pool),
+                "prime": args.prime,
+                "complete": False,
+                "finite_density_core_unsat": True,
+                "cells": len(cells),
+                "master": master,
+            }
+            args.result_output.write_text(
+                json.dumps(result, indent=2) + "\n"
+            )
+            print("UNSAT supplied residual-density core", flush=True)
+            return 2
+        phases = next_phases
+        args.phase_output.write_text(
+            json.dumps(
+                {
+                    str(row_prime): target
+                    for row_prime, target in phases.items()
+                }
+            )
+            + "\n"
+        )
+
     for round_no in range(1, args.rounds + 1):
         misses, checker = find_low_density_cells(
             rows,
@@ -1143,6 +1846,7 @@ def main() -> int:
             args.batch,
             args.max_component,
             args.checker_diversity_modulus,
+            algebraic_primes,
         )
         new_cells = [cell for cell in misses if cell not in seen]
         for cell in new_cells:
@@ -1198,32 +1902,7 @@ def main() -> int:
         if not new_cells:
             raise RuntimeError("checker returned no new density cell")
 
-        if args.master_engine == "z3":
-            next_phases, master = solve_master_z3(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-            )
-        elif args.master_engine == "milp":
-            next_phases, master = solve_master_milp(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-                args.milp_time_limit,
-            )
-        else:
-            next_phases, master = solve_master(
-                rows,
-                phases,
-                args.prime,
-                cells,
-                fixed_targets,
-                args.solver,
-            )
+        next_phases, master = invoke_master(phases, cells)
         print(
             f"round={round_no} master_sat={master.get('sat')} "
             f"cuts={master.get('cuts', master.get('cells'))} "

@@ -1,7 +1,7 @@
 # Public snapshot manifest
 
-This repository is a curated snapshot of the active workspace, published on
-2026-07-26.
+This repository is a curated snapshot of the active workspace, updated on
+2026-07-27.
 
 ## Included
 
@@ -18,6 +18,9 @@ This repository is a curated snapshot of the active workspace, published on
 - the explicit exponent pair outside all 129,497 bounded homogeneous fibres,
   together with an independent modular-exponentiation replay over every
   source prime;
+- the self-contained 14-row, period-5,544 affine-subpool no-cover
+  certificate, its 13,908 witness points, and the independent exhaustive
+  replay of all 746,496 legal phase assignments;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its
@@ -56,8 +59,10 @@ This repository is a curated snapshot of the active workspace, published on
   parameters and measured repair curves are recorded in `RESEARCH_LOG.md`;
 - the local `D=1616615` perfect-power phase assignments, stream caches, and
   lesson sets, including the 830,162-point ordinary and 587,225-point
-  triple-coverage multi-digit continuations; their exact checker outcomes are
-  recorded in `README.md` and `RESEARCH_LOG.md`;
+  triple-coverage multi-digit continuations, the transient 17-adic phase
+  assignments, and the growing 319-cell density core; their exact checker
+  outcomes and structural measurements are recorded in `README.md` and
+  `RESEARCH_LOG.md`;
 - superseded discovery-only period-`3139207671600` design JSON, CEGIS witnesses,
   phases, and checker logs; their exact aggregate checkpoint and caveats are
   recorded in `RESEARCH_LOG.md`;

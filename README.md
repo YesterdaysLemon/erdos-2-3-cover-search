@@ -173,6 +173,74 @@ returned five holes.  The search has therefore found no conditioned-cell
 cover.  More point accumulation by itself is no longer the active tactic:
 the next experiments impose structural conditions on complete CRT cells.
 
+The first complete-cell condition freezes the 17-adic coordinate and requires
+the compatible fibres in every remaining CRT cell to have total line density
+at least one.  This is a necessary condition for a cover, not a sufficient
+one.  Exact holes supplied 5, 10, 15, and then 115 cumulative density cuts.
+All four masters were satisfiable in `1.887`, `3.296`, `5.416`, and `115.325`
+seconds, respectively, and each round needed one new full-weight phase move.
+The resulting full checker still returned its complete requested batches of
+5, 5, 100, and 100 holes, all independently replayed with 17-adic density
+below the required threshold.
+
+The last 100-hole batch capped target reuse on the four earlier mover rows,
+so it could not be repaired by reusing any of them.  This removed one known
+degeneracy but did not remove the holes.  The combined 215-cut master was
+also satisfiable, after `863.551` seconds, by one additional change:
+the unrestricted modulus-2 row for `p=41` flipped from target 1 to target 0.
+Exact integer replay gave minimum scaled density 25 on the 215 cuts, above
+the required 17.
+
+The checker then supplied one genuinely uncovered point at a time under a
+target cap on every accumulated small mover.  Exhaustive one-row scans
+repaired the growing exact core with
+
+```
+cuts   moved row   target move   exact replay range
+315    p=17, h=4   3 -> 1        23..98
+316    p=19, h=3   1 -> 0        23..115
+317    p=37, h=3   1 -> 2        30..115
+318    p=41, h=2   0 -> 1        25..98
+319    p=73, h=3   2 -> 0        35..115
+```
+
+Each replay has zero density violations, but every returned phase still has
+an exact full-domain hole.  In particular, `p=41` flipped back once the
+other movers protected the older half-plane.  This remains an oscillating
+necessary-condition search, not a cover.
+
+The checker and master now support
+algebraic sublattices, restricted perfect-power targets, unioned cut files,
+hard phase-change budgets, and exact integer replay of every accepted MILP
+answer.  It also has an exhaustive exact one-change scanner, so a negative
+result means that no legal single-row retarget repairs the supplied core.
+Work is continuing from the `p=73` phase.  No conditioned-cell cover, global
+`m`, or global impossibility proof has been obtained.
+
+## Exact small affine-subpool obstruction
+
+As a deliberately different strategy, the 14 derived rows with modulus
+`h <= 12` were treated as a complete affine-cover problem on their
+period-5,544 torus.  Exact CEGIS reached an UNSAT master on 13,908 explicit
+witness points.  A separately written verifier then enumerated all 746,496
+legal phase assignments using exact bitset unions and found that none covers
+those points.  It also reconstructs every row from its prime, multiplicative
+orders, perfect-power restriction, and period-60 coordinate change, then
+checks that every witness avoids the five declared algebraic sublattices.
+
+The self-contained proof object and replay are:
+
+```
+power1616615_hle12_structured_noncover_certificate.json
+power1616615_hle12_structured_noncover_verification.json
+```
+
+This proves a finite no-cover statement for exactly the embedded 14 rows.
+It rules out that attractive low-modulus affine template, but says nothing
+by itself about the other 12,563 rows, the roughly 1,711 neighboring
+period-60 cells needed for a global construction, or the original infinite
+problem.
+
 ## Bounded homogeneous obstructions
 
 The complete raw pool through subgroup index `1050000` contains 129,497 leaf
@@ -214,6 +282,9 @@ or fibres of higher index.
 - `certify_bounded_homogeneous_noncover.py` and its modular-exponentiation
   verifier: an explicit point outside the union of all bounded homogeneous
   fibres.
+- `certify_small_derived_pool_noncover.py` and
+  `verify_small_derived_pool_noncover.py`: a self-contained 14-row affine
+  no-cover certificate and exhaustive phase replay.
 - `search_projected_conditional_designs.py`: checkpointable projected
   conditional-overlap discovery, including a proof-structural shared
   residual pair.
@@ -305,6 +376,15 @@ python replay_ranked_period_conditional_star.py `
 
 Successful replay prints `verified=True`. These checks prove only the finite
 claims encoded by their certificates.
+
+The small affine-subpool obstruction can be replayed without its discovery
+pool:
+
+```powershell
+python verify_small_derived_pool_noncover.py `
+  power1616615_hle12_structured_noncover_certificate.json `
+  --output replay-small-derived-pool.json
+```
 
 ## Evidence policy
 

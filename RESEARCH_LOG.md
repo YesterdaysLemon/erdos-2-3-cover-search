@@ -3431,6 +3431,163 @@ does not rule out the candidate family, but it is strong evidence that more
 pointwise CEGIS rounds are the wrong immediate escalation.  Subsequent work
 will target complete CRT-cell constraints or phase-independent obstructions.
 
+### Perfect-power residual-density CEGIS
+
+`component_density_cegis.py` now applies a complete-cell necessary condition.
+Fix every CRT coordinate except one selected prime-power component `q^e`.
+Each compatible selected fibre becomes an affine line in the residual plane,
+with exact integer weight `q^e / q^j`.  A cover must have total scaled weight
+at least `q^e` in every coarse cell.  When `q` divides the perfect-power
+exponent, the algebraically covered origin sublattice contributes density
+`1/q^2`; coarse cells wholly covered by a different algebraic prime are
+excluded.
+
+The implementation now:
+
+- preserves and validates restricted perfect-power target congruences under
+  the residual/coarse CRT split;
+- unions and deduplicates several exact-hole or density-cell files;
+- can solve supplied cuts before invoking another checker;
+- supports a hard MILP phase-change budget as a feasibility decision;
+- replays every SAT master phase over every learned cut using exact Python
+  integer arithmetic before accepting it;
+- lets the full exact checker cap target reuse on all rows coprime to a chosen
+  residual component.
+
+The first run selected `q=17`, for which the required first-level scaled
+density remains 17.  Starting with five full-checker holes from the
+triple-coverage phase gave:
+
+```
+cumulative cuts   MILP seconds   new phase mover   next exact holes
+5                 1.8866         2192783           5
+10                3.2956         1992983           5
+15                5.4162         2165039           100
+115               115.3249       1095947           100
+```
+
+All four movers have modulus coprime to 17, so each supplies the full scaled
+weight 17 on one coarse target.  Their moduli factor as
+
+```
+p=2192783   h=1096391 = 89*97*127
+p=1992983   h=996491  = 67*107*139
+p=2165039   h=1082519 = 67*107*151
+p=1095947   h=547973  = 47*89*131
+```
+
+The 100 holes after 15 cuts all had scaled density between 9 and 13.  They
+shared one target on the fourth mover, so one new phase repaired all 100
+necessary inequalities.  A new exact batch therefore capped every target
+value on all four known movers at one use.  It still returned 100 holes, with
+17-adic density histogram
+
+```
+8:2, 9:10, 10:21, 11:22, 12:17, 13:14, 14:10, 15:3, 16:1
+```
+
+An independent arithmetic audit matched all 12,577 derived row coordinates,
+found all 215 accumulated cells unique, reconfirmed that every cell is a
+genuine full-checker hole, and recomputed each density below 17.  The next
+215-cut MILP was SAT after `863.5509` seconds.  It preserved 12,572 of the
+12,573 mutable coarse targets and changed only
+
+```
+p=41, h=2, (a,b)=(0,1): target 1 -> 0.
+```
+
+Exact integer replay of the returned phase found no failed cut; scaled
+densities ranged from 25 to 98.  Every member of the newest 100-hole batch
+had `l=0 mod 2`, so this single flip added weight 17 to the entire batch.
+This exposes a half-plane oscillation: a checker under the flipped phase
+must return holes with the opposite modulus-2 target, and retaining both
+batches prevents `p=41` alone from satisfying the accumulated core.
+
+The attempted checker escalation also caps target reuse on all 10,815 rows
+whose moduli are coprime to 17.  It returned one hole because `p=41` is one
+of those rows and every hole under a fixed `p=41` phase has the same opposite
+target.  This is an exact consequence of the modulus-2 split, not evidence
+of a cover.  During this audit the diversity checker was hardened to ignore
+targets forbidden by a row's perfect-power restriction; regression tests
+cover that distinction.
+
+These density inequalities are necessary only.  A SAT master is not a cover;
+an MILP UNSAT answer would require exact PySAT or Z3 replay before it could
+become even a finite-pool obstruction.  The work is confined to one
+conditioned period-60 cell, so neither outcome by itself supplies a global
+`m` or a proof of impossibility.
+
+### Exact one-row phase exhaustion
+
+The exact checker after the 215-cut `p=41` repair was run with target reuse
+capped on the four original high-order movers.  It returned 100 genuine
+holes.  Their 17-adic density ranged from 6 through 17, and all lay in the
+opposite modulus-2 half-plane.  A direct exact scan of every legal one-row
+retarget found that `p=17, h=4` moving from target 3 to target 1 covers all
+315 accumulated density cells; integer replay gave range `23..98`.
+
+`component_density_cegis.py` now exposes this operation as
+`--one-change-scan`.  It computes each candidate retarget by exact integer
+delta updates, scans every legal target, and independently replays any
+winner against the complete supplied core.  If no winner exists it reports
+`NO_ONE_CHANGE`; it does not promote that local negative result to general
+UNSAT.
+
+The exact checker and one-change scanner were alternated, capping every
+previous small mover in the next checker.  Each checker found one genuinely
+uncovered point, and the subsequent exhaustive scan produced:
+
+```
+cells  row             phase move  replay min..max  scan seconds
+315    p=17, h=4       3 -> 1      23..98           ad-hoc audited scan
+316    p=19, h=3       1 -> 0      23..115          5.8041
+317    p=37, h=3       1 -> 2      30..115          6.8608
+318    p=41, h=2       0 -> 1      25..98           4.6993
+319    p=73, h=3       2 -> 0      35..115          5.2983
+```
+
+All five exact replays have zero failed density cuts.  The `p=41` return to
+target 1 is especially informative: the intervening `p=17,19,37` changes
+protect enough old cells that the binary half-plane can oscillate back.
+The exact checker under the final `p=73` phase again returned a genuine
+hole.  Hence the one-change strategy is not exhausted and no candidate
+cover has been found.
+
+### Exact low-modulus affine-subpool obstruction
+
+To test a non-refinement affine-cover route in a different space, every
+derived row with `h <= 12` was selected from the corrected conditioned pool.
+This gives 14 rows on a torus of period 5,544 and exactly 746,496 allowed
+phase tuples.  Its raw reciprocal-density sum is `2.877886002886`, so
+density alone does not exclude a cover.
+
+Exact CEGIS with a Cadical195 PySAT master became UNSAT after accumulating
+13,908 explicit torus points.  Every point is unique and avoids the
+algebraically covered origin sublattices for `7,11,13,17,19`.  The result
+was packaged in
+
+```
+power1616615_hle12_structured_noncover_certificate.json
+```
+
+The separately written
+`verify_small_derived_pool_noncover.py` does not call the discovery solver.
+It independently reconstructs each row from its prime, multiplicative
+orders, perfect-power restriction, and period-60 coordinate change, checks
+the points and algebraic exclusions, and exhaustively evaluates all 746,496
+phase tuples by exact bitset union.  It found no covering tuple in about
+four seconds; the replay report
+
+```
+power1616615_hle12_structured_noncover_verification.json
+```
+
+has `verified=true`, `cover_exists=false`, and certificate SHA-256
+`3ccf9485a0c15837b424f92cdd2ff644b6f14c0867afd969ddc916627ad89100`.
+This is a rigorous obstruction for exactly the 14 embedded rows.  It rules
+out a tempting small affine template, not the remaining 12,563 rows, the
+other conditioned cells, or the original infinite problem.
+
 ## Homogeneous-refinement lead (2026-07-27)
 
 Cochrane and Myerson construct a homogeneous cover of `Z^2` from a

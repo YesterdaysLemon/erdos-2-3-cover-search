@@ -5,11 +5,30 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import exact_greedy
 import exact_uncovered
 import exact_uncovered_z3_bv
+
+
+def expanded_diversity_primes(
+    rows: list[dict],
+    explicit_primes: tuple[int, ...],
+    coprime_to: int = 0,
+) -> tuple[int, ...]:
+    """Add every row whose modulus is coprime to a selected component."""
+    if coprime_to and coprime_to < 2:
+        raise ValueError("diversity coprime modulus must be at least two")
+    ordered = list(explicit_primes)
+    if coprime_to:
+        ordered.extend(
+            int(row["p"])
+            for row in rows
+            if math.gcd(int(row["h"]), coprime_to) == 1
+        )
+    return tuple(dict.fromkeys(ordered))
 
 
 def main() -> int:
@@ -31,8 +50,26 @@ def main() -> int:
         help="also replay the assignment with the independent Z3-BV checker",
     )
     parser.add_argument("--diversity-primes", default="")
+    parser.add_argument(
+        "--diversity-coprime-to",
+        type=int,
+        default=0,
+        help=(
+            "also diversify every row whose modulus is coprime to this "
+            "integer; useful for capping all full-weight residual rows"
+        ),
+    )
     parser.add_argument("--diversity-coordinate-moduli", default="")
     parser.add_argument("--diversity-quota", type=int, default=1)
+    parser.add_argument(
+        "--diversity-target-cap",
+        type=int,
+        default=0,
+        help=(
+            "allow each target value on every selected diversity prime in "
+            "at most this many witnesses; zero disables the cap"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -60,15 +97,23 @@ def main() -> int:
         target = phases.get(prime, residue) % h
         if target % modulus != residue:
             raise RuntimeError(f"phase for p={prime} violates target restriction")
-        rows.append(exact_greedy.as_row(candidate, target))
+        row = exact_greedy.as_row(candidate, target)
+        row["target_modulus"] = modulus
+        row["target_residue"] = residue
+        rows.append(row)
 
     algebraic_primes = tuple(
         int(value) for value in payload.get("algebraic_primes", ())
     )
-    diversity_primes = tuple(
+    explicit_diversity_primes = tuple(
         int(value)
         for value in args.diversity_primes.split(",")
         if value
+    )
+    diversity_primes = expanded_diversity_primes(
+        rows,
+        explicit_diversity_primes,
+        args.diversity_coprime_to,
     )
     diversity_coordinate_moduli = tuple(
         int(value)
@@ -84,6 +129,7 @@ def main() -> int:
         diversity_primes=diversity_primes,
         diversity_coordinate_moduli=diversity_coordinate_moduli,
         diversity_quota=args.diversity_quota,
+        diversity_target_cap=args.diversity_target_cap,
         sophie_germain=bool(payload.get("sophie_germain", False)),
     )
     independent_misses = []
@@ -104,6 +150,8 @@ def main() -> int:
         "pool": str(args.pool),
         "phase_file": str(args.phase_file),
         "row_count": len(rows),
+        "diversity_coprime_to": args.diversity_coprime_to,
+        "expanded_diversity_prime_count": len(diversity_primes),
         "checker": meta,
         "misses": [[k, l] for k, l in misses],
         "independent_checker": independent_meta,

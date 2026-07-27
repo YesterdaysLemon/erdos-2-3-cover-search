@@ -44,6 +44,16 @@ def crt(residues: list[tuple[int, int]]) -> int:
     return value % modulus
 
 
+def target_allowed(row: dict, target: int) -> bool:
+    """Whether a synthesized phase target obeys this row's restrictions."""
+    h = int(row["h"])
+    modulus = int(row.get("target_modulus", 1))
+    if modulus < 1 or h % modulus:
+        raise ValueError("target modulus must be positive and divide h")
+    residue = int(row.get("target_residue", 0)) % modulus
+    return target % modulus == residue
+
+
 def find_uncovered(
     rows: list[dict],
     max_component: int = 256,
@@ -77,6 +87,8 @@ def find_uncovered(
     maximal: dict[int, int] = {}
     row_factors = []
     for row in rows:
+        if not target_allowed(row, int(row["c"])):
+            raise ValueError("selected row target violates its restriction")
         factors = factor(int(row["h"]))
         row_factors.append(factors)
         for prime, exponent in factors.items():
@@ -444,11 +456,25 @@ def find_uncovered(
                 % int(rows[row_index]["h"]),
             )
             for row_index in diversity_indices
+            if target_allowed(
+                rows[row_index],
+                (
+                    int(rows[row_index]["a"]) * k
+                    + int(rows[row_index]["b"]) * l
+                )
+                % int(rows[row_index]["h"]),
+            )
         )
         coordinate_fingerprint = tuple(
             (prime, modulus, k % modulus, l % modulus)
             for prime, modulus in diversity_coordinate_specs
         )
+        if not row_fingerprint and not coordinate_fingerprint:
+            # Every selected row target at this witness is illegal for phase
+            # synthesis, so none should constrain diversity.  Exclude only
+            # this exact CRT assignment and continue the honest enumeration.
+            solver.add_clause(block)
+            continue
         fingerprint = (row_fingerprint, coordinate_fingerprint)
         fingerprint_counts[fingerprint] = (
             fingerprint_counts.get(fingerprint, 0) + 1
