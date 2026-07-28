@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import exact_greedy
@@ -12,10 +13,69 @@ import exact_uncovered
 import exact_uncovered_z3_bv
 
 
+def expanded_diversity_primes(
+    rows: list[dict],
+    explicit_primes: tuple[int, ...],
+    coprime_to: int = 0,
+    min_modulus: int = 0,
+) -> tuple[int, ...]:
+    """Expand explicit diversity rows by exact modulus predicates."""
+    if coprime_to and coprime_to < 2:
+        raise ValueError("diversity coprime modulus must be at least two")
+    if min_modulus and min_modulus < 2:
+        raise ValueError("diversity minimum modulus must be at least two")
+    ordered = list(explicit_primes)
+    if coprime_to:
+        ordered.extend(
+            int(row["p"])
+            for row in rows
+            if math.gcd(int(row["h"]), coprime_to) == 1
+        )
+    if min_modulus:
+        ordered.extend(
+            int(row["p"])
+            for row in rows
+            if int(row["h"]) >= min_modulus
+        )
+    return tuple(dict.fromkeys(ordered))
+
+
+def parse_phase_overrides(
+    items: list[str],
+    row_primes: set[int],
+) -> dict[int, int]:
+    overrides = {}
+    for item in items:
+        try:
+            raw_prime, raw_target = item.split(":", 1)
+            prime = int(raw_prime)
+            target = int(raw_target)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                f"invalid phase override {item!r}; expected PRIME:TARGET"
+            ) from error
+        if prime not in row_primes:
+            raise ValueError(f"phase override prime {prime} is absent")
+        if prime in overrides:
+            raise ValueError(f"phase override repeats prime {prime}")
+        overrides[prime] = target
+    return overrides
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
     parser.add_argument("--phase-file", type=Path, required=True)
+    parser.add_argument(
+        "--phase-override",
+        action="append",
+        default=[],
+        metavar="PRIME:TARGET",
+        help=(
+            "override one saved phase without rewriting the phase file; "
+            "repeat for several rows"
+        ),
+    )
     parser.add_argument(
         "--period",
         type=int,
@@ -31,8 +91,35 @@ def main() -> int:
         help="also replay the assignment with the independent Z3-BV checker",
     )
     parser.add_argument("--diversity-primes", default="")
+    parser.add_argument(
+        "--diversity-coprime-to",
+        type=int,
+        default=0,
+        help=(
+            "also diversify every row whose modulus is coprime to this "
+            "integer; useful for capping all full-weight residual rows"
+        ),
+    )
+    parser.add_argument(
+        "--diversity-min-modulus",
+        type=int,
+        default=0,
+        help=(
+            "also diversify every row with modulus at least this value; "
+            "useful for broad witnesses while omitting tiny fixed anchors"
+        ),
+    )
     parser.add_argument("--diversity-coordinate-moduli", default="")
     parser.add_argument("--diversity-quota", type=int, default=1)
+    parser.add_argument(
+        "--diversity-target-cap",
+        type=int,
+        default=0,
+        help=(
+            "allow each target value on every selected diversity prime in "
+            "at most this many witnesses; zero disables the cap"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -51,6 +138,11 @@ def main() -> int:
     row_by_prime = {
         int(row["p"]): row for row in payload["choices"]
     }
+    phase_overrides = parse_phase_overrides(
+        args.phase_override,
+        set(row_by_prime),
+    )
+    phases.update(phase_overrides)
     rows = []
     for candidate in candidates:
         h, prime, *_rest = candidate
@@ -60,15 +152,24 @@ def main() -> int:
         target = phases.get(prime, residue) % h
         if target % modulus != residue:
             raise RuntimeError(f"phase for p={prime} violates target restriction")
-        rows.append(exact_greedy.as_row(candidate, target))
+        row = exact_greedy.as_row(candidate, target)
+        row["target_modulus"] = modulus
+        row["target_residue"] = residue
+        rows.append(row)
 
     algebraic_primes = tuple(
         int(value) for value in payload.get("algebraic_primes", ())
     )
-    diversity_primes = tuple(
+    explicit_diversity_primes = tuple(
         int(value)
         for value in args.diversity_primes.split(",")
         if value
+    )
+    diversity_primes = expanded_diversity_primes(
+        rows,
+        explicit_diversity_primes,
+        args.diversity_coprime_to,
+        args.diversity_min_modulus,
     )
     diversity_coordinate_moduli = tuple(
         int(value)
@@ -84,6 +185,7 @@ def main() -> int:
         diversity_primes=diversity_primes,
         diversity_coordinate_moduli=diversity_coordinate_moduli,
         diversity_quota=args.diversity_quota,
+        diversity_target_cap=args.diversity_target_cap,
         sophie_germain=bool(payload.get("sophie_germain", False)),
     )
     independent_misses = []
@@ -103,7 +205,13 @@ def main() -> int:
     result = {
         "pool": str(args.pool),
         "phase_file": str(args.phase_file),
+        "phase_overrides": {
+            str(prime): target
+            for prime, target in phase_overrides.items()
+        },
         "row_count": len(rows),
+        "diversity_coprime_to": args.diversity_coprime_to,
+        "expanded_diversity_prime_count": len(diversity_primes),
         "checker": meta,
         "misses": [[k, l] for k, l in misses],
         "independent_checker": independent_meta,

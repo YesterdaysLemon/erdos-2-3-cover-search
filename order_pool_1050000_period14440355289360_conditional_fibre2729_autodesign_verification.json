@@ -1,0 +1,28 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_period14440355289360_conditional_fibre2729_autodesign_certificate.json",
+  "outside_prime": 2729,
+  "anchor_primes": [
+    37,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    47,
+    59,
+    239
+  ],
+  "base_period": 24552,
+  "base_enumeration_mode": "cyclic_kernel_lifts",
+  "outside_base_points": 220968,
+  "target_combinations": 1824768,
+  "maximum_uncovered_score": 101573588160,
+  "forced_intersection_density": {
+    "numerator": 300649,
+    "denominator": 1948765896
+  },
+  "verified": true
+}

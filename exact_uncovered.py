@@ -44,6 +44,16 @@ def crt(residues: list[tuple[int, int]]) -> int:
     return value % modulus
 
 
+def target_allowed(row: dict, target: int) -> bool:
+    """Whether a synthesized phase target obeys this row's restrictions."""
+    h = int(row["h"])
+    modulus = int(row.get("target_modulus", 1))
+    if modulus < 1 or h % modulus:
+        raise ValueError("target modulus must be positive and divide h")
+    residue = int(row.get("target_residue", 0)) % modulus
+    return target % modulus == residue
+
+
 def find_uncovered(
     rows: list[dict],
     max_component: int = 256,
@@ -53,6 +63,7 @@ def find_uncovered(
     diversity_primes: tuple[int, ...] = (),
     diversity_coordinate_moduli: tuple[int, ...] = (),
     diversity_quota: int = 1,
+    diversity_target_cap: int = 0,
     sophie_germain: bool = False,
     core_coordinate_cells: tuple[
         tuple[tuple[int, int, int], ...], ...
@@ -61,6 +72,12 @@ def find_uncovered(
 ) -> tuple[list[tuple[int, int]], dict]:
     if diversity_quota < 1:
         raise ValueError("diversity_quota must be positive")
+    if diversity_target_cap < 0:
+        raise ValueError("diversity_target_cap must be nonnegative")
+    if diversity_target_cap and not diversity_primes:
+        raise ValueError(
+            "diversity_target_cap requires at least one diversity prime"
+        )
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
     from pysat.card import CardEnc, EncType  # type: ignore
@@ -70,6 +87,8 @@ def find_uncovered(
     maximal: dict[int, int] = {}
     row_factors = []
     for row in rows:
+        if not target_allowed(row, int(row["c"])):
+            raise ValueError("selected row target violates its restriction")
         factors = factor(int(row["h"]))
         row_factors.append(factors)
         for prime, exponent in factors.items():
@@ -378,6 +397,7 @@ def find_uncovered(
     witnesses = []
     previous_preference: dict[int, tuple[int, int]] = {}
     fingerprint_counts: dict[tuple, int] = {}
+    target_counts: dict[tuple[int, int], int] = {}
     for _ in range(limit):
         # Request a different deterministic CRT corner on every model.  When
         # enumerating a large batch, leaving one phase fixed makes CaDiCaL
@@ -436,15 +456,54 @@ def find_uncovered(
                 % int(rows[row_index]["h"]),
             )
             for row_index in diversity_indices
+            if target_allowed(
+                rows[row_index],
+                (
+                    int(rows[row_index]["a"]) * k
+                    + int(rows[row_index]["b"]) * l
+                )
+                % int(rows[row_index]["h"]),
+            )
         )
         coordinate_fingerprint = tuple(
             (prime, modulus, k % modulus, l % modulus)
             for prime, modulus in diversity_coordinate_specs
         )
+        if not row_fingerprint and not coordinate_fingerprint:
+            # Every selected row target at this witness is illegal for phase
+            # synthesis, so none should constrain diversity.  Exclude only
+            # this exact CRT assignment and continue the honest enumeration.
+            solver.add_clause(block)
+            continue
         fingerprint = (row_fingerprint, coordinate_fingerprint)
         fingerprint_counts[fingerprint] = (
             fingerprint_counts.get(fingerprint, 0) + 1
         )
+        if diversity_target_cap:
+            for row_index, target in row_fingerprint:
+                target_key = (row_index, target)
+                target_counts[target_key] = target_counts.get(target_key, 0) + 1
+                if target_counts[target_key] != diversity_target_cap:
+                    continue
+                row = rows[row_index]
+                factors = row_factors[row_index]
+                a, b = int(row["a"]), int(row["b"])
+                target_equalities = [
+                    component_equality(
+                        prime,
+                        prime**exponent,
+                        a,
+                        b,
+                        target,
+                    )
+                    for prime, exponent in factors.items()
+                ]
+                # Once this row-target value has supplied the requested
+                # number of witnesses, forbid that complete congruence on
+                # later models.  Thus changing any one selected fibre phase
+                # can absorb at most `diversity_target_cap` members of this
+                # checker batch.
+                solver.add_clause([-value for value in target_equalities])
         if fingerprint_counts[fingerprint] < diversity_quota:
             # Retain several genuinely different CRT representatives of each
             # coarse fingerprint before excluding the whole cell.  This gives
@@ -494,6 +553,7 @@ def find_uncovered(
             diversity_coordinate_moduli
         ),
         "diversity_quota": diversity_quota,
+        "diversity_target_cap": diversity_target_cap,
         "fixed_coordinate_residues": normalized_fixed_coordinates,
         "component_equalities": len(equality_cache),
         "component_equality_pairs": equality_pair_count,

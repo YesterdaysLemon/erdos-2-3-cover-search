@@ -1,0 +1,18 @@
+{
+  "certificate": "power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_certificate.json",
+  "verified": true,
+  "repair_exists": false,
+  "row_count": 12579,
+  "point_count": 151,
+  "fixed_prime_count": 5,
+  "max_changes": 2,
+  "initial_misses": 24,
+  "gain_mask_count": 119,
+  "gain_move_count": 47661,
+  "minimum_relaxed_mask_count": null,
+  "full_skeleton_count": 0,
+  "matching_failures": 0,
+  "replay_failures": 0,
+  "discovery_count_match": true,
+  "elapsed_seconds": 0.0007704000454396009
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "axis_layered_column_prime_deficit_obstruction_v1",
+  "source": "order_pool_1050000_direction3_1_period15120_layered_pool.json",
+  "source_sha256": "13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c",
+  "layer_axis": "k",
+  "coordinate_basis": {
+    "direction": [
+      3,
+      1
+    ],
+    "transverse": [
+      -1,
+      0
+    ],
+    "determinant": 1,
+    "mapping": "(original_k, original_l) = x * direction + y * transverse"
+  },
+  "layer_period": 15120,
+  "column": 454,
+  "active_row_count": 78,
+  "total_reciprocal_density": {
+    "numerator": 80718382598754045540628836954047932637363689954237434392185793,
+    "denominator": 73300458360958919895828203435289998373244396085883021002524800,
+    "decimal": 1.1011988792930392
+  },
+  "obstruction_prime": 11,
+  "divisible_row_count": 6,
+  "divisible_rows": [
+    {
+      "p": 23,
+      "residual_modulus": 11
+    },
+    {
+      "p": 199,
+      "residual_modulus": 99
+    },
+    {
+      "p": 2377,
+      "residual_modulus": 1188
+    },
+    {
+      "p": 14851,
+      "residual_modulus": 14850
+    },
+    {
+      "p": 332641,
+      "residual_modulus": 9240
+    },
+    {
+      "p": 895357,
+      "residual_modulus": 298452
+    }
+  ],
+  "surviving_row_count": 72,
+  "surviving_reciprocal_density": {
+    "numerator": 1331626919328932373170013200623287663407217762378152211484151,
+    "denominator": 1332735606562889452651421880641636334058989019743327654591360,
+    "decimal": 0.9991681116430765
+  },
+  "density_deficit": {
+    "numerator": 1108687233957079481408680018348670651771257365175443107209,
+    "denominator": 1332735606562889452651421880641636334058989019743327654591360,
+    "decimal": 0.0008318883569235249
+  },
+  "theorem": "if fewer than q residue-class moduli are divisible by prime q, those classes are redundant in any cover of the integers",
+  "proof": [
+    "only 6 < 11 active residual moduli are divisible by q=11",
+    "the q-divisible classes are therefore redundant by the q-translate argument",
+    "the exact reciprocal density of all surviving classes is 1331626919328932373170013200623287663407217762378152211484151/1332735606562889452651421880641636334058989019743327654591360 < 1"
+  ],
+  "proved_no_independent_column_cover": true,
+  "proved_no_declared_layered_cover": true,
+  "scope": "the declared finite layered placement; the active residual phases were relaxed to be independent, so this does not rule out other placements, other finite pools, or the original infinite problem"
+}

@@ -1,0 +1,22 @@
+{
+  "schema": "erdos203-bounded-homogeneous-noncover-v1",
+  "source_pool": "order_pool_1050000.json",
+  "source_sha256": "3be851ac19002a25711f9ca99f31efb128b07b06f8fd9a22ff84bc64009b4d9f",
+  "source_max_h": 1050000,
+  "source_unresolved": 0,
+  "source_rows": 129497,
+  "search": {
+    "seed": 2031050000,
+    "coordinate_bits": 63,
+    "attempt_limit": 20000,
+    "witness_attempt": 12
+  },
+  "witness": {
+    "k": 552897490806962158,
+    "l": 6049004616530593493
+  },
+  "signature_hit_count": 0,
+  "obstruction": true,
+  "argument": "The displayed exponent pair lies in none of the homogeneous prime-signature lattices in the complete supplied finite pool. Their full union is therefore not a cover, so no homogeneous subfamily of this pool can cover Z^2.",
+  "scope": "Finite pool only; this does not obstruct affine phase assignments, homogeneous fibres outside the source bound, or higher-index fibres."
+}

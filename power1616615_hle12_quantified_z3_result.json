@@ -1,0 +1,14 @@
+{
+  "input": "power1616615_hle12_structured_noncover_certificate.json",
+  "row_count": 14,
+  "max_h": 0,
+  "period": 5544,
+  "encoding": "existential integer phase constants and two universally quantified integer exponent coordinates",
+  "result": "UNKNOWN",
+  "proved_no_cover": false,
+  "proved_cover": false,
+  "targets": null,
+  "elapsed_seconds": 120.03686879994348,
+  "reason_unknown": "timeout",
+  "scope": "all phase assignments for exactly the selected finite rows"
+}

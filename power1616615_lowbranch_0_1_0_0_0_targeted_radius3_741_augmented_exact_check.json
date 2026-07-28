@@ -1,0 +1,83 @@
+{
+  "pool": "power1616615_lowbranch_0_1_0_0_0_targeted_pool.json",
+  "phase_files": [
+    "power1616615_lowbranch_0_1_0_0_0_targeted_radius3_741_phase.json"
+  ],
+  "phase_count": 1,
+  "base_row_count": 12579,
+  "union_row_count": 12579,
+  "additional_distinct_fibres": 0,
+  "diversity_coordinate_moduli": [],
+  "checker": {
+    "components": {
+      "2": 32768,
+      "3": 19683,
+      "7": 49,
+      "11": 121,
+      "13": 169,
+      "17": 17,
+      "19": 19,
+      "23": 529,
+      "29": 841,
+      "31": 961,
+      "37": 1369,
+      "53": 53,
+      "59": 59,
+      "61": 61,
+      "67": 67,
+      "71": 71,
+      "73": 73,
+      "79": 79,
+      "83": 83,
+      "89": 89,
+      "97": 97,
+      "101": 101,
+      "103": 103,
+      "107": 107,
+      "109": 109,
+      "113": 113,
+      "127": 127,
+      "131": 131,
+      "137": 137,
+      "139": 139,
+      "149": 149,
+      "151": 151,
+      "157": 157,
+      "163": 163,
+      "173": 173,
+      "179": 179,
+      "167": 167,
+      "43": 43,
+      "41": 41,
+      "5": 125,
+      "47": 47
+    },
+    "period": 61369844571899500586135803712326985641776741641451693950330257392621566140780976541696000,
+    "rows": 12579,
+    "algebraic_primes": [
+      7,
+      11,
+      13,
+      17,
+      19
+    ],
+    "sophie_germain": false,
+    "solver": "cadical195",
+    "diversity_primes": [],
+    "diversity_coordinate_moduli": [],
+    "diversity_quota": 1,
+    "diversity_target_cap": 0,
+    "fixed_coordinate_residues": [],
+    "component_equalities": 22643,
+    "component_equality_pairs": 2450042,
+    "sat": true
+  },
+  "misses": [
+    [
+      7550817196507409423104620758386269784898654629559281120026149346164970350503426413461504,
+      31433597715357029766389193317642403928269292503995393084882067211187977722853249124630529
+    ]
+  ],
+  "scalar_replay": true,
+  "scope": "each point is missed by every supplied phase; UNSAT only means their selected fibre union covers the declared exact domain"
+}

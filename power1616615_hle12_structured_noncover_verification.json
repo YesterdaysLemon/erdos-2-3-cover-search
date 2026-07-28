@@ -1,0 +1,20 @@
+{
+  "verified": true,
+  "row_count": 14,
+  "point_count": 13908,
+  "algebraic_primes": [
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "phase_assignments_declared": 746496,
+  "phase_assignments_enumerated": 746496,
+  "cover_exists": false,
+  "covering_phases": null,
+  "verification_seconds": 4.0626302000600845,
+  "engine": "independent-python-exhaustive-bitset-enumeration",
+  "certificate": "power1616615_hle12_structured_noncover_certificate.json",
+  "certificate_sha256": "3ccf9485a0c15837b424f92cdd2ff644b6f14c0867afd969ddc916627ad89100"
+}

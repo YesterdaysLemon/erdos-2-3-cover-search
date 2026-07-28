@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "column": 24,
+  "projection_modulus": 30,
+  "active_row_count": 56,
+  "tail_row_count": 53,
+  "branch_count": 30,
+  "minimum_strict_gap_numerator": 3639527,
+  "minimum_strict_gap_denominator": 609840,
+  "proved_no_independent_column_cover": true,
+  "proved_no_declared_layered_cover": true,
+  "engine": "independent-python-exact-rational-weight-replay",
+  "scope": "the declared finite layered placement; the selected column's residual phases were allowed to vary independently, so this does not rule out other placements, pools, or the original infinite problem",
+  "certificate": "order_pool_1050000_direction1_neg3_period110880_pruned_layered_projection_noncover_certificate.json",
+  "certificate_sha256": "8d94523c81a9c98d0bca87182d108dbec2c9bf46667edc8135315a8b3dc0f6f9",
+  "source": "order_pool_1050000_direction1_neg3_period110880_pruned_layered_pool.json",
+  "source_sha256": "88a3b076961bdb7f9ac281afc21adb43d6193778b8c12f717d280c4b929c27cb"
+}

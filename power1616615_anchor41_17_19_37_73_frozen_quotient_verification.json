@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "rows": 12577,
+  "anchor_rows": 5,
+  "nonanchor_rows": 12572,
+  "legal_anchor_branches": 216,
+  "verified_branch_witnesses": 216,
+  "distinct_recorded_witnesses": 28,
+  "algebraic_primes": [
+    7,
+    11,
+    13,
+    17,
+    19
+  ],
+  "engine": "independent-python-modular-replay",
+  "certificate": "power1616615_anchor41_17_19_37_73_frozen_quotient_certificate.json",
+  "certificate_sha256": "faba66c4a77cc74cfed7bcfdf75947b0b99967a6176b128e42eaacf4764c6c84"
+}

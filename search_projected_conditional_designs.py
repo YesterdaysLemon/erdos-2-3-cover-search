@@ -64,6 +64,8 @@ class Design:
     base_points: int
     tensor_cells: int
     density_score: Fraction
+    paired_projected: Projected | None = None
+    paired_shared: int | None = None
 
     @property
     def anchor_primes(self) -> tuple[int, ...]:
@@ -71,6 +73,14 @@ class Design:
             self.normalizer,
             *self.base_primes,
             *(record.prime for record in self.projected),
+            *(
+                (
+                    self.paired_projected.prime,
+                    self.paired_shared,
+                )
+                if self.paired_projected is not None
+                else ()
+            ),
         )
 
 
@@ -103,6 +113,7 @@ def greedy_projected_set(
     max_tensor_cells: int,
     order_kind: str,
     seed: int,
+    initial_residuals: tuple[int, ...] = (),
 ) -> tuple[tuple[Projected, ...], int]:
     def key(record: Projected) -> tuple:
         modulus = int(rows_by_prime[record.prime]["h"])
@@ -125,7 +136,7 @@ def greedy_projected_set(
         return primary, -record.projection, -modulus, -record.prime
 
     selected = []
-    residuals = []
+    residuals = list(initial_residuals)
     cells = initial_cells
     for record in sorted(candidates, key=key, reverse=True):
         if any(
@@ -153,7 +164,14 @@ def candidate_designs(
 ) -> list[Design]:
     rows_by_prime = {int(row["p"]): row for row in anchors}
     designs: dict[
-        tuple[int, tuple[int, ...], tuple[int, ...], int],
+        tuple[
+            int,
+            tuple[int, ...],
+            tuple[int, ...],
+            int | None,
+            int | None,
+            int,
+        ],
         Design,
     ] = {}
     for normalizer in anchors:
@@ -197,6 +215,26 @@ def candidate_designs(
                     for record in [projectable(row, period)]
                     if record is not None
                 ]
+                pair_candidates = []
+                for record in projected_candidates:
+                    if math.gcd(record.residual, period) != 1:
+                        continue
+                    projected_row = rows_by_prime[record.prime]
+                    for shared_row in remaining:
+                        shared_prime = int(shared_row["p"])
+                        if (
+                            shared_prime in base_set
+                            or shared_prime == record.prime
+                            or int(shared_row["h"]) != record.residual
+                        ):
+                            continue
+                        determinant = (
+                            int(projected_row["a"]) * int(shared_row["b"])
+                            - int(projected_row["b"]) * int(shared_row["a"])
+                        )
+                        if math.gcd(determinant, record.residual) != 1:
+                            continue
+                        pair_candidates.append((record, shared_prime))
                 orderings = [
                     ("density", 0),
                     ("projection", 0),
@@ -207,45 +245,84 @@ def candidate_designs(
                         for seed in range(jitter_seeds)
                     ),
                 ]
-                for order_kind, seed in orderings:
-                    projected, cells = greedy_projected_set(
-                        projected_candidates,
-                        rows_by_prime,
-                        initial_cells,
-                        max_tensor_cells,
-                        order_kind,
-                        seed,
+                pair_variants = [None, *pair_candidates]
+                for pair in pair_variants:
+                    paired_record = pair[0] if pair else None
+                    paired_shared = pair[1] if pair else None
+                    excluded = (
+                        {paired_record.prime, paired_shared}
+                        if paired_record is not None
+                        else set()
                     )
-                    density_score = sum(
-                        (
-                            Fraction(
-                                1,
-                                int(rows_by_prime[prime]["h"]),
-                            )
-                            for prime in (
-                                normalizer_prime,
-                                *base_primes,
-                                *(item.prime for item in projected),
-                            )
-                        ),
-                        Fraction(0),
-                    )
-                    design = Design(
-                        normalizer=normalizer_prime,
-                        base_primes=base_primes,
-                        projected=projected,
-                        base_period=period,
-                        base_points=base_points,
-                        tensor_cells=cells,
-                        density_score=density_score,
-                    )
-                    signature = (
-                        normalizer_prime,
-                        base_primes,
-                        tuple(item.prime for item in projected),
-                        period,
-                    )
-                    designs[signature] = design
+                    variant_candidates = [
+                        record
+                        for record in projected_candidates
+                        if record.prime not in excluded
+                    ]
+                    variant_cells = initial_cells
+                    initial_residuals: tuple[int, ...] = ()
+                    if paired_record is not None:
+                        variant_cells *= paired_record.projection
+                        initial_residuals = (paired_record.residual,)
+                    if variant_cells > max_tensor_cells:
+                        continue
+                    for order_kind, seed in orderings:
+                        projected, cells = greedy_projected_set(
+                            variant_candidates,
+                            rows_by_prime,
+                            variant_cells,
+                            max_tensor_cells,
+                            order_kind,
+                            seed,
+                            initial_residuals,
+                        )
+                        anchor_primes = (
+                            normalizer_prime,
+                            *base_primes,
+                            *(item.prime for item in projected),
+                            *(
+                                (
+                                    paired_record.prime,
+                                    paired_shared,
+                                )
+                                if paired_record is not None
+                                else ()
+                            ),
+                        )
+                        density_score = sum(
+                            (
+                                Fraction(
+                                    1,
+                                    int(rows_by_prime[prime]["h"]),
+                                )
+                                for prime in anchor_primes
+                            ),
+                            Fraction(0),
+                        )
+                        design = Design(
+                            normalizer=normalizer_prime,
+                            base_primes=base_primes,
+                            projected=projected,
+                            base_period=period,
+                            base_points=base_points,
+                            tensor_cells=cells,
+                            density_score=density_score,
+                            paired_projected=paired_record,
+                            paired_shared=paired_shared,
+                        )
+                        signature = (
+                            normalizer_prime,
+                            base_primes,
+                            tuple(item.prime for item in projected),
+                            (
+                                paired_record.prime
+                                if paired_record is not None
+                                else None
+                            ),
+                            paired_shared,
+                            period,
+                        )
+                        designs[signature] = design
     return list(designs.values())
 
 
@@ -275,6 +352,12 @@ def select_designs(
             design.normalizer,
             design.base_primes,
             tuple(item.prime for item in design.projected),
+            (
+                design.paired_projected.prime
+                if design.paired_projected is not None
+                else None
+            ),
+            design.paired_shared,
             design.base_period,
         )
         unique[signature] = design
@@ -298,10 +381,36 @@ def evaluate_design(
         )
         for record in design.projected
     ]
+    paired_rows = (
+        (
+            rows_by_prime[design.paired_projected.prime],
+            rows_by_prime[design.paired_shared],
+            design.paired_projected.projection,
+            design.paired_projected.residual,
+        )
+        if design.paired_projected is not None
+        else None
+    )
+    projection_rows = [
+        (row, projection, residual, "single")
+        for row, projection, residual in projected_rows
+    ]
+    if paired_rows is not None:
+        projection_rows.append(
+            (
+                paired_rows[0],
+                paired_rows[2],
+                paired_rows[3],
+                "paired",
+            )
+        )
     shape = (
         *(int(row["h"]) for row in base_rows),
-        *(projection for _row, projection, _residual
-          in projected_rows),
+        *(
+            projection
+            for _row, projection, _residual, _kind
+            in projection_rows
+        ),
     )
     counts = np.zeros(shape, dtype=np.int64)
     outside_points = 0
@@ -325,7 +434,7 @@ def evaluate_design(
                 (
                     int(row["a"]) * k + int(row["b"]) * l
                 ) % projection
-                for row, projection, _residual in projected_rows
+                for row, projection, _residual, _kind in projection_rows
             ),
         )
         counts[index] += 1
@@ -333,18 +442,28 @@ def evaluate_design(
     residual_denominator = math.prod(
         residual for _row, _projection, residual in projected_rows
     )
+    if paired_rows is not None:
+        residual_denominator *= paired_rows[3] ** 2
     if outside_points * residual_denominator > INT64_SAFE_SCORE:
         return None
     transformed = counts
-    for axis, (_row, projection, residual) in reversed(
-        list(enumerate(projected_rows, start=len(base_rows)))
+    for axis, (_row, projection, residual, kind) in reversed(
+        list(enumerate(projection_rows, start=len(base_rows)))
     ):
-        matrix = np.full(
-            (projection, projection),
-            residual,
-            dtype=np.int64,
-        )
-        np.fill_diagonal(matrix, residual - 1)
+        if kind == "single":
+            matrix = np.full(
+                (projection, projection),
+                residual,
+                dtype=np.int64,
+            )
+            np.fill_diagonal(matrix, residual - 1)
+        else:
+            matrix = np.full(
+                (projection, projection),
+                residual * (residual - 1),
+                dtype=np.int64,
+            )
+            np.fill_diagonal(matrix, (residual - 1) ** 2)
         transformed = np.tensordot(
             matrix,
             transformed,
@@ -390,6 +509,22 @@ def design_payload(
             }
             for record in design.projected
         ],
+        "paired_projected_prime": (
+            design.paired_projected.prime
+            if design.paired_projected is not None
+            else None
+        ),
+        "paired_shared_prime": design.paired_shared,
+        "paired_projection_modulus": (
+            design.paired_projected.projection
+            if design.paired_projected is not None
+            else None
+        ),
+        "paired_residual_modulus": (
+            design.paired_projected.residual
+            if design.paired_projected is not None
+            else None
+        ),
         "anchor_primes": list(design.anchor_primes),
         "base_period": design.base_period,
         "base_points": design.base_points,
@@ -399,6 +534,32 @@ def design_payload(
         "baseline": fraction_payload(baseline),
         "improvement": fraction_payload(value - baseline),
         **detail,
+    }
+
+
+def search_output_payload(
+    args: argparse.Namespace,
+    outside_primes: list[int],
+    results: list[dict],
+    status: str,
+) -> dict:
+    return {
+        "schema": "projected_conditional_design_search_v1",
+        "pool": str(args.pool),
+        "block_certificate": str(args.block_certificate),
+        "period_certificate": str(args.period_certificate),
+        "outside_primes": outside_primes,
+        "max_base_anchors": args.max_base_anchors,
+        "max_base_period": args.max_base_period,
+        "max_base_points": args.max_base_points,
+        "max_tensor_cells": args.max_tensor_cells,
+        "jitter_seeds": args.jitter_seeds,
+        "max_designs": args.max_designs,
+        "results": results,
+        "completed_outside_primes": [
+            int(record["outside_prime"]) for record in results
+        ],
+        "status": status,
     }
 
 
@@ -414,6 +575,11 @@ def main() -> int:
     parser.add_argument("--max-tensor-cells", type=int, default=3_000_000)
     parser.add_argument("--jitter-seeds", type=int, default=8)
     parser.add_argument("--max-designs", type=int, default=20)
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="resume a matching per-fibre output checkpoint",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if np is None:
@@ -446,7 +612,40 @@ def main() -> int:
         )
 
     results = []
+    if args.resume and args.output.exists():
+        checkpoint = json.loads(args.output.read_text())
+        expected = search_output_payload(
+            args,
+            outside_primes,
+            [],
+            "discovery_in_progress",
+        )
+        metadata_keys = (
+            "schema",
+            "pool",
+            "block_certificate",
+            "period_certificate",
+            "outside_primes",
+            "max_base_anchors",
+            "max_base_period",
+            "max_base_points",
+            "max_tensor_cells",
+            "jitter_seeds",
+            "max_designs",
+        )
+        if any(
+            checkpoint.get(key) != expected[key]
+            for key in metadata_keys
+        ):
+            raise RuntimeError("resume checkpoint metadata does not match")
+        results = list(checkpoint.get("results", []))
+    completed = {
+        int(record["outside_prime"]) for record in results
+    }
     for outside_prime in outside_primes:
+        if outside_prime in completed:
+            print(f"outside={outside_prime} resumed=True", flush=True)
+            continue
         outside = rows_by_prime[outside_prime]
         baseline = baseline_by_prime[outside_prime]
         designs = candidate_designs(
@@ -502,22 +701,25 @@ def main() -> int:
             f"evaluated={evaluated} improved={best_record is not None}",
             flush=True,
         )
+        args.output.write_text(
+            json.dumps(
+                search_output_payload(
+                    args,
+                    outside_primes,
+                    results,
+                    "discovery_in_progress_requires_certificate_and_replay",
+                ),
+                indent=2,
+            )
+            + "\n"
+        )
 
-    output = {
-        "schema": "projected_conditional_design_search_v1",
-        "pool": str(args.pool),
-        "block_certificate": str(args.block_certificate),
-        "period_certificate": str(args.period_certificate),
-        "outside_primes": outside_primes,
-        "max_base_anchors": args.max_base_anchors,
-        "max_base_period": args.max_base_period,
-        "max_base_points": args.max_base_points,
-        "max_tensor_cells": args.max_tensor_cells,
-        "jitter_seeds": args.jitter_seeds,
-        "max_designs": args.max_designs,
-        "results": results,
-        "status": "discovery_only_requires_certificate_and_replay",
-    }
+    output = search_output_payload(
+        args,
+        outside_primes,
+        results,
+        "discovery_only_requires_certificate_and_replay",
+    )
     args.output.write_text(json.dumps(output, indent=2) + "\n")
     return 0
 

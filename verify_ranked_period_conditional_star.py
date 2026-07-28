@@ -4,15 +4,61 @@
 from __future__ import annotations
 
 import argparse
+import itertools
 import json
 from fractions import Fraction
 from pathlib import Path
 
 from verify_all_ranked_pairanchor_star import (
     best_lower,
+    pair_index,
     read_fraction,
     recorded_anchor_rows,
+    triple_index,
 )
+
+
+def select_star_anchors_independent(
+    outside: dict,
+    anchors: list[dict],
+    limit: int | None,
+) -> list[dict]:
+    """Independently reconstruct the certificate's compatible subset."""
+    if limit is None:
+        return anchors
+    compatible = [
+        anchor for anchor in anchors
+        if pair_index(outside, anchor) == 1
+    ]
+    compatible.sort(
+        key=lambda anchor: (int(anchor["h"]), int(anchor["p"]))
+    )
+    return compatible[:limit]
+
+
+def witnessed_pairwise_lower(
+    outside: dict,
+    anchors: tuple[dict, ...],
+) -> Fraction:
+    outside_h = int(outside["h"])
+    value = sum(
+        (
+            Fraction(1, outside_h * int(anchor["h"]))
+            for anchor in anchors
+        ),
+        Fraction(0),
+    )
+    value -= sum(
+        (
+            Fraction(
+                triple_index((outside, first, second)),
+                outside_h * int(first["h"]) * int(second["h"]),
+            )
+            for first, second in itertools.combinations(anchors, 2)
+        ),
+        Fraction(0),
+    )
+    return value
 
 
 def main() -> int:
@@ -33,6 +79,9 @@ def main() -> int:
     cert = json.loads(args.certificate.read_text())
     fourway_triples = bool(cert.get("fourway_triples", False))
     fourterm_quads = bool(cert.get("fourterm_quads", False))
+    star_anchor_limit = cert.get("star_anchor_limit")
+    if star_anchor_limit is not None:
+        star_anchor_limit = int(star_anchor_limit)
     block_path = Path(cert["block_certificate"])
     block = json.loads(block_path.read_text())
     block_verification = json.loads(args.block_verification.read_text())
@@ -112,24 +161,70 @@ def main() -> int:
             value,
         )
 
+    recorded_by_prime = {
+        int(record["outside_prime"]): record
+        for record in cert["outside_row_lowers"]
+    }
     expected_lowers = {}
     star_loss = Fraction(0)
+    baseline_witnesses_valid = True
     for row in selected:
         prime = int(row["p"])
         if prime in anchor_primes:
             continue
-        baseline = best_lower(
-            row,
-            anchors,
-            fourway_triples=fourway_triples,
-            fourterm_quads=fourterm_quads,
+        recorded = recorded_by_prime.get(prime)
+        witness_primes = (
+            recorded.get("baseline_anchor_primes")
+            if recorded is not None
+            else None
         )
+        if witness_primes is not None:
+            witness_primes = tuple(int(value) for value in witness_primes)
+            valid_witness = (
+                len(set(witness_primes)) == len(witness_primes)
+                and set(witness_primes) <= anchor_primes
+                and all(
+                    pair_index(row, by_prime[anchor_prime]) == 1
+                    for anchor_prime in witness_primes
+                )
+            )
+            baseline_witnesses_valid = (
+                baseline_witnesses_valid and valid_witness
+            )
+            baseline = (
+                witnessed_pairwise_lower(
+                    row,
+                    tuple(
+                        by_prime[anchor_prime]
+                        for anchor_prime in witness_primes
+                    ),
+                )
+                if valid_witness
+                else Fraction(0)
+            )
+        else:
+            edge_anchors = select_star_anchors_independent(
+                row,
+                anchors,
+                star_anchor_limit,
+            )
+            baseline = best_lower(
+                row,
+                edge_anchors,
+                fourway_triples=fourway_triples,
+                fourterm_quads=fourterm_quads,
+            )
         path = None
         used = baseline
         if prime in conditional_values:
             path, value = conditional_values[prime]
             used = max(baseline, value)
-        expected_lowers[prime] = (baseline, path, used)
+        expected_lowers[prime] = (
+            baseline,
+            path,
+            used,
+            witness_primes,
+        )
         star_loss += used
     recorded_lowers = {
         int(record["outside_prime"]): (
@@ -138,6 +233,14 @@ def main() -> int:
             ),
             record["conditional_certificate"],
             read_fraction(record["used_intersection_lower_bound"]),
+            (
+                tuple(
+                    int(value)
+                    for value in record["baseline_anchor_primes"]
+                )
+                if record.get("baseline_anchor_primes") is not None
+                else None
+            ),
         )
         for record in cert["outside_row_lowers"]
     }
@@ -157,6 +260,9 @@ def main() -> int:
         and sorted(anchor_primes) == cert["block_anchor_primes"]
         and block_verification_valid
         and conditional_valid
+        and baseline_witnesses_valid
+        and len(recorded_by_prime) == len(cert["outside_row_lowers"])
+        and len(recorded_by_prime) == len(expected_lowers)
         and set(verification_by_certificate)
         == set(cert["conditional_certificates"])
         and int(cert["row_count"]) == len(selected)
@@ -177,10 +283,12 @@ def main() -> int:
         "period": period,
         "fourway_triples": fourway_triples,
         "fourterm_quads": fourterm_quads,
+        "star_anchor_limit": star_anchor_limit,
         "row_count": len(selected),
         "anchor_count": len(anchors),
         "outside_rows_checked": len(expected_lowers),
         "conditional_edges_checked": len(conditional_values),
+        "baseline_witnesses_valid": baseline_witnesses_valid,
         "block_overlap_loss": {
             "numerator": block_loss.numerator,
             "denominator": block_loss.denominator,

@@ -1,0 +1,34 @@
+{
+  "pool": "power1616615_lowbranch_0_1_0_0_0_targeted_pool.json",
+  "points": [
+    "power1616615_lowbranch_0_1_0_0_0_targeted_radius3_763_points.json"
+  ],
+  "initial_phases": "power1616615_lowbranch_0_1_0_0_0_targeted_base_phase.json",
+  "result": "INTEGER_MODEL",
+  "engine": "gain-mask-sat-with-exact-full-corpus-replay",
+  "scope": "successful phases are exact finite repairs; UNSAT exhausts all gain-mask skeletons, distinct row owners, and remaining zero-gain or duplicate-mask compensator chains",
+  "fixed_primes": [
+    17,
+    19,
+    37,
+    41,
+    73
+  ],
+  "max_changes": 3,
+  "avoid_phases": [],
+  "minimum_hamming_distance": 1,
+  "point_count": 763,
+  "changed_phases": 3,
+  "full_misses": 0,
+  "initial_misses": 634,
+  "gain_mask_count": 7232,
+  "gain_move_count": 108406,
+  "minimum_relaxed_mask_count": 3,
+  "mask_models": 1,
+  "matching_failures": 0,
+  "replay_failures": 0,
+  "diversity_rejections": 0,
+  "complete_negative": false,
+  "build_seconds": 2.893329899990931,
+  "search_seconds": 0.1187041001394391
+}

@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "rows": 12577,
+  "anchor_rows": 11,
+  "frozen_rows": 12566,
+  "core_points": 258,
+  "joint_legal_target_assignments": 693636364523341088,
+  "z3_verdict": "unsat",
+  "z3_assertions": 269,
+  "z3_solve_seconds": 3.5444497999269515,
+  "engine": "independent-z3-integer-anchor-master",
+  "certificate": "power1616615_anchor11_lowbranch_0_1_0_0_0_unsat_certificate.json",
+  "certificate_sha256": "7330119c171612c05fd634b8b51686e3d3156ad259f1c08dcafb7b2e29501f3f"
+}

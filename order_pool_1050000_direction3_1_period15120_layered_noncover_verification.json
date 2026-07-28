@@ -1,0 +1,20 @@
+{
+  "verified": true,
+  "source_row_count": 99,
+  "column": 454,
+  "active_row_count": 78,
+  "obstruction_prime": 11,
+  "divisible_row_count": 6,
+  "prime_deficit_holds": true,
+  "surviving_density_numerator": 1331626919328932373170013200623287663407217762378152211484151,
+  "surviving_density_denominator": 1332735606562889452651421880641636334058989019743327654591360,
+  "surviving_density_below_one": true,
+  "proved_no_independent_column_cover": true,
+  "proved_no_declared_layered_cover": true,
+  "engine": "independent-python-exact-rational-replay",
+  "scope": "the declared finite layered placement; the active residual phases were relaxed to be independent, so this does not rule out other placements, other finite pools, or the original infinite problem",
+  "certificate": "order_pool_1050000_direction3_1_period15120_layered_noncover_certificate.json",
+  "certificate_sha256": "5d88f3db107a0411bf3433bdf41b9e3b2c8c739056d502ef27c787505b405e1c",
+  "source": "order_pool_1050000_direction3_1_period15120_layered_pool.json",
+  "source_sha256": "13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c"
+}

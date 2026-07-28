@@ -1,0 +1,23 @@
+{
+  "verified": true,
+  "checks": {
+    "exact_source_row_selection": true,
+    "target_restrictions": true,
+    "all_columns_have_capacity_at_least_one": true,
+    "capacity_metadata": true,
+    "complete_coprime_pair_screen": true,
+    "source_sha256": true
+  },
+  "row_count": 99,
+  "layer_period": 15120,
+  "minimum_capacity_numerator": 80718382598754045540628836954047932637363689954237434392185793,
+  "minimum_capacity_denominator": 73300458360958919895828203435289998373244396085883021002524800,
+  "minimum_capacity_decimal": 1.1011988792930392,
+  "minimum_capacity_multiplicity": 18,
+  "unavoidable_pair_violations": 0,
+  "scope": "independent source-selection, unimodular-transform, exact column-capacity, and unavoidable-coprime-pair replay; this does not choose residual phases or prove a lattice cover",
+  "artifact": "order_pool_1050000_direction3_1_period15120_layered_pool.json",
+  "artifact_sha256": "13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c",
+  "source": "order_pool_1050000.json",
+  "source_sha256_matches": true
+}

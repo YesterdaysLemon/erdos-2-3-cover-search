@@ -1,0 +1,23 @@
+{
+  "schema": "erdos203-bounded-homogeneous-noncover-verification-v1",
+  "certificate": "order_pool_1050000_bounded_homogeneous_noncover_certificate.json",
+  "source_pool": "order_pool_1050000.json",
+  "source_sha256": "3be851ac19002a25711f9ca99f31efb128b07b06f8fd9a22ff84bc64009b4d9f",
+  "source_rows": 129497,
+  "witness": {
+    "k": 552897490806962158,
+    "l": 6049004616530593493
+  },
+  "independent_modular_hit_count": 0,
+  "independent_modular_hit_primes": [],
+  "checks": {
+    "source_complete": true,
+    "source_max_h_matches": true,
+    "source_row_count_matches": true,
+    "certificate_claims_zero_signature_hits": true,
+    "independent_modular_hit_count_zero": true,
+    "certificate_claims_obstruction": true
+  },
+  "verified": true,
+  "scope": "Finite pool only; this does not obstruct affine phase assignments, homogeneous fibres outside the source bound, or higher-index fibres."
+}

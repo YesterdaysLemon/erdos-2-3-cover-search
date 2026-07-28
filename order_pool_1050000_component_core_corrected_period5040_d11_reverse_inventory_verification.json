@@ -1,0 +1,17 @@
+{
+  "verified": true,
+  "source_sha256": "eb1d98ced110964cee91b380dfb832dd0a7a5f6b663f25a316b47c02fefb94cb",
+  "descending_row_count": 31,
+  "raw_density_numerator": 143,
+  "raw_density_denominator": 140,
+  "forced_overlap_forest_edge_count": 30,
+  "forced_overlap_density_numerator": 4511,
+  "forced_overlap_density_denominator": 25200,
+  "union_upper_bound_numerator": 21229,
+  "union_upper_bound_denominator": 25200,
+  "declared_finite_group_family_noncover_proved": true,
+  "integer_m_found": false,
+  "scope": "exact Hunter union-bound verification for every phase assignment in the declared finite quotient family only",
+  "inventory": "order_pool_1050000_component_core_corrected_period5040_d11_reverse_inventory.json",
+  "inventory_sha256": "3e61ebf2cbf42cce7552e9f5a6c3a933822b609398149673172869c4f919ca09"
+}

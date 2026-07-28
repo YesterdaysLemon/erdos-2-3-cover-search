@@ -1,0 +1,17 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "certificate": "order_pool_1050000_conditional_fibre97_vs_fullblock_plus31_certificate.json",
+  "block_certificate": "order_pool_1050000_component_core_corrected_fullblock_plus31conditional_certificate.json",
+  "outside_prime": 97,
+  "anchor_count": 15,
+  "base_period": 720,
+  "normalization_primes": [
+    31
+  ],
+  "target_combinations_checked": 5529600,
+  "forced_intersection_density": {
+    "numerator": 14630281,
+    "denominator": 1771605360
+  },
+  "verified": true
+}

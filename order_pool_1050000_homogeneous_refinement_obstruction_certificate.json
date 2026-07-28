@@ -1,0 +1,39 @@
+{
+  "schema": "erdos203-homogeneous-refinement-obstruction-v1",
+  "source_pool": "order_pool_1050000.json",
+  "source_sha256": "3be851ac19002a25711f9ca99f31efb128b07b06f8fd9a22ff84bc64009b4d9f",
+  "source_max_h": 1050000,
+  "source_unresolved": 0,
+  "analysis": {
+    "rows": 129497,
+    "unique_leaf_lattices": 129497,
+    "duplicate_leaf_rows": 0,
+    "parent_buckets": 429197,
+    "complete_sibling_groups": [],
+    "best_completion": {
+      "child_index": 4,
+      "parent_index": 2,
+      "refinement_prime": 2,
+      "observed_children": 1,
+      "required_children": 2,
+      "parent_key": [
+        [
+          2,
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    "best_completion_fraction": {
+      "numerator": 1,
+      "denominator": 2
+    },
+    "refinement_primes": 19369,
+    "multi_child_buckets": 144,
+    "max_observed_children": 2
+  },
+  "obstruction": true,
+  "argument": "A nontrivial finite refinement tree has a deepest internal node, all of whose q-descendants are leaves. The source leaf lattices contain no complete q-sibling group, so no homogeneous refinement of the trivial cover can use only this finite pool.",
+  "scope": "Finite pool only; this does not obstruct general affine covers, non-refinement homogeneous covers, or higher-index fibres."
+}

@@ -32,6 +32,26 @@ def pair_index(first: dict, second: dict) -> int:
     )
 
 
+def primitive_kernel_residues(row: dict) -> object:
+    """Enumerate the target-zero kernel modulo h as one cyclic subgroup."""
+    h = int(row["h"])
+    a = int(row["a"])
+    b = int(row["b"])
+    if math.gcd(a, b, h) != 1:
+        raise RuntimeError("outside row is not primitive modulo h")
+    order = math.lcm(
+        h // math.gcd(b, h),
+        h // math.gcd(a, h),
+    )
+    if order != h:
+        raise RuntimeError("primitive kernel generator has wrong order")
+    for multiplier in range(h):
+        yield (
+            (multiplier * b) % h,
+            (-multiplier * a) % h,
+        )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("pool", type=Path)
@@ -132,24 +152,14 @@ def main() -> int:
                     continue
                 record_outside_point(k, l)
     else:
-        enumeration_mode = "residue_kernel_lifts"
-        # For a large base plane, independently find all target-zero residue
-        # pairs modulo h, then lift each pair through the base period.  This
-        # visits the outside fibre once without using the generator's
-        # invertible-coefficient parametrization.
+        enumeration_mode = "cyclic_kernel_lifts"
+        # The vector (b,-a) generates the target-zero kernel modulo h when
+        # gcd(a,b,h)=1.  Enumerate that h-cycle and lift it through the base
+        # period.  This is independent of the generator's choice of an
+        # invertible coefficient and avoids an unnecessary h-by-h scan.
         outside_h = int(outside["h"])
-        residues = [
-            (k, l)
-            for k in range(outside_h)
-            for l in range(outside_h)
-            if (
-                int(outside["a"]) * k + int(outside["b"]) * l
-            ) % outside_h == 0
-        ]
-        if len(residues) != outside_h:
-            raise RuntimeError("outside row is not primitive modulo h")
         lift_count = period // outside_h
-        for residue_k, residue_l in residues:
+        for residue_k, residue_l in primitive_kernel_residues(outside):
             for k_lift in range(lift_count):
                 k = residue_k + outside_h * k_lift
                 for l_lift in range(lift_count):

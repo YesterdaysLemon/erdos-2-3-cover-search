@@ -1,0 +1,18 @@
+{
+  "pool": "power1616615_lowbranch_0_1_0_0_0_targeted_pool.json",
+  "points": "power1616615_lowbranch_0_1_0_0_0_targeted_radius3_743_points.json",
+  "phase_file": "power1616615_lowbranch_0_1_0_0_0_targeted_radius3_743_phase.json",
+  "point_count": 743,
+  "row_count": 12579,
+  "required_coverage": 1,
+  "minimum_coverage": 1,
+  "coverage_histogram": {
+    "1": 218,
+    "2": 203,
+    "3": 319,
+    "4": 3
+  },
+  "below_required": 0,
+  "total_deficit": 0,
+  "below_points": []
+}

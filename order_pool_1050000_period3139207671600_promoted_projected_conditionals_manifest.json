@@ -1,0 +1,3850 @@
+{
+  "schema": "promoted_projected_conditional_designs_v1",
+  "pool": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "artifact_prefix": "order_pool_1050000_period3139207671600",
+  "discovery_files": [
+    "_tmp_period3139_24block_projected_design_search_137.json",
+    "_tmp_period3139_24block_projected_design_search_151.json",
+    "_tmp_period3139_24block_projected_design_search_157.json",
+    "_tmp_period3139_24block_projected_design_search_241.json",
+    "_tmp_period3139_24block_projected_design_search_307.json",
+    "_tmp_period3139_24block_projected_design_search_313.json",
+    "_tmp_period3139_24block_projected_design_search_577.json",
+    "_tmp_period3139_24block_projected_design_search_6553.json",
+    "_tmp_period3139_24block_projected_design_search_batchA.json",
+    "_tmp_period3139_24block_projected_design_search_batchB.json",
+    "_tmp_period3139_24block_projected_design_search_batchC.json",
+    "_tmp_period3139_24block_projected_design_search_batchD.json",
+    "_tmp_period3139_24block_projected_design_search_batchE.json",
+    "_tmp_period3139_24block_projected_design_search_batchF.json",
+    "_tmp_period3139_24block_projected_design_search_batchG.json",
+    "_tmp_period3139_24block_projected_design_search_batchH.json",
+    "_tmp_period3139_24block_projected_design_search_batchI.json",
+    "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+    "_tmp_period3139_24block_projected_design_search_batchJrest2.json",
+    "_tmp_period3139_24block_projected_design_search_batchKfast.json",
+    "_tmp_period3139_24block_projected_design_search_batchKrest.json",
+    "_tmp_period3139_24block_projected_design_search_batchKrest2.json",
+    "_tmp_period3139_24block_projected_design_search_batchKrest3.json",
+    "_tmp_period3139_24block_projected_design_search_p101_base2.json",
+    "_tmp_period3139_24block_projected_design_search_p37_base2.json",
+    "_tmp_period3139_24block_projected_design_search_p61_base2.json",
+    "_tmp_period3139_24block_projected_design_search_p89_base2.json",
+    "_tmp_period3139_24block_projected_design_search_p97_base2.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchL.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchM.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchN.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchO.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchP.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchQ.json",
+    "_tmp_period3139_24block_projected_design_search_paired_batchS.json",
+    "_tmp_period3139_24block_projected_design_search_paired_top13.json",
+    "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+    "_tmp_period3139_24block_projected_design_search_top9helpers.json"
+  ],
+  "selected_outside_count": 165,
+  "completed_outside_count": 165,
+  "records": [
+    {
+      "outside_prime": 61,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_p61_base2.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre61_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre61_autodesign_verification.json",
+      "baseline": {
+        "numerator": 869841560293,
+        "denominator": 129995394606000,
+        "decimal": 0.006691325972965292
+      },
+      "forced_intersection_density": {
+        "numerator": 649,
+        "denominator": 96900,
+        "decimal": 0.006697626418988648
+      },
+      "improvement": {
+        "numerator": 819028967,
+        "denominator": 129995394606000,
+        "decimal": 6.300446023356256e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 89,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre89_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre89_autodesign_verification.json",
+      "baseline": {
+        "numerator": 801904372014079,
+        "denominator": 174167829693118800,
+        "decimal": 0.004604204883456508
+      },
+      "forced_intersection_density": {
+        "numerator": 111469,
+        "denominator": 24001560,
+        "decimal": 0.004644239791080246
+      },
+      "improvement": {
+        "numerator": 6972792972791,
+        "denominator": 174167829693118800,
+        "decimal": 4.003490762373832e-05
+      },
+      "target_combinations": 1267200,
+      "verified": true
+    },
+    {
+      "outside_prime": 101,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_p101_base2.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre101_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre101_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1,
+        "denominator": 275,
+        "decimal": 0.0036363636363636364
+      },
+      "forced_intersection_density": {
+        "numerator": 1237123,
+        "denominator": 319414700,
+        "decimal": 0.003873093505089152
+      },
+      "improvement": {
+        "numerator": 15123,
+        "denominator": 63882940,
+        "decimal": 0.00023672986872551576
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 113,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre113_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre113_autodesign_verification.json",
+      "baseline": {
+        "numerator": 114150458931277,
+        "denominator": 31666878126021600,
+        "decimal": 0.003604727263515005
+      },
+      "forced_intersection_density": {
+        "numerator": 111469,
+        "denominator": 30547440,
+        "decimal": 0.0036490455501344793
+      },
+      "improvement": {
+        "numerator": 1403421781133,
+        "denominator": 31666878126021600,
+        "decimal": 4.431828661947473e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 127,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre127_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre127_autodesign_verification.json",
+      "baseline": {
+        "numerator": 20,
+        "denominator": 6237,
+        "decimal": 0.00320666987333654
+      },
+      "forced_intersection_density": {
+        "numerator": 116621,
+        "denominator": 34365870,
+        "decimal": 0.003393512225938118
+      },
+      "improvement": {
+        "numerator": 6421,
+        "denominator": 34365870,
+        "decimal": 0.00018684235260157825
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 131,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre131_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre131_autodesign_verification.json",
+      "baseline": {
+        "numerator": 107385447341,
+        "denominator": 33919945259200,
+        "decimal": 0.003165849665157528
+      },
+      "forced_intersection_density": {
+        "numerator": 34687,
+        "denominator": 9976824,
+        "decimal": 0.003476757733723678
+      },
+      "improvement": {
+        "numerator": 284741585993,
+        "denominator": 915838521998400,
+        "decimal": 0.00031090806856615
+      },
+      "target_combinations": 691200,
+      "verified": true
+    },
+    {
+      "outside_prime": 137,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchL.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre137_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre137_autodesign_verification.json",
+      "baseline": {
+        "numerator": 18808188824477,
+        "denominator": 6333375625204320,
+        "decimal": 0.002969694194297884
+      },
+      "forced_intersection_density": {
+        "numerator": 1364371,
+        "denominator": 450976680,
+        "decimal": 0.0030253692940397717
+      },
+      "improvement": {
+        "numerator": 1292908171999,
+        "denominator": 23222377292415840,
+        "decimal": 5.56750997418877e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 151,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre151_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre151_autodesign_verification.json",
+      "baseline": {
+        "numerator": 22748600459357,
+        "denominator": 8796355035006000,
+        "decimal": 0.002586139414430932
+      },
+      "forced_intersection_density": {
+        "numerator": 1988537,
+        "denominator": 695499750,
+        "decimal": 0.0028591484037197713
+      },
+      "improvement": {
+        "numerator": 4322671195559,
+        "denominator": 15833439063010800,
+        "decimal": 0.000273008989288839
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 229,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchA.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre229_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre229_autodesign_verification.json",
+      "baseline": {
+        "numerator": 36639198733,
+        "denominator": 20221505827600,
+        "decimal": 0.001811892697080539
+      },
+      "forced_intersection_density": {
+        "numerator": 193,
+        "denominator": 106020,
+        "decimal": 0.0018204112431616675
+      },
+      "improvement": {
+        "numerator": 1550320463,
+        "denominator": 181993552448400,
+        "decimal": 8.518546081128654e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 241,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_241.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre241_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre241_autodesign_verification.json",
+      "baseline": {
+        "numerator": 11258539722817,
+        "denominator": 4691389352003200,
+        "decimal": 0.002399830599864763
+      },
+      "forced_intersection_density": {
+        "numerator": 10211,
+        "denominator": 4121480,
+        "decimal": 0.0024775080796218835
+      },
+      "improvement": {
+        "numerator": 364415301423,
+        "denominator": 4691389352003200,
+        "decimal": 7.767747975712066e-05
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 271,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchA.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre271_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre271_autodesign_verification.json",
+      "baseline": {
+        "numerator": 22748600459357,
+        "denominator": 15833439063010800,
+        "decimal": 0.0014367441191282958
+      },
+      "forced_intersection_density": {
+        "numerator": 21521,
+        "denominator": 14728230,
+        "decimal": 0.0014612074906489103
+      },
+      "improvement": {
+        "numerator": 3486053720227,
+        "denominator": 142500951567097200,
+        "decimal": 2.4463371520614558e-05
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 281,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchL.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre281_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre281_autodesign_verification.json",
+      "baseline": {
+        "numerator": 4239995692111,
+        "denominator": 3121287270486000,
+        "decimal": 0.001358412515311611
+      },
+      "forced_intersection_density": {
+        "numerator": 2503013,
+        "denominator": 1713711384,
+        "decimal": 0.0014605802490251765
+      },
+      "improvement": {
+        "numerator": 2870053620251,
+        "denominator": 28091585434374000,
+        "decimal": 0.00010216773371356557
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 307,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchL.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre307_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre307_autodesign_verification.json",
+      "baseline": {
+        "numerator": 934577119979,
+        "denominator": 263890651050180,
+        "decimal": 0.0035415317528671598
+      },
+      "forced_intersection_density": {
+        "numerator": 23306,
+        "denominator": 6491331,
+        "decimal": 0.003590326852844201
+      },
+      "improvement": {
+        "numerator": 12876570701,
+        "denominator": 263890651050180,
+        "decimal": 4.87950999770411e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 331,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre331_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre331_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8480929372087,
+        "denominator": 8293706175862800,
+        "decimal": 0.0010225741293764512
+      },
+      "forced_intersection_density": {
+        "numerator": 22283,
+        "denominator": 20878550,
+        "decimal": 0.0010672676023957602
+      },
+      "improvement": {
+        "numerator": 52953504743,
+        "denominator": 1184815167980400,
+        "decimal": 4.4693473019308944e-05
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 337,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchL.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre337_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre337_autodesign_verification.json",
+      "baseline": {
+        "numerator": 122847656694431,
+        "denominator": 52778130210036000,
+        "decimal": 0.0023276242679599697
+      },
+      "forced_intersection_density": {
+        "numerator": 1359707,
+        "denominator": 571237128,
+        "decimal": 0.002380284707264336
+      },
+      "improvement": {
+        "numerator": 10190838249253,
+        "denominator": 193519810770132000,
+        "decimal": 5.266043930436636e-05
+      },
+      "target_combinations": 1327104,
+      "verified": true
+    },
+    {
+      "outside_prime": 401,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre401_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre401_autodesign_verification.json",
+      "baseline": {
+        "numerator": 4239995692111,
+        "denominator": 4458981814980000,
+        "decimal": 0.0009508887607181277
+      },
+      "forced_intersection_density": {
+        "numerator": 1109209,
+        "denominator": 1112799600,
+        "decimal": 0.000996773363326155
+      },
+      "improvement": {
+        "numerator": 1841387477551,
+        "denominator": 40130836334820000,
+        "decimal": 4.588460260802734e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 409,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchA.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre409_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre409_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8104483531253,
+        "denominator": 5277813021003600,
+        "decimal": 0.0015355760992290506
+      },
+      "forced_intersection_density": {
+        "numerator": 701,
+        "denominator": 455532,
+        "decimal": 0.0015388600581298351
+      },
+      "improvement": {
+        "numerator": 17332121047,
+        "denominator": 5277813021003600,
+        "decimal": 3.283958900784291e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 419,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre419_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre419_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1382501252147,
+        "denominator": 1380640742712000,
+        "decimal": 0.0010013475695577008
+      },
+      "forced_intersection_density": {
+        "numerator": 41443,
+        "denominator": 39395664,
+        "decimal": 0.0010519685618193921
+      },
+      "improvement": {
+        "numerator": 69889404353,
+        "denominator": 1380640742712000,
+        "decimal": 5.0620992261691385e-05
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 443,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre443_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre443_autodesign_verification.json",
+      "baseline": {
+        "numerator": 44822369484701,
+        "denominator": 47318323636584000,
+        "decimal": 0.0009472518474861341
+      },
+      "forced_intersection_density": {
+        "numerator": 2501,
+        "denominator": 2450448,
+        "decimal": 0.0010206296971002854
+      },
+      "improvement": {
+        "numerator": 3472116835799,
+        "denominator": 47318323636584000,
+        "decimal": 7.337784961415126e-05
+      },
+      "target_combinations": 691200,
+      "verified": true
+    },
+    {
+      "outside_prime": 457,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchA.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre457_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre457_autodesign_verification.json",
+      "baseline": {
+        "numerator": 33212428000679,
+        "denominator": 21111252084014400,
+        "decimal": 0.0015732097683503908
+      },
+      "forced_intersection_density": {
+        "numerator": 13484,
+        "denominator": 8455095,
+        "decimal": 0.0015947780598562168
+      },
+      "improvement": {
+        "numerator": 151777879667,
+        "denominator": 7037084028004800,
+        "decimal": 2.1568291505826037e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 521,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre521_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre521_autodesign_verification.json",
+      "baseline": {
+        "numerator": 53547716155457,
+        "denominator": 73038122129372400,
+        "decimal": 0.0007331474933132584
+      },
+      "forced_intersection_density": {
+        "numerator": 155219,
+        "denominator": 198558360,
+        "decimal": 0.0007817298652144387
+      },
+      "improvement": {
+        "numerator": 3548365212253,
+        "denominator": 73038122129372400,
+        "decimal": 4.8582371901180347e-05
+      },
+      "target_combinations": 1382400,
+      "verified": true
+    },
+    {
+      "outside_prime": 547,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre547_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre547_autodesign_verification.json",
+      "baseline": {
+        "numerator": 435824575310039,
+        "denominator": 686115692730468000,
+        "decimal": 0.0006352056656445653
+      },
+      "forced_intersection_density": {
+        "numerator": 16063,
+        "denominator": 24819795,
+        "decimal": 0.0006471850391995583
+      },
+      "improvement": {
+        "numerator": 8219236185161,
+        "denominator": 686115692730468000,
+        "decimal": 1.1979373554992896e-05
+      },
+      "target_combinations": 1382400,
+      "verified": true
+    },
+    {
+      "outside_prime": 571,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre571_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre571_autodesign_verification.json",
+      "baseline": {
+        "numerator": 143340554078677,
+        "denominator": 274446277092187200,
+        "decimal": 0.0005222900292086256
+      },
+      "forced_intersection_density": {
+        "numerator": 31664,
+        "denominator": 59185665,
+        "decimal": 0.0005349944112311656
+      },
+      "improvement": {
+        "numerator": 316970031713,
+        "denominator": 24949661553835200,
+        "decimal": 1.2704382022539947e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 631,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchM.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre631_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre631_autodesign_verification.json",
+      "baseline": {
+        "numerator": 14816185583,
+        "denominator": 24321718990800,
+        "decimal": 0.0006091750993671299
+      },
+      "forced_intersection_density": {
+        "numerator": 4339987,
+        "denominator": 6426417690,
+        "decimal": 0.0006753353437877768
+      },
+      "improvement": {
+        "numerator": 159303956443,
+        "denominator": 2407850180089200,
+        "decimal": 6.616024442064685e-05
+      },
+      "target_combinations": 2488320,
+      "verified": true
+    },
+    {
+      "outside_prime": 661,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre661_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre661_autodesign_verification.json",
+      "baseline": {
+        "numerator": 27766228551,
+        "denominator": 44487312820720,
+        "decimal": 0.0006241381371559907
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 413820,
+        "decimal": 0.0006258759847276594
+      },
+      "improvement": {
+        "numerator": 695809517,
+        "denominator": 400385815386480,
+        "decimal": 1.7378475716687333e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 683,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre683_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre683_autodesign_verification.json",
+      "baseline": {
+        "numerator": 26304337059593,
+        "denominator": 42799863024072000,
+        "decimal": 0.0006145892813908915
+      },
+      "forced_intersection_density": {
+        "numerator": 177751,
+        "denominator": 272603925,
+        "decimal": 0.0006520485719345384
+      },
+      "improvement": {
+        "numerator": 1603252504247,
+        "denominator": 42799863024072000,
+        "decimal": 3.7459290543646835e-05
+      },
+      "target_combinations": 1188000,
+      "verified": true
+    },
+    {
+      "outside_prime": 701,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre701_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre701_autodesign_verification.json",
+      "baseline": {
+        "numerator": 13028125491739,
+        "denominator": 26389065105018000,
+        "decimal": 0.0004936940903321976
+      },
+      "forced_intersection_density": {
+        "numerator": 1215779,
+        "denominator": 2235902900,
+        "decimal": 0.000543753040438384
+      },
+      "improvement": {
+        "numerator": 42613190111,
+        "denominator": 851260164678000,
+        "decimal": 5.0058950106186374e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 761,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchM.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre761_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre761_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1621089930979,
+        "denominator": 3201614516417625,
+        "decimal": 0.0005063351389326165
+      },
+      "forced_intersection_density": {
+        "numerator": 270007,
+        "denominator": 504032760,
+        "decimal": 0.0005356933545351298
+      },
+      "improvement": {
+        "numerator": 751949513993,
+        "denominator": 25612916131341000,
+        "decimal": 2.9358215602513303e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 881,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre881_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre881_autodesign_verification.json",
+      "baseline": {
+        "numerator": 108268787336,
+        "denominator": 250817727092625,
+        "decimal": 0.0004316632185093408
+      },
+      "forced_intersection_density": {
+        "numerator": 1109209,
+        "denominator": 2448159120,
+        "decimal": 0.00045307880151188864
+      },
+      "improvement": {
+        "numerator": 85942525649,
+        "denominator": 4013083633482000,
+        "decimal": 2.141558300254783e-05
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 911,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre911_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre911_autodesign_verification.json",
+      "baseline": {
+        "numerator": 705079,
+        "denominator": 627026400,
+        "decimal": 0.0011244805641357366
+      },
+      "forced_intersection_density": {
+        "numerator": 28077715,
+        "denominator": 22278247992,
+        "decimal": 0.0012603197078191498
+      },
+      "improvement": {
+        "numerator": 14410753,
+        "denominator": 106086895200,
+        "decimal": 0.00013583914368341322
+      },
+      "target_combinations": 829440,
+      "verified": true
+    },
+    {
+      "outside_prime": 919,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre919_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre919_autodesign_verification.json",
+      "baseline": {
+        "numerator": 724208764063,
+        "denominator": 545980657345200,
+        "decimal": 0.001326436668259319
+      },
+      "forced_intersection_density": {
+        "numerator": 113227,
+        "denominator": 83459970,
+        "decimal": 0.0013566623616088048
+      },
+      "improvement": {
+        "numerator": 49507931771,
+        "denominator": 1637941972035600,
+        "decimal": 3.0225693349485745e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 937,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchA.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre937_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre937_autodesign_verification.json",
+      "baseline": {
+        "numerator": 948013481867,
+        "denominator": 545980657345200,
+        "decimal": 0.0017363499404478206
+      },
+      "forced_intersection_density": {
+        "numerator": 9645709,
+        "denominator": 5424898050,
+        "decimal": 0.0017780442896986792
+      },
+      "improvement": {
+        "numerator": 887808020251,
+        "denominator": 21293245636462800,
+        "decimal": 4.169434925085856e-05
+      },
+      "target_combinations": 648000,
+      "verified": true
+    },
+    {
+      "outside_prime": 953,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre953_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre953_autodesign_verification.json",
+      "baseline": {
+        "numerator": 56368148299,
+        "denominator": 133054109773200,
+        "decimal": 0.0004236483066557165
+      },
+      "forced_intersection_density": {
+        "numerator": 40883,
+        "denominator": 95661720,
+        "decimal": 0.00042737053023926395
+      },
+      "improvement": {
+        "numerator": 3466800017,
+        "denominator": 931378768412400,
+        "decimal": 3.722223583547435e-06
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 991,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre991_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre991_autodesign_verification.json",
+      "baseline": {
+        "numerator": 727536096799,
+        "denominator": 1872772362291600,
+        "decimal": 0.00038848079534277056
+      },
+      "forced_intersection_density": {
+        "numerator": 78581,
+        "denominator": 183611934,
+        "decimal": 0.0004279732710619997
+      },
+      "improvement": {
+        "numerator": 665643753409,
+        "denominator": 16854951260624400,
+        "decimal": 3.949247571922916e-05
+      },
+      "target_combinations": 1267200,
+      "verified": true
+    },
+    {
+      "outside_prime": 1021,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1021_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1021_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3332603542801,
+        "denominator": 2729903286726000,
+        "decimal": 0.0012207771458445417
+      },
+      "forced_intersection_density": {
+        "numerator": 226,
+        "denominator": 176715,
+        "decimal": 0.0012788953965424553
+      },
+      "improvement": {
+        "numerator": 52885734533,
+        "denominator": 909967762242000,
+        "decimal": 5.811825069791361e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1051,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1051_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1051_autodesign_verification.json",
+      "baseline": {
+        "numerator": 274145249221,
+        "denominator": 851260164678000,
+        "decimal": 0.00032204637383061256
+      },
+      "forced_intersection_density": {
+        "numerator": 3431873,
+        "denominator": 10061563050,
+        "decimal": 0.0003410874615549917
+      },
+      "improvement": {
+        "numerator": 502476503629,
+        "denominator": 26389065105018000,
+        "decimal": 1.9041087724379135e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1093,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1093_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1093_autodesign_verification.json",
+      "baseline": {
+        "numerator": 54007394869,
+        "denominator": 47067298047000,
+        "decimal": 0.0011474505040648356
+      },
+      "forced_intersection_density": {
+        "numerator": 2423,
+        "denominator": 2054052,
+        "decimal": 0.0011796196006722322
+      },
+      "improvement": {
+        "numerator": 19683461953,
+        "denominator": 611874874611000,
+        "decimal": 3.21690966073967e-05
+      },
+      "target_combinations": 1935360,
+      "verified": true
+    },
+    {
+      "outside_prime": 1171,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1171_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1171_autodesign_verification.json",
+      "baseline": {
+        "numerator": 209984010873211,
+        "denominator": 823338831276561600,
+        "decimal": 0.0002550396056841352
+      },
+      "forced_intersection_density": {
+        "numerator": 5671,
+        "denominator": 21274110,
+        "decimal": 0.00026656814315616494
+      },
+      "improvement": {
+        "numerator": 9491892568549,
+        "denominator": 823338831276561600,
+        "decimal": 1.1528537472029726e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 1201,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchB.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1201_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1201_autodesign_verification.json",
+      "baseline": {
+        "numerator": 59738287706239,
+        "denominator": 52778130210036000,
+        "decimal": 0.0011318757877269304
+      },
+      "forced_intersection_density": {
+        "numerator": 3431873,
+        "denominator": 2874732300,
+        "decimal": 0.0011938061154424709
+      },
+      "improvement": {
+        "numerator": 3268566900121,
+        "denominator": 52778130210036000,
+        "decimal": 6.193032771554053e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1249,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1249_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1249_autodesign_verification.json",
+      "baseline": {
+        "numerator": 266324084556359,
+        "denominator": 411669415638280800,
+        "decimal": 0.0006469367760620052
+      },
+      "forced_intersection_density": {
+        "numerator": 111469,
+        "denominator": 170192880,
+        "decimal": 0.0006549568936138809
+      },
+      "improvement": {
+        "numerator": 1100545701977,
+        "denominator": 137223138546093600,
+        "decimal": 8.020117551875727e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1277,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1277_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1277_autodesign_verification.json",
+      "baseline": {
+        "numerator": 7701576620321,
+        "denominator": 26389065105018000,
+        "decimal": 0.00029184727043841014
+      },
+      "forced_intersection_density": {
+        "numerator": 5596,
+        "denominator": 18790695,
+        "decimal": 0.00029780697307896275
+      },
+      "improvement": {
+        "numerator": 576660263623,
+        "denominator": 96759905385066000,
+        "decimal": 5.959702640552625e-06
+      },
+      "target_combinations": 760320,
+      "verified": true
+    },
+    {
+      "outside_prime": 1301,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1301_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1301_autodesign_verification.json",
+      "baseline": {
+        "numerator": 366689551459831,
+        "denominator": 1372231385460936000,
+        "decimal": 0.0002672213704955153
+      },
+      "forced_intersection_density": {
+        "numerator": 110897,
+        "denominator": 401844300,
+        "decimal": 0.0002759700709951591
+      },
+      "improvement": {
+        "numerator": 12005241407609,
+        "denominator": 1372231385460936000,
+        "decimal": 8.748700499643803e-06
+      },
+      "target_combinations": 691200,
+      "verified": true
+    },
+    {
+      "outside_prime": 1303,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1303_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1303_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1219354494839,
+        "denominator": 4029857232786000,
+        "decimal": 0.0003025800727923088
+      },
+      "forced_intersection_density": {
+        "numerator": 5416889,
+        "denominator": 17013188430,
+        "decimal": 0.00031839352290063364
+      },
+      "improvement": {
+        "numerator": 191177838883,
+        "denominator": 12089571698358000,
+        "decimal": 1.581345010832482e-05
+      },
+      "target_combinations": 552960,
+      "verified": true
+    },
+    {
+      "outside_prime": 1321,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1321_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1321_autodesign_verification.json",
+      "baseline": {
+        "numerator": 20063387791,
+        "denominator": 32289178660200,
+        "decimal": 0.0006213656904110217
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 413820,
+        "decimal": 0.0006258759847276594
+      },
+      "improvement": {
+        "numerator": 145633699,
+        "denominator": 32289178660200,
+        "decimal": 4.51029431663772e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1327,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1327_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1327_autodesign_verification.json",
+      "baseline": {
+        "numerator": 718869789751,
+        "denominator": 2365916181829200,
+        "decimal": 0.00030384414937100954
+      },
+      "forced_intersection_density": {
+        "numerator": 42787,
+        "denominator": 133243110,
+        "decimal": 0.0003211197937364266
+      },
+      "improvement": {
+        "numerator": 122618179667,
+        "denominator": 7097748545487600,
+        "decimal": 1.7275644365417062e-05
+      },
+      "target_combinations": 1728000,
+      "verified": true
+    },
+    {
+      "outside_prime": 1361,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1361_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1361_autodesign_verification.json",
+      "baseline": {
+        "numerator": 35591221769,
+        "denominator": 127399480428000,
+        "decimal": 0.00027936708728662697
+      },
+      "forced_intersection_density": {
+        "numerator": 5677,
+        "denominator": 19522800,
+        "decimal": 0.00029078820660970764
+      },
+      "improvement": {
+        "numerator": 4365134003,
+        "denominator": 382198441284000,
+        "decimal": 1.1421119323080657e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 1429,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1429_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1429_autodesign_verification.json",
+      "baseline": {
+        "numerator": 665036557,
+        "denominator": 2297898389500,
+        "decimal": 0.00028941077640282667
+      },
+      "forced_intersection_density": {
+        "numerator": 9161,
+        "denominator": 31337460,
+        "decimal": 0.0002923338394368912
+      },
+      "improvement": {
+        "numerator": 332486641,
+        "denominator": 113745970280250,
+        "decimal": 2.9230630340645176e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1451,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1451_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1451_autodesign_verification.json",
+      "baseline": {
+        "numerator": 107385447341,
+        "denominator": 378337850968000,
+        "decimal": 0.00028383479756584736
+      },
+      "forced_intersection_density": {
+        "numerator": 754879,
+        "denominator": 2411065800,
+        "decimal": 0.0003130893399922972
+      },
+      "improvement": {
+        "numerator": 1294967783383,
+        "denominator": 44265528563256000,
+        "decimal": 2.9254542426449844e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 1531,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1531_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1531_autodesign_verification.json",
+      "baseline": {
+        "numerator": 22645056199,
+        "denominator": 102151219761360,
+        "decimal": 0.00022168170142169738
+      },
+      "forced_intersection_density": {
+        "numerator": 2369,
+        "denominator": 10249470,
+        "decimal": 0.00023113390253349684
+      },
+      "improvement": {
+        "numerator": 321851291,
+        "denominator": 34050406587120,
+        "decimal": 9.45220111179948e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 1597,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1597_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1597_autodesign_verification.json",
+      "baseline": {
+        "numerator": 36900529663,
+        "denominator": 47067298047000,
+        "decimal": 0.0007839950707634041
+      },
+      "forced_intersection_density": {
+        "numerator": 19,
+        "denominator": 23436,
+        "decimal": 0.0008107185526540366
+      },
+      "improvement": {
+        "numerator": 1257802087,
+        "denominator": 47067298047000,
+        "decimal": 2.6723481890632353e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 1613,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1613_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1613_autodesign_verification.json",
+      "baseline": {
+        "numerator": 307741431414583,
+        "denominator": 1329349154665281750,
+        "decimal": 0.00023149782006824952
+      },
+      "forced_intersection_density": {
+        "numerator": 103067,
+        "denominator": 415239110,
+        "decimal": 0.00024821120534624015
+      },
+      "improvement": {
+        "numerator": 11108962295446,
+        "denominator": 664674577332640875,
+        "decimal": 1.6713385277990623e-05
+      },
+      "target_combinations": 691200,
+      "verified": true
+    },
+    {
+      "outside_prime": 1801,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchC.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1801_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1801_autodesign_verification.json",
+      "baseline": {
+        "numerator": 67892097538127,
+        "denominator": 79167195315054000,
+        "decimal": 0.0008575786633332583
+      },
+      "forced_intersection_density": {
+        "numerator": 21521,
+        "denominator": 24547050,
+        "decimal": 0.0008767244943893461
+      },
+      "improvement": {
+        "numerator": 4547165240059,
+        "denominator": 237501585945162000,
+        "decimal": 1.914583105608785e-05
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 1861,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1861_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1861_autodesign_verification.json",
+      "baseline": {
+        "numerator": 869841560293,
+        "denominator": 4029857232786000,
+        "decimal": 0.00021584922493436427
+      },
+      "forced_intersection_density": {
+        "numerator": 649,
+        "denominator": 3003900,
+        "decimal": 0.00021605246512866608
+      },
+      "improvement": {
+        "numerator": 819028967,
+        "denominator": 4029857232786000,
+        "decimal": 2.032401943018147e-07
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 1871,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1871_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1871_autodesign_verification.json",
+      "baseline": {
+        "numerator": 23201,
+        "denominator": 42240240,
+        "decimal": 0.0005492629776724753
+      },
+      "forced_intersection_density": {
+        "numerator": 29929,
+        "denominator": 48855807,
+        "decimal": 0.000612598621081011
+      },
+      "improvement": {
+        "numerator": 601181,
+        "denominator": 9491985360,
+        "decimal": 6.333564340853556e-05
+      },
+      "target_combinations": 2534400,
+      "verified": true
+    },
+    {
+      "outside_prime": 1901,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1901_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1901_autodesign_verification.json",
+      "baseline": {
+        "numerator": 77724099451,
+        "denominator": 425630082339000,
+        "decimal": 0.00018260950688418537
+      },
+      "forced_intersection_density": {
+        "numerator": 1799,
+        "denominator": 9091500,
+        "decimal": 0.00019787713798603092
+      },
+      "improvement": {
+        "numerator": 6498363083,
+        "denominator": 425630082339000,
+        "decimal": 1.5267631101845552e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 1951,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1951_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1951_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3907297382389,
+        "denominator": 20288367258159000,
+        "decimal": 0.0001925880645135539
+      },
+      "forced_intersection_density": {
+        "numerator": 1326449,
+        "denominator": 6630430950,
+        "decimal": 0.00020005471891687524
+      },
+      "improvement": {
+        "numerator": 454458680173,
+        "denominator": 60865101774477000,
+        "decimal": 7.466654403321337e-06
+      },
+      "target_combinations": 2376000,
+      "verified": true
+    },
+    {
+      "outside_prime": 1973,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre1973_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre1973_autodesign_verification.json",
+      "baseline": {
+        "numerator": 704033017019,
+        "denominator": 3769866443574000,
+        "decimal": 0.0001867527742843711
+      },
+      "forced_intersection_density": {
+        "numerator": 142433,
+        "denominator": 710629920,
+        "decimal": 0.0002004320335963338
+      },
+      "improvement": {
+        "numerator": 1340793496981,
+        "denominator": 98016527532924000,
+        "decimal": 1.367925931196271e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 2003,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2003_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2003_autodesign_verification.json",
+      "baseline": {
+        "numerator": 534978197657,
+        "denominator": 2564047093608000,
+        "decimal": 0.0002086460108282197
+      },
+      "forced_intersection_density": {
+        "numerator": 1585,
+        "denominator": 7189182,
+        "decimal": 0.00022047014528217535
+      },
+      "improvement": {
+        "numerator": 636670389203,
+        "denominator": 53844988965768000,
+        "decimal": 1.1824134453955665e-05
+      },
+      "target_combinations": 2772000,
+      "verified": true
+    },
+    {
+      "outside_prime": 2017,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2017_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2017_autodesign_verification.json",
+      "baseline": {
+        "numerator": 12863605350389,
+        "denominator": 36190717858310400,
+        "decimal": 0.00035543935328254773
+      },
+      "forced_intersection_density": {
+        "numerator": 32863,
+        "denominator": 91642320,
+        "decimal": 0.00035860069889108003
+      },
+      "improvement": {
+        "numerator": 10401033361,
+        "denominator": 3290065259846400,
+        "decimal": 3.1613456085322704e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 2129,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2129_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2129_autodesign_verification.json",
+      "baseline": {
+        "numerator": 5992567342843,
+        "denominator": 31666878126021600,
+        "decimal": 0.00018923770505557767
+      },
+      "forced_intersection_density": {
+        "numerator": 40883,
+        "denominator": 213832080,
+        "decimal": 0.00019119207931756545
+      },
+      "improvement": {
+        "numerator": 61888931567,
+        "denominator": 31666878126021600,
+        "decimal": 1.954374261987766e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 2143,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2143_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2143_autodesign_verification.json",
+      "baseline": {
+        "numerator": 102328491553,
+        "denominator": 545980657345200,
+        "decimal": 0.00018742145930694044
+      },
+      "forced_intersection_density": {
+        "numerator": 42787,
+        "denominator": 215238870,
+        "decimal": 0.00019878844374159743
+      },
+      "improvement": {
+        "numerator": 18618460901,
+        "denominator": 1637941972035600,
+        "decimal": 1.1366984434656965e-05
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 2161,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2161_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2161_autodesign_verification.json",
+      "baseline": {
+        "numerator": 11258539722817,
+        "denominator": 42222504168028800,
+        "decimal": 0.00026664784442941806
+      },
+      "forced_intersection_density": {
+        "numerator": 1212719,
+        "denominator": 4339918440,
+        "decimal": 0.00027943359230502034
+      },
+      "improvement": {
+        "numerator": 5742001479761,
+        "denominator": 449093907969033600,
+        "decimal": 1.2785747875602287e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 2281,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2281_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2281_autodesign_verification.json",
+      "baseline": {
+        "numerator": 56871364271,
+        "denominator": 170252032935600,
+        "decimal": 0.0003340422037281183
+      },
+      "forced_intersection_density": {
+        "numerator": 1207,
+        "denominator": 3398220,
+        "decimal": 0.0003551859502916233
+      },
+      "improvement": {
+        "numerator": 334778222777,
+        "denominator": 15833439063010800,
+        "decimal": 2.1143746563504973e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 2311,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2311_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2311_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3237731665643,
+        "denominator": 19351981077013200,
+        "decimal": 0.00016730750473339725
+      },
+      "forced_intersection_density": {
+        "numerator": 21521,
+        "denominator": 126008190,
+        "decimal": 0.00017079048592000251
+      },
+      "improvement": {
+        "numerator": 606623274133,
+        "denominator": 174167829693118800,
+        "decimal": 3.48298118660525e-06
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 2357,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2357_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2357_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8076071046866,
+        "denominator": 51128813640972375,
+        "decimal": 0.0001579553772472865
+      },
+      "forced_intersection_density": {
+        "numerator": 269,
+        "denominator": 1691019,
+        "decimal": 0.00015907568158607326
+      },
+      "improvement": {
+        "numerator": 6364425751,
+        "denominator": 5680979293441375,
+        "decimal": 1.1203043387867398e-06
+      },
+      "target_combinations": 1327104,
+      "verified": true
+    },
+    {
+      "outside_prime": 2381,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2381_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2381_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3815259460577,
+        "denominator": 26389065105018000,
+        "decimal": 0.00014457728780439103
+      },
+      "forced_intersection_density": {
+        "numerator": 16419,
+        "denominator": 100976260,
+        "decimal": 0.00016260257609065736
+      },
+      "improvement": {
+        "numerator": 475670506123,
+        "denominator": 26389065105018000,
+        "decimal": 1.802528828626631e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 2521,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2521_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2521_autodesign_verification.json",
+      "baseline": {
+        "numerator": 19763661773,
+        "denominator": 60664517482800,
+        "decimal": 0.0003257861859463981
+      },
+      "forced_intersection_density": {
+        "numerator": 37,
+        "denominator": 112860,
+        "decimal": 0.00032783980152401205
+      },
+      "improvement": {
+        "numerator": 1121234383,
+        "denominator": 545980657345200,
+        "decimal": 2.0536155776139373e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 2731,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2731_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2731_autodesign_verification.json",
+      "baseline": {
+        "numerator": 274145249221,
+        "denominator": 2213276428162800,
+        "decimal": 0.000123863989934851
+      },
+      "forced_intersection_density": {
+        "numerator": 3713,
+        "denominator": 29099070,
+        "decimal": 0.0001275985796109635
+      },
+      "improvement": {
+        "numerator": 918408811,
+        "denominator": 245919603129200,
+        "decimal": 3.7345896761125262e-06
+      },
+      "target_combinations": 1935360,
+      "verified": true
+    },
+    {
+      "outside_prime": 2791,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2791_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2791_autodesign_verification.json",
+      "baseline": {
+        "numerator": 67892097538127,
+        "denominator": 490836610953334800,
+        "decimal": 0.00013831913924729973
+      },
+      "forced_intersection_density": {
+        "numerator": 11891911,
+        "denominator": 80205031170,
+        "decimal": 0.000148268890698319
+      },
+      "improvement": {
+        "numerator": 14651106846139,
+        "denominator": 1472509832860004400,
+        "decimal": 9.94975145101929e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 2801,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2801_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2801_autodesign_verification.json",
+      "baseline": {
+        "numerator": 7628735129093,
+        "denominator": 56183170868748000,
+        "decimal": 0.0001357832783577635
+      },
+      "forced_intersection_density": {
+        "numerator": 374873,
+        "denominator": 2596532400,
+        "decimal": 0.0001443744742025942
+      },
+      "improvement": {
+        "numerator": 482680624117,
+        "denominator": 56183170868748000,
+        "decimal": 8.591195844830682e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 2851,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2851_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2851_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3143183927701,
+        "denominator": 26389065105018000,
+        "decimal": 0.00011910933241448214
+      },
+      "forced_intersection_density": {
+        "numerator": 2369,
+        "denominator": 19092150,
+        "decimal": 0.000124082410833772
+      },
+      "improvement": {
+        "numerator": 43744963393,
+        "denominator": 8796355035006000,
+        "decimal": 4.973078419289855e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 2857,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2857_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2857_autodesign_verification.json",
+      "baseline": {
+        "numerator": 18720364139,
+        "denominator": 66527054886600,
+        "decimal": 0.0002813947524193002
+      },
+      "forced_intersection_density": {
+        "numerator": 157735,
+        "denominator": 545271804,
+        "decimal": 0.00028927774890043646
+      },
+      "improvement": {
+        "numerator": 3671027777,
+        "denominator": 465689384206200,
+        "decimal": 7.88299648113629e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 2861,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2861_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2861_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1477188367309,
+        "denominator": 12173020354895400,
+        "decimal": 0.00012134937133453049
+      },
+      "forced_intersection_density": {
+        "numerator": 1679647,
+        "denominator": 12702509820,
+        "decimal": 0.00013222953761117423
+      },
+      "improvement": {
+        "numerator": 573926104051,
+        "denominator": 52749754871213400,
+        "decimal": 1.0880166276643742e-05
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 2927,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre2927_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre2927_autodesign_verification.json",
+      "baseline": {
+        "numerator": 79856593,
+        "denominator": 223454523600,
+        "decimal": 0.0003573729084265448
+      },
+      "forced_intersection_density": {
+        "numerator": 185,
+        "denominator": 472758,
+        "decimal": 0.0003913207179994839
+      },
+      "improvement": {
+        "numerator": 98615291,
+        "denominator": 2904908806800,
+        "decimal": 3.3947809572939054e-05
+      },
+      "target_combinations": 1216512,
+      "verified": true
+    },
+    {
+      "outside_prime": 3121,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3121_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3121_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3907297382389,
+        "denominator": 16230693806527200,
+        "decimal": 0.00024073508064194237
+      },
+      "forced_intersection_density": {
+        "numerator": 421,
+        "denominator": 1697080,
+        "decimal": 0.0002480731609588234
+      },
+      "improvement": {
+        "numerator": 119102134751,
+        "denominator": 16230693806527200,
+        "decimal": 7.338080316881025e-06
+      },
+      "target_combinations": 1382400,
+      "verified": true
+    },
+    {
+      "outside_prime": 3163,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3163_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3163_autodesign_verification.json",
+      "baseline": {
+        "numerator": 37183453070773,
+        "denominator": 327224407302223200,
+        "decimal": 0.00011363288385890636
+      },
+      "forced_intersection_density": {
+        "numerator": 12041,
+        "denominator": 105911190,
+        "decimal": 0.00011368959219512122
+      },
+      "improvement": {
+        "numerator": 6185450569,
+        "denominator": 109074802434074400,
+        "decimal": 5.6708336214851557e-08
+      },
+      "target_combinations": 1728000,
+      "verified": true
+    },
+    {
+      "outside_prime": 3191,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3191_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3191_autodesign_verification.json",
+      "baseline": {
+        "numerator": 102004829,
+        "denominator": 332902785600,
+        "decimal": 0.0003064102597283884
+      },
+      "forced_intersection_density": {
+        "numerator": 2017,
+        "denominator": 6088550,
+        "decimal": 0.00033127756198109566
+      },
+      "improvement": {
+        "numerator": 408952673,
+        "denominator": 16445397608640,
+        "decimal": 2.4867302252707256e-05
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 3301,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3301_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3301_autodesign_verification.json",
+      "baseline": {
+        "numerator": 27766228551,
+        "denominator": 222436564103600,
+        "decimal": 0.00012482762743119813
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 2069100,
+        "decimal": 0.00012517519694553187
+      },
+      "improvement": {
+        "numerator": 695809517,
+        "denominator": 2001929076932400,
+        "decimal": 3.4756951433374667e-07
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 3361,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3361_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3361_autodesign_verification.json",
+      "baseline": {
+        "numerator": 18259021229,
+        "denominator": 80782852362300,
+        "decimal": 0.00022602595346733732
+      },
+      "forced_intersection_density": {
+        "numerator": 374873,
+        "denominator": 1557919440,
+        "decimal": 0.00024062412367099032
+      },
+      "improvement": {
+        "numerator": 33019891193,
+        "denominator": 2261919866144400,
+        "decimal": 1.4598170203653017e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 3511,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3511_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3511_autodesign_verification.json",
+      "baseline": {
+        "numerator": 727536096799,
+        "denominator": 6639829284488400,
+        "decimal": 0.00010957150637873015
+      },
+      "forced_intersection_density": {
+        "numerator": 78581,
+        "denominator": 650987766,
+        "decimal": 0.00012071040978671787
+      },
+      "improvement": {
+        "numerator": 665643753409,
+        "denominator": 59758463560395600,
+        "decimal": 1.1138903407987711e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 3673,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3673_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3673_autodesign_verification.json",
+      "baseline": {
+        "numerator": 14807199067037,
+        "denominator": 32758839440712000,
+        "decimal": 0.0004520062163324053
+      },
+      "forced_intersection_density": {
+        "numerator": 6563,
+        "denominator": 14419944,
+        "decimal": 0.00045513352895129133
+      },
+      "improvement": {
+        "numerator": 9313375633,
+        "denominator": 2978076312792000,
+        "decimal": 3.1273126188860294e-06
+      },
+      "target_combinations": 2322432,
+      "verified": true
+    },
+    {
+      "outside_prime": 3851,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3851_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3851_autodesign_verification.json",
+      "baseline": {
+        "numerator": 21530598808493,
+        "denominator": 200192907693240000,
+        "decimal": 0.00010754925864549013
+      },
+      "forced_intersection_density": {
+        "numerator": 503,
+        "denominator": 4345110,
+        "decimal": 0.00011576231671925452
+      },
+      "improvement": {
+        "numerator": 4932587930521,
+        "denominator": 600578723079720000,
+        "decimal": 8.213058073764387e-06
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 3907,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre3907_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre3907_autodesign_verification.json",
+      "baseline": {
+        "numerator": 2263251434113,
+        "denominator": 24541830547666740,
+        "decimal": 9.22201556936499e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 32863,
+        "denominator": 355113990,
+        "decimal": 9.254211584285936e-05
+      },
+      "improvement": {
+        "numerator": 526766095,
+        "denominator": 1636122036511116,
+        "decimal": 3.219601492094573e-07
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 4177,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4177_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4177_autodesign_verification.json",
+      "baseline": {
+        "numerator": 210884514139,
+        "denominator": 363987104896800,
+        "decimal": 0.0005793735857724722
+      },
+      "forced_intersection_density": {
+        "numerator": 111469,
+        "denominator": 189830520,
+        "decimal": 0.0005872027322055484
+      },
+      "improvement": {
+        "numerator": 22538602357,
+        "denominator": 2878807102365600,
+        "decimal": 7.829146433076176e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 4201,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4201_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4201_autodesign_verification.json",
+      "baseline": {
+        "numerator": 18259021229,
+        "denominator": 100978565452875,
+        "decimal": 0.00018082076277386986
+      },
+      "forced_intersection_density": {
+        "numerator": 1063009,
+        "denominator": 5488125300,
+        "decimal": 0.0001936925529014434
+      },
+      "improvement": {
+        "numerator": 36393697253,
+        "denominator": 2827399832680500,
+        "decimal": 1.2871790127573562e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 4421,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4421_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4421_autodesign_verification.json",
+      "baseline": {
+        "numerator": 2034433651,
+        "denominator": 26038546213680,
+        "decimal": 7.813161434992709e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 171,
+        "denominator": 1973972,
+        "decimal": 8.662736857463024e-05
+      },
+      "improvement": {
+        "numerator": 221217089,
+        "denominator": 26038546213680,
+        "decimal": 8.495754224703147e-06
+      },
+      "target_combinations": 1728000,
+      "verified": true
+    },
+    {
+      "outside_prime": 4523,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4523_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4523_autodesign_verification.json",
+      "baseline": {
+        "numerator": 11566119013,
+        "denominator": 125512794792000,
+        "decimal": 9.215091602547287e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 19121,
+        "denominator": 198470580,
+        "decimal": 9.634173488080702e-05
+      },
+      "improvement": {
+        "numerator": 526001387,
+        "denominator": 125512794792000,
+        "decimal": 4.190818855334154e-06
+      },
+      "target_combinations": 2508800,
+      "verified": true
+    },
+    {
+      "outside_prime": 4591,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4591_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4591_autodesign_verification.json",
+      "baseline": {
+        "numerator": 229586260837,
+        "denominator": 2809158543437400,
+        "decimal": 8.172776911198075e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 263,
+        "denominator": 3124170,
+        "decimal": 8.418235883450645e-05
+      },
+      "improvement": {
+        "numerator": 20685995069,
+        "denominator": 8427475630312200,
+        "decimal": 2.4545897225256855e-06
+      },
+      "target_combinations": 2268000,
+      "verified": true
+    },
+    {
+      "outside_prime": 4621,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4621_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4621_autodesign_verification.json",
+      "baseline": {
+        "numerator": 19763661773,
+        "denominator": 222436564103600,
+        "decimal": 8.885077798538131e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 37,
+        "denominator": 413820,
+        "decimal": 8.941085496109419e-05
+      },
+      "improvement": {
+        "numerator": 1121234383,
+        "denominator": 2001929076932400,
+        "decimal": 5.60076975712892e-07
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 4651,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4651_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4651_autodesign_verification.json",
+      "baseline": {
+        "numerator": 77087684491,
+        "denominator": 1055562604200720,
+        "decimal": 7.302995026938396e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 105929,
+        "denominator": 1437366150,
+        "decimal": 7.369660124527073e-05
+      },
+      "improvement": {
+        "numerator": 3518459201,
+        "denominator": 5277813021003600,
+        "decimal": 6.666509758867792e-07
+      },
+      "target_combinations": 1382400,
+      "verified": true
+    },
+    {
+      "outside_prime": 4801,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4801_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4801_autodesign_verification.json",
+      "baseline": {
+        "numerator": 11258539722817,
+        "denominator": 46913893520032000,
+        "decimal": 0.00023998305998647627
+      },
+      "forced_intersection_density": {
+        "numerator": 10211,
+        "denominator": 41214800,
+        "decimal": 0.00024775080796218834
+      },
+      "improvement": {
+        "numerator": 364415301423,
+        "denominator": 46913893520032000,
+        "decimal": 7.767747975712067e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 4931,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4931_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4931_autodesign_verification.json",
+      "baseline": {
+        "numerator": 12239311661,
+        "denominator": 145594841958720,
+        "decimal": 8.40641845297663e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 32597,
+        "denominator": 355314960,
+        "decimal": 9.174114143688181e-05
+      },
+      "improvement": {
+        "numerator": 14530429259,
+        "denominator": 1892732945463360,
+        "decimal": 7.676956907115497e-06
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 4951,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre4951_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre4951_autodesign_verification.json",
+      "baseline": {
+        "numerator": 22748600459357,
+        "denominator": 290279716155198000,
+        "decimal": 7.836786104336159e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 78581,
+        "denominator": 918059670,
+        "decimal": 8.559465421239995e-05
+      },
+      "improvement": {
+        "numerator": 18880123228387,
+        "denominator": 2612517445396782000,
+        "decimal": 7.2267931690383554e-06
+      },
+      "target_combinations": 1267200,
+      "verified": true
+    },
+    {
+      "outside_prime": 5101,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5101_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5101_autodesign_verification.json",
+      "baseline": {
+        "numerator": 978994241,
+        "denominator": 12132903496560,
+        "decimal": 8.068919704814028e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 1829,
+        "denominator": 22383900,
+        "decimal": 8.171051514704766e-05
+      },
+      "improvement": {
+        "numerator": 185873309,
+        "denominator": 181993552448400,
+        "decimal": 1.0213180989073776e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 5209,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5209_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5209_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1741388110001,
+        "denominator": 5641800125900400,
+        "decimal": 0.0003086582422526151
+      },
+      "forced_intersection_density": {
+        "numerator": 116621,
+        "denominator": 355113990,
+        "decimal": 0.0003284044089617534
+      },
+      "improvement": {
+        "numerator": 334211777477,
+        "denominator": 16925400377701200,
+        "decimal": 1.9746166709138285e-05
+      },
+      "target_combinations": 552960,
+      "verified": true
+    },
+    {
+      "outside_prime": 5237,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5237_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5237_autodesign_verification.json",
+      "baseline": {
+        "numerator": 20566129791901,
+        "denominator": 290279716155198000,
+        "decimal": 7.084935201226848e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 14243,
+        "denominator": 198763796,
+        "decimal": 7.165791903068705e-05
+      },
+      "improvement": {
+        "numerator": 234710604599,
+        "denominator": 290279716155198000,
+        "decimal": 8.085670184185794e-07
+      },
+      "target_combinations": 1216512,
+      "verified": true
+    },
+    {
+      "outside_prime": 5279,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5279_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5279_autodesign_verification.json",
+      "baseline": {
+        "numerator": 79856593,
+        "denominator": 403073470800,
+        "decimal": 0.000198119198570684
+      },
+      "forced_intersection_density": {
+        "numerator": 49549,
+        "denominator": 228980752,
+        "decimal": 0.0002163893670853173
+      },
+      "improvement": {
+        "numerator": 7824484,
+        "denominator": 428265562725,
+        "decimal": 1.827016851463328e-05
+      },
+      "target_combinations": 2322432,
+      "verified": true
+    },
+    {
+      "outside_prime": 5281,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5281_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5281_autodesign_verification.json",
+      "baseline": {
+        "numerator": 869841560293,
+        "denominator": 5719797362664000,
+        "decimal": 0.0001520755902946657
+      },
+      "forced_intersection_density": {
+        "numerator": 59,
+        "denominator": 387600,
+        "decimal": 0.000152218782249742
+      },
+      "improvement": {
+        "numerator": 819028967,
+        "denominator": 5719797362664000,
+        "decimal": 1.4319195507627854e-07
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 5581,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5581_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5581_autodesign_verification.json",
+      "baseline": {
+        "numerator": 9255409517,
+        "denominator": 125373336131120,
+        "decimal": 7.382279041629997e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 3498660,
+        "decimal": 7.402834227961562e-05
+      },
+      "improvement": {
+        "numerator": 695809517,
+        "denominator": 3385080075540240,
+        "decimal": 2.0555186331565661e-07
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 5743,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5743_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5743_autodesign_verification.json",
+      "baseline": {
+        "numerator": 12324175264271,
+        "denominator": 174167829693118800,
+        "decimal": 7.076034240069488e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 380899,
+        "denominator": 5324746086,
+        "decimal": 7.15337396090064e-05
+      },
+      "improvement": {
+        "numerator": 404102739787,
+        "denominator": 522503489079356400,
+        "decimal": 7.733972083115143e-07
+      },
+      "target_combinations": 1824768,
+      "verified": true
+    },
+    {
+      "outside_prime": 5801,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5801_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5801_autodesign_verification.json",
+      "baseline": {
+        "numerator": 72984413723,
+        "denominator": 1114745453745000,
+        "decimal": 6.547182002654332e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 62641,
+        "denominator": 927333000,
+        "decimal": 6.75496288819658e-05
+      },
+      "improvement": {
+        "numerator": 3474341963,
+        "denominator": 1672118180617500,
+        "decimal": 2.0778088554224995e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 5851,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre5851_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre5851_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8480929372087,
+        "denominator": 147024791299386000,
+        "decimal": 5.768366883662033e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 59887,
+        "denominator": 1004610750,
+        "decimal": 5.9612143310232345e-05
+      },
+      "improvement": {
+        "numerator": 283533557009,
+        "denominator": 147024791299386000,
+        "decimal": 1.9284744736120163e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 6007,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6007_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6007_autodesign_verification.json",
+      "baseline": {
+        "numerator": 49108190111737,
+        "denominator": 754727262003514800,
+        "decimal": 6.50674655389728e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 380899,
+        "denominator": 5569561998,
+        "decimal": 6.838939940641271e-05
+      },
+      "improvement": {
+        "numerator": 683769286999,
+        "denominator": 205834707819140400,
+        "decimal": 3.3219338674399053e-06
+      },
+      "target_combinations": 304128,
+      "verified": true
+    },
+    {
+      "outside_prime": 6091,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6091_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6091_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3696941337307,
+        "denominator": 21111252084014400,
+        "decimal": 0.00017511710449928037
+      },
+      "forced_intersection_density": {
+        "numerator": 294731,
+        "denominator": 1538827290,
+        "decimal": 0.00019152961603637793
+      },
+      "improvement": {
+        "numerator": 45498512011,
+        "denominator": 2772184617092800,
+        "decimal": 1.6412511537097574e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 6121,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6121_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6121_autodesign_verification.json",
+      "baseline": {
+        "numerator": 229586260837,
+        "denominator": 1872772362291600,
+        "decimal": 0.00012259165366797114
+      },
+      "forced_intersection_density": {
+        "numerator": 19,
+        "denominator": 151844,
+        "decimal": 0.0001251284212744659
+      },
+      "improvement": {
+        "numerator": 4750788263,
+        "denominator": 1872772362291600,
+        "decimal": 2.53676760649476e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 6271,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6271_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6271_autodesign_verification.json",
+      "baseline": {
+        "numerator": 345096543157,
+        "denominator": 1872772362291600,
+        "decimal": 0.00018427041647214716
+      },
+      "forced_intersection_density": {
+        "numerator": 8479,
+        "denominator": 42002730,
+        "decimal": 0.0002018678309719392
+      },
+      "improvement": {
+        "numerator": 2995995593,
+        "denominator": 170252032935600,
+        "decimal": 1.7597414499792045e-05
+      },
+      "target_combinations": 2534400,
+      "verified": true
+    },
+    {
+      "outside_prime": 6553,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_valid_top13.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6553_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6553_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1002497504819,
+        "denominator": 228959630499600,
+        "decimal": 0.004378490228305778
+      },
+      "forced_intersection_density": {
+        "numerator": 6642509,
+        "denominator": 1410473493,
+        "decimal": 0.0047094178181766085
+      },
+      "improvement": {
+        "numerator": 268635753569,
+        "denominator": 811765962680400,
+        "decimal": 0.00033092758987083134
+      },
+      "target_combinations": 1990656,
+      "verified": true
+    },
+    {
+      "outside_prime": 6841,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6841_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6841_autodesign_verification.json",
+      "baseline": {
+        "numerator": 18072358321,
+        "denominator": 165244620202200,
+        "decimal": 0.00010936730223886219
+      },
+      "forced_intersection_density": {
+        "numerator": 1,
+        "denominator": 8932,
+        "decimal": 0.00011195700850873264
+      },
+      "improvement": {
+        "numerator": 427935029,
+        "denominator": 165244620202200,
+        "decimal": 2.5897062698704586e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 6917,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre6917_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre6917_autodesign_verification.json",
+      "baseline": {
+        "numerator": 2298516666601,
+        "denominator": 42882230795654250,
+        "decimal": 5.3600678508402954e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 4552,
+        "denominator": 84387303,
+        "decimal": 5.394176420118557e-05
+      },
+      "improvement": {
+        "numerator": 4875505133,
+        "denominator": 14294076931884750,
+        "decimal": 3.410856927826216e-07
+      },
+      "target_combinations": 387072,
+      "verified": true
+    },
+    {
+      "outside_prime": 7481,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre7481_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre7481_autodesign_verification.json",
+      "baseline": {
+        "numerator": 748443898,
+        "denominator": 14753983946625,
+        "decimal": 5.0728257581655284e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 559,
+        "denominator": 10737540,
+        "decimal": 5.206034156799416e-05
+      },
+      "improvement": {
+        "numerator": 78614183,
+        "denominator": 59015935786500,
+        "decimal": 1.332083986338875e-06
+      },
+      "target_combinations": 253440,
+      "verified": true
+    },
+    {
+      "outside_prime": 7541,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre7541_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre7541_autodesign_verification.json",
+      "baseline": {
+        "numerator": 72319763713,
+        "denominator": 1580911734402000,
+        "decimal": 4.574560498177077e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 7663,
+        "denominator": 155379796,
+        "decimal": 4.9317866268790826e-05
+      },
+      "improvement": {
+        "numerator": 5647429787,
+        "denominator": 1580911734402000,
+        "decimal": 3.5722612870200577e-06
+      },
+      "target_combinations": 276480,
+      "verified": true
+    },
+    {
+      "outside_prime": 7561,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre7561_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre7561_autodesign_verification.json",
+      "baseline": {
+        "numerator": 274145249221,
+        "denominator": 3064536592840800,
+        "decimal": 8.945732606405905e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 109931,
+        "denominator": 1168439580,
+        "decimal": 9.408359822935817e-05
+      },
+      "improvement": {
+        "numerator": 14177380339,
+        "denominator": 3064536592840800,
+        "decimal": 4.626272165299122e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 8161,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8161_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8161_autodesign_verification.json",
+      "baseline": {
+        "numerator": 63509514037,
+        "denominator": 681008131742400,
+        "decimal": 9.325808470819153e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 8087,
+        "denominator": 81995760,
+        "decimal": 9.862705095970816e-05
+      },
+      "improvement": {
+        "numerator": 10968929029,
+        "denominator": 2043024395227200,
+        "decimal": 5.368966251516625e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 8191,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchM.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8191_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8191_autodesign_verification.json",
+      "baseline": {
+        "numerator": 46297753872059,
+        "denominator": 107818180286216400,
+        "decimal": 0.00042940581773088745
+      },
+      "forced_intersection_density": {
+        "numerator": 13092089,
+        "denominator": 27847809990,
+        "decimal": 0.00047012993139142
+      },
+      "improvement": {
+        "numerator": 13172399485943,
+        "denominator": 323454540858649200,
+        "decimal": 4.072411366053255e-05
+      },
+      "target_combinations": 829440,
+      "verified": true
+    },
+    {
+      "outside_prime": 8681,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8681_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8681_autodesign_verification.json",
+      "baseline": {
+        "numerator": 16835026383037657,
+        "denominator": 53992027204866828000,
+        "decimal": 0.0003118057841977112
+      },
+      "forced_intersection_density": {
+        "numerator": 62641,
+        "denominator": 198257400,
+        "decimal": 0.00031595794154467877
+      },
+      "improvement": {
+        "numerator": 224183392436363,
+        "denominator": 53992027204866828000,
+        "decimal": 4.152157346967612e-06
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 8737,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8737_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8737_autodesign_verification.json",
+      "baseline": {
+        "numerator": 33951026407,
+        "denominator": 358472148762000,
+        "decimal": 9.471036041224242e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 9161,
+        "denominator": 95855760,
+        "decimal": 9.557067827744519e-05
+      },
+      "improvement": {
+        "numerator": 5088599897,
+        "denominator": 5914790454573000,
+        "decimal": 8.603178652027759e-07
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 8779,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8779_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8779_autodesign_verification.json",
+      "baseline": {
+        "numerator": 29812202864693,
+        "denominator": 232223772924158400,
+        "decimal": 0.00012837704981405725
+      },
+      "forced_intersection_density": {
+        "numerator": 120662,
+        "denominator": 928260333,
+        "decimal": 0.00012998724141323402
+      },
+      "improvement": {
+        "numerator": 540113554199,
+        "denominator": 335434338668228800,
+        "decimal": 1.6101915991767772e-06
+      },
+      "target_combinations": 995328,
+      "verified": true
+    },
+    {
+      "outside_prime": 8933,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchP.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre8933_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre8933_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1095969134303,
+        "denominator": 26389065105018000,
+        "decimal": 4.1531184600192465e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 38315,
+        "denominator": 920326484,
+        "decimal": 4.163196503209615e-05
+      },
+      "improvement": {
+        "numerator": 29254515167,
+        "denominator": 290279716155198000,
+        "decimal": 1.0078043190368519e-07
+      },
+      "target_combinations": 152064,
+      "verified": true
+    },
+    {
+      "outside_prime": 9241,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre9241_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre9241_autodesign_verification.json",
+      "baseline": {
+        "numerator": 4775850949,
+        "denominator": 28701492142400,
+        "decimal": 0.00016639730524479438
+      },
+      "forced_intersection_density": {
+        "numerator": 731,
+        "denominator": 4345110,
+        "decimal": 0.00016823509646476153
+      },
+      "improvement": {
+        "numerator": 1424178457,
+        "denominator": 774940287844800,
+        "decimal": 1.8377912199671636e-06
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 10151,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre10151_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre10151_autodesign_verification.json",
+      "baseline": {
+        "numerator": 117244063,
+        "denominator": 1158702583500,
+        "decimal": 0.00010118564044782765
+      },
+      "forced_intersection_density": {
+        "numerator": 10546,
+        "denominator": 100461075,
+        "decimal": 0.00010497598199103484
+      },
+      "improvement": {
+        "numerator": 57094421,
+        "denominator": 15063133585500,
+        "decimal": 3.7903415432071817e-06
+      },
+      "target_combinations": 2508800,
+      "verified": true
+    },
+    {
+      "outside_prime": 10711,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchKfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre10711_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre10711_autodesign_verification.json",
+      "baseline": {
+        "numerator": 63416557033,
+        "denominator": 1759271007001200,
+        "decimal": 3.6047065392783306e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 8479,
+        "denominator": 215238870,
+        "decimal": 3.939344227183501e-05
+      },
+      "improvement": {
+        "numerator": 22707709027,
+        "denominator": 6785759598433200,
+        "decimal": 3.3463768790516986e-06
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 10847,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre10847_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre10847_autodesign_verification.json",
+      "baseline": {
+        "numerator": 2382489149,
+        "denominator": 24641741609100,
+        "decimal": 9.668509583430441e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 2136031,
+        "denominator": 21792016389,
+        "decimal": 9.801896996912176e-05
+      },
+      "improvement": {
+        "numerator": 427296763,
+        "denominator": 320342640918300,
+        "decimal": 1.3338741348173424e-06
+      },
+      "target_combinations": 191488,
+      "verified": true
+    },
+    {
+      "outside_prime": 11161,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre11161_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre11161_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1080842906309,
+        "denominator": 15833439063010800,
+        "decimal": 6.82633066643118e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 374873,
+        "denominator": 5174518140,
+        "decimal": 7.244597271814762e-05
+      },
+      "improvement": {
+        "numerator": 198677964253,
+        "denominator": 47500317189032400,
+        "decimal": 4.182666053835822e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 11287,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchKrest2.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre11287_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre11287_autodesign_verification.json",
+      "baseline": {
+        "numerator": 33800890367,
+        "denominator": 948282194336400,
+        "decimal": 3.564433727520697e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 4819,
+        "denominator": 132960366,
+        "decimal": 3.624388338401536e-05
+      },
+      "improvement": {
+        "numerator": 1705616699,
+        "denominator": 2844846583009200,
+        "decimal": 5.995461088083863e-07
+      },
+      "target_combinations": 456192,
+      "verified": true
+    },
+    {
+      "outside_prime": 11551,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre11551_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre11551_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1711899905483,
+        "denominator": 17075277420894000,
+        "decimal": 0.00010025605226116268
+      },
+      "forced_intersection_density": {
+        "numerator": 21521,
+        "denominator": 210013650,
+        "decimal": 0.0001024742915520015
+      },
+      "improvement": {
+        "numerator": 4208561253,
+        "denominator": 1897253046766000,
+        "decimal": 2.2182392908388186e-06
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 11971,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre11971_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre11971_autodesign_verification.json",
+      "baseline": {
+        "numerator": 20378134095619,
+        "denominator": 274446277092187200,
+        "decimal": 7.425181464120912e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 31664,
+        "denominator": 414299655,
+        "decimal": 7.642777303302364e-05
+      },
+      "improvement": {
+        "numerator": 54289425431,
+        "denominator": 24949661553835200,
+        "decimal": 2.175958391814528e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 12241,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre12241_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre12241_autodesign_verification.json",
+      "baseline": {
+        "numerator": 63509514037,
+        "denominator": 510756098806800,
+        "decimal": 0.00012434411294425538
+      },
+      "forced_intersection_density": {
+        "numerator": 8087,
+        "denominator": 61496820,
+        "decimal": 0.0001315027346129442
+      },
+      "improvement": {
+        "numerator": 10968929029,
+        "denominator": 1532268296420400,
+        "decimal": 7.158621668688833e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 12601,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre12601_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre12601_autodesign_verification.json",
+      "baseline": {
+        "numerator": 232109469139,
+        "denominator": 5107560988068000,
+        "decimal": 4.544428733817202e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 10211,
+        "denominator": 216377700,
+        "decimal": 4.719063008803587e-05
+      },
+      "improvement": {
+        "numerator": 8919552101,
+        "denominator": 5107560988068000,
+        "decimal": 1.7463427498638513e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 12853,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre12853_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre12853_autodesign_verification.json",
+      "baseline": {
+        "numerator": 665036557,
+        "denominator": 2297898389500,
+        "decimal": 0.00028941077640282667
+      },
+      "forced_intersection_density": {
+        "numerator": 9161,
+        "denominator": 31337460,
+        "decimal": 0.0002923338394368912
+      },
+      "improvement": {
+        "numerator": 332486641,
+        "denominator": 113745970280250,
+        "decimal": 2.9230630340645176e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 12959,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchP.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre12959_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre12959_autodesign_verification.json",
+      "baseline": {
+        "numerator": 79856593,
+        "denominator": 989584318800,
+        "decimal": 8.06971083543811e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 2136031,
+        "denominator": 26035492197,
+        "decimal": 8.204304277551277e-05
+      },
+      "improvement": {
+        "numerator": 294353347,
+        "denominator": 218698134454800,
+        "decimal": 1.345934421131682e-06
+      },
+      "target_combinations": 38912,
+      "verified": true
+    },
+    {
+      "outside_prime": 13441,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre13441_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre13441_autodesign_verification.json",
+      "baseline": {
+        "numerator": 710534723,
+        "denominator": 3560826832640,
+        "decimal": 0.00019954206042454724
+      },
+      "forced_intersection_density": {
+        "numerator": 109931,
+        "denominator": 519306480,
+        "decimal": 0.0002116880960160559
+      },
+      "improvement": {
+        "numerator": 77849873,
+        "denominator": 6409488298752,
+        "decimal": 1.2146035591508648e-05
+      },
+      "target_combinations": 2211840,
+      "verified": true
+    },
+    {
+      "outside_prime": 13681,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre13681_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre13681_autodesign_verification.json",
+      "baseline": {
+        "numerator": 98800066219,
+        "denominator": 2010595436572800,
+        "decimal": 4.9139704796809644e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 163,
+        "denominator": 3272940,
+        "decimal": 4.9802318404859236e-05
+      },
+      "improvement": {
+        "numerator": 11990231069,
+        "denominator": 18095358929155200,
+        "decimal": 6.626136080495959e-07
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 13921,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre13921_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre13921_autodesign_verification.json",
+      "baseline": {
+        "numerator": 28683766261,
+        "denominator": 535077817797600,
+        "decimal": 5.3606719073243286e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 14243,
+        "denominator": 264208560,
+        "decimal": 5.39081701213617e-05
+      },
+      "improvement": {
+        "numerator": 5562061,
+        "denominator": 18450959234400,
+        "decimal": 3.014510481184135e-07
+      },
+      "target_combinations": 276480,
+      "verified": true
+    },
+    {
+      "outside_prime": 14281,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre14281_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre14281_autodesign_verification.json",
+      "baseline": {
+        "numerator": 350897383,
+        "denominator": 6275639739600,
+        "decimal": 5.591420119064478e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 251,
+        "denominator": 4476780,
+        "decimal": 5.6067083930861024e-05
+      },
+      "improvement": {
+        "numerator": 959437,
+        "denominator": 6275639739600,
+        "decimal": 1.5288274021624337e-07
+      },
+      "target_combinations": 460800,
+      "verified": true
+    },
+    {
+      "outside_prime": 14401,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre14401_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre14401_autodesign_verification.json",
+      "baseline": {
+        "numerator": 77087684491,
+        "denominator": 817209758090880,
+        "decimal": 9.43303524312876e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 109931,
+        "denominator": 1112799600,
+        "decimal": 9.878777814082608e-05
+      },
+      "improvement": {
+        "numerator": 18213258929,
+        "denominator": 4086048790454400,
+        "decimal": 4.457425709538467e-06
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 14851,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchQ.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre14851_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre14851_autodesign_verification.json",
+      "baseline": {
+        "numerator": 6533471459,
+        "denominator": 340504065871200,
+        "decimal": 1.918764594567681e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 8183,
+        "denominator": 417299850,
+        "decimal": 1.9609400770213553e-05
+      },
+      "improvement": {
+        "numerator": 117498463,
+        "denominator": 278594235712800,
+        "decimal": 4.217548245367431e-07
+      },
+      "target_combinations": 126720,
+      "verified": true
+    },
+    {
+      "outside_prime": 15121,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchE.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre15121_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre15121_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3907297382389,
+        "denominator": 11236634173749600,
+        "decimal": 0.000347728449816139
+      },
+      "forced_intersection_density": {
+        "numerator": 39649,
+        "denominator": 111279960,
+        "decimal": 0.0003562995529473591
+      },
+      "improvement": {
+        "numerator": 3567050013,
+        "denominator": 416171636064800,
+        "decimal": 8.571103131220103e-06
+      },
+      "target_combinations": 2488320,
+      "verified": true
+    },
+    {
+      "outside_prime": 15601,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre15601_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre15601_autodesign_verification.json",
+      "baseline": {
+        "numerator": 2102600515877,
+        "denominator": 15809117344020000,
+        "decimal": 0.00013299923519590647
+      },
+      "forced_intersection_density": {
+        "numerator": 584063,
+        "denominator": 4018443000,
+        "decimal": 0.00014534559778501275
+      },
+      "improvement": {
+        "numerator": 195185094943,
+        "denominator": 15809117344020000,
+        "decimal": 1.2346362589106296e-05
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 16633,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre16633_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre16633_autodesign_verification.json",
+      "baseline": {
+        "numerator": 38167789251899,
+        "denominator": 165335789647828800,
+        "decimal": 0.00023085013434295
+      },
+      "forced_intersection_density": {
+        "numerator": 926179,
+        "denominator": 3855850614,
+        "decimal": 0.00024020095504664695
+      },
+      "improvement": {
+        "numerator": 515341774967,
+        "denominator": 55111929882609600,
+        "decimal": 9.350820703696941e-06
+      },
+      "target_combinations": 912384,
+      "verified": true
+    },
+    {
+      "outside_prime": 17401,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre17401_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre17401_autodesign_verification.json",
+      "baseline": {
+        "numerator": 12612576563459,
+        "denominator": 105556260420072000,
+        "decimal": 0.0001194867695508154
+      },
+      "forced_intersection_density": {
+        "numerator": 14423,
+        "denominator": 109593900,
+        "decimal": 0.00013160404000587625
+      },
+      "improvement": {
+        "numerator": 1847522091617,
+        "denominator": 152470153940104000,
+        "decimal": 1.2117270455060837e-05
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 19531,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre19531_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre19531_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8480929372087,
+        "denominator": 163612203651111600,
+        "decimal": 5.1835554945350064e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 3311813,
+        "denominator": 62381690910,
+        "decimal": 5.308950353362584e-05
+      },
+      "improvement": {
+        "numerator": 205161291793,
+        "denominator": 163612203651111600,
+        "decimal": 1.2539485882757751e-06
+      },
+      "target_combinations": 552960,
+      "verified": true
+    },
+    {
+      "outside_prime": 20359,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre20359_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre20359_autodesign_verification.json",
+      "baseline": {
+        "numerator": 948013481867,
+        "denominator": 15833439063010800,
+        "decimal": 5.9874135877511055e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 380899,
+        "denominator": 6292881738,
+        "decimal": 6.0528548899928494e-05
+      },
+      "improvement": {
+        "numerator": 404102739787,
+        "denominator": 617504123457421200,
+        "decimal": 6.544130224174351e-07
+      },
+      "target_combinations": 165888,
+      "verified": true
+    },
+    {
+      "outside_prime": 21577,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre21577_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre21577_autodesign_verification.json",
+      "baseline": {
+        "numerator": 26304337059593,
+        "denominator": 112836002518008000,
+        "decimal": 0.00023312007225171748
+      },
+      "forced_intersection_density": {
+        "numerator": 3331418,
+        "denominator": 13367505195,
+        "decimal": 0.0002492176327147483
+      },
+      "improvement": {
+        "numerator": 5449153118821,
+        "denominator": 338508007554024000,
+        "decimal": 1.6097560463030835e-05
+      },
+      "target_combinations": 1620000,
+      "verified": true
+    },
+    {
+      "outside_prime": 21601,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre21601_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre21601_autodesign_verification.json",
+      "baseline": {
+        "numerator": 9255409517,
+        "denominator": 121329034965600,
+        "decimal": 7.62835500968433e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 3385800,
+        "decimal": 7.649595368893615e-05
+      },
+      "improvement": {
+        "numerator": 695809517,
+        "denominator": 3275883944071200,
+        "decimal": 2.1240359209284516e-07
+      },
+      "target_combinations": 2073600,
+      "verified": true
+    },
+    {
+      "outside_prime": 24571,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre24571_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre24571_autodesign_verification.json",
+      "baseline": {
+        "numerator": 384774686999473,
+        "denominator": 10703404806595300800,
+        "decimal": 3.594881198573185e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 18481,
+        "denominator": 506323818,
+        "decimal": 3.650035677365666e-05
+      },
+      "improvement": {
+        "numerator": 5903407134127,
+        "denominator": 10703404806595300800,
+        "decimal": 5.515447879248102e-07
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 26209,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre26209_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre26209_autodesign_verification.json",
+      "baseline": {
+        "numerator": 12863605350389,
+        "denominator": 235239666079017600,
+        "decimal": 5.468297742808427e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 32863,
+        "denominator": 595675080,
+        "decimal": 5.5169338290935385e-05
+      },
+      "improvement": {
+        "numerator": 10401033361,
+        "denominator": 21385424189001600,
+        "decimal": 4.863608628511185e-07
+      },
+      "target_combinations": 829440,
+      "verified": true
+    },
+    {
+      "outside_prime": 27551,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre27551_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre27551_autodesign_verification.json",
+      "baseline": {
+        "numerator": 705079,
+        "denominator": 3796610400,
+        "decimal": 0.00018571276104601095
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 1246362,
+        "decimal": 0.00020780479507558799
+      },
+      "improvement": {
+        "numerator": 1090373,
+        "denominator": 49355935200,
+        "decimal": 2.2092034029577053e-05
+      },
+      "target_combinations": 1105920,
+      "verified": true
+    },
+    {
+      "outside_prime": 29761,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre29761_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre29761_autodesign_verification.json",
+      "baseline": {
+        "numerator": 1080842906309,
+        "denominator": 21111252084014400,
+        "decimal": 5.119747999823385e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 374873,
+        "denominator": 6899357520,
+        "decimal": 5.433447953861072e-05
+      },
+      "improvement": {
+        "numerator": 198677964253,
+        "denominator": 63333756252043200,
+        "decimal": 3.1369995403768664e-06
+      },
+      "target_combinations": 230400,
+      "verified": true
+    },
+    {
+      "outside_prime": 30241,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre30241_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre30241_autodesign_verification.json",
+      "baseline": {
+        "numerator": 556044172603,
+        "denominator": 11236634173749600,
+        "decimal": 4.948494041943623e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 269,
+        "denominator": 5372136,
+        "decimal": 5.0073192488053166e-05
+      },
+      "improvement": {
+        "numerator": 6609973297,
+        "denominator": 11236634173749600,
+        "decimal": 5.882520686169398e-07
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 31249,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchP.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre31249_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre31249_autodesign_verification.json",
+      "baseline": {
+        "numerator": 99350804081,
+        "denominator": 1880600041966800,
+        "decimal": 5.282931078587838e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 37,
+        "denominator": 699732,
+        "decimal": 5.287738734258259e-05
+      },
+      "improvement": {
+        "numerator": 813714971,
+        "denominator": 16925400377701200,
+        "decimal": 4.807655670420946e-08
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 34511,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchD.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre34511_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre34511_autodesign_verification.json",
+      "baseline": {
+        "numerator": 255211,
+        "denominator": 295681680,
+        "decimal": 0.0008631275363424612
+      },
+      "forced_intersection_density": {
+        "numerator": 136009,
+        "denominator": 140645505,
+        "decimal": 0.0009670341046448659
+      },
+      "improvement": {
+        "numerator": 83475121,
+        "denominator": 803367124560,
+        "decimal": 0.00010390656830240457
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 37201,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre37201_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre37201_autodesign_verification.json",
+      "baseline": {
+        "numerator": 976211921207,
+        "denominator": 7295431197285000,
+        "decimal": 0.0001338114081002228
+      },
+      "forced_intersection_density": {
+        "numerator": 1351,
+        "denominator": 9593100,
+        "decimal": 0.00014083038850840708
+      },
+      "improvement": {
+        "numerator": 51206488643,
+        "denominator": 7295431197285000,
+        "decimal": 7.018980408184308e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 41851,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchKrest3.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre41851_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre41851_autodesign_verification.json",
+      "baseline": {
+        "numerator": 209984010873211,
+        "denominator": 9816732219066696000,
+        "decimal": 2.139041854125005e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 34469,
+        "denominator": 1588667850,
+        "decimal": 2.1696794581699377e-05
+      },
+      "improvement": {
+        "numerator": 3007611547429,
+        "denominator": 9816732219066696000,
+        "decimal": 3.0637604044932806e-07
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 47881,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJfast.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre47881_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre47881_autodesign_verification.json",
+      "baseline": {
+        "numerator": 550933547,
+        "denominator": 7069288564800,
+        "decimal": 7.793337928561226e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 5717,
+        "denominator": 68731740,
+        "decimal": 8.31784558342332e-05
+      },
+      "improvement": {
+        "numerator": 111236879,
+        "denominator": 21207865694400,
+        "decimal": 5.24507654862094e-06
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 55201,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchF.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre55201_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre55201_autodesign_verification.json",
+      "baseline": {
+        "numerator": 619887063751,
+        "denominator": 1819935524484000,
+        "decimal": 0.000340609354238939
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 752400,
+        "decimal": 0.00034423179160021264
+      },
+      "improvement": {
+        "numerator": 6592602439,
+        "denominator": 1819935524484000,
+        "decimal": 3.6224373612736515e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 55441,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre55441_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre55441_autodesign_verification.json",
+      "baseline": {
+        "numerator": 30764434927,
+        "denominator": 374554472458320,
+        "decimal": 8.213607683038262e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 374873,
+        "denominator": 4284278460,
+        "decimal": 8.749968133490558e-05
+      },
+      "improvement": {
+        "numerator": 6026886167,
+        "denominator": 1123663417374960,
+        "decimal": 5.3636045045229615e-06
+      },
+      "target_combinations": 1520640,
+      "verified": true
+    },
+    {
+      "outside_prime": 59281,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre59281_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre59281_autodesign_verification.json",
+      "baseline": {
+        "numerator": 299359857571,
+        "denominator": 2213276428162800,
+        "decimal": 0.00013525642516307512
+      },
+      "forced_intersection_density": {
+        "numerator": 20513,
+        "denominator": 138281715,
+        "decimal": 0.0001483421000383167
+      },
+      "improvement": {
+        "numerator": 1129526414171,
+        "denominator": 86317780698349200,
+        "decimal": 1.3085674875241572e-05
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 61561,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchP.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre61561_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre61561_autodesign_verification.json",
+      "baseline": {
+        "numerator": 23054181414757,
+        "denominator": 823338831276561600,
+        "decimal": 2.8000843078192e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 70421,
+        "denominator": 2466705780,
+        "decimal": 2.854860136582645e-05
+      },
+      "improvement": {
+        "numerator": 450990668363,
+        "denominator": 823338831276561600,
+        "decimal": 5.477582876344516e-07
+      },
+      "target_combinations": 414720,
+      "verified": true
+    },
+    {
+      "outside_prime": 63841,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchJrest2.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre63841_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre63841_autodesign_verification.json",
+      "baseline": {
+        "numerator": 711736351,
+        "denominator": 15022238200200,
+        "decimal": 4.737884871180675e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 5,
+        "denominator": 100548,
+        "decimal": 4.972749333651589e-05
+      },
+      "improvement": {
+        "numerator": 1306737,
+        "denominator": 556379192600,
+        "decimal": 2.3486446247091376e-06
+      },
+      "target_combinations": 276480,
+      "verified": true
+    },
+    {
+      "outside_prime": 93601,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchS.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre93601_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre93601_autodesign_verification.json",
+      "baseline": {
+        "numerator": 619887063751,
+        "denominator": 35488742727438000,
+        "decimal": 1.7467146371227642e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 259,
+        "denominator": 14671800,
+        "decimal": 1.7652912389754494e-05
+      },
+      "improvement": {
+        "numerator": 6592602439,
+        "denominator": 35488742727438000,
+        "decimal": 1.8576601852685392e-07
+      },
+      "target_combinations": 230400,
+      "verified": true
+    },
+    {
+      "outside_prime": 110251,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchH.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre110251_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre110251_autodesign_verification.json",
+      "baseline": {
+        "numerator": 8480929372087,
+        "denominator": 79167195315054000,
+        "decimal": 0.00010712681355372347
+      },
+      "forced_intersection_density": {
+        "numerator": 105929,
+        "denominator": 973699650,
+        "decimal": 0.00010879022088587584
+      },
+      "improvement": {
+        "numerator": 131687293153,
+        "denominator": 79167195315054000,
+        "decimal": 1.6634073321523752e-06
+      },
+      "target_combinations": 1658880,
+      "verified": true
+    },
+    {
+      "outside_prime": 218401,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre218401_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre218401_autodesign_verification.json",
+      "baseline": {
+        "numerator": 4668641461877,
+        "denominator": 55331910704070000,
+        "decimal": 8.437520776837357e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 11891911,
+        "denominator": 130800319650,
+        "decimal": 9.091652858204617e-05
+      },
+      "improvement": {
+        "numerator": 3740085717871,
+        "denominator": 571763077275390000,
+        "decimal": 6.541320813672594e-06
+      },
+      "target_combinations": 691200,
+      "verified": true
+    },
+    {
+      "outside_prime": 224401,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchI.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre224401_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre224401_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3332603542801,
+        "denominator": 27299032867260000,
+        "decimal": 0.00012207771458445417
+      },
+      "forced_intersection_density": {
+        "numerator": 113,
+        "denominator": 883575,
+        "decimal": 0.00012788953965424553
+      },
+      "improvement": {
+        "numerator": 52885734533,
+        "denominator": 9099677622420000,
+        "decimal": 5.811825069791361e-06
+      },
+      "target_combinations": 1382400,
+      "verified": true
+    },
+    {
+      "outside_prime": 316201,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_batchG.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre316201_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre316201_autodesign_verification.json",
+      "baseline": {
+        "numerator": 3907297382389,
+        "denominator": 19351981077013200,
+        "decimal": 0.00020190684182872586
+      },
+      "forced_intersection_density": {
+        "numerator": 66971,
+        "denominator": 319414700,
+        "decimal": 0.0002096678706396418
+      },
+      "improvement": {
+        "numerator": 150191282687,
+        "denominator": 19351981077013200,
+        "decimal": 7.761028810915964e-06
+      },
+      "target_combinations": 2764800,
+      "verified": true
+    },
+    {
+      "outside_prime": 565111,
+      "discovery_file": "_tmp_period3139_24block_projected_design_search_paired_batchS.json",
+      "certificate": "order_pool_1050000_period3139207671600_conditional_fibre565111_autodesign_certificate.json",
+      "verification": "order_pool_1050000_period3139207671600_conditional_fibre565111_autodesign_verification.json",
+      "baseline": {
+        "numerator": 14816185583,
+        "denominator": 948547040641200,
+        "decimal": 1.561987434274692e-05
+      },
+      "forced_intersection_density": {
+        "numerator": 25565,
+        "denominator": 1518971454,
+        "decimal": 1.6830467704102094e-05
+      },
+      "improvement": {
+        "numerator": 3444914251,
+        "denominator": 2845641121923600,
+        "decimal": 1.210593361355174e-06
+      },
+      "target_combinations": 414720,
+      "verified": true
+    }
+  ],
+  "total_improvement": {
+    "numerator": 12407842119878078171429,
+    "denominator": 3284874935144097815520000,
+    "decimal": 0.003777264694959774
+  },
+  "status": "all_selected_designs_independently_replayed"
+}

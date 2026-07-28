@@ -14,10 +14,14 @@ from scan_all_ranked_pairanchor_star import (
     quintuple_image_index_minors,
     quadruple_image_index_minors,
 )
+from certify_ranked_period_conditional_star import select_star_anchors
 from verify_all_ranked_pairanchor_star import (
     best_lower,
     quintuple_index_explicit,
     quadruple_index_explicit,
+)
+from verify_ranked_period_conditional_star import (
+    select_star_anchors_independent,
 )
 
 
@@ -63,6 +67,27 @@ def brute_outside_anchor_union(
 
 
 class FourwayIndexTests(unittest.TestCase):
+    def test_limited_star_subset_is_compatible_and_smallest_first(
+        self,
+    ) -> None:
+        outside = {"p": 2, "h": 2, "a": 1, "b": 0}
+        anchors = [
+            {"p": 11, "h": 11, "a": 1, "b": 0},
+            {"p": 4, "h": 4, "a": 1, "b": 0},
+            {"p": 3, "h": 3, "a": 1, "b": 0},
+            {"p": 7, "h": 7, "a": 1, "b": 0},
+            {"p": 5, "h": 5, "a": 1, "b": 0},
+        ]
+        expected = [anchors[2], anchors[4], anchors[3]]
+        self.assertEqual(
+            select_star_anchors(outside, anchors, 3),
+            expected,
+        )
+        self.assertEqual(
+            select_star_anchors_independent(outside, anchors, 3),
+            expected,
+        )
+
     def test_random_small_maps_match_brute_image(self) -> None:
         rng = random.Random(203)
         for _ in range(40):

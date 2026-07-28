@@ -1,0 +1,41 @@
+{
+  "schema": "square_quotient_period_bridge_verification_v1",
+  "verified": true,
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "source_sha256": "eb1d98ced110964cee91b380dfb832dd0a7a5f6b663f25a316b47c02fefb94cb",
+  "period_pool": "order_pool_1050000_component_core_corrected_period5040.json",
+  "period_pool_sha256": "762167fe0ece5ecfc94b1d200d670f4fbcdce6d3f415dc52ba30c465c956139a",
+  "forced_pair_certificate": "order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_certificate.json",
+  "forced_pair_certificate_sha256": "778332988d154b6444b74b05d3e13b58759db6e6803c0a300c8e6c9c190efbc4",
+  "period": 5040,
+  "basis": {
+    "direction": [
+      1,
+      1
+    ],
+    "transverse": [
+      0,
+      1
+    ],
+    "determinant": 1
+  },
+  "row_count": 31,
+  "descending_primes_equal_divisor_period_primes": true,
+  "raw_density_numerator": 143,
+  "raw_density_denominator": 140,
+  "anchor_primes": [
+    5,
+    7
+  ],
+  "joint_image_index": 1,
+  "enumerated_anchor_period": 12,
+  "enumerated_anchor_cell_count": 144,
+  "enumerated_target_count": 24,
+  "forced_overlap_numerator": 1,
+  "forced_overlap_denominator": 24,
+  "union_upper_bound_numerator": 823,
+  "union_upper_bound_denominator": 840,
+  "proved_no_declared_square_quotient_cover": true,
+  "integer_m_found": false,
+  "scope": "all phase assignments of the declared source rows descending to the declared sheared square quotient only"
+}

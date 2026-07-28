@@ -1,0 +1,1042 @@
+{
+  "schema": "reverse_group_arithmetic_line_inventory_v3",
+  "source": "order_pool_1050000_component_core_corrected_max32_stable.json",
+  "source_sha256": "eb1d98ced110964cee91b380dfb832dd0a7a5f6b663f25a316b47c02fefb94cb",
+  "basis": {
+    "direction": [
+      1,
+      1
+    ],
+    "transverse": [
+      0,
+      1
+    ],
+    "determinant": 1
+  },
+  "group": {
+    "width": 5040,
+    "height": 5040,
+    "cell_count": 25401600
+  },
+  "source_row_count": 1577,
+  "descending_row_count": 31,
+  "excluded_not_descending_count": 1546,
+  "geometric_type_count": 31,
+  "axis_separable_row_count": 1,
+  "proper_two_axis_rectangle_row_count": 0,
+  "raw_density_numerator": 143,
+  "raw_density_denominator": 140,
+  "raw_density_decimal": 1.0214285714285714,
+  "density_at_least_one": true,
+  "forced_overlap_forest": [
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 7,
+      "right_modulus": 6,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 24,
+      "intersection_cell_count": 1058400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 11,
+      "right_modulus": 10,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 40,
+      "intersection_cell_count": 635040,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 13,
+      "right_modulus": 12,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 48,
+      "intersection_cell_count": 529200,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 17,
+      "right_modulus": 16,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 64,
+      "intersection_cell_count": 396900,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 19,
+      "right_modulus": 18,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 108,
+      "intersection_cell_count": 235200,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 31,
+      "right_modulus": 30,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 120,
+      "intersection_cell_count": 211680,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 71,
+      "right_modulus": 35,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 140,
+      "intersection_cell_count": 181440,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 37,
+      "right_modulus": 36,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 144,
+      "intersection_cell_count": 176400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 73,
+      "right_modulus": 36,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 144,
+      "intersection_cell_count": 176400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 41,
+      "right_modulus": 40,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 160,
+      "intersection_cell_count": 158760,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 29,
+      "right_modulus": 28,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 168,
+      "intersection_cell_count": 151200,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 61,
+      "right_modulus": 60,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 240,
+      "intersection_cell_count": 105840,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 43,
+      "right_modulus": 42,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 252,
+      "intersection_cell_count": 100800,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 97,
+      "right_modulus": 48,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 288,
+      "intersection_cell_count": 88200,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 113,
+      "right_modulus": 112,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 448,
+      "intersection_cell_count": 56700,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 127,
+      "right_modulus": 126,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 504,
+      "intersection_cell_count": 50400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 337,
+      "right_modulus": 168,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 672,
+      "intersection_cell_count": 37800,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 181,
+      "right_modulus": 180,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 720,
+      "intersection_cell_count": 35280,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 577,
+      "right_modulus": 144,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 864,
+      "intersection_cell_count": 29400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 281,
+      "right_modulus": 280,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 1120,
+      "intersection_cell_count": 22680,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 11,
+      "left_modulus": 10,
+      "right_prime": 241,
+      "right_modulus": 120,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 1200,
+      "intersection_cell_count": 21168,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 211,
+      "right_modulus": 210,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 1260,
+      "intersection_cell_count": 20160,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 673,
+      "right_modulus": 336,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 1344,
+      "intersection_cell_count": 18900,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 421,
+      "right_modulus": 420,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 1680,
+      "intersection_cell_count": 15120,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 631,
+      "right_modulus": 630,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 2520,
+      "intersection_cell_count": 10080,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 1009,
+      "right_modulus": 504,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 3024,
+      "intersection_cell_count": 8400,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 2521,
+      "right_modulus": 1260,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 5040,
+      "intersection_cell_count": 5040,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 2017,
+      "right_modulus": 1008,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 6048,
+      "intersection_cell_count": 4200,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 5,
+      "left_modulus": 4,
+      "right_prime": 3361,
+      "right_modulus": 1680,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 6720,
+      "intersection_cell_count": 3780,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    },
+    {
+      "left_prime": 7,
+      "left_modulus": 6,
+      "right_prime": 13441,
+      "right_modulus": 1680,
+      "intersection_density_numerator": 1,
+      "intersection_density_denominator": 10080,
+      "intersection_cell_count": 2520,
+      "joint_map_cokernel_index": 1,
+      "reason": "joint affine map is surjective, forcing this intersection for every pair of phases"
+    }
+  ],
+  "forced_overlap_density_numerator": 4511,
+  "forced_overlap_density_denominator": 25200,
+  "phase_independent_union_upper_bound_numerator": 21229,
+  "phase_independent_union_upper_bound_denominator": 25200,
+  "phase_independent_union_upper_bound_decimal": 0.8424206349206349,
+  "finite_group_cover_impossible_by_density_overlap": true,
+  "unrestricted_descending_row_count": 31,
+  "random_phase_avoidance_probability_numerator": 75351832502140608161394097825340063538327422393,
+  "random_phase_avoidance_probability_denominator": 224347811742075361483774197854082466578432000000,
+  "expected_uncovered_cell_count_numerator": 75351832502140608161394097825340063538327422393,
+  "expected_uncovered_cell_count_denominator": 8832034664827229839213836839178731520000,
+  "expected_uncovered_cell_count_decimal": 8531650.447684767,
+  "first_moment_cover_exists": false,
+  "line_types": [
+    {
+      "h": 4,
+      "a": 0,
+      "b": 1,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 6350400,
+      "legal_target_count_per_prime": 4,
+      "axis_rectangle": {
+        "k_modulus": 1,
+        "l_modulus": 4,
+        "proper_two_axis_rectangle": false
+      },
+      "primes": [
+        5
+      ],
+      "source_signatures": [
+        {
+          "p": 5,
+          "a": 0,
+          "b": 3
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 6,
+      "a": 3,
+      "b": 1,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 4233600,
+      "legal_target_count_per_prime": 6,
+      "axis_rectangle": null,
+      "primes": [
+        7
+      ],
+      "source_signatures": [
+        {
+          "p": 7,
+          "a": 3,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 10,
+      "a": 1,
+      "b": 2,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 2540160,
+      "legal_target_count_per_prime": 10,
+      "axis_rectangle": null,
+      "primes": [
+        11
+      ],
+      "source_signatures": [
+        {
+          "p": 11,
+          "a": 9,
+          "b": 8
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 12,
+      "a": 1,
+      "b": 8,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 2116800,
+      "legal_target_count_per_prime": 12,
+      "axis_rectangle": null,
+      "primes": [
+        13
+      ],
+      "source_signatures": [
+        {
+          "p": 13,
+          "a": 5,
+          "b": 4
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 16,
+      "a": 1,
+      "b": 15,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 1587600,
+      "legal_target_count_per_prime": 16,
+      "axis_rectangle": null,
+      "primes": [
+        17
+      ],
+      "source_signatures": [
+        {
+          "p": 17,
+          "a": 15,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 18,
+      "a": 2,
+      "b": 7,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 1411200,
+      "legal_target_count_per_prime": 18,
+      "axis_rectangle": null,
+      "primes": [
+        19
+      ],
+      "source_signatures": [
+        {
+          "p": 19,
+          "a": 14,
+          "b": 13
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 28,
+      "a": 2,
+      "b": 11,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 907200,
+      "legal_target_count_per_prime": 28,
+      "axis_rectangle": null,
+      "primes": [
+        29
+      ],
+      "source_signatures": [
+        {
+          "p": 29,
+          "a": 6,
+          "b": 5
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 30,
+      "a": 5,
+      "b": 11,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 846720,
+      "legal_target_count_per_prime": 30,
+      "axis_rectangle": null,
+      "primes": [
+        31
+      ],
+      "source_signatures": [
+        {
+          "p": 31,
+          "a": 25,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 35,
+      "a": 1,
+      "b": 3,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 725760,
+      "legal_target_count_per_prime": 35,
+      "axis_rectangle": null,
+      "primes": [
+        71
+      ],
+      "source_signatures": [
+        {
+          "p": 71,
+          "a": 16,
+          "b": 13
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 36,
+      "a": 1,
+      "b": 21,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 705600,
+      "legal_target_count_per_prime": 36,
+      "axis_rectangle": null,
+      "primes": [
+        73
+      ],
+      "source_signatures": [
+        {
+          "p": 73,
+          "a": 7,
+          "b": 3
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 36,
+      "a": 9,
+      "b": 2,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 705600,
+      "legal_target_count_per_prime": 36,
+      "axis_rectangle": null,
+      "primes": [
+        37
+      ],
+      "source_signatures": [
+        {
+          "p": 37,
+          "a": 27,
+          "b": 26
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 40,
+      "a": 1,
+      "b": 15,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 635040,
+      "legal_target_count_per_prime": 40,
+      "axis_rectangle": null,
+      "primes": [
+        41
+      ],
+      "source_signatures": [
+        {
+          "p": 41,
+          "a": 1,
+          "b": 15
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 42,
+      "a": 14,
+      "b": 5,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 604800,
+      "legal_target_count_per_prime": 42,
+      "axis_rectangle": null,
+      "primes": [
+        43
+      ],
+      "source_signatures": [
+        {
+          "p": 43,
+          "a": 28,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 48,
+      "a": 4,
+      "b": 11,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 529200,
+      "legal_target_count_per_prime": 48,
+      "axis_rectangle": null,
+      "primes": [
+        97
+      ],
+      "source_signatures": [
+        {
+          "p": 97,
+          "a": 4,
+          "b": 35
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 60,
+      "a": 1,
+      "b": 18,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 423360,
+      "legal_target_count_per_prime": 60,
+      "axis_rectangle": null,
+      "primes": [
+        61
+      ],
+      "source_signatures": [
+        {
+          "p": 61,
+          "a": 7,
+          "b": 6
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 112,
+      "a": 1,
+      "b": 69,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 226800,
+      "legal_target_count_per_prime": 112,
+      "axis_rectangle": null,
+      "primes": [
+        113
+      ],
+      "source_signatures": [
+        {
+          "p": 113,
+          "a": 13,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 120,
+      "a": 6,
+      "b": 1,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 211680,
+      "legal_target_count_per_prime": 120,
+      "axis_rectangle": null,
+      "primes": [
+        241
+      ],
+      "source_signatures": [
+        {
+          "p": 241,
+          "a": 66,
+          "b": 91
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 126,
+      "a": 1,
+      "b": 19,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 201600,
+      "legal_target_count_per_prime": 126,
+      "axis_rectangle": null,
+      "primes": [
+        127
+      ],
+      "source_signatures": [
+        {
+          "p": 127,
+          "a": 73,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 144,
+      "a": 2,
+      "b": 21,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 176400,
+      "legal_target_count_per_prime": 144,
+      "axis_rectangle": null,
+      "primes": [
+        577
+      ],
+      "source_signatures": [
+        {
+          "p": 577,
+          "a": 34,
+          "b": 141
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 168,
+      "a": 3,
+      "b": 107,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 151200,
+      "legal_target_count_per_prime": 168,
+      "axis_rectangle": null,
+      "primes": [
+        337
+      ],
+      "source_signatures": [
+        {
+          "p": 337,
+          "a": 141,
+          "b": 157
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 180,
+      "a": 3,
+      "b": 44,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 141120,
+      "legal_target_count_per_prime": 180,
+      "axis_rectangle": null,
+      "primes": [
+        181
+      ],
+      "source_signatures": [
+        {
+          "p": 181,
+          "a": 57,
+          "b": 56
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 210,
+      "a": 2,
+      "b": 169,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 120960,
+      "legal_target_count_per_prime": 210,
+      "axis_rectangle": null,
+      "primes": [
+        211
+      ],
+      "source_signatures": [
+        {
+          "p": 211,
+          "a": 44,
+          "b": 43
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 280,
+      "a": 5,
+      "b": 41,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 90720,
+      "legal_target_count_per_prime": 280,
+      "axis_rectangle": null,
+      "primes": [
+        281
+      ],
+      "source_signatures": [
+        {
+          "p": 281,
+          "a": 205,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 336,
+      "a": 1,
+      "b": 302,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 75600,
+      "legal_target_count_per_prime": 336,
+      "axis_rectangle": null,
+      "primes": [
+        673
+      ],
+      "source_signatures": [
+        {
+          "p": 673,
+          "a": 233,
+          "b": 142
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 420,
+      "a": 15,
+      "b": 16,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 60480,
+      "legal_target_count_per_prime": 420,
+      "axis_rectangle": null,
+      "primes": [
+        421
+      ],
+      "source_signatures": [
+        {
+          "p": 421,
+          "a": 405,
+          "b": 404
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 504,
+      "a": 2,
+      "b": 141,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 50400,
+      "legal_target_count_per_prime": 504,
+      "axis_rectangle": null,
+      "primes": [
+        1009
+      ],
+      "source_signatures": [
+        {
+          "p": 1009,
+          "a": 494,
+          "b": 51
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 630,
+      "a": 9,
+      "b": 121,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 40320,
+      "legal_target_count_per_prime": 630,
+      "axis_rectangle": null,
+      "primes": [
+        631
+      ],
+      "source_signatures": [
+        {
+          "p": 631,
+          "a": 99,
+          "b": 1
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 1008,
+      "a": 2,
+      "b": 59,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 25200,
+      "legal_target_count_per_prime": 1008,
+      "axis_rectangle": null,
+      "primes": [
+        2017
+      ],
+      "source_signatures": [
+        {
+          "p": 2017,
+          "a": 530,
+          "b": 515
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 1260,
+      "a": 1,
+      "b": 950,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 20160,
+      "legal_target_count_per_prime": 1260,
+      "axis_rectangle": null,
+      "primes": [
+        2521
+      ],
+      "source_signatures": [
+        {
+          "p": 2521,
+          "a": 619,
+          "b": 890
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 1680,
+      "a": 3,
+      "b": 253,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 15120,
+      "legal_target_count_per_prime": 1680,
+      "axis_rectangle": null,
+      "primes": [
+        3361
+      ],
+      "source_signatures": [
+        {
+          "p": 3361,
+          "a": 27,
+          "b": 1157
+        }
+      ],
+      "prime_capacity": 1
+    },
+    {
+      "h": 1680,
+      "a": 14,
+      "b": 25,
+      "target_modulus": 1,
+      "target_residue": 0,
+      "fibre_size": 15120,
+      "legal_target_count_per_prime": 1680,
+      "axis_rectangle": null,
+      "primes": [
+        13441
+      ],
+      "source_signatures": [
+        {
+          "p": 13441,
+          "a": 1666,
+          "b": 575
+        }
+      ],
+      "prime_capacity": 1
+    }
+  ],
+  "claim": {
+    "inventory_exact": true,
+    "finite_group_cover_exists_by_first_moment": false,
+    "finite_group_cover_impossible_by_density_overlap": true,
+    "explicit_finite_group_cover_found": false,
+    "distinct_prime_matching_found": false,
+    "integer_m_found": false
+  },
+  "scope": "exact inventory of source-prime line slots whose predicates descend to the declared finite group, including exact CRT rectangle signatures and a maximum-weight, phase-independent Hunter forest; any noncover claim applies only to this declared finite quotient family"
+}
