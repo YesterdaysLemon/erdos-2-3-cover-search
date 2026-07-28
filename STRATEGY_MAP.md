@@ -115,9 +115,10 @@ their noncoprime moduli, forcing overlap `1/24` and the exact union bound
 
 `verify_square_quotient_period_bridge.py` authenticates the source-row
 identity, transports the two rows through the shear, and independently
-enumerates their 144-cell target map. Its runtime replay is pending the host
-memory floor, so the QBF target is retired in planning but no new verification
-artifact is yet promoted.
+enumerates their 144-cell target map. The real replay returns
+`verified=true`. The independently reconstructed maximum affine forest uses
+30 forced edges and improves the same finite-family upper bound to
+`21229/25200 < 1`. The QBF target is therefore rigorously retired.
 
 ### 3. Reverse-designed finite-group cover with arithmetic matching
 
@@ -208,11 +209,11 @@ their phases intersects in density \(1/140\). Even subtracting only this
 one forced overlap gives
 
 \[
-337/336-1/140=1673/1680<1.
+337/336-1/140=239/240<1.
 \]
 
 Using all nine coprime neighbors of the modulus-35 row as a Hunter star
-strengthens the same bound to \(413/420\). In that pilot the star already is
+strengthens the same bound to \(59/60\). In that pilot the star already is
 the complete positive-overlap forest.
 
 Thus the entire 38,102,400-cell pilot family is ruled out by exact quotient
@@ -227,7 +228,9 @@ multisets surviving the older Hunter-star test. The strongest had 33 rows,
 raw density \(2609/2520\), and star-adjusted upper bound \(341/336\); its
 random phase expectation was still enormous. The scanner now uses the
 strictly stronger maximum joint-surjectivity forest. Its full rescan remains
-pending while the host is below the requested free-memory floor.
+deferred at this stopping checkpoint; the square `5040 x 5040` candidate is
+already eliminated, so the next scan should focus QBF work only on surviving
+nonsquare families.
 
 ### 4. Library of one-dimensional covering templates
 

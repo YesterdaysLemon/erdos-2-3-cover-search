@@ -101,7 +101,10 @@ def test_exact_opb_verifier_rejects_tampered_constraint(tmp_path):
         opb_path,
     )
     text = opb_path.read_text()
-    opb_path.write_text(text.replace(">= 1 ;", ">= 2 ;", 1))
+    opb_path.write_text(
+        text.replace(">= 1 ;", ">= 2 ;", 1),
+        newline="\n",
+    )
     manifest["opb_sha256"] = sha256(opb_path)
     try:
         replay(manifest)

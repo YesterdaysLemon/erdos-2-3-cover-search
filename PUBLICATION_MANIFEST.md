@@ -87,6 +87,9 @@ This repository is a curated snapshot of the active workspace, updated on
   authenticated finite-family obstruction through a unimodular shear;
 - the 31-row period-5,040 source slice, its forced `p=5`/`p=7` overlap
   certificate, and the earlier independent 144-cell target-map replay;
+- the verified `d11` square-quotient bridge and the independently replayed
+  30-edge maximum affine forest, proving the declared 31-row quotient family
+  has union density at most `21229/25200`;
 - the deterministic CRT lookup-gate QCIR exporter for authenticated
   finite-quotient inventories; all QBF result claims remain explicitly
   `UNRUN` until solver proof and independent reconstruction;

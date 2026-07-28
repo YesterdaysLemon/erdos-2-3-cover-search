@@ -10,14 +10,19 @@ from inventory_reverse_group_lines import inventory
 from verify_crt_cover_qcir import verify
 
 
-def row(prime: int, a: int = 1, b: int = 0) -> dict:
+def row(
+    prime: int,
+    a: int = 1,
+    b: int = 0,
+    h: int = 2,
+) -> dict:
     return {
         "p": prime,
-        "h": 2,
+        "h": h,
         "a": a,
         "b": b,
-        "ord2": 2 if a else 1,
-        "ord3": 2 if b else 1,
+        "ord2": h if a else 1,
+        "ord3": h if b else 1,
         "c": 0,
         "target_modulus": 1,
         "target_residue": 0,
@@ -167,11 +172,13 @@ def test_qcir_verifier_rejects_semantic_gate_tamper(tmp_path):
         verify(manifest_path)
 
 
-def test_qcir_rejects_two_crossed_parity_lines_semantically(tmp_path):
+def test_qcir_rejects_two_by_two_crossed_ternary_lines(tmp_path):
     pool = {
         "choices": [
-            row(5, 1, 0),
-            row(7, 0, 1),
+            row(7, 1, 0, 3),
+            row(13, 1, 0, 3),
+            row(19, 0, 1, 3),
+            row(31, 0, 1, 3),
         ]
     }
     pool_path = tmp_path / "pool.json"
@@ -179,14 +186,22 @@ def test_qcir_rejects_two_crossed_parity_lines_semantically(tmp_path):
     artifact = inventory(
         pool,
         pool_path,
-        width=2,
-        height=2,
+        width=3,
+        height=3,
         direction=(1, 0),
         transverse=(0, 1),
     )
     assert artifact[
         "finite_group_cover_impossible_by_density_overlap"
     ] is False
+    assert (
+        artifact["phase_independent_union_upper_bound_numerator"]
+        == 1
+    )
+    assert (
+        artifact["phase_independent_union_upper_bound_denominator"]
+        == 1
+    )
     inventory_path = tmp_path / "inventory.json"
     inventory_path.write_text(json.dumps(artifact))
     qcir_path = tmp_path / "crossed.qcir"

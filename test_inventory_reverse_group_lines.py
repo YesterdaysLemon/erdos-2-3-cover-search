@@ -194,11 +194,11 @@ def test_density_overlap_verifier_certifies_surviving_family(tmp_path):
     assert result["forced_overlap_density_denominator"] == 560
     assert (
         result["phase_independent_union_upper_bound_numerator"]
-        == 413
+        == 59
     )
     assert (
         result["phase_independent_union_upper_bound_denominator"]
-        == 420
+        == 60
     )
     assert result[
         "finite_group_cover_impossible_by_density_overlap"

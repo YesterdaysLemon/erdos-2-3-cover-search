@@ -4879,12 +4879,12 @@ moduli are coprime, the two quotient homomorphisms jointly surject onto
 `1/140`. The union of all 28 rows is therefore at most
 
 ```
-337/336 - 1/140 = 1673/1680 < 1.
+337/336 - 1/140 = 239/240 < 1.
 ```
 
 The strongest single-center forest uses all nine coprime neighbors of the
 modulus-35 row. Their forced intersections total `11/560`, strengthening the
-union upper bound to `413/420`.
+union upper bound to `59/60`.
 
 This rejects all phase assignments in the 38,102,400-cell pilot family
 without cell or graph enumeration. The inventory now generalizes the
@@ -4995,9 +4995,8 @@ weight `1/16`, and the exact union bound is `13/16`. The previous
 single-center star could use only two edges.
 
 `HUNTER_FOREST_CORRECTNESS.md` records the Smith-normal-form and Hunter
-proofs. Runtime QA and the real 16-basis quotient rescan remain pending while
-host free memory is below the requested 15 percent. No stronger real-family
-claim is promoted before that independent replay.
+proofs. At this point runtime QA and the real 16-basis quotient rescan were
+still pending because host free memory was below the requested 15 percent.
 
 ## Square-quotient bridge removes the first QBF target (2026-07-28)
 
@@ -5029,12 +5028,39 @@ this edge immediately.
 pool, checks that square descent and divisor-period selection have identical
 source-prime sets, transports the anchors through the declared shear, and
 independently enumerates the 144-cell joint map. A regression uses a
-nontrivial shear. Runtime QA and the real bridge report remain pending while
-free host memory is below 15 percent, so this note does not yet promote a new
-artifact hash. The QBF exporter remains useful, but its next real target must
-be a nonsquare family surviving the strengthened arithmetic preflight.
+nontrivial shear.
 
-The small prior artifacts included for the pending bridge replay have hashes:
+After the orphaned 36 GB Python process was explicitly terminated at the
+user's direction, free memory returned above the requested floor. Focused QA
+then completed:
+
+```
+python -m pytest -q \
+  test_axis_layered_projection_opb.py \
+  test_construct_reverse_group_cover.py \
+  test_crt_cover_qcir.py \
+  test_inventory_reverse_group_lines.py \
+  test_scan_reverse_group_quotients.py \
+  test_verify_square_quotient_period_bridge.py
+
+23 passed in 19.86s
+```
+
+All nine new implementation/verifier modules also passed `py_compile`.
+The real square bridge returned `verified=true`, 31 rows, and upper bound
+`823/840`. The independently reconstructed maximum affine forest selected
+30 edges with total forced overlap `4511/25200`; the separate Kruskal
+verifier returned
+
+```
+verified=True rows=31 union_upper=21229/25200 noncover=True
+```
+
+This is a rigorous obstruction for that declared 25,401,600-cell family, not
+a global result. The QBF exporter remains useful, but its next real target
+must be a nonsquare family surviving the strengthened arithmetic preflight.
+
+The published bridge artifacts have hashes:
 
 ```
 order_pool_1050000_component_core_corrected_period5040.json
@@ -5043,4 +5069,10 @@ order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_certif
   778332988d154b6444b74b05d3e13b58759db6e6803c0a300c8e6c9c190efbc4
 order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_verification.json
   75ac4b9c1adde35cb9983b16f0dc1f6a241049e2dd5280b19c8c4cc6776e449c
+order_pool_1050000_component_core_corrected_period5040_d11_square_bridge_verification.json
+  2a3d2c225f605fd02c58990af972868b3a8d721fb836ef19f9b896b1a46cedc8
+order_pool_1050000_component_core_corrected_period5040_d11_reverse_inventory.json
+  3e61ebf2cbf42cce7552e9f5a6c3a933822b609398149673172869c4f919ca09
+order_pool_1050000_component_core_corrected_period5040_d11_reverse_inventory_verification.json
+  65481d4eb729b4aca4976ba6188c8b519099b0ece15be666732cb7d2793f33e3
 ```

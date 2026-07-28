@@ -117,18 +117,21 @@ The maximum-weight affine-overlap obstruction and its independent
 Smith-normal-form replay are proved in
 [HUNTER_FOREST_CORRECTNESS.md](HUNTER_FOREST_CORRECTNESS.md).
 The square-quotient bridge that identifies sheared square inventories with
-their divisor-period families is implemented in
-`verify_square_quotient_period_bridge.py`; its new replay artifact is pending
-the host-memory floor.
+their divisor-period families is independently replayed by
+`verify_square_quotient_period_bridge.py`. For the 31-row `d11`,
+`5040 x 5040` family it verifies the transported `p=5`/`p=7` bound
+`823/840 < 1`. The full maximum affine forest is stronger: 30 verified
+edges give union upper bound `21229/25200 < 1`, without enumerating the
+25,401,600 quotient cells.
 
 The first arithmetic-matched quotient scan tested 64 small basis/quotient
 configurations without enumerating their cells. Sixty-three fail the raw
 density test. The sole survivor has 28 descending rows and density exactly
 `337/336`, but its unavoidable modulus-4/modulus-35 intersection has density
-`1/140`; hence its union is at most `1673/1680 < 1`. This rules out that
+`1/140`; hence its union is at most `239/240 < 1`. This rules out that
 declared 38,102,400-cell family for every phase assignment, not the original
 problem. Subtracting the complete nine-edge modulus-35 Hunter star sharpens
-the bound to `413/420`. The exact inventory and structurally separate
+the bound to `59/60`. The exact inventory and structurally separate
 density/overlap verifier are included with the alternative-space tooling.
 
 ## Exploratory direct-cover checkpoint
