@@ -31,6 +31,7 @@ def enumerate_exact_radius_covers(
     solver_name: str,
     model_limit: int,
     time_limit: float,
+    save_models: bool = False,
 ) -> dict:
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
@@ -61,6 +62,7 @@ def enumerate_exact_radius_covers(
     models = 0
     frequencies: Counter[int] = Counter()
     common: set[int] | None = None
+    saved_models: list[list[int]] = []
     complete = False
     stop_reason = "UNSAT"
     while solver.solve():
@@ -81,11 +83,13 @@ def enumerate_exact_radius_covers(
         models += 1
         frequencies.update(selected)
         common = selected if common is None else common & selected
+        if save_models:
+            saved_models.append(sorted(selected))
         solver.add_clause([-variables[mask] for mask in selected])
     else:
         complete = True
     solver.delete()
-    return {
+    result = {
         "complete": complete,
         "stop_reason": stop_reason,
         "cover_count": models,
@@ -93,6 +97,9 @@ def enumerate_exact_radius_covers(
         "mask_frequencies": frequencies,
         "elapsed_seconds": time.monotonic() - started,
     }
+    if save_models:
+        result["models"] = saved_models
+    return result
 
 
 def mask_record(
@@ -132,6 +139,14 @@ def main() -> int:
     parser.add_argument("--model-limit", type=int, default=100_000)
     parser.add_argument("--time-limit", type=float, default=240.0)
     parser.add_argument("--top", type=int, default=20)
+    parser.add_argument(
+        "--save-models",
+        action="store_true",
+        help=(
+            "store every selected gain-mask tuple; use only when the "
+            "expected model family is small enough for the output file"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.radius < 1:
@@ -178,6 +193,7 @@ def main() -> int:
         args.solver,
         args.model_limit,
         args.time_limit,
+        args.save_models,
     )
     frequencies: Counter[int] = enumeration.pop("mask_frequencies")
     ordered = sorted(

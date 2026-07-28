@@ -36,6 +36,10 @@ This repository is a curated snapshot of the active workspace, updated on
 - the 753/763-point continuation, incomplete 3,851-model relaxed-cover-space
   audit, six pairwise distance-six exact finite repair phases, and ten exact
   augmented-domain points common to five separated responses;
+- the complete 1,073-point class-27 radius-three Hamming-ball obstruction,
+  covering all 210,047 legal moves and 14 terminal gain-mask skeletons,
+  together with an independent scalar reconstruction returning
+  `repair_exists=false`;
 - the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
   on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;

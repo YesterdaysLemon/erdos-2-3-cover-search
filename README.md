@@ -594,7 +594,54 @@ confirmed every point.  Adding the batch gives 763 accumulated points.
 Radius three remains feasible: the current finite response retargets
 `p=15121,269,167`, and an independent scalar audit reports sampled minimum
 coverage one.  Thus diversified common cuts are more efficient, but they
-have not yet closed radius three.
+had not yet closed radius three at that checkpoint.
+
+Subsequent branch exhaustion closes radius three for this finite class-27
+Hamming ball.  On 773 points, a complete relaxed enumeration found 3,921
+three-mask skeletons.  Expanding every mask to its legal row owners gave
+14,302 raw products, 9,625 distinct-row trials, and 9,468 exact finite
+repairs; 157 owner assignments failed full-corpus replay.  Of the exact
+repairs, 9,462 use `p=97: 1 -> 2`.  The remaining six all use
+`p=109: 2 -> 6`, `p=4177: 28 -> 9`, and one of six explicitly replayed
+third moves.
+
+After two exact 100-hole batches were merged, all six exceptional repairs
+failed the 973-point corpus.  Fixing the dominant `p=97` move reduces the
+remaining problem to a two-change residual search.  Its complete relaxed
+enumeration has 26 skeletons and exactly 89 legal owner assignments, all of
+which pass finite replay.  Those 89 repairs use 50 distinct alternative
+fibres.  One exact augmented-domain query against their complete fibre union
+returned 100 exponent pairs missed by every repair, with independent scalar
+replay.
+
+Adding that batch gives 1,073 points and an exact radius-three UNSAT result:
+
+```
+initial base misses          869
+legal deficit-hitting moves  210047
+distinct gain masks          15835
+relaxed three-mask skeletons 14
+distinct-row matching fails  14
+exact repairs                0
+```
+
+The separately implemented scalar verifier reconstructs the 12,579 rows,
+all 1,073 points, all 210,047 legal moves, and all 14 terminal skeletons.  It
+returns `verified=true` and `repair_exists=false`:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius3_1073_sparse_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius3_1073_sparse_obstruction_verification.json
+```
+
+Certificate SHA-256:
+`38fa3e2774e84f0c621c612100c7fdaa4a6c713b144dc7f5c3204e31837de26d`.
+This is an exact finite Hamming-ball obstruction with the five low anchors
+fixed.  It does not rule out radius four, other base phases, the other 161
+quotient branches, fibres outside the bounded pool, or the original infinite
+problem.  Radius four remains feasible on these 1,073 points; the current
+finite response retargets `p=97,263,3637,49927`, and a full-domain checker
+has already returned 100 exact holes for that response.
 
 An experimental quantified-SMT encoding moved phase targets outside a
 universal pair of integer exponent coordinates.  It correctly handles tiny

@@ -30,6 +30,23 @@ class EnumerateRelaxedMaskCoversTests(unittest.TestCase):
         self.assertEqual(result["stop_reason"], "MODEL_LIMIT")
         self.assertEqual(result["cover_count"], 1)
 
+    def test_models_are_saved_only_when_requested(self):
+        kwargs = {
+            "masks": [0b001, 0b010, 0b100, 0b110],
+            "point_count": 3,
+            "radius": 2,
+            "solver_name": "cadical195",
+            "model_limit": 0,
+            "time_limit": 0.0,
+        }
+        without_models = enumerate_exact_radius_covers(**kwargs)
+        with_models = enumerate_exact_radius_covers(
+            **kwargs,
+            save_models=True,
+        )
+        self.assertNotIn("models", without_models)
+        self.assertEqual(with_models["models"], [[0b001, 0b110]])
+
 
 if __name__ == "__main__":
     unittest.main()

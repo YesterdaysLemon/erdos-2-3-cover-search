@@ -4352,3 +4352,47 @@ stable/targeted pools and base phases are now tracked, both older certificates
 were regenerated against those dependencies, and all three verifiers pass
 using only the public-shaped file set.  Their updated hashes are recorded
 above.
+
+### Complete radius-three branch exhaustion
+
+The radius-three continuation was converted from repeated single-phase CEGIS
+to a complete finite branch classification.  On 773 points, exact enumeration
+found 3,921 relaxed three-mask covers.  Expanding their row owners produced
+9,625 distinct-row trials and 9,468 exact finite repairs; 9,462 contained the
+move `p=97: 1 -> 2`, while the six exceptions shared the moves
+`p=109: 2 -> 6` and `p=4177: 28 -> 9`.
+
+Two exact 100-hole batches enlarged the corpus to 973 points and eliminated
+all six exceptions.  With `p=97: 1 -> 2` fixed, the remaining two-change
+residual problem had a complete family of 26 relaxed skeletons and 89 exact
+owner assignments.  Their union contained 50 alternative fibres.  The exact
+augmented-domain oracle returned 100 scalar-replayed points outside the fibre
+union of all 89 repairs.
+
+On the resulting 1,073-point corpus, the bounded repair engine returned exact
+UNSAT at radius three.  The final search contains 15,835 gain masks and
+210,047 legal moves; all 14 terminal three-mask skeletons fail distinct-row
+matching.  The independently implemented scalar verifier reconstructs the
+entire calculation and reports:
+
+```
+verified=true
+repair_exists=false
+point_count=1073
+max_changes=3
+matching_failures=14
+replay_failures=0
+```
+
+The public proof objects are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius3_1073_sparse_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius3_1073_sparse_obstruction_verification.json
+```
+
+Certificate SHA-256:
+`38fa3e2774e84f0c621c612100c7fdaa4a6c713b144dc7f5c3204e31837de26d`.
+This closes only the declared finite Hamming ball.  Radius four remains
+feasible on the same corpus, so this is not a cover, an integer `m`, or a
+global nonexistence result.
