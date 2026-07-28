@@ -4824,3 +4824,223 @@ percent, honoring the user's 15 percent floor.  The allocator itself was
 using only about 0.2 GB; an unrelated or separately owned Python process was
 using more than 23 GB.  No further allocator run is launched while the host
 remains below the requested floor.
+
+## Alternative-space triage (2026-07-28)
+
+Continuing to add isolated point witnesses is not the preferred scaling
+path. `STRATEGY_MAP.md` records three higher-priority formulations.
+
+First, the 81-row active-class master is being exported as an exact integer
+pseudo-Boolean instance. Its constraints are only necessary conditions, and
+all imported modulo-30 cuts carry independently replayable integer-dual
+evidence. SAT will mean only that a placement survives; UNSAT will become a
+finite-family theorem only with a checked proof log.
+
+Second, the full synthesis problem can be written as a symbolic CRT game:
+phase targets are existential variables and the independent prime-power
+digits of the two exponents are universal variables. A QBF, BDD/MDD, or
+transfer-matrix engine can learn component cubes or separators rather than
+individual exponent pairs. The known 14-row no-cover instance is the
+required admission benchmark before this route is scaled.
+
+Third, a construction can be reverse-designed in a small sheared finite
+abelian group. Abstract line multiplicities will be capped by actual source
+primes of the corresponding `(h,a,b)` signature, and every chosen line slot
+must pass a distinct-prime matching before component-wise lifting. This
+prevents an attractive geometric cover from being misreported when its
+lines have no arithmetic realization. A completely lifted cover would be
+sent to both exact full-domain checkers and only then to the CRT builder.
+`inventory_reverse_group_lines.py` is the first exact preflight: it transforms
+the source signatures, keeps only predicates that descend to the declared
+quotient, and records the distinct-prime capacity and raw density of each
+projective line type. It also recognizes
+axis-separable CRT rectangles: for `h=u*v` with coprime `u,v`, the row can
+simultaneously select one class of `k mod u` and one class of `l mod v`.
+This exposes a concrete construction subproblem: cross two one-dimensional
+covering systems and match every required rectangle to a distinct source
+prime.
+
+For unrestricted descending rows the same inventory computes an exact
+first-moment criterion. On a quotient with `N` cells, independently uniform
+row phases leave `N*product(1-1/h_i)` cells uncovered in expectation. A value
+strictly below one proves that some phase assignment covers the quotient.
+Conditional expectation can recover one without brute-force graph search.
+`construct_reverse_group_cover.py` implements the deterministic greedy
+choice and an exact finite-group replay. No real quotient has yet passed this
+cover-existence criterion.
+
+A low-memory source-streaming pilot then tested 64 combinations of six
+bases/layer periods and eight transverse quotient sizes. Sixty-three had raw
+density below one. The only density survivor was the `(3,1)` basis on
+`Z/15120 x Z/2520`, with 28 descending source rows and exact density
+`15165/15120 = 337/336`. Two of those rows have moduli 4 and 35. Because the
+moduli are coprime, the two quotient homomorphisms jointly surject onto
+`Z/4 x Z/35`, so every choice of their phases intersects in exact density
+`1/140`. The union of all 28 rows is therefore at most
+
+```
+337/336 - 1/140 = 1673/1680 < 1.
+```
+
+The strongest single-center forest uses all nine coprime neighbors of the
+modulus-35 row. Their forced intersections total `11/560`, strengthening the
+union upper bound to `413/420`.
+
+This rejects all phase assignments in the 38,102,400-cell pilot family
+without cell or graph enumeration. The inventory now generalizes the
+argument to the strongest single-center forest of coprime-modulus
+intersections, using Hunter's union bound, and
+`verify_reverse_group_density_obstruction.py` independently
+reconstructs the finite-family arithmetic from the authenticated source
+pool. This is a reusable quotient-family eliminator, not a global
+nonexistence theorem.
+
+The follow-up grid expanded to 16 unimodular bases and 15 declared smooth
+periods under a 100,000,000-cell quotient-size cap. There were 86
+basis/period configurations with raw density at least one; the Hunter-star
+bound immediately eliminated 6. After collapsing only by the modulus
+multiset for triage, 7 patterns remained. The strongest raw family has 33
+rows:
+
+```
+raw density             2609/2520
+forced overlap star      103/5040
+union upper bound          341/336
+log expected misses           17.044
+```
+
+The last figure shows that random phases are nowhere near the first-moment
+existence regime. `scan_reverse_group_quotients.py` records this exact
+no-cell-enumeration ranking. The next justified test is a symbolic
+multi-projection or Fourier dual on these small row sets, not explicit
+enumeration of their 50--76 million quotient cells.
+
+Classical finite-abelian coset-cover bounds were also screened as a possible
+fully analytic shortcut. The Lettl--Sun irredundancy theorem applies to any
+row whose deletion leaves raw density below one, but its two necessary
+conditions are too weak for the present 31--34-row patterns: their indices
+and Mycielski values remain inside the permitted range. This is a useful
+cheap future preflight, but it does not promote a new obstruction here.
+
+The other algebraic detour was checked against Capelli's binomial
+reducibility criterion. For a positive rational binomial, the universal
+factorizations reduce to odd-power sums and the exceptional coefficient-four
+fourth-power case. Those are precisely the `X^q+1` and Sophie Germain cells
+already present in the perfect-power implementation. This closes off
+"search for another binomial identity" as a likely source of new coverage;
+any further algebraic shift would need more than two monomials or additional
+Diophantine structure.
+
+The concrete symbolic follow-up is now the 31-row `5040 x 5040` survivor.
+Its group decomposes as
+`(2^4 x 3^2 x 5 x 7)^2`, so a QBF needs only 28 universal CRT-coordinate
+bits. Existential row phases split into 83 prime-power components, totaling
+531 one-hot variables and 2,037 naive pairwise at-most-one clauses.
+Precomputed lookup gates evaluate each local affine form. The exact
+quantifier order is existential phases, universal coordinate bits, then
+dependent circuit gates. Invalid binary digit encodings are guarded by the
+universal implication. This is the preferred way to decide 25,401,600
+cells without listing them. `build_crt_cover_qcir.py` now implements the
+deterministic QCIR translation, but no real inventory has been exported and
+no QBF result or proof has been checked yet.
+
+`QCIR_CORRECTNESS.md` records the formal equivalence boundary: CRT gives a
+bijection for both coordinates and unrestricted phases, lookup buckets
+evaluate each local homomorphism exactly, the row conjunction reconstructs
+the congruence modulo `h`, and the invalid-bit guard adds no quotient points.
+It also separates finite-family UNSAT from a global theorem and lists every
+additional arithmetic gate required before a SAT phase assignment could
+produce an integer `m`.
+
+Independent review also found and prompted repair of three artifact-trust
+gaps before any reverse-designed output is used: the inventory payload is now
+bound to its hashed source file, the constructor recomputes every target
+restriction from that authenticated pool instead of trusting the inventory's
+label, and the OPB verifier authenticates its recorded extraction source.
+
+Exact multi-projection Fourier/LP duals and libraries of complete
+one-dimensional layer covers remain fallback formulations. The
+perfect-power route remains valid but is not resumed as another unbounded
+point CEGIS run. None of this triage changes the authoritative status: no
+integer `m` and no global impossibility proof are known here.
+
+## Maximum affine-overlap forest upgrade (2026-07-28)
+
+The reverse-design obstruction has now been shifted one step further from
+graph search into exact abelian-group arithmetic. The first implementation
+subtracted only the strongest star of coprime-modulus intersections. The
+general Hunter inequality permits any forest, and coprimality is sufficient
+but not necessary for two affine maps to force an intersection.
+
+For rows `(h_i,a_i,b_i)` and `(h_j,a_j,b_j)`, the joint map to
+`Z/h_i x Z/h_j` is surjective exactly when the gcd of the six presentation
+minors
+
+```
+a_i*b_j-b_i*a_j, h_i*a_j, h_i*b_j,
+h_j*a_i, h_j*b_i, h_i*h_j
+```
+
+is one. Every phase pair then intersects in exact density `1/(h_i*h_j)`,
+even when the two moduli are not coprime. The inventory now builds the
+maximum-weight forest of all such edges with Prim's algorithm. The separate
+verifier reconstructs the source rows, validates every emitted edge and
+acyclicity, and recomputes the optimum with Kruskal's algorithm.
+
+This upgrade can only lower the old phase-independent union upper bounds and
+still requires no quotient-cell enumeration. A four-row synthetic regression
+with two horizontal and two vertical modulus-4 maps demonstrates the strict
+gain: the forced graph is `K_(2,2)`, its maximum forest has three edges of
+weight `1/16`, and the exact union bound is `13/16`. The previous
+single-center star could use only two edges.
+
+`HUNTER_FOREST_CORRECTNESS.md` records the Smith-normal-form and Hunter
+proofs. Runtime QA and the real 16-basis quotient rescan remain pending while
+host free memory is below the requested 15 percent. No stronger real-family
+claim is promoted before that independent replay.
+
+## Square-quotient bridge removes the first QBF target (2026-07-28)
+
+Static cross-checking exposed a duplicated finite family. The proposed
+31-row QBF target used the `d11` shear on
+`Z/5040 x Z/5040`, with density `143/140`. For a primitive row
+`a*x+b*y mod h` on a square quotient `(Z/n)^2`, descent is equivalent to
+`h | n`: the forward implication is immediate, while the reverse follows
+prime-power by prime-power because at least one transformed coefficient is
+a unit modulo each prime dividing `h`. A unimodular shear preserves this
+primitivity. Thus the descending prime set is exactly the older period-5040
+divisor family.
+
+That older 31-row family already has a forced-pair certificate. Its `p=5`
+row has modulus 4 and its `p=7` row has modulus 6. Although the moduli are
+not coprime, the six presentation minors have gcd one, so the joint target
+map is surjective. Every phase pair intersects in density `1/24`, giving
+
+```
+143/140 - 1/24 = 823/840 < 1.
+```
+
+This also diagnoses why the first reverse-group scan called the family a
+survivor: its overlap preflight recognized only coprime row moduli. The new
+maximum affine forest recognizes all jointly surjective pairs and will find
+this edge immediately.
+
+`verify_square_quotient_period_bridge.py` now authenticates the stable source
+pool, checks that square descent and divisor-period selection have identical
+source-prime sets, transports the anchors through the declared shear, and
+independently enumerates the 144-cell joint map. A regression uses a
+nontrivial shear. Runtime QA and the real bridge report remain pending while
+free host memory is below 15 percent, so this note does not yet promote a new
+artifact hash. The QBF exporter remains useful, but its next real target must
+be a nonsquare family surviving the strengthened arithmetic preflight.
+
+The small prior artifacts included for the pending bridge replay have hashes:
+
+```
+order_pool_1050000_component_core_corrected_period5040.json
+  762167fe0ece5ecfc94b1d200d670f4fbcdce6d3f415dc52ba30c465c956139a
+order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_certificate.json
+  778332988d154b6444b74b05d3e13b58759db6e6803c0a300c8e6c9c190efbc4
+order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_verification.json
+  75ac4b9c1adde35cb9983b16f0dc1f6a241049e2dd5280b19c8c4cc6776e449c
+```

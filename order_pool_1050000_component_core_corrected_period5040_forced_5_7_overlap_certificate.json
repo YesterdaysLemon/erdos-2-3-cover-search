@@ -1,0 +1,41 @@
+{
+  "pool": "order_pool_1050000_component_core_corrected_period5040.json",
+  "row_count": 31,
+  "anchor_primes": [
+    5,
+    7
+  ],
+  "anchor_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "a": 1,
+      "b": 3
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "a": 2,
+      "b": 1
+    }
+  ],
+  "joint_image_index": 1,
+  "joint_target_map_surjective": true,
+  "total_reciprocal_density": {
+    "numerator": 143,
+    "denominator": 140,
+    "decimal": 1.0214285714285714
+  },
+  "forced_pair_overlap_density": {
+    "numerator": 1,
+    "denominator": 24,
+    "decimal": 0.041666666666666664
+  },
+  "union_density_upper_bound": {
+    "numerator": 823,
+    "denominator": 840,
+    "decimal": 0.9797619047619047
+  },
+  "proved_no_cover": true,
+  "argument": "The two anchor target maps are jointly surjective, so every pair of anchor fibres intersects with the stated density. The union of all rows is at most the sum of their individual densities minus this unavoidable intersection."
+}

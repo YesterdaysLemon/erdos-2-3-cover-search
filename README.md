@@ -108,6 +108,29 @@ The fraction \(4{,}620/4{,}637\) measures only this deliberately chosen
 finite menu. It is **not** a probability, a completeness claim, or evidence
 that the original infinite problem is nearly solved.
 
+The active route ranking and the planned shifts into pseudo-Boolean,
+symbolic-CRT, and arithmetic-matched finite-group formulations are recorded
+in [STRATEGY_MAP.md](STRATEGY_MAP.md).
+The exact meaning and promotion boundary of the symbolic circuit are proved
+in [QCIR_CORRECTNESS.md](QCIR_CORRECTNESS.md).
+The maximum-weight affine-overlap obstruction and its independent
+Smith-normal-form replay are proved in
+[HUNTER_FOREST_CORRECTNESS.md](HUNTER_FOREST_CORRECTNESS.md).
+The square-quotient bridge that identifies sheared square inventories with
+their divisor-period families is implemented in
+`verify_square_quotient_period_bridge.py`; its new replay artifact is pending
+the host-memory floor.
+
+The first arithmetic-matched quotient scan tested 64 small basis/quotient
+configurations without enumerating their cells. Sixty-three fail the raw
+density test. The sole survivor has 28 descending rows and density exactly
+`337/336`, but its unavoidable modulus-4/modulus-35 intersection has density
+`1/140`; hence its union is at most `1673/1680 < 1`. This rules out that
+declared 38,102,400-cell family for every phase assignment, not the original
+problem. Subtracting the complete nine-edge modulus-35 Hunter star sharpens
+the bound to `413/420`. The exact inventory and structurally separate
+density/overlap verifier are included with the alternative-space tooling.
+
 ## Exploratory direct-cover checkpoint
 
 A separate exact counterexample-guided search now attacks a 14,629-fibre

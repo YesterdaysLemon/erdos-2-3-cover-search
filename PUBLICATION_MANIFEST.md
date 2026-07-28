@@ -72,6 +72,28 @@ This repository is a curated snapshot of the active workspace, updated on
   Benders-cut support, structurally separate exact-claim verifier, and their
   regression tests; transient allocator states remain excluded and no
   family-level result is claimed;
+- a strategy map separating the proof-producing pseudo-Boolean endgame,
+  symbolic CRT/QBF compression, arithmetic-matched finite-group reverse
+  design, template-cover, Fourier-dual, and perfect-power routes, with
+  explicit promotion gates for each, plus the exact arithmetic line-inventory
+  preflight and deterministic conditional-expectation phase constructor for
+  a declared finite quotient;
+- the exact maximum-weight affine Hunter-forest quotient-family obstruction,
+  its Smith-normal-form correctness note, and its structurally separate
+  source-reconstructing verifier;
+- the exact no-cell-enumeration quotient-grid scanner used to rank small
+  coordinate-basis and smooth-period alternatives before phase search;
+- the square-quotient/divisor-period bridge verifier, which transports an
+  authenticated finite-family obstruction through a unimodular shear;
+- the 31-row period-5,040 source slice, its forced `p=5`/`p=7` overlap
+  certificate, and the earlier independent 144-cell target-map replay;
+- the deterministic CRT lookup-gate QCIR exporter for authenticated
+  finite-quotient inventories; all QBF result claims remain explicitly
+  `UNRUN` until solver proof and independent reconstruction;
+- the structurally separate QCIR parser and normalized Boolean-DAG
+  reconstruction verifier;
+- the written equivalence proof connecting the QCIR quantifiers and lookup
+  gates to an affine cover of the declared quotient and its periodic lift;
 - the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
   on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;

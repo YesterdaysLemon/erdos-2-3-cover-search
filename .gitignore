@@ -8,6 +8,9 @@
 !RESEARCH_LOG.md
 !PUBLICATION_MANIFEST.md
 !CURRENT_FINITE_FRONTIER.md
+!STRATEGY_MAP.md
+!QCIR_CORRECTNESS.md
+!HUNTER_FOREST_CORRECTNESS.md
 !requirements.txt
 
 # Source and independent verifiers.
@@ -16,6 +19,9 @@
 # Stable input, ranked finite frontier, and its independent replay.
 !order_pool_1050000_component_core_corrected_max32_stable.json
 !order_pool_1050000_component_core_corrected_max128.json
+!order_pool_1050000_component_core_corrected_period5040.json
+!order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_certificate.json
+!order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_verification.json
 !order_pool_1050000_max32_period_divisor_family_ranking_all.json
 !order_pool_1050000_max32_all4637_pairanchor_star_scan_v35.json
 !order_pool_1050000_max32_pairanchor_survivors_singleanchor_star_scan_v26.json

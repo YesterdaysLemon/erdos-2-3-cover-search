@@ -1,0 +1,23 @@
+{
+  "source": "order_pool_1050000_component_core_corrected_period5040.json",
+  "certificate": "order_pool_1050000_component_core_corrected_period5040_forced_5_7_overlap_certificate.json",
+  "enumerated_period": 12,
+  "enumerated_cells": 144,
+  "target_pairs": 24,
+  "expected_target_pairs": 24,
+  "jointly_surjective": true,
+  "uniform_fibre_size": true,
+  "intersection_density": {
+    "numerator": 1,
+    "denominator": 24
+  },
+  "total_density": {
+    "numerator": 143,
+    "denominator": 140
+  },
+  "union_upper_bound": {
+    "numerator": 823,
+    "denominator": 840
+  },
+  "verified": true
+}
