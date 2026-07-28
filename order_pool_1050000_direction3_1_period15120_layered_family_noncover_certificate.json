@@ -1,0 +1,876 @@
+{
+  "schema": "axis_layered_family_prime_pruned_mdd_obstruction_v1",
+  "source": "order_pool_1050000_direction3_1_period15120_layered_pool.json",
+  "source_sha256": "13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c",
+  "layer_axis": "k",
+  "coordinate_basis": {
+    "direction": [
+      3,
+      1
+    ],
+    "transverse": [
+      -1,
+      0
+    ],
+    "determinant": 1,
+    "mapping": "(original_k, original_l) = x * direction + y * transverse"
+  },
+  "layer_period": 15120,
+  "initial_row_count": 99,
+  "prime_deficit_pruning": [
+    {
+      "prime": 11,
+      "row_count_before": 99,
+      "divisible_row_count": 6,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        23,
+        199,
+        2377,
+        14851,
+        332641,
+        895357
+      ],
+      "row_count_after": 93
+    },
+    {
+      "prime": 13,
+      "row_count_before": 93,
+      "divisible_row_count": 5,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        79,
+        26209,
+        140401,
+        368551,
+        196561
+      ],
+      "row_count_after": 88
+    },
+    {
+      "prime": 17,
+      "row_count_before": 88,
+      "divisible_row_count": 4,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        239,
+        100981,
+        24481,
+        2400571
+      ],
+      "row_count_after": 84
+    },
+    {
+      "prime": 19,
+      "row_count_before": 84,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        2585521
+      ],
+      "row_count_after": 83
+    },
+    {
+      "prime": 29,
+      "row_count_before": 83,
+      "divisible_row_count": 3,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        349,
+        33409,
+        182701
+      ],
+      "row_count_after": 80
+    },
+    {
+      "prime": 37,
+      "row_count_before": 80,
+      "divisible_row_count": 3,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        12433,
+        53281,
+        139861
+      ],
+      "row_count_after": 77
+    },
+    {
+      "prime": 41,
+      "row_count_before": 77,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        5167
+      ],
+      "row_count_after": 76
+    },
+    {
+      "prime": 43,
+      "row_count_before": 76,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        2311681
+      ],
+      "row_count_after": 75
+    },
+    {
+      "prime": 61,
+      "row_count_before": 75,
+      "divisible_row_count": 2,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        366001,
+        1090681
+      ],
+      "row_count_after": 73
+    },
+    {
+      "prime": 73,
+      "row_count_before": 73,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        15331
+      ],
+      "row_count_after": 72
+    },
+    {
+      "prime": 79,
+      "row_count_before": 72,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        29863
+      ],
+      "row_count_after": 71
+    },
+    {
+      "prime": 83,
+      "row_count_before": 71,
+      "divisible_row_count": 2,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        71713,
+        278881
+      ],
+      "row_count_after": 69
+    },
+    {
+      "prime": 107,
+      "row_count_before": 69,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        77041
+      ],
+      "row_count_after": 68
+    },
+    {
+      "prime": 113,
+      "row_count_before": 68,
+      "divisible_row_count": 3,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        3391,
+        2733697,
+        6150817
+      ],
+      "row_count_after": 65
+    },
+    {
+      "prime": 137,
+      "row_count_before": 65,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        28771
+      ],
+      "row_count_after": 64
+    },
+    {
+      "prime": 149,
+      "row_count_before": 64,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        17881
+      ],
+      "row_count_after": 63
+    },
+    {
+      "prime": 193,
+      "row_count_before": 63,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        5791
+      ],
+      "row_count_after": 62
+    },
+    {
+      "prime": 211,
+      "row_count_before": 62,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        141793
+      ],
+      "row_count_after": 61
+    },
+    {
+      "prime": 233,
+      "row_count_before": 61,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        125821
+      ],
+      "row_count_after": 60
+    },
+    {
+      "prime": 251,
+      "row_count_before": 60,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        3252961
+      ],
+      "row_count_after": 59
+    },
+    {
+      "prime": 277,
+      "row_count_before": 59,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        4987
+      ],
+      "row_count_after": 58
+    },
+    {
+      "prime": 401,
+      "row_count_before": 58,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        866161
+      ],
+      "row_count_after": 57
+    },
+    {
+      "prime": 431,
+      "row_count_before": 57,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        10426753
+      ],
+      "row_count_after": 56
+    },
+    {
+      "prime": 577,
+      "row_count_before": 56,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        346201
+      ],
+      "row_count_after": 55
+    },
+    {
+      "prime": 613,
+      "row_count_before": 55,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        165511
+      ],
+      "row_count_after": 54
+    },
+    {
+      "prime": 797,
+      "row_count_before": 54,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        114769
+      ],
+      "row_count_after": 53
+    },
+    {
+      "prime": 953,
+      "row_count_before": 53,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        2401561
+      ],
+      "row_count_after": 52
+    },
+    {
+      "prime": 1621,
+      "row_count_before": 52,
+      "divisible_row_count": 1,
+      "divisible_count_below_prime": true,
+      "removed_primes": [
+        875341
+      ],
+      "row_count_after": 51
+    }
+  ],
+  "surviving_row_count": 51,
+  "surviving_rows": [
+    {
+      "p": 5,
+      "h": 4,
+      "active_modulus": 1,
+      "residual_modulus": 4
+    },
+    {
+      "p": 7,
+      "h": 6,
+      "active_modulus": 2,
+      "residual_modulus": 3
+    },
+    {
+      "p": 11,
+      "h": 10,
+      "active_modulus": 1,
+      "residual_modulus": 10
+    },
+    {
+      "p": 13,
+      "h": 12,
+      "active_modulus": 1,
+      "residual_modulus": 12
+    },
+    {
+      "p": 17,
+      "h": 16,
+      "active_modulus": 2,
+      "residual_modulus": 8
+    },
+    {
+      "p": 19,
+      "h": 18,
+      "active_modulus": 1,
+      "residual_modulus": 18
+    },
+    {
+      "p": 29,
+      "h": 28,
+      "active_modulus": 1,
+      "residual_modulus": 28
+    },
+    {
+      "p": 31,
+      "h": 30,
+      "active_modulus": 6,
+      "residual_modulus": 5
+    },
+    {
+      "p": 71,
+      "h": 35,
+      "active_modulus": 1,
+      "residual_modulus": 35
+    },
+    {
+      "p": 37,
+      "h": 36,
+      "active_modulus": 1,
+      "residual_modulus": 36
+    },
+    {
+      "p": 73,
+      "h": 36,
+      "active_modulus": 4,
+      "residual_modulus": 9
+    },
+    {
+      "p": 41,
+      "h": 40,
+      "active_modulus": 2,
+      "residual_modulus": 20
+    },
+    {
+      "p": 43,
+      "h": 42,
+      "active_modulus": 3,
+      "residual_modulus": 14
+    },
+    {
+      "p": 97,
+      "h": 48,
+      "active_modulus": 1,
+      "residual_modulus": 48
+    },
+    {
+      "p": 61,
+      "h": 60,
+      "active_modulus": 1,
+      "residual_modulus": 60
+    },
+    {
+      "p": 601,
+      "h": 75,
+      "active_modulus": 3,
+      "residual_modulus": 25
+    },
+    {
+      "p": 109,
+      "h": 108,
+      "active_modulus": 3,
+      "residual_modulus": 36
+    },
+    {
+      "p": 113,
+      "h": 112,
+      "active_modulus": 4,
+      "residual_modulus": 28
+    },
+    {
+      "p": 241,
+      "h": 120,
+      "active_modulus": 5,
+      "residual_modulus": 24
+    },
+    {
+      "p": 127,
+      "h": 126,
+      "active_modulus": 18,
+      "residual_modulus": 7
+    },
+    {
+      "p": 577,
+      "h": 144,
+      "active_modulus": 1,
+      "residual_modulus": 144
+    },
+    {
+      "p": 337,
+      "h": 168,
+      "active_modulus": 8,
+      "residual_modulus": 21
+    },
+    {
+      "p": 181,
+      "h": 180,
+      "active_modulus": 1,
+      "residual_modulus": 180
+    },
+    {
+      "p": 211,
+      "h": 210,
+      "active_modulus": 1,
+      "residual_modulus": 210
+    },
+    {
+      "p": 433,
+      "h": 216,
+      "active_modulus": 3,
+      "residual_modulus": 72
+    },
+    {
+      "p": 271,
+      "h": 270,
+      "active_modulus": 2,
+      "residual_modulus": 135
+    },
+    {
+      "p": 281,
+      "h": 280,
+      "active_modulus": 4,
+      "residual_modulus": 70
+    },
+    {
+      "p": 673,
+      "h": 336,
+      "active_modulus": 7,
+      "residual_modulus": 48
+    },
+    {
+      "p": 379,
+      "h": 378,
+      "active_modulus": 1,
+      "residual_modulus": 378
+    },
+    {
+      "p": 421,
+      "h": 420,
+      "active_modulus": 1,
+      "residual_modulus": 420
+    },
+    {
+      "p": 1009,
+      "h": 504,
+      "active_modulus": 1,
+      "residual_modulus": 504
+    },
+    {
+      "p": 541,
+      "h": 540,
+      "active_modulus": 1,
+      "residual_modulus": 540
+    },
+    {
+      "p": 631,
+      "h": 630,
+      "active_modulus": 14,
+      "residual_modulus": 45
+    },
+    {
+      "p": 757,
+      "h": 756,
+      "active_modulus": 1,
+      "residual_modulus": 756
+    },
+    {
+      "p": 2017,
+      "h": 1008,
+      "active_modulus": 3,
+      "residual_modulus": 336
+    },
+    {
+      "p": 2161,
+      "h": 1080,
+      "active_modulus": 1,
+      "residual_modulus": 1080
+    },
+    {
+      "p": 15121,
+      "h": 1080,
+      "active_modulus": 4,
+      "residual_modulus": 270
+    },
+    {
+      "p": 2521,
+      "h": 1260,
+      "active_modulus": 1,
+      "residual_modulus": 1260
+    },
+    {
+      "p": 1621,
+      "h": 1620,
+      "active_modulus": 1,
+      "residual_modulus": 1620
+    },
+    {
+      "p": 3361,
+      "h": 1680,
+      "active_modulus": 10,
+      "residual_modulus": 168
+    },
+    {
+      "p": 13441,
+      "h": 1680,
+      "active_modulus": 1,
+      "residual_modulus": 1680
+    },
+    {
+      "p": 2269,
+      "h": 2268,
+      "active_modulus": 1,
+      "residual_modulus": 2268
+    },
+    {
+      "p": 2801,
+      "h": 2800,
+      "active_modulus": 2,
+      "residual_modulus": 1400
+    },
+    {
+      "p": 6481,
+      "h": 3240,
+      "active_modulus": 4,
+      "residual_modulus": 810
+    },
+    {
+      "p": 7561,
+      "h": 3780,
+      "active_modulus": 1,
+      "residual_modulus": 3780
+    },
+    {
+      "p": 331777,
+      "h": 5184,
+      "active_modulus": 1,
+      "residual_modulus": 5184
+    },
+    {
+      "p": 12601,
+      "h": 6300,
+      "active_modulus": 1,
+      "residual_modulus": 6300
+    },
+    {
+      "p": 30241,
+      "h": 7560,
+      "active_modulus": 14,
+      "residual_modulus": 540
+    },
+    {
+      "p": 8821,
+      "h": 8820,
+      "active_modulus": 1,
+      "residual_modulus": 8820
+    },
+    {
+      "p": 20161,
+      "h": 10080,
+      "active_modulus": 1,
+      "residual_modulus": 10080
+    },
+    {
+      "p": 1693441,
+      "h": 105840,
+      "active_modulus": 15,
+      "residual_modulus": 7056
+    }
+  ],
+  "surviving_raw_reciprocal_density": {
+    "numerator": 6748703,
+    "denominator": 6350400,
+    "decimal": 1.0627209309649785
+  },
+  "capacity_obstruction": {
+    "engine": "exact-reduced-multivalued-decision-diagram",
+    "capacity_period": 2520,
+    "capacity_scale": 6350400,
+    "fixed_scaled_weight": 4128403,
+    "required_flexible_scaled_weight": 2221997,
+    "row_count": 51,
+    "fixed_row_count": 27,
+    "flexible_row_count": 24,
+    "flexible_order": [
+      {
+        "p": 7,
+        "active_modulus": 2,
+        "residual_modulus": 3,
+        "scaled_weight": 2116800
+      },
+      {
+        "p": 31,
+        "active_modulus": 6,
+        "residual_modulus": 5,
+        "scaled_weight": 1270080
+      },
+      {
+        "p": 127,
+        "active_modulus": 18,
+        "residual_modulus": 7,
+        "scaled_weight": 907200
+      },
+      {
+        "p": 17,
+        "active_modulus": 2,
+        "residual_modulus": 8,
+        "scaled_weight": 793800
+      },
+      {
+        "p": 73,
+        "active_modulus": 4,
+        "residual_modulus": 9,
+        "scaled_weight": 705600
+      },
+      {
+        "p": 43,
+        "active_modulus": 3,
+        "residual_modulus": 14,
+        "scaled_weight": 453600
+      },
+      {
+        "p": 41,
+        "active_modulus": 2,
+        "residual_modulus": 20,
+        "scaled_weight": 317520
+      },
+      {
+        "p": 337,
+        "active_modulus": 8,
+        "residual_modulus": 21,
+        "scaled_weight": 302400
+      },
+      {
+        "p": 241,
+        "active_modulus": 5,
+        "residual_modulus": 24,
+        "scaled_weight": 264600
+      },
+      {
+        "p": 601,
+        "active_modulus": 3,
+        "residual_modulus": 25,
+        "scaled_weight": 254016
+      },
+      {
+        "p": 113,
+        "active_modulus": 4,
+        "residual_modulus": 28,
+        "scaled_weight": 226800
+      },
+      {
+        "p": 109,
+        "active_modulus": 3,
+        "residual_modulus": 36,
+        "scaled_weight": 176400
+      },
+      {
+        "p": 631,
+        "active_modulus": 14,
+        "residual_modulus": 45,
+        "scaled_weight": 141120
+      },
+      {
+        "p": 673,
+        "active_modulus": 7,
+        "residual_modulus": 48,
+        "scaled_weight": 132300
+      },
+      {
+        "p": 281,
+        "active_modulus": 4,
+        "residual_modulus": 70,
+        "scaled_weight": 90720
+      },
+      {
+        "p": 433,
+        "active_modulus": 3,
+        "residual_modulus": 72,
+        "scaled_weight": 88200
+      },
+      {
+        "p": 271,
+        "active_modulus": 2,
+        "residual_modulus": 135,
+        "scaled_weight": 47040
+      },
+      {
+        "p": 3361,
+        "active_modulus": 10,
+        "residual_modulus": 168,
+        "scaled_weight": 37800
+      },
+      {
+        "p": 15121,
+        "active_modulus": 4,
+        "residual_modulus": 270,
+        "scaled_weight": 23520
+      },
+      {
+        "p": 2017,
+        "active_modulus": 3,
+        "residual_modulus": 336,
+        "scaled_weight": 18900
+      },
+      {
+        "p": 30241,
+        "active_modulus": 14,
+        "residual_modulus": 540,
+        "scaled_weight": 11760
+      },
+      {
+        "p": 6481,
+        "active_modulus": 4,
+        "residual_modulus": 810,
+        "scaled_weight": 7840
+      },
+      {
+        "p": 2801,
+        "active_modulus": 2,
+        "residual_modulus": 1400,
+        "scaled_weight": 4536
+      },
+      {
+        "p": 1693441,
+        "active_modulus": 15,
+        "residual_modulus": 7056,
+        "scaled_weight": 900
+      }
+    ],
+    "core_columns": [
+      2016,
+      2020,
+      2032,
+      2071,
+      2103,
+      2132,
+      2142,
+      2156,
+      2168,
+      2174,
+      2208,
+      2209,
+      2210,
+      2212,
+      2219,
+      2228,
+      2236,
+      2256,
+      2261,
+      2274,
+      2275,
+      2277,
+      2282,
+      2287,
+      2291,
+      2294,
+      2296,
+      2302,
+      2305,
+      2309,
+      2328,
+      2336,
+      2343,
+      2349,
+      2361,
+      2364,
+      2365,
+      2366,
+      2379,
+      2383,
+      2391,
+      2398,
+      2401,
+      2403,
+      2406,
+      2413,
+      2416,
+      2427,
+      2429,
+      2434,
+      2441,
+      2446,
+      2458,
+      2459,
+      2462,
+      2466,
+      2471,
+      2483,
+      2489,
+      2490,
+      2505,
+      2506,
+      2508,
+      2511,
+      2512,
+      2513,
+      2517,
+      2519
+    ],
+    "processed_columns": 68,
+    "terminal_root": 0,
+    "mdd_node_count_including_terminals": 1152581,
+    "unique_nonterminal_node_count": 1152579,
+    "apply_cache_entries": 2738057,
+    "proved_no_capacity_placement": true
+  },
+  "proved_no_active_class_placement": true,
+  "proved_no_declared_layered_family_cover": true,
+  "proof_chain": [
+    "at each recorded prime q, fewer than q residual moduli contain q, so those rows are redundant in every column cover",
+    "after all proof-safe removals, any cover would still need one active class per surviving row with residual capacity at least one in every column",
+    "the exact reduced MDD exhausts every such active-class assignment and reaches terminal false on the column core"
+  ],
+  "scope": "all active-class placements of exactly the declared finite layered row family; this does not rule out other directions, periods, source rows beyond the bounded pool, or the original infinite problem"
+}

@@ -82,6 +82,29 @@ def inclusion_maximal_masks(masks: list[int]) -> list[int]:
     ]
 
 
+def tight_partition_exists_dp(
+    tight_masks: list[int],
+    positive_mask: int,
+    radius: int,
+) -> bool:
+    """Independently enumerate disjoint tight-mask unions."""
+
+    if radius < 1 or not positive_mask:
+        return False
+    reachable = {0}
+    for _used in range(radius):
+        next_reachable = set()
+        for union in reachable:
+            for mask in tight_masks:
+                if mask & union:
+                    continue
+                next_reachable.add(union | mask)
+        reachable = next_reachable
+        if not reachable:
+            return False
+    return positive_mask in reachable
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("certificate", type=Path)
@@ -145,6 +168,59 @@ def main() -> int:
     total_weight = sum(weights)
     maximum_mask_weight = max(mask_weights, default=0)
     radius = int(certificate["radius"])
+    positive_mask = sum(
+        1 << bit
+        for bit, weight in enumerate(weights)
+        if weight > 0
+    )
+    tight_masks = [
+        mask
+        for mask, weight in zip(masks, mask_weights)
+        if weight == maximum_mask_weight
+    ]
+    tight_positive_masks = sorted(
+        {mask & positive_mask for mask in tight_masks}
+    )
+    tight_equality_case = (
+        radius > 0
+        and maximum_mask_weight > 0
+        and radius * maximum_mask_weight == total_weight
+    )
+    tight_cover_exists = (
+        tight_partition_exists_dp(
+            tight_positive_masks,
+            positive_mask,
+            radius,
+        )
+        if tight_equality_case
+        else None
+    )
+    tight_equality_certified = (
+        tight_equality_case and tight_cover_exists is False
+    )
+    tight_fields_present = "tight_equality_certified" in certificate
+    if tight_fields_present:
+        encoded_tight_masks = [
+            sum(1 << int(bit) for bit in bits)
+            for bits in certificate["tight_positive_masks"]
+        ]
+        tight_metadata_matches = (
+            positive_mask.bit_count()
+            == int(certificate["positive_weight_point_count"])
+            and len(tight_masks)
+            == int(certificate["tight_mask_count"])
+            and len(tight_positive_masks)
+            == int(certificate["distinct_tight_positive_mask_count"])
+            and tight_positive_masks == encoded_tight_masks
+            and tight_equality_case
+            == bool(certificate["tight_equality_case"])
+            and tight_cover_exists
+            == certificate["tight_disjoint_cover_exists"]
+            and tight_equality_certified
+            == bool(certificate["tight_equality_certified"])
+        )
+    else:
+        tight_metadata_matches = True
     checks = {
         "gain_mask_count": len(masks)
         == int(certificate["gain_mask_count"]),
@@ -170,9 +246,14 @@ def main() -> int:
             radius == 2 and maximum_pair_union < len(points)
         )
         == bool(certificate["pairwise_union_certified"]),
+        "tight_equality_metadata": tight_metadata_matches,
     }
     verified = all(checks.values()) and (
         radius * maximum_mask_weight < total_weight
+        or (
+            tight_fields_present
+            and tight_equality_certified
+        )
         or (radius == 2 and maximum_pair_union < len(points))
     )
     result = {
@@ -183,6 +264,13 @@ def main() -> int:
         "gain_mask_count": len(masks),
         "inclusion_maximal_mask_count": len(maximal),
         "maximum_pair_union_cardinality": maximum_pair_union,
+        "positive_weight_point_count": positive_mask.bit_count(),
+        "tight_mask_count": len(tight_masks),
+        "distinct_tight_positive_mask_count": len(
+            tight_positive_masks
+        ),
+        "tight_disjoint_cover_exists": tight_cover_exists,
+        "tight_equality_certified": tight_equality_certified,
         "scope": (
             "independent scalar reconstruction of every legal one-row "
             "gain mask on the embedded finite point set"
@@ -191,7 +279,8 @@ def main() -> int:
     args.output.write_text(json.dumps(result, indent=2) + "\n")
     print(
         f"verified={verified} points={len(points)} masks={len(masks)} "
-        f"maximal={len(maximal)} max_pair_union={maximum_pair_union}",
+        f"maximal={len(maximal)} max_pair_union={maximum_pair_union} "
+        f"tight_equality={tight_equality_certified}",
         flush=True,
     )
     return 0 if verified else 1

@@ -1,7 +1,7 @@
 # Public snapshot manifest
 
 This repository is a curated snapshot of the active workspace, updated on
-2026-07-27.
+2026-07-28.
 
 ## Included
 
@@ -44,9 +44,29 @@ This repository is a curated snapshot of the active workspace, updated on
   represented by an exhaustive 19-leaf phase tree over `p=97,109,193`,
   its compact embedded leaf cores, and an independent scalar replay
   returning `repair_exists=false`;
+- the candidate 1,392-point class-27 radius-five Hamming-ball obstruction,
+  represented by an exhaustive 34-node, 130-leaf phase tree over 15
+  partition primes and its 16,603 embedded leaf-point appearances; the
+  independent full replay is still pending, so this remains conspicuously
+  unverified work in progress;
 - the partitioned-radius composer and verifier, their regression test, and
   the random-audit witness-export path used for fast constructive
   falsification at radius five;
+- exact tight-dual-equality analysis and its separately implemented replay;
+- the 99-row, period-15,120 base-24 layered candidate obtained by a
+  determinant-one coordinate shear, its max-min allocator, and an independent
+  replay of exact source selection, all column capacities, target
+  restrictions, and unavoidable coprime-pair overlaps;
+- the independently replayed column-454 prime-deficit obstruction proving
+  that the 99-row base-24 placement cannot cover even when its active
+  one-dimensional residual phases are relaxed to be independent;
+- the stronger independently replayed family obstruction: 28 proof-safe
+  prime-deficit pruning rounds followed by a 1,152,581-node exact MDD on a
+  68-column core, ruling out every active-class placement of the same 99
+  rows;
+- the wider `(1,-3)` shear's independently replayed 81-row,
+  period-110,880 necessary-condition placement, plus its exact 30-branch
+  modulo-30 weighted projection obstruction in weakest column 24;
 - the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
   on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;
@@ -82,6 +102,10 @@ This repository is a curated snapshot of the active workspace, updated on
 - transient standard-output and standard-error logs;
 - PID files, bytecode, caches, and temporary files;
 - local-search checkpoints and intermediate solver phase assignments;
+- the 500-point sheared two-dimensional CEGIS checkpoint and the 400-point
+  weakest-column relaxation checkpoint; both were stopped after sharply
+  superlinear point-master growth and were superseded by the exact
+  prime-deficit obstruction;
 - the max-32 and max-128 direct-cover CEGIS lesson sets and current phase
   assignments, including the 1,968,920-point continuation checkpoint; their
   parameters and measured repair curves are recorded in `RESEARCH_LOG.md`;

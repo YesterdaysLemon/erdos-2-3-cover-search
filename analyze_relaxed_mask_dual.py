@@ -185,6 +185,85 @@ def summarize_exact_certificate(
     ]
     total = sum(weights)
     maximum = max(mask_weights, default=0)
+    positive_mask = sum(
+        1 << bit
+        for bit, weight in enumerate(weights)
+        if weight > 0
+    )
+    tight_masks = [
+        mask for mask, weight in zip(masks, mask_weights) if weight == maximum
+    ]
+    tight_positive_masks = sorted(
+        {mask & positive_mask for mask in tight_masks}
+    )
+
+    def tight_partition_exists(
+        search_limit: int = 2_000_000,
+    ) -> tuple[bool | None, int]:
+        """Search exactly for the only cover possible at dual equality.
+
+        If ``radius * maximum == total``, a cover by at most ``radius`` masks
+        must use exactly ``radius`` maximum-weight masks.  Those masks must be
+        pairwise disjoint on every positive-weight point.  Otherwise overlap
+        would make their union weight strictly smaller than ``total``.
+
+        ``None`` means the deliberately bounded discovery search hit its
+        state limit; only a completed negative search is certifying.
+        """
+
+        if (
+            radius < 1
+            or maximum < 1
+            or radius * maximum != total
+            or not positive_mask
+        ):
+            return None, 0
+        containing: dict[int, list[int]] = {
+            bit: [
+                mask
+                for mask in tight_positive_masks
+                if mask & (1 << bit)
+            ]
+            for bit in range(point_count)
+            if positive_mask & (1 << bit)
+        }
+        visited: set[tuple[int, int]] = set()
+        nodes = 0
+
+        def search(union: int, used: int) -> bool | None:
+            nonlocal nodes
+            state = (union, used)
+            if state in visited:
+                return False
+            visited.add(state)
+            nodes += 1
+            if nodes > search_limit:
+                return None
+            if union == positive_mask:
+                return used == radius
+            if used >= radius:
+                return False
+            uncovered = positive_mask & ~union
+            bit = (uncovered & -uncovered).bit_length() - 1
+            for mask in containing[bit]:
+                if mask & union:
+                    continue
+                result = search(union | mask, used + 1)
+                if result is not False:
+                    return result
+            return False
+
+        return search(0, 0), nodes
+
+    tight_cover_exists, tight_search_nodes = tight_partition_exists()
+    tight_equality_case = (
+        radius > 0
+        and maximum > 0
+        and radius * maximum == total
+    )
+    tight_equality_certified = (
+        tight_equality_case and tight_cover_exists is False
+    )
     maximal_masks = [
         mask
         for mask in masks
@@ -206,6 +285,26 @@ def summarize_exact_certificate(
         "radius_times_maximum": radius * maximum,
         "strict_weight_gap": total - radius * maximum,
         "certified": radius * maximum < total,
+        "positive_weight_point_count": positive_mask.bit_count(),
+        "tight_mask_count": len(tight_masks),
+        "distinct_tight_positive_mask_count": len(
+            tight_positive_masks
+        ),
+        "tight_positive_masks": [
+            [
+                bit
+                for bit in range(point_count)
+                if mask & (1 << bit)
+            ]
+            for mask in tight_positive_masks
+        ],
+        "tight_equality_case": tight_equality_case,
+        "tight_disjoint_cover_exists": tight_cover_exists,
+        "tight_disjoint_search_complete": (
+            tight_cover_exists is not None
+        ),
+        "tight_disjoint_search_nodes": tight_search_nodes,
+        "tight_equality_certified": tight_equality_certified,
         "pairwise_union_certified": (
             radius == 2 and maximum_pair_union < point_count
         ),
@@ -318,6 +417,15 @@ def main() -> int:
         "fixed_primes": sorted(fixed_primes),
         "radius": args.radius,
         "missed_points": [[k, ell] for k, ell in missed_points],
+        "positive_weight_points": [
+            [k, ell]
+            for (k, ell), weight in zip(
+                missed_points,
+                integer_weights,
+                strict=True,
+            )
+            if weight > 0
+        ],
         **summary,
     }
     args.output.write_text(json.dumps(result, indent=2) + "\n")
@@ -327,12 +435,15 @@ def main() -> int:
         f"max={summary['maximum_single_mask_weight']} "
         f"total={summary['total_point_weight']} "
         f"weighted={summary['certified']} "
+        f"tight_equality={summary['tight_equality_certified']} "
         f"pairwise={summary['pairwise_union_certified']} "
         f"output={args.output}",
         flush=True,
     )
     return 0 if (
-        summary["certified"] or summary["pairwise_union_certified"]
+        summary["certified"]
+        or summary["tight_equality_certified"]
+        or summary["pairwise_union_certified"]
     ) else 1
 
 

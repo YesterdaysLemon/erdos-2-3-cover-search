@@ -4474,3 +4474,298 @@ points for direct CEGIS ingestion.  On this phase, 200,000 draws contained
 approximately `9.90455e-5`.  A complete-domain SAT checker separately
 returned ten exact holes; scalar replay against all 12,579 rows confirmed
 coverage zero for every one.  Radius five remains feasible and active.
+
+## Radius-five candidate certificate and layered pivot (2026-07-28)
+
+The five-change response at the end of the preceding checkpoint was only a
+finite construction candidate.  Its random and complete-domain holes were
+added to an adversarial corpus, which ultimately reached 1,392 distinct
+points.  Repeated monolithic repair became less useful, so the finite
+neighborhood was converted into an exhaustive phase-decision tree.
+
+The root still fixes the five low anchors `p=17,19,37,41,73` and permits at
+most five changes from the declared base phase.  The complete tree has 34
+partition nodes, 130 terminal leaves, and 15 distinct partition primes:
+
+```
+97, 109, 127, 193, 337, 577, 757, 919, 937, 1171, 2521,
+6553, 8209, 10141, 25411
+```
+
+Every legal target at every reachable node occurs exactly once.  The leaf
+budgets split into 80 radius-four, 49 radius-three, and one radius-five
+obstruction.  Eleven leaves retain the full 1,392-point corpus; minimized
+relaxed cores reduce most other leaves to 7--13 points.  The combined
+certificate therefore embeds 16,603 point appearances.  Across all leaves,
+28 relaxed mask skeletons reach the owner/replay layer; none becomes a
+finite repair.
+
+The deepest base branch ends at `p=8209:19`.  On its 31-point core, an exact
+integer dual has total weight 410 and maximum one-mask weight 82.  Since
+`5*82=410`, strict dual inequality is unavailable.  The new equality-case
+analysis enumerates disjoint tight-mask partitions and finds exactly one
+relaxed five-mask skeleton.  The standard sparse-radius engine then performs
+the certifying step: the skeleton has no distinct-row owner assignment, so
+the complete 31-point replay is `UNSAT` with one matching failure and no
+replay failure.  This correction matters: equality of the dual objective is
+not by itself an obstruction.
+
+`compose_partitioned_sparse_radius_obstruction.py` packages the 130 leaves.
+The separately oriented
+`verify_partitioned_sparse_radius_obstruction.py` authenticates the original
+12,579-row pool and base phase, reconstructs every legal tree branch, derives
+the fixed rows and remaining Hamming budget independently, and calls the
+scalar sparse-radius verifier on each embedded leaf.  The first independent
+replay remained responsive for 5.2 hours but grew to about 9.5 GB and was
+stopped when host free memory approached the declared 15% floor.  A
+checkpointed or lower-memory replay is still pending.  The following is
+therefore the candidate certificate's internal summary, not a promoted
+verification report:
+
+```
+repair_exists=false
+row_count=12579
+max_changes=5
+partition_count=34
+leaf_count=130
+total_leaf_point_count=16603
+total_full_skeleton_count=28
+```
+
+The stable proof objects are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius5_1392_partitioned_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius5_1392_points.json
+```
+
+Their certificate and point-set SHA-256 hashes are respectively
+`b578027be29cabec886031c0a297e4e5150c182f7c23cac712f264ad563d5feb`
+and
+`0f2aeaf0ff42b2a88cf443dad1f41fe1894ff99e9e89009ab993f1bc64eff8a5`.
+Until the independent replay finishes successfully, this is an unverified
+finite radius-five obstruction candidate.  If promoted, it would still not
+close radius six, the rest of quotient class 27, another quotient class,
+primes outside the bounded pool, or the original infinite problem.
+
+The constructive search was therefore moved into a different coordinate
+space rather than extending the Hamming radius.  For a unimodular basis
+
+```
+(k, l) = x * direction + y * transverse,
+```
+
+an affine row remains affine and a cover of all transformed integer pairs is
+a cover of the original integer lattice.  Scanning small primitive
+directions found several dense but allocation-infeasible candidates:
+
+```
+direction (3,1), B=720 and B=2520
+direction (1,2), B=4620
+direction (3,2), B=3960
+direction (1,-2), B=3780
+```
+
+The first strong survivor uses `direction=(3,1)`,
+`transverse=(-1,0)`, so `k=3x-y`, `l=x` and the layered base is 24.  At
+`B=15120`, 99 rows have coordinate order dividing the layer period.  Max-min
+allocation followed by exact rational replay gives raw density
+`1.1861303234043865` and weakest-column capacity
+
+```
+80718382598754045540628836954047932637363689954237434392185793
+----------------------------------------------------------------
+73300458360958919895828203435289998373244396085883021002524800
+```
+
+or `1.1011988792930392`.  The minimum occurs in 18 columns.  A complete
+screen finds no active pair of coprime residual moduli whose forced
+intersection exceeds the exact slack.
+
+`verify_axis_layered_pool.py` is independent of the MILP.  It authenticates
+`order_pool_1050000.json`, reconstructs every transformed signature, proves
+that exactly the same 99 rows qualify, checks each active-class target
+restriction, replays all 15,120 exact capacities, and repeats the full
+coprime-pair screen.  Its result is `verified=true`, with zero pair
+violations.  The stable files and hashes are:
+
+```
+order_pool_1050000_direction3_1_period15120_layered_pool.json
+  13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c
+order_pool_1050000_direction3_1_period15120_layered_pool_verification.json
+  beea045dddc7836f65e320671274a22917addda81c85f324eb19197476a8c344
+```
+
+Point-only exact CEGIS initially completed four two-dimensional rounds and
+persisted 500 genuine witnesses; the round-four master took 17.436 seconds,
+while round five exceeded roughly 270 additional CPU seconds and was
+stopped.  The independent relaxation of one weakest 78-row column similarly
+persisted 400 witnesses; its third master rose from 2.908 to 87.562 seconds.
+The checker still found random holes in about 0.004 seconds.  This scaling
+failure motivated a whole-column structural check.
+
+That check gives a short obstruction and supersedes both CEGIS checkpoints.
+For a family of integer residue classes and a prime `q`, suppose only `r<q`
+class moduli are divisible by `q`.  If the `q`-free classes missed some
+integer, hold all prime-to-`q` coordinates fixed and vary through `q`
+translates.  The `q`-free classes keep the same truth values, while each of
+the `r` remaining classes can hit at most one translate.  Some translate
+would be uncovered.  Therefore every `q`-divisible class is redundant in any
+putative cover.
+
+In weakest column 454, 78 residual classes are active and exactly six
+moduli are divisible by 11:
+
+```
+(p, residual modulus) =
+(23,11), (199,99), (2377,1188), (14851,14850),
+(332641,9240), (895357,298452).
+```
+
+After deleting them, the remaining 72 reciprocal densities sum exactly to
+
+```
+1331626919328932373170013200623287663407217762378152211484151
+----------------------------------------------------------------
+1332735606562889452651421880641636334058989019743327654591360
+```
+
+or `0.9991681116430765 < 1`.  The union bound now closes the argument: even
+independent residual phases cannot cover that column, hence the globally
+coupled 99-row placement cannot cover the sheared lattice.  Scanning the
+complete layer period finds the same `q=11` obstruction in 360 of 15,120
+columns; one is sufficient.
+
+`certify_axis_layered_column_noncover.py` emits the exact column-454 proof
+object.  `verify_axis_layered_column_noncover.py` independently authenticates
+the layered source, reconstructs its active residual moduli, checks that 11
+is prime and `6<11`, and replays both rational densities.  It returns
+`verified=true` and `proved_no_declared_layered_cover=true`.  The stable
+files and hashes are:
+
+```
+order_pool_1050000_direction3_1_period15120_layered_noncover_certificate.json
+  5d88f3db107a0411bf3433bdf41b9e3b2c8c739056d502ef27c787505b405e1c
+order_pool_1050000_direction3_1_period15120_layered_noncover_verification.json
+  2778bfc99cc7158d1ec48bbf2406c8d1223bcb8f95ba294f2783f86faebdc6e6
+```
+
+This prime-deficit test is now the first admission screen for other
+active-class allocations and shears.  Complete-column BDD/CNF remains a
+fallback only for candidates that survive it.  Reverse-designing an abstract
+sheared covering system and then matching its lines to arithmetic primes is
+a second, genuinely different constructive route.  There remains no integer
+`m` and no global impossibility proof.
+
+The column obstruction extends to the full active-class allocation family.
+Apply the same prime-deficit theorem globally and sequentially: at each
+stage, remove every row whose residual modulus contains the smallest prime
+`q` occurring in fewer than `q` current residual moduli.  If the original
+rows admitted an active-class placement covering every column, each removal
+would preserve the one-dimensional cover in every fixed column.  Twenty-eight
+such rounds remove 48 of the 99 rows.  The 51 survivors have raw reciprocal
+density exactly
+
+```
+6748703 / 6350400 = 1.0627209309649785.
+```
+
+Raw density remains above one, so the final step must retain the integrality
+of the active-class choices.  Twenty-seven surviving rows are active in
+every column.  The other 24 choose one residue class modulo their respective
+active moduli.  Scaling their residual reciprocal weights by 6,350,400
+turns all capacity inequalities into exact integer threshold constraints.
+A reduced multi-valued decision diagram intersects 68 column constraints
+modulo the resulting capacity period 2,520.  It represents every possible
+active-class choice, constructs 1,152,581 nodes including terminals, and
+reaches terminal zero.
+
+`verify_axis_layered_family_noncover.py` independently reconstructs the 99
+layer rows, replays all 28 prime-deficit rounds, checks the 51 survivors and
+their exact raw density, rebuilds the complete 68-column MDD, and again
+reaches terminal zero.  It returns
+`proved_no_active_class_placement=true` and
+`proved_no_declared_layered_family_cover=true`.  The stable files and hashes
+are:
+
+```
+order_pool_1050000_direction3_1_period15120_layered_family_noncover_certificate.json
+  b83eb87058d58f403b7d60b8d3896bed78146f47a4330e70c775737728b35df6
+order_pool_1050000_direction3_1_period15120_layered_family_noncover_verification.json
+  6f21d8bf8032a1f6dbc6929162b8540c08ce79c7f2267fa1a621192d35fb0ed6
+```
+
+This closes the entire 99-row, base-24, period-15,120 layered family, not
+merely the max-min placement.  It does not close another direction, another
+coordinate period, rows beyond the bounded source pool, or the original
+problem.
+
+## Wider shear and projected-cell obstruction (2026-07-28)
+
+Prime-deficit pruning was moved ahead of allocation and applied across 24
+small primitive directions and larger smooth layer periods.  The first exact
+capacity survivor uses
+
+```
+direction=(1,-3), transverse=(0,1), B=110880.
+```
+
+The determinant is one, so `k=x` and `l=-3x+y` biject the integer lattice.
+Of 140 rows whose transformed `x`-order divides `B`, 33 exact
+prime-deficit rounds remove 59 and leave 81.  Max-min allocation on capacity
+pattern period 9,240 gives exact minimum
+
+```
+140596447 / 128066400 = 1.0978402375642635
+```
+
+with multiplicity 2,640 over the full period.  The complete exact pair screen
+has zero violations.  `verify_axis_layered_pool.py` independently
+reconstructs the source selection and shear, replays every pruning round,
+target restriction, capacity, and pair test, and returns `verified=true`.
+
+Point CEGIS on one 56-row weakest column immediately showed the old scaling
+problem again: the first 250-point binary master took 60.432 seconds while
+the random checker found 100 holes in 0.003 seconds.  It was stopped after
+one round when a stronger finite projection was found.
+
+Project column 24 modulo 30.  Three residual rows cover complete projection
+cells: `p=7` modulo 6, `p=11` modulo 5, and `p=31` modulo 30.  Translation
+symmetry puts the first two at target zero.  For each of the 30 targets of
+`p=31`, a rational LP discovers nonnegative cell weights.  The certificate
+stores integer-scaled weights and no floating answer.  Direct exact replay
+bounds each of the 53 remaining rows by its largest weighted residue bucket.
+The four distinct tail/required ratios are:
+
+```
+15875353/19514880
+455075/557568
+15966829/19514880
+42580991/51226560
+```
+
+All are strictly below one.  The independent verifier reconstructs the
+column and all projection moduli from the source and checks every branch with
+`Fraction` arithmetic.  It returns `verified=true`,
+`branch_count=30`, and
+`proved_no_declared_layered_cover=true`.
+
+Stable artifacts and SHA-256 hashes are:
+
+```
+order_pool_1050000_direction1_neg3_period110880_pruned_layered_pool.json
+  88a3b076961bdb7f9ac281afc21adb43d6193778b8c12f717d280c4b929c27cb
+order_pool_1050000_direction1_neg3_period110880_pruned_layered_pool_verification.json
+  e60856156a60e911dcd85e85252582b2791e83531876455bc5909832ae197e4a
+order_pool_1050000_direction1_neg3_period110880_pruned_layered_projection_noncover_certificate.json
+  8d94523c81a9c98d0bca87182d108dbec2c9bf46667edc8135315a8b3dc0f6f9
+order_pool_1050000_direction1_neg3_period110880_pruned_layered_projection_noncover_verification.json
+  d4f24ef8d6d0b6b5f6c27436da29f948c138ec983264ea1540c16b00b7d55a53
+```
+
+This exact result rules out the chosen active-class placement, not all
+placements of the 81-row family.  The next constructive formulation couples
+the active layer class with a small projected residual class in the
+allocator.  Only placements surviving those projected-cell constraints
+should proceed to whole-column BDD/CNF, CRT transfer matrices, or exact
+phase synthesis.

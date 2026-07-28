@@ -41,6 +41,22 @@ class RelaxedMaskDualVerifierTests(unittest.TestCase):
             [0b010, 0b011, 0b100, 0b101],
         )
 
+    def test_tight_partition_dynamic_program(self):
+        self.assertTrue(
+            verifier.tight_partition_exists_dp(
+                [0b0011, 0b1100],
+                0b1111,
+                2,
+            )
+        )
+        self.assertFalse(
+            verifier.tight_partition_exists_dp(
+                [0b0011, 0b0101, 0b1001],
+                0b1111,
+                2,
+            )
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

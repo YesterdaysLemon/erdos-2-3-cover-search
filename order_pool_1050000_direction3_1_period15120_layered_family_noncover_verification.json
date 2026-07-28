@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "initial_row_count": 99,
+  "prime_deficit_pruning_rounds": 28,
+  "surviving_row_count": 51,
+  "capacity_period": 2520,
+  "capacity_scale": 6350400,
+  "core_column_count": 68,
+  "mdd_node_count_including_terminals": 1152581,
+  "terminal_root": 0,
+  "proved_no_active_class_placement": true,
+  "proved_no_declared_layered_family_cover": true,
+  "engine": "independent-prime-pruning-and-exact-mdd-replay",
+  "scope": "all active-class placements of exactly the declared finite layered row family; this does not rule out other directions, periods, source rows beyond the bounded pool, or the original infinite problem",
+  "certificate": "order_pool_1050000_direction3_1_period15120_layered_family_noncover_certificate.json",
+  "certificate_sha256": "b83eb87058d58f403b7d60b8d3896bed78146f47a4330e70c775737728b35df6",
+  "source": "order_pool_1050000_direction3_1_period15120_layered_pool.json",
+  "source_sha256": "13cc7468117b88256a9e4158200da56602e529cc708993478eadff8abf19302c"
+}

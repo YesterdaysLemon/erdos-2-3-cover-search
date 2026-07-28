@@ -25,6 +25,20 @@ class RelaxedMaskDualTests(unittest.TestCase):
         self.assertFalse(summary["certified"])
         self.assertEqual(summary["strict_weight_gap"], 0)
         self.assertFalse(summary["pairwise_union_certified"])
+        self.assertTrue(summary["tight_disjoint_cover_exists"])
+        self.assertFalse(summary["tight_equality_certified"])
+
+    def test_tight_equality_without_disjoint_partition_certifies(self):
+        summary = dual.summarize_exact_certificate(
+            [0b0011, 0b0101, 0b1001],
+            [1, 1, 1, 1],
+            2,
+            4,
+        )
+        self.assertEqual(summary["strict_weight_gap"], 0)
+        self.assertTrue(summary["tight_equality_case"])
+        self.assertFalse(summary["tight_disjoint_cover_exists"])
+        self.assertTrue(summary["tight_equality_certified"])
 
     def test_pairwise_maximal_masks_compress_subsets(self):
         summary = dual.summarize_exact_certificate(
