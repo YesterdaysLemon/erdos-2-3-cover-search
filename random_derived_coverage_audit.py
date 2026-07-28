@@ -25,9 +25,14 @@ def main() -> int:
     parser.add_argument("--batch", type=int, default=100_000)
     parser.add_argument("--seed", type=integer, default=0x203)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--uncovered-output", type=Path)
+    parser.add_argument("--uncovered-limit", type=int, default=100)
     args = parser.parse_args()
-    if args.draws < 1 or args.batch < 1:
-        raise SystemExit("--draws and --batch must be positive")
+    if args.draws < 1 or args.batch < 1 or args.uncovered_limit < 0:
+        raise SystemExit(
+            "--draws and --batch must be positive; "
+            "--uncovered-limit must be nonnegative"
+        )
 
     dependency_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dependency_path))
@@ -59,6 +64,7 @@ def main() -> int:
     histogram = Counter()
     generated = 0
     eligible_total = 0
+    uncovered_points = []
     started = time.monotonic()
     while generated < args.draws:
         count = min(args.batch, args.draws - generated)
@@ -91,6 +97,12 @@ def main() -> int:
             coverage += (
                 values == phases[int(row["p"])] % h
             )
+        remaining = args.uncovered_limit - len(uncovered_points)
+        if remaining > 0:
+            for index in np.flatnonzero(coverage == 0)[:remaining]:
+                uncovered_points.append(
+                    [int(batch_k[index]), int(batch_l[index])]
+                )
         unique, counts = np.unique(coverage, return_counts=True)
         for value, frequency in zip(unique, counts):
             histogram[int(value)] += int(frequency)
@@ -108,6 +120,8 @@ def main() -> int:
             str(value): histogram[value] for value in sorted(histogram)
         },
         "uncovered": uncovered,
+        "captured_uncovered": len(uncovered_points),
+        "uncovered_points": uncovered_points,
         "uncovered_rate": (
             uncovered / eligible_total if eligible_total else None
         ),
@@ -121,6 +135,21 @@ def main() -> int:
     }
     if args.output:
         args.output.write_text(json.dumps(result, indent=2) + "\n")
+    if args.uncovered_output:
+        args.uncovered_output.write_text(
+            json.dumps(
+                {
+                    "points": uncovered_points,
+                    "source": str(args.output) if args.output else None,
+                    "scope": (
+                        "reproducible random audit witnesses with exact "
+                        "scalar affine replay in the audit loop"
+                    ),
+                },
+                indent=2,
+            )
+            + "\n"
+        )
     print(
         f"rows={len(rows)} draws={args.draws} eligible={eligible_total} "
         f"uncovered={uncovered} "

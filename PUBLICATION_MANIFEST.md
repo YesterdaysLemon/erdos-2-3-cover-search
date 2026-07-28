@@ -40,6 +40,13 @@ This repository is a curated snapshot of the active workspace, updated on
   covering all 210,047 legal moves and 14 terminal gain-mask skeletons,
   together with an independent scalar reconstruction returning
   `repair_exists=false`;
+- the complete 1,373-point class-27 radius-four Hamming-ball obstruction,
+  represented by an exhaustive 19-leaf phase tree over `p=97,109,193`,
+  its compact embedded leaf cores, and an independent scalar replay
+  returning `repair_exists=false`;
+- the partitioned-radius composer and verifier, their regression test, and
+  the random-audit witness-export path used for fast constructive
+  falsification at radius five;
 - the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
   on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;

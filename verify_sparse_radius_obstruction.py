@@ -25,26 +25,54 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def verify_certificate(certificate_path: Path) -> dict:
-    certificate = json.loads(certificate_path.read_text())
-    pool_path = Path(certificate["pool"])
-    phase_path = Path(certificate["base_phase"])
-    if sha256_file(pool_path) != certificate["pool_sha256"]:
-        raise RuntimeError("pool hash mismatch")
-    if sha256_file(phase_path) != certificate["base_phase_sha256"]:
-        raise RuntimeError("base-phase hash mismatch")
+def verify_certificate(
+    certificate_path: Path | None,
+    *,
+    certificate_data: dict | None = None,
+    pool_data: dict | None = None,
+    phase_data: dict[int, int] | None = None,
+) -> dict:
+    """Verify a standalone certificate or an embedded partition-tree leaf.
 
-    pool = json.loads(pool_path.read_text())
+    A partition-tree verifier may supply already authenticated pool data and
+    a phase map derived from the tree path.  Standalone callers retain the
+    original hash-checked file behavior.
+    """
+    if certificate_data is None:
+        if certificate_path is None:
+            raise ValueError("certificate_path is required")
+        certificate = json.loads(certificate_path.read_text())
+    else:
+        certificate = certificate_data
+
+    if pool_data is None:
+        pool_path = Path(certificate["pool"])
+        if sha256_file(pool_path) != certificate["pool_sha256"]:
+            raise RuntimeError("pool hash mismatch")
+        pool = json.loads(pool_path.read_text())
+    else:
+        pool = pool_data
+
+    if phase_data is None:
+        phase_path = Path(certificate["base_phase"])
+        if sha256_file(phase_path) != certificate["base_phase_sha256"]:
+            raise RuntimeError("base-phase hash mismatch")
+        phases = {
+            int(prime): int(target)
+            for prime, target in json.loads(phase_path.read_text()).items()
+        }
+    else:
+        phases = {
+            int(prime): int(target)
+            for prime, target in phase_data.items()
+        }
+
     rows = pool["choices"]
     points = [tuple(map(int, point)) for point in certificate["points"]]
     if len(points) != len(set(points)):
         raise RuntimeError("certificate repeats a point")
-    if any(k < 0 or l < 0 for k, l in points):
+    if any(k < 0 or ell < 0 for k, ell in points):
         raise RuntimeError("certificate contains a negative exponent")
-    phases = {
-        int(prime): int(target)
-        for prime, target in json.loads(phase_path.read_text()).items()
-    }
     fixed_primes = set(map(int, certificate["fixed_primes"]))
     max_changes = int(certificate["max_changes"])
     if max_changes < 0:
@@ -68,8 +96,8 @@ def verify_certificate(certificate_path: Path) -> dict:
         if current % modulus != residue:
             raise RuntimeError(f"base phase is illegal for p={prime}")
         targets = [
-            (a * (k % h) + b * (l % h)) % h
-            for k, l in points
+            (a * (k % h) + b * (ell % h)) % h
+            for k, ell in points
         ]
         assignment.append(current)
         target_columns.append(targets)
@@ -310,7 +338,11 @@ def verify_certificate(certificate_path: Path) -> dict:
         and count_match
     )
     return {
-        "certificate": str(certificate_path),
+        "certificate": (
+            str(certificate_path)
+            if certificate_path is not None
+            else "<embedded partition leaf>"
+        ),
         "verified": verified,
         "repair_exists": repair is not None,
         "row_count": len(rows),

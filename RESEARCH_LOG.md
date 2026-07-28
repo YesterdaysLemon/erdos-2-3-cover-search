@@ -4396,3 +4396,81 @@ Certificate SHA-256:
 This closes only the declared finite Hamming ball.  Radius four remains
 feasible on the same corpus, so this is not a cover, an integer `m`, or a
 global nonexistence result.
+
+### Partitioned radius-four closure and radius-five continuation
+
+Radius-four finite responses survived the 1,073-point radius-three
+certificate corpus.  Two exact 100-hole batches and a reproducible random
+audit extension produced a 1,373-point adversarial corpus.  On it, the
+monolithic mask engine reached a five-minute search limit after eight
+terminal skeletons, while a separate phase-variable Z3 model spent about
+349 seconds encoding 873,722 move variables and then returned `TIME_LIMIT`
+after 600 seconds of solving.  These timeouts are not negative results.
+
+The successful route changed spaces from a monolithic move SAT instance to
+an exhaustive phase decision tree.  Fixing `p=97` at target 2 leaves a
+three-change obstruction with two relaxed skeletons, both impossible by row
+ownership.  Targets 0 and 3 similarly leave one impossible skeleton each.
+The base target 1 is partitioned by all nine targets of `p=109`; every
+alternate target is relaxed UNSAT, while the base target 2 is partitioned by
+all eight targets of `p=193`.  Every alternate `p=193` target is relaxed
+UNSAT, and fixing all three rows at base targets leaves an 11-point relaxed
+radius-four obstruction.
+
+Assumption-core deletion reduced the eight alternate `p=109` leaves to
+8--10 points, the seven alternate `p=193` leaves to 7--9 points, and the
+final base leaf to 11 points.  The three non-base `p=97` leaves use 1,073 or
+1,079 points and contain four terminal relaxed skeletons total.  The combined
+tree therefore has 19 exhaustive leaves and embeds 3,377 point appearances.
+
+`compose_partitioned_sparse_radius_obstruction.py` checks every source leaf
+against its tree-derived phase map, fixed-row set, and remaining Hamming
+budget.  The independent
+`verify_partitioned_sparse_radius_obstruction.py` does not trust the
+discovery split: it reconstructs each legal phase set from the pool, checks
+tree exhaustiveness, derives every leaf in memory, and calls the scalar
+sparse-radius replay.  The final report is:
+
+```
+verified=true
+repair_exists=false
+row_count=12579
+max_changes=4
+partition_count=3
+leaf_count=19
+total_leaf_point_count=3377
+total_full_skeleton_count=4
+elapsed_seconds=437.195724
+```
+
+The permanent artifacts are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_partitioned_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_partitioned_obstruction_verification.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_points.json
+```
+
+Certificate SHA-256:
+`010807fa45cf948fe1f79b49713543347266986ca42589fc5d8201afe8126ed7`.
+This closes only radius four around the declared base phase with the five
+low anchors fixed.  It does not close the quotient class, any other class,
+the full fibre universe, or the original problem.
+
+At radius five, fixing `p=97:1 -> 2` reduced the residual search to four
+changes and found an exact finite repair in 10.603 seconds:
+
+```
+p=97:1->2
+p=109:2->6
+p=193:1->5
+p=433:12->0
+p=577:7->1
+```
+
+The random audit tool now optionally writes a bounded list of its uncovered
+points for direct CEGIS ingestion.  On this phase, 200,000 draws contained
+191,831 algebraically eligible points and 19 misses, an uncovered rate of
+approximately `9.90455e-5`.  A complete-domain SAT checker separately
+returned ten exact holes; scalar replay against all 12,579 rows confirmed
+coverage zero for every one.  Radius five remains feasible and active.

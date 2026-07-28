@@ -1,0 +1,15 @@
+{
+  "certificate": "power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_partitioned_obstruction_certificate.json",
+  "verified": true,
+  "repair_exists": false,
+  "row_count": 12579,
+  "max_changes": 4,
+  "partition_count": 3,
+  "leaf_count": 19,
+  "declared_leaf_count": 19,
+  "over_budget_branch_count": 0,
+  "leaf_count_match": true,
+  "total_leaf_point_count": 3377,
+  "total_full_skeleton_count": 4,
+  "elapsed_seconds": 437.1957235999871
+}

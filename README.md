@@ -21,10 +21,13 @@ remainder theorem.
 
 ## Current certified checkpoint
 
-As of 2026-07-26:
+As of 2026-07-27:
 
 - no candidate \(m\) has been found;
 - no global impossibility theorem has been proved;
+- one class-27 neighborhood has an independently replayed radius-four
+  Hamming-ball obstruction: an exhaustive 19-leaf phase tree over 12,579
+  rows returns `repair_exists=false`; radius five remains feasible;
 - 4,620 of 4,637 ranked finite divisor-period families have independently
   replayed no-cover certificates;
 - 17 ranked finite families remain after intersecting the aggregate
@@ -637,11 +640,68 @@ power1616615_lowbranch_0_1_0_0_0_targeted_radius3_1073_sparse_obstruction_verifi
 Certificate SHA-256:
 `38fa3e2774e84f0c621c612100c7fdaa4a6c713b144dc7f5c3204e31837de26d`.
 This is an exact finite Hamming-ball obstruction with the five low anchors
-fixed.  It does not rule out radius four, other base phases, the other 161
-quotient branches, fibres outside the bounded pool, or the original infinite
-problem.  Radius four remains feasible on these 1,073 points; the current
-finite response retargets `p=97,263,3637,49927`, and a full-domain checker
-has already returned 100 exact holes for that response.
+fixed.
+
+Radius four has since been closed on a 1,373-point extension.  A monolithic
+five-minute mask search examined only eight terminal skeletons and a separate
+600-second Z3 encoding returned `TIME_LIMIT`, so neither contributed a
+negative result.  The successful proof instead partitions the Hamming ball
+by the complete legal phase sets of three high-leverage rows:
+
+```
+p=97,  h=4
+  base target 1 -> partition p=109, h=9
+    base target 2 -> partition p=193, h=8
+```
+
+The other three `p=97` targets leave four terminal relaxed skeletons in
+total, all rejected by distinct-row matching.  Eight alternate `p=109`
+targets and seven alternate `p=193` targets have 8--10 and 7--9-point
+relaxed UNSAT cores respectively.  With all three rows at their base targets,
+an 11-point relaxed core closes the final branch.  Thus the complete decision
+tree has 19 leaves.  The combined certificate embeds only 3,377 point
+appearances across those leaves rather than repeating the full corpus.
+
+The independently implemented scalar verifier authenticates the pool and
+base phase, checks that every legal target occurs exactly once in the tree,
+derives each leaf phase and remaining Hamming budget from its path, and then
+reconstructs all sparse-radius searches.  It returns:
+
+```
+verified=true
+repair_exists=false
+partition_count=3
+leaf_count=19
+total_full_skeleton_count=4
+elapsed_seconds=437.196
+```
+
+The public proof objects and the reproducible discovery corpus are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_partitioned_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_partitioned_obstruction_verification.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius4_1373_points.json
+```
+
+Certificate SHA-256:
+`010807fa45cf948fe1f79b49713543347266986ca42589fc5d8201afe8126ed7`.
+This is still only a finite Hamming-ball obstruction.  It does not rule out
+radius five, distant assignments, other quotient branches, fibres outside
+the bounded pool, or the original infinite problem.
+
+Radius five remains feasible on the same corpus.  Quotienting first by
+`p=97:1 -> 2` found a five-change response in 10.6 seconds, with the changes
+
+```
+p=97:1->2, p=109:2->6, p=193:1->5, p=433:12->0, p=577:7->1.
+```
+
+A 200,000-draw reproducible audit found 19 uncovered points among 191,831
+algebraically eligible draws.  More importantly, the complete-domain exact
+checker returned ten genuine holes, and a separate scalar affine replay
+gave coverage zero on all ten.  Those are counterexamples to this radius-five
+response, not a radius-five obstruction; the next quotient repair is active.
 
 An experimental quantified-SMT encoding moved phase targets outside a
 universal pair of integer exponent coordinates.  It correctly handles tiny
@@ -651,8 +711,9 @@ recorded in `power1616615_hle12_quantified_z3_result.json`; the encoding is
 not being scaled to the 12,579-row branch.
 
 The sparse-radius proof dependencies were also promoted from ignored
-`_tmp` files to permanent tracked pool and base-phase artifacts.  All three
-sparse-radius verifiers now read only files present in a fresh clone.
+`_tmp` files to permanent tracked pool and base-phase artifacts.  The
+standalone and partitioned sparse-radius verifiers read only files present
+in a fresh clone.
 
 ## Exact small affine-subpool obstruction
 
