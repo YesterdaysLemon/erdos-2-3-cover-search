@@ -7,6 +7,8 @@ import argparse
 import json
 from pathlib import Path
 
+from certify_anchor_phase_quotient import load_cells
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -22,13 +24,21 @@ def main() -> int:
     seen: set[tuple[int, int]] = set()
     source_counts = []
     for spec in args.inputs:
-        path_text, separator, key = spec.partition(":")
-        path = Path(path_text)
-        payload = json.loads(path.read_text())
+        path = Path(spec)
+        separator = ""
+        key = ""
+        if not path.exists():
+            path_text, separator, key = spec.rpartition(":")
+            path = Path(path_text)
+            if not separator or not path.exists():
+                raise RuntimeError(f"point source does not exist: {spec}")
         if separator:
+            payload = json.loads(path.read_text())
             if not isinstance(payload, dict) or key not in payload:
                 raise RuntimeError(f"{path} has no top-level key {key!r}")
             payload = payload[key]
+        else:
+            payload = load_cells(path)
         count_before = len(merged)
         for raw_k, raw_l in payload:
             point = (int(raw_k), int(raw_l))
@@ -44,7 +54,7 @@ def main() -> int:
         )
 
     args.output.write_text(
-        json.dumps([[k, l] for k, l in merged]) + "\n"
+        json.dumps([[k, ell] for k, ell in merged]) + "\n"
     )
     print(
         f"sources={len(args.inputs)} points={len(merged)} "

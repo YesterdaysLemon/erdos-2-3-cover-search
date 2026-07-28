@@ -535,6 +535,40 @@ two changed rows.  This rules out a radius-two neighborhood of one augmented
 base phase.  Radius three, distant assignments, the rest of quotient class
 27, the other 161 classes, and the original problem remain open.
 
+The relaxed obstruction has also been compressed into a small hypergraph.
+All 33,349 legal one-row moves induce 110 distinct gain masks on the nine
+points, but only 14 masks are inclusion-maximal.  Exhaustively unioning the
+105 unordered pairs of maximal masks gives maximum cardinality eight, so
+every pair omits at least one of the nine witnesses.  This is an exact
+finite combinatorial proof of the relaxed radius-two obstruction, independent
+of row ownership and secondary losses.  A fractional point-weight LP lands
+on equality and is therefore not used as the proof.
+
+The hypergraph proof object and separately implemented scalar reconstruction
+are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_hypergraph_dual_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_hypergraph_dual_verification.json
+```
+
+The hypergraph certificate SHA-256 is
+`d281ad38fdb8777f00bdce4bed78ef9d1ac582905ba18ca49870c016f4254aa4`.
+The verifier reconstructs all 110 masks directly from scalar affine
+congruences, reduces them again to the same 14 maximal masks, and confirms
+maximum pair union eight.
+
+Radius three remains feasible on the tracked adversarial corpus.  The first
+three-change response covered all 741 points by retargeting
+`p=15121,223,569`.  A direct exact checker over the augmented component
+domain found a genuine full-domain hole.  After that cut, the response
+swapped `p=223` for `p=1777`; one exact point was then found outside both
+responses simultaneously.  On the resulting 743-point corpus, the current
+finite response retargets `p=15121,709,569` and has exact sampled minimum
+coverage one.  It has not passed a full-domain cover check and is not a
+candidate integer `m`.  This oscillation motivates common-phase cuts and a
+quotient-wide symbolic engine rather than unbounded single-hole sampling.
+
 The sparse-radius proof dependencies were also promoted from ignored
 `_tmp` files to permanent tracked pool and base-phase artifacts.  All three
 sparse-radius verifiers now read only files present in a fresh clone.
@@ -616,6 +650,9 @@ or fibres of higher index.
   diversity, and scalar replay.
 - `minimize_relaxed_radius_obstruction.py`: assumption-core extraction and
   complete replay for obstructions already UNSAT in the relaxed mask layer.
+- `analyze_relaxed_mask_dual.py` and `verify_relaxed_mask_dual.py`: exact
+  compression of a relaxed obstruction to inclusion-maximal gain masks and
+  independent scalar replay of the resulting hypergraph certificate.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.

@@ -1,0 +1,20 @@
+{
+  "certificate": "power1616615_lowbranch_0_1_0_0_0_targeted_radius2_hypergraph_dual_certificate.json",
+  "verified": true,
+  "checks": {
+    "gain_mask_count": true,
+    "maximal_masks": true,
+    "maximal_mask_count": true,
+    "maximum_pair_union": true,
+    "pair_union_histogram": true,
+    "total_weight": true,
+    "maximum_mask_weight": true,
+    "weighted_flag": true,
+    "pairwise_flag": true
+  },
+  "point_count": 9,
+  "gain_mask_count": 110,
+  "inclusion_maximal_mask_count": 14,
+  "maximum_pair_union_cardinality": 8,
+  "scope": "independent scalar reconstruction of every legal one-row gain mask on the embedded finite point set"
+}
