@@ -492,6 +492,22 @@ a two-change finite repair covering 281 accumulated points, now using
 rows have not passed out-of-sample validation and the phase is not accepted
 as a construction.
 
+`exact_common_phase_misses.py` strengthens the adversary in a different
+space.  It unions every distinct fibre selected by several saved phase maps
+and asks for one exact point outside that union.  Because recent repairs
+differ on only two rows, four historical phases enlarged the stable checker
+from 12,577 to only 12,585 distinct fibres.  Every returned point is scalar-
+replayed and is simultaneously missed by all supplied phases.
+
+This produced one exact augmented point common to two early radius-two
+repairs.  Later 100-point pair and triple batches eliminated several repair
+responses at once.  The master nevertheless remains feasible at radius two
+on 582 accumulated points, most recently by changing `p=853` and `p=12841`.
+The promoted rows sometimes intercept almost every common base-pool hole;
+for the latest pair they caught 98/100, leaving two exact augmented common
+misses.  Thus common-phase cuts improve Benders efficiency but have not
+produced a cover or a full radius-two obstruction.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus
@@ -564,6 +580,8 @@ or fibres of higher index.
   target also hits separately declared held-out points.
 - `verify_layered_exact_misses.py`: independent scalar replay of base-pool
   holes against a small targeted extension.
+- `exact_common_phase_misses.py`: exact counterexamples shared by several
+  saved phase assignments, with distinct-fibre union and scalar replay.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.

@@ -4262,3 +4262,41 @@ p=823: 113 -> 20
 This shows substantial finite repair flexibility, but it removes the
 strongest evidence that the promoted high-component rows generalize.  No
 phase in this validation campaign is a full-domain cover.
+
+### Common-phase Benders cuts
+
+Ordinary CEGIS invalidates one saved repair per exact checker call.
+`exact_common_phase_misses.py` instead deduplicates the union of every fibre
+selected by several phase maps and searches for a point outside the complete
+union.  A returned point is missed by every supplied phase.  Scalar replay
+checks every union fibre and every algebraic exclusion independently of the
+SAT model.
+
+Four historical two-change repairs enlarged the 12,577-row stable phase to
+only 12,585 distinct fibres.  The first 100 common base-pool holes were all
+intercepted by the two promoted rows, but a direct augmented-pool check found
+one exact common miss in about 213 seconds.  Adding it moved rather than
+closed the finite master.
+
+The next phase pairs were more productive:
+
+```
+i14 + i15: 100/100 common base holes remain augmented misses
+i15 + i16: 100/100 common base holes remain augmented misses
+i15 + i16 + i17: 100/100 remain augmented misses
+i17 + i18: 2/100 remain augmented misses
+```
+
+The first three batches simultaneously eliminate two or three saved repair
+responses per lesson family.  After 582 accumulated points the radius-two
+master is still feasible, now using:
+
+```
+p=853:   33 -> 54
+p=12841: 31 -> 0
+```
+
+The final 98/100 interception rate again exposes a complementary residue
+partition between the promoted rows and the sparse repairs.  Common-phase
+cuts are a substantial efficiency improvement, but the surviving pair
+family remains large and every checked phase still has an exact hole.
