@@ -4,7 +4,7 @@
   "scope": "the embedded finite row pool, base phase, fixed rows, supplied points, and declared maximum number of changed nonfixed rows",
   "pool": "power1616615_cell60_0_1_augmented_pure23_h1e15_final_component_core_corrected_max16384_stable.json",
   "pool_sha256": "90b33cde9445fd5331e725bce4b50f1bafd8017c9317d1ed1fb85b80d8fb236c",
-  "base_phase": "_tmp_sparse_quotient_sweep_z3\\branch_084_1_1_0_1_0_input_phase.json",
+  "base_phase": "power1616615_lowbranch_1_1_0_1_0_radius4_base_phase.json",
   "base_phase_sha256": "65e1ef52f0033d7392b1f059ce9e0e426ffe67d19445a06d736c297ce0e04dd6",
   "point_sources": [
     {
@@ -258,7 +258,7 @@
     "matching_failures": 317,
     "replay_failures": 1,
     "complete_negative": true,
-    "build_seconds": 0.1643523999955505,
-    "search_seconds": 3.4699942998122424
+    "build_seconds": 0.23016999987885356,
+    "search_seconds": 4.129725799895823
   }
 }

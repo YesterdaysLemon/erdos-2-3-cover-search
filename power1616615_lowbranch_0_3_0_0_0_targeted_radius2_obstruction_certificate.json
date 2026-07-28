@@ -2,9 +2,9 @@
   "problem": "finite affine phase repair obstruction within a Hamming ball",
   "complete": true,
   "scope": "the embedded finite row pool, base phase, fixed rows, supplied points, and declared maximum number of changed nonfixed rows",
-  "pool": "_tmp_sparse_quotient_branch054_retargeted_top1_pool_i10.json",
+  "pool": "power1616615_lowbranch_0_3_0_0_0_targeted_pool.json",
   "pool_sha256": "9e4b1449746192bcf23c8e199fe045d579b5fbb70a80f8ed8baa4e3fff60b71e",
-  "base_phase": "_tmp_sparse_quotient_branch054_retargeted_top1_phase_input_i10.json",
+  "base_phase": "power1616615_lowbranch_0_3_0_0_0_targeted_base_phase.json",
   "base_phase_sha256": "730c544e89f1fe8d59fae7a16873705e5616da2da8f8a5bc33da42e167b1488d",
   "point_sources": [
     {
@@ -694,7 +694,7 @@
     "matching_failures": 0,
     "replay_failures": 0,
     "complete_negative": true,
-    "build_seconds": 0.5926351000089198,
+    "build_seconds": 0.559305900009349,
     "search_seconds": 0.0
   }
 }

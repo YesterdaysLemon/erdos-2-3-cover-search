@@ -4093,7 +4093,7 @@ power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_verification.json
 ```
 
 The certificate SHA-256 is
-`0e0bd78b4996614fe57f13b91402887e36ab7015e9582cc22cd9a35f44911219`.
+`9531f57cef120ed007eb5816ebaaa3cdbd432d47adcab1eda4acc97fbecf9c45`.
 This is an exact finite Hamming-ball theorem, not full-pool UNSAT: it fixes
 the five low anchors to `(1,1,0,1,0)` and excludes only assignments within
 four nonanchor changes of the declared base phase.  Radius five and distant
@@ -4219,7 +4219,7 @@ power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_verification.json
 ```
 
 Certificate SHA-256:
-`7adaeca2359d63b5f2d08ac5d20ed7eb331776956a6a17a9eae0acc9ba5e7107`.
+`23f14c18a283c4b03471673d8503a712006a57e9171053f2d83b5d28ee4fa17d`.
 This is a finite radius-two obstruction around one augmented base phase, not
 full-pool UNSAT for quotient class 54 and not a result about the other 161
 classes or the original problem.
@@ -4300,3 +4300,55 @@ The final 98/100 interception rate again exposes a complementary residue
 partition between the promoted rows and the sparse repairs.  Common-phase
 cuts are a substantial efficiency improvement, but the surviving pair
 family remains large and every checked phase still has an exact hole.
+
+### Coordinate-common closure and a nine-point radius-two core
+
+The common-phase checker gained coordinate-fingerprint diversity.  On the
+shared `p=1423` repair cluster, ordinary common holes were entirely caught by
+the promoted rows, while mod-127-diverse batches retained 7/10, 9/20, and
+11/30 exact augmented common misses as the cluster grew.  A four-member
+`p=233` cluster then retained all 30 mod-127 common misses.
+
+After those 30 points were added, the 741-point finite master became UNSAT
+at radius two:
+
+```
+initial base misses 613
+gain masks          6510
+relaxed minimum     greater than 2
+mask models         0
+```
+
+Because the contradiction already occurs in the relaxed set-cover layer,
+`minimize_relaxed_radius_obstruction.py` reified each of the 613 base-miss
+clauses behind an assumption.  CaDiCaL returned a small UNSAT assumption
+core; greedy deletion and a final complete gain-mask replay reduced it to
+nine points.  The compact replay has:
+
+```
+initial base misses          9
+legal deficit-hitting moves  33349
+distinct gain masks          110
+relaxed two-mask cover       none
+```
+
+The independent scalar verifier enumerates no full mask skeletons and
+returns `verified=true`, `repair_exists=false`:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_obstruction_verification.json
+```
+
+Certificate SHA-256:
+`ce270923ce476d05dcacd6a2e1f8bd94c7e3ad68d8bc49cc082f22b094dc6cc8`.
+Only the five low anchors are fixed, so either promoted row is allowed to
+move within the two-change budget.  This is a finite Hamming-ball result, not
+full UNSAT for quotient class 27.
+
+During certification, an artifact audit found that the earlier sparse-radius
+certificates referred to ignored temporary pool or phase paths.  Permanent
+stable/targeted pools and base phases are now tracked, both older certificates
+were regenerated against those dependencies, and all three verifiers pass
+using only the public-shaped file set.  Their updated hashes are recorded
+above.

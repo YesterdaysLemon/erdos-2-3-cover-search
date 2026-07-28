@@ -80,6 +80,14 @@ def main() -> int:
     parser.add_argument("--max-component", type=int, default=256)
     parser.add_argument("--limit", type=int, default=1)
     parser.add_argument("--solver", default="cadical195")
+    parser.add_argument(
+        "--diversity-coordinate-moduli",
+        default="",
+        help=(
+            "comma-separated prime-power coordinate moduli whose complete "
+            "residue fingerprints are blocked between common misses"
+        ),
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
@@ -104,12 +112,18 @@ def main() -> int:
         int(value) for value in payload.get("algebraic_primes", ())
     )
     sophie_germain = bool(payload.get("sophie_germain", False))
+    diversity_coordinate_moduli = tuple(
+        int(value)
+        for value in args.diversity_coordinate_moduli.split(",")
+        if value
+    )
     misses, meta = exact_uncovered.find_uncovered(
         union_rows,
         max_component=args.max_component,
         limit=args.limit,
         algebraic_primes=algebraic_primes,
         solver_name=args.solver,
+        diversity_coordinate_moduli=diversity_coordinate_moduli,
         sophie_germain=sophie_germain,
     )
     replayed = replay_common_misses(
@@ -127,6 +141,9 @@ def main() -> int:
         "base_row_count": len(candidates),
         "union_row_count": len(union_rows),
         "additional_distinct_fibres": len(union_rows) - len(candidates),
+        "diversity_coordinate_moduli": list(
+            diversity_coordinate_moduli
+        ),
         "checker": meta,
         "misses": [[k, l] for k, l in misses],
         "scalar_replay": replayed,

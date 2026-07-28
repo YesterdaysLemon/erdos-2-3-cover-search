@@ -400,7 +400,7 @@ power1616615_lowbranch_1_1_0_1_0_radius4_obstruction_verification.json
 ```
 
 The certificate SHA-256 is
-`0e0bd78b4996614fe57f13b91402887e36ab7015e9582cc22cd9a35f44911219`.
+`9531f57cef120ed007eb5816ebaaa3cdbd432d47adcab1eda4acc97fbecf9c45`.
 This rules out only four-row repairs around the declared base phase with all
 five low anchors fixed.  Radius five, distant full-pool assignments, the
 other 161 quotient classes, and the original problem remain open.
@@ -471,7 +471,7 @@ power1616615_lowbranch_0_3_0_0_0_targeted_radius2_obstruction_verification.json
 ```
 
 The certificate SHA-256 is
-`7adaeca2359d63b5f2d08ac5d20ed7eb331776956a6a17a9eae0acc9ba5e7107`.
+`23f14c18a283c4b03471673d8503a712006a57e9171053f2d83b5d28ee4fa17d`.
 This is another finite Hamming-ball theorem, not a full quotient-class
 obstruction.  The class-27 two-change phase still has an exact full-domain
 hole, and neither branch yields an integer `m`.
@@ -507,6 +507,37 @@ The promoted rows sometimes intercept almost every common base-pool hole;
 for the latest pair they caught 98/100, leaving two exact augmented common
 misses.  Thus common-phase cuts improve Benders efficiency but have not
 produced a cover or a full radius-two obstruction.
+
+Coordinate-diverse common cuts ultimately closed class 27 at radius two.
+The 741-point discovery corpus was already UNSAT in its relaxed mask layer.
+`minimize_relaxed_radius_obstruction.py` guarded every base-miss clause by a
+SAT assumption, extracted an UNSAT core, greedily deleted redundant
+assumptions, and complete-replayed the result.  Only nine points are needed:
+
+```
+base misses                 9
+legal deficit-hitting moves 33349
+distinct gain masks         110
+relaxed two-mask cover      none
+```
+
+The proof object and independent scalar replay are:
+
+```
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_obstruction_certificate.json
+power1616615_lowbranch_0_1_0_0_0_targeted_radius2_obstruction_verification.json
+```
+
+Certificate SHA-256:
+`ce270923ce476d05dcacd6a2e1f8bd94c7e3ad68d8bc49cc082f22b094dc6cc8`.
+Only the five low anchors are fixed; either promoted row may be among the
+two changed rows.  This rules out a radius-two neighborhood of one augmented
+base phase.  Radius three, distant assignments, the rest of quotient class
+27, the other 161 classes, and the original problem remain open.
+
+The sparse-radius proof dependencies were also promoted from ignored
+`_tmp` files to permanent tracked pool and base-phase artifacts.  All three
+sparse-radius verifiers now read only files present in a fresh clone.
 
 ## Exact small affine-subpool obstruction
 
@@ -581,7 +612,10 @@ or fibres of higher index.
 - `verify_layered_exact_misses.py`: independent scalar replay of base-pool
   holes against a small targeted extension.
 - `exact_common_phase_misses.py`: exact counterexamples shared by several
-  saved phase assignments, with distinct-fibre union and scalar replay.
+  saved phase assignments, with distinct-fibre union, optional coordinate
+  diversity, and scalar replay.
+- `minimize_relaxed_radius_obstruction.py`: assumption-core extraction and
+  complete replay for obstructions already UNSAT in the relaxed mask layer.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.
