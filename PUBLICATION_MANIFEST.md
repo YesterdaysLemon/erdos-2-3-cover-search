@@ -67,6 +67,11 @@ This repository is a curated snapshot of the active workspace, updated on
 - the wider `(1,-3)` shear's independently replayed 81-row,
   period-110,880 necessary-condition placement, plus its exact 30-branch
   modulo-30 weighted projection obstruction in weakest column 24;
+- the experimental projected-cell-aware allocator, persistent monotone
+  feasible/infeasible antichains, exact anchor-dual expansion, resumable
+  Benders-cut support, structurally separate exact-claim verifier, and their
+  regression tests; transient allocator states remain excluded and no
+  family-level result is claimed;
 - the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
   on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;

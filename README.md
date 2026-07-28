@@ -933,6 +933,49 @@ the next allocator: enforce projected-cell feasibility while choosing the
 active classes, then pass surviving placements to phase-aware column BDDs or
 CRT-component transfer matrices.
 
+## Projected-cell-aware allocator (experimental)
+
+`refine_axis_layered_projection.py` now couples the 81 active layer-class
+choices to a necessary modulo-30 residual-cover test.  It does not enumerate
+large point graphs.  Instead, each distinct active row set defines a
+30-cell multiple-choice covering problem.  Failed active sets produce
+Benders cuts in the 9,240-column master.
+
+The oracle has three deliberately separated evidence tiers:
+
+1. feasible projected phases are replayed with exact rational arithmetic;
+2. complementary full-cell anchors are normalized by translation and
+   rejected, when possible, by 30 exact integer-weight duals;
+3. remaining HiGHS max-min outcomes are discovery evidence only.
+
+Projected feasibility is monotone.  An exact feasible set certifies every
+superset, and an exact infeasible set certifies every subset.  The allocator
+stores both antichain frontiers across restarts.  It also persists projection
+and unavoidable-pair cuts instead of rediscovering them.
+
+The strongest exact improvement expands each anchor-dual obstruction before
+cutting.  The already verified dual weights have a strict gap in every
+branch; any inactive row whose worst weighted contribution fits inside all
+30 gaps can be added without another optimization call.  On the first 22
+previously unresolved types for which an anchor dual existed, this exact
+greedy lift added between 12 and 21 rows, with median 16, producing failed
+supersets of size 66 through 71 out of 81.  This is a development benchmark,
+not a family-level impossibility certificate.
+
+The first unexpanded resumable runs accumulated tens of thousands of cuts
+but oscillated between bad placements rather than reaching either a
+projected-safe placement or an exact UNSAT master.  The expanded-cut run was
+paused when host free memory fell below the requested 15 percent floor,
+although the allocator itself used only about 0.2 GB.  Consequently there is
+still no claim that the 81-row family is modulo-30 impossible.
+
+`verify_axis_layered_projection_refinement.py` is structurally separate from
+the allocator.  It replays exact projected witnesses, exact anchor duals,
+their monotone uses, and persisted exact cuts while reporting floating MILP
+records separately.  A future family-level no-cover claim requires every
+master cut to have replayable exact evidence and the final master UNSAT to
+receive its own exact certificate.
+
 An experimental quantified-SMT encoding moved phase targets outside a
 universal pair of integer exponent coordinates.  It correctly handles tiny
 parity examples, but Z3 returned `UNKNOWN` after 120 seconds on the already
@@ -1044,6 +1087,10 @@ or fibres of higher index.
 - `certify_axis_layered_projection_noncover.py` and
   `verify_axis_layered_projection_noncover.py`: branch on translated
   full-cell anchors and replay exact weighted projection duals.
+- `refine_axis_layered_projection.py` and
+  `verify_axis_layered_projection_refinement.py`: experimental
+  projected-cell-aware allocation with persistent monotone antichains,
+  exact dual expansion, resumable Benders cuts, and evidence-tiered replay.
 - `enumerate_relaxed_mask_covers.py`: complete-or-explicitly-limited
   enumeration of exact-radius relaxed mask covers and observed backbones.
 - `quantified_phase_cover_z3.py`: experimental quantified-SMT encoding; its

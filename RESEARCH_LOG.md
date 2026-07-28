@@ -4769,3 +4769,58 @@ the active layer class with a small projected residual class in the
 allocator.  Only placements surviving those projected-cell constraints
 should proceed to whole-column BDD/CNF, CRT transfer matrices, or exact
 phase synthesis.
+
+## Projected-cell Benders allocator and exact antichains (2026-07-28)
+
+The first projected-cell-aware allocator chooses the 81 active layer classes
+subject to exact ordinary column capacity.  For every distinct active row
+set it asks whether independently chosen residual phases can cover all 30
+cells modulo 30.  If an active set is projected-infeasible, every subset is
+also infeasible; if it is feasible, every superset is feasible.  These two
+monotone antichains now persist across restart artifacts, as do projection
+and unavoidable-pair master cuts.
+
+The initial low-memory development run used a 0.5-second HiGHS subproblem
+limit.  Four completed rounds had respectively
+
+```
+bad coordinates     3152  2204  1672  2348
+unknown types          38    40    57    42
+```
+
+and accumulated 7,028 cuts.  It remained pair-safe and used roughly 0.2 GB,
+but did not converge.  This is search telemetry, not a proof.
+
+The exact column-24 method generalizes to many active-set types.  Whenever
+complete projection cells include two coprime anchors whose least common
+multiple is 30 and a third modulus-30 anchor, translation fixes the first
+two targets and only 30 targets of the third remain.  Exact integer weights
+then either prove all branches impossible or decline to classify the type.
+Of the 42 unknown types in the first saved placement, this exact oracle
+proved 22 infeasible in 8.2 seconds total.
+
+The proof can be strengthened without resolving another LP.  For every
+inactive row, replay its maximum weighted contribution against the 30
+existing strict gaps.  Greedily add a row only when every gap stays positive.
+Across those 22 exact obstructions, this added 12 to 21 rows, median 16, and
+grew the certified failed active sets to sizes 66 through 71 of the 81 rows.
+On a later cache of 68 exact duals, strengthening all of them took 1.18
+seconds, added 825 row appearances, and compressed the exact infeasible
+frontier from 68 to 34 maximal sets.
+
+The complementary feasible-side MILP was also changed from a zero-objective
+feasibility model to a max-min model.  Any incumbent whose weakest cell is at
+least one is replayed exactly and retained as a feasible witness.  Optimal
+floating outcomes below one remain discovery evidence unless an exact dual
+also exists.
+
+`verify_axis_layered_projection_refinement.py` independently reconstructs
+the projected rows and checks all exact weights with `Fraction` arithmetic.
+It also distinguishes exact from discovery Benders cuts.  No projected-safe
+placement and no exact master-UNSAT certificate has yet been obtained.
+
+The expanded resumable run was stopped when host free memory fell to 13.7
+percent, honoring the user's 15 percent floor.  The allocator itself was
+using only about 0.2 GB; an unrelated or separately owned Python process was
+using more than 23 GB.  No further allocator run is launched while the host
+remains below the requested floor.
