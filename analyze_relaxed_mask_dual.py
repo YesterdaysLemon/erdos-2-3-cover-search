@@ -51,14 +51,17 @@ def load_point_file(path: Path) -> list[tuple[int, int]]:
     return load_cells(path)
 
 
-def build_gain_masks(
+def build_gain_mask_support(
     rows: list[dict],
     candidates: list[tuple],
     points: list[tuple[int, int]],
     initial: dict[int, int],
     fixed_primes: set[int],
     np,
-) -> tuple[list[tuple[int, int]], list[int]]:
+) -> tuple[
+    list[tuple[int, int]],
+    dict[int, list[tuple[int, int]]],
+]:
     assignment = []
     for row in rows:
         prime = int(row["p"])
@@ -79,7 +82,7 @@ def build_gain_masks(
     miss_indices = [
         int(index) for index in np.flatnonzero(base_cover == 0)
     ]
-    masks: set[int] = set()
+    support: dict[int, list[tuple[int, int]]] = {}
     for row_index, row in enumerate(rows):
         if int(row["p"]) in fixed_primes:
             continue
@@ -94,8 +97,29 @@ def build_gain_masks(
             by_target[target] = (
                 by_target.get(target, 0) | (1 << bit)
             )
-        masks.update(mask for mask in by_target.values() if mask)
-    return [points[index] for index in miss_indices], sorted(masks)
+        for target, mask in by_target.items():
+            if mask:
+                support.setdefault(mask, []).append((row_index, target))
+    return [points[index] for index in miss_indices], support
+
+
+def build_gain_masks(
+    rows: list[dict],
+    candidates: list[tuple],
+    points: list[tuple[int, int]],
+    initial: dict[int, int],
+    fixed_primes: set[int],
+    np,
+) -> tuple[list[tuple[int, int]], list[int]]:
+    missed_points, support = build_gain_mask_support(
+        rows,
+        candidates,
+        points,
+        initial,
+        fixed_primes,
+        np,
+    )
+    return missed_points, sorted(support)
 
 
 def solve_fractional_weights(

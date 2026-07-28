@@ -33,6 +33,11 @@ This repository is a curated snapshot of the active workspace, updated on
 - the reproducible class-27 radius-three 741/742/743-point finite-repair
   progression and exact augmented-domain counterexamples that refute the
   first two responses;
+- the 753/763-point continuation, incomplete 3,851-model relaxed-cover-space
+  audit, six pairwise distance-six exact finite repair phases, and ten exact
+  augmented-domain points common to five separated responses;
+- the experimental quantified-Z3 source and its explicit `UNKNOWN` timeout
+  on the known 14-row no-cover benchmark;
 - the 4,637-family ranking and the two scans defining the current frontier;
 - a compact index of the 17 currently unresolved ranked finite families;
 - the exact period-`2533395664800` conditional-star checkpoint and its

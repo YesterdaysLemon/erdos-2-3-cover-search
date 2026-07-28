@@ -569,6 +569,40 @@ coverage one.  It has not passed a full-domain cover check and is not a
 candidate integer `m`.  This oscillation motivates common-phase cuts and a
 quotient-wide symbolic engine rather than unbounded single-hole sampling.
 
+A single augmented-domain query against those three responses then returned
+ten coordinate-diverse exact holes common to all three.  Adding the complete
+batch gives a 753-point corpus.  Radius three is still feasible there.
+`enumerate_relaxed_mask_covers.py` enumerated 3,851 distinct relaxed
+three-mask covers in 60 seconds before its declared time limit and found no
+mask common even to that incomplete sample.  Thus the apparent two-move
+backbone was solver-order bias, not a valid structural conclusion.
+
+The mask repair engine now accepts previous phases and a required Hamming
+distance.  On the same 753 points it produced six exact finite repairs at
+pairwise distance six, the maximum possible for radius-three phases.  Their
+18 changed rows are pairwise disjoint.  This creates deliberately separated
+responses for common-phase exact cuts and avoids spending each expensive
+checker call on a cosmetic one-row oscillation.  It also shows that this
+finite radius-three cover space remains broad; it is not evidence of a
+full-domain cover.
+
+The exact augmented-domain checker then unioned five of those separated
+phases.  Their 15 alternative fibres enlarged the 12,579-row base assignment
+to 12,594 distinct selected fibres.  One checker call returned ten
+coordinate-diverse points missed by all five phases, and scalar replay
+confirmed every point.  Adding the batch gives 763 accumulated points.
+Radius three remains feasible: the current finite response retargets
+`p=15121,269,167`, and an independent scalar audit reports sampled minimum
+coverage one.  Thus diversified common cuts are more efficient, but they
+have not yet closed radius three.
+
+An experimental quantified-SMT encoding moved phase targets outside a
+universal pair of integer exponent coordinates.  It correctly handles tiny
+parity examples, but Z3 returned `UNKNOWN` after 120 seconds on the already
+certified 14-row, period-5,544 no-cover instance.  That admission test is
+recorded in `power1616615_hle12_quantified_z3_result.json`; the encoding is
+not being scaled to the 12,579-row branch.
+
 The sparse-radius proof dependencies were also promoted from ignored
 `_tmp` files to permanent tracked pool and base-phase artifacts.  All three
 sparse-radius verifiers now read only files present in a fresh clone.
@@ -633,7 +667,8 @@ or fibres of higher index.
   tiles (including multiple digits of one prime component), and adversarial
   witness diversity.
 - `finite_sample_mask_repair.py`: fast gain-mask construction search with
-  exact full-corpus replay and complete bounded secondary-loss search.
+  exact full-corpus replay, complete bounded secondary-loss search, and
+  optional Hamming separation from previous repair phases.
 - `certify_sparse_radius_obstruction.py` and its independent scalar verifier:
   self-contained finite Hamming-ball obstruction certificates.
 - `finite_sample_sat_repair.py` and `finite_sample_z3_repair.py`: complete
@@ -653,6 +688,10 @@ or fibres of higher index.
 - `analyze_relaxed_mask_dual.py` and `verify_relaxed_mask_dual.py`: exact
   compression of a relaxed obstruction to inclusion-maximal gain masks and
   independent scalar replay of the resulting hypergraph certificate.
+- `enumerate_relaxed_mask_covers.py`: complete-or-explicitly-limited
+  enumeration of exact-radius relaxed mask covers and observed backbones.
+- `quantified_phase_cover_z3.py`: experimental quantified-SMT encoding; its
+  public 14-row timeout is an inconclusive scaling result, not a certificate.
 - `certify_homogeneous_refinement_obstruction.py` and its independent
   verifier: the deepest-node sibling test for bounded homogeneous
   refinement trees.

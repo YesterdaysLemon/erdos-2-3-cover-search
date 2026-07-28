@@ -37,7 +37,13 @@ def search_mask_repair(
     solver_name: str,
     max_mask_models: int,
     time_limit: float,
+    avoid_assignments: list[list[int]] | None = None,
+    min_hamming_distance: int = 1,
 ):
+    avoid_assignments = avoid_assignments or []
+    if min_hamming_distance < 0:
+        raise ValueError("minimum Hamming distance must be nonnegative")
+    diversity_rejections = 0
     dep_path = Path(os.environ.get("TEMP", ".")) / "erdos203-pydeps"
     sys.path.insert(0, str(dep_path))
     import numpy as np  # type: ignore
@@ -77,6 +83,7 @@ def search_mask_repair(
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
+            "diversity_rejections": diversity_rejections,
             "complete_negative": False,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
@@ -94,6 +101,7 @@ def search_mask_repair(
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
+            "diversity_rejections": diversity_rejections,
             "complete_negative": True,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
@@ -148,6 +156,7 @@ def search_mask_repair(
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
+            "diversity_rejections": diversity_rejections,
             "complete_negative": True,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
@@ -198,6 +207,7 @@ def search_mask_repair(
             "mask_models": 0,
             "matching_failures": 0,
             "replay_failures": 0,
+            "diversity_rejections": diversity_rejections,
             "complete_negative": True,
             "build_seconds": build_seconds,
             "search_seconds": 0.0,
@@ -254,7 +264,7 @@ def search_mask_repair(
         matched_leaf = False
 
         def assign_masks(depth: int):
-            nonlocal matched_leaf
+            nonlocal matched_leaf, diversity_rejections
             if depth == len(ordered):
                 matched_leaf = True
                 counts = base_cover.astype(np.int32, copy=True)
@@ -266,6 +276,7 @@ def search_mask_repair(
                     counts += targets[:, row_index] == target
 
                 def add_compensators(remaining: int):
+                    nonlocal diversity_rejections
                     deficits = [
                         int(index)
                         for index in np.flatnonzero(counts == 0)
@@ -274,6 +285,20 @@ def search_mask_repair(
                         repaired = list(assignment)
                         for _mask, row_index, target in chosen:
                             repaired[row_index] = target
+                        if any(
+                            sum(
+                                left != right
+                                for left, right in zip(
+                                    repaired,
+                                    avoided,
+                                    strict=True,
+                                )
+                            )
+                            < min_hamming_distance
+                            for avoided in avoid_assignments
+                        ):
+                            diversity_rejections += 1
+                            return None
                         return repaired
                     if remaining == 0:
                         return None
@@ -408,6 +433,7 @@ def search_mask_repair(
         "mask_models": mask_models,
         "matching_failures": matching_failures,
         "replay_failures": replay_failures,
+        "diversity_rejections": diversity_rejections,
         "complete_negative": complete_negative,
         "build_seconds": build_seconds,
         "search_seconds": search_seconds,
@@ -426,7 +452,22 @@ def main() -> int:
     parser.add_argument("--solver", default="cadical195")
     parser.add_argument("--max-mask-models", type=int, default=200_000)
     parser.add_argument("--time-limit", type=float, default=240.0)
+    parser.add_argument(
+        "--avoid-phase",
+        action="append",
+        type=Path,
+        default=[],
+        help="reject repairs too close to this phase; may be repeated",
+    )
+    parser.add_argument(
+        "--min-hamming-distance",
+        type=int,
+        default=1,
+        help="minimum row-phase distance from every --avoid-phase map",
+    )
     args = parser.parse_args()
+    if args.min_hamming_distance < 0:
+        raise SystemExit("--min-hamming-distance must be nonnegative")
 
     payload = json.loads(args.pool.read_text())
     rows = payload["choices"]
@@ -447,6 +488,32 @@ def main() -> int:
     fixed_primes = {
         int(value) for value in args.fixed_primes.split(",") if value
     }
+    avoid_assignments = []
+    for path in args.avoid_phase:
+        phase_map = {
+            int(prime): int(target)
+            for prime, target in json.loads(path.read_text()).items()
+        }
+        missing = {
+            int(row["p"]) for row in rows
+        } - phase_map.keys()
+        if missing:
+            raise RuntimeError(
+                f"avoid phase {path} omits primes {sorted(missing)[:10]}"
+            )
+        avoided = []
+        for row in rows:
+            prime = int(row["p"])
+            h = int(row["h"])
+            modulus = int(row.get("target_modulus", 1))
+            residue = int(row.get("target_residue", 0)) % modulus
+            target = int(phase_map[prime]) % h
+            if target % modulus != residue:
+                raise RuntimeError(
+                    f"avoid phase {path} violates p={prime}"
+                )
+            avoided.append(target)
+        avoid_assignments.append(avoided)
     result = search_mask_repair(
         rows,
         candidates,
@@ -457,6 +524,8 @@ def main() -> int:
         args.solver,
         args.max_mask_models,
         args.time_limit,
+        avoid_assignments,
+        args.min_hamming_distance,
     )
     if result["status"] == "INTEGER_MODEL":
         phase_map = {
@@ -482,6 +551,8 @@ def main() -> int:
         ),
         "fixed_primes": sorted(fixed_primes),
         "max_changes": args.max_changes,
+        "avoid_phases": [str(path) for path in args.avoid_phase],
+        "minimum_hamming_distance": args.min_hamming_distance,
         "point_count": len(points),
         **{
             key: value

@@ -82,6 +82,46 @@ class FiniteSampleMaskRepairTests(unittest.TestCase):
         self.assertEqual(result["status"], "UNSAT")
         self.assertTrue(result["complete_negative"])
 
+    def test_avoids_a_nearby_repair(self) -> None:
+        first = finite_sample_mask_repair.search_mask_repair(
+            self.rows,
+            self.candidates,
+            self.points,
+            {5: 0, 7: 0},
+            set(),
+            1,
+            "cadical195",
+            100,
+            10.0,
+        )
+        second = finite_sample_mask_repair.search_mask_repair(
+            self.rows,
+            self.candidates,
+            self.points,
+            {5: 0, 7: 0},
+            set(),
+            1,
+            "cadical195",
+            100,
+            10.0,
+            [first["repaired"]],
+            2,
+        )
+        self.assertEqual(second["status"], "INTEGER_MODEL")
+        self.assertEqual(second["changed_phases"], 1)
+        self.assertEqual(
+            sum(
+                left != right
+                for left, right in zip(
+                    first["repaired"],
+                    second["repaired"],
+                    strict=True,
+                )
+            ),
+            2,
+        )
+        self.assertGreater(second["diversity_rejections"], 0)
+
     def test_full_mask_budget_upgrades_exhaustion_to_unsat(self) -> None:
         result = finite_sample_mask_repair.search_mask_repair(
             self.rows[:1],
