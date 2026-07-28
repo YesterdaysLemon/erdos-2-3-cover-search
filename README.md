@@ -476,6 +476,22 @@ This is another finite Hamming-ball theorem, not a full quotient-class
 obstruction.  The class-27 two-change phase still has an exact full-domain
 hole, and neither branch yields an integer `m`.
 
+The selector now accepts a separately declared validation corpus.  A target
+is chosen from training points only and must hit a requested number of held-
+out points at that same target before promotion.  This rejected a tempting
+third row, `p=3439853569`, which hit 52/101 training points but 0/2
+changed-row-diverse validation holes.
+
+The audit also exposed a checker artifact: one 100-hole batch occupied a
+single residue pair modulo almost every tested small prime.  Three subsequent
+checker runs therefore forced different coordinate cells modulo 127, 113,
+and 109.  Both promoted rows intercepted 0/10 holes in each cross-section.
+After all 30 exact augmented misses were added, class 27 nevertheless retained
+a two-change finite repair covering 281 accumulated points, now using
+`p=233` and `p=823`.  This is robust finite repair flexibility; the promoted
+rows have not passed out-of-sample validation and the phase is not accepted
+as a construction.
+
 ## Exact small affine-subpool obstruction
 
 As a deliberately different strategy, the 14 derived rows with modulus
@@ -543,8 +559,9 @@ or fibres of higher index.
   bounded-change finite repair encodings in SAT and pseudo-Boolean spaces.
 - `sparse_anchor_quotient_sweep.py`: resumable driver over the 162 exact
   low-anchor quotient representatives.
-- `select_targeted_signature_rows.py`: verification-cost-aware promotion of
-  extension rows whose one legal target hits several adversarial points.
+- `select_targeted_signature_rows.py`: verification-cost- and
+  validation-aware promotion of extension rows whose one training-selected
+  target also hits separately declared held-out points.
 - `verify_layered_exact_misses.py`: independent scalar replay of base-pool
   holes against a small targeted extension.
 - `certify_homogeneous_refinement_obstruction.py` and its independent

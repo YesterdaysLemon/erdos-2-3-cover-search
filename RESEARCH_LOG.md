@@ -4223,3 +4223,42 @@ Certificate SHA-256:
 This is a finite radius-two obstruction around one augmented base phase, not
 full-pool UNSAT for quotient class 54 and not a result about the other 161
 classes or the original problem.
+
+### Held-out validation and coordinate-diverse adversaries
+
+The recursive selector initially proposed a complementary third row:
+
+```
+p=3439853569
+h=71663616
+largest prime-power component=32768
+training hits=52/101
+```
+
+It failed immediately on two changed-row-diverse holes, intercepting neither.
+`select_targeted_signature_rows.py` now accepts separate validation point
+files.  It chooses each row target from training points alone, measures that
+same target on the held-out corpus, and can require a minimum validation hit
+before ranking or promotion.  Reapplying the guarded selector to the 62-row
+extension found zero rows with at least two training hits and one of those
+two validation hits.
+
+The 100-hole training batches were audited geometrically.  All 100 points
+shared one coordinate pair modulo 5, 7, 11, 13, 17, 23, 29, 31, 37, and most
+other tested primes; only a few components varied.  Thus the large apparent
+multi-hit scores reflected an exact but narrow CRT corner.
+
+The checker was rerun with complete coordinate fingerprints blocked
+separately modulo 127, 113, and 109.  Each run returned ten exact base-pool
+holes in distinct coordinate cells.  Independent layered replay found that
+both promoted rows intercepted 0/10 in all three batches.  Adding all 30
+augmented misses still left a two-change finite repair on 281 points:
+
+```
+p=233: 44 -> 15
+p=823: 113 -> 20
+```
+
+This shows substantial finite repair flexibility, but it removes the
+strongest evidence that the promoted high-component rows generalize.  No
+phase in this validation campaign is a full-domain cover.

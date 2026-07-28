@@ -4,6 +4,7 @@ from select_targeted_signature_rows import (
     best_legal_target,
     largest_prime_power_component,
     select_rows,
+    target_hit_indices,
 )
 
 
@@ -71,6 +72,28 @@ class TargetedSignatureRowsTest(unittest.TestCase):
         self.assertEqual([int(row["p"]) for row in rows], [23])
         self.assertEqual(audit[0]["largest_prime_power_component"], 5)
         self.assertEqual(largest_prime_power_component(884736), 32768)
+
+    def test_validation_uses_training_selected_target(self):
+        candidates = [
+            {"p": 29, "h": 5, "a": 1, "b": 0},
+            {"p": 31, "h": 7, "a": 1, "b": 0},
+        ]
+        rows, audit = select_rows(
+            [],
+            candidates,
+            [(0, 0), (5, 1), (1, 0)],
+            min_hit=2,
+            max_rows=0,
+            validation_points=[(5, 2), (6, 3)],
+            min_validation_hit=1,
+        )
+        self.assertEqual([int(row["p"]) for row in rows], [29])
+        self.assertEqual(audit[0]["target"], 0)
+        self.assertEqual(audit[0]["validation_hit_count"], 1)
+        self.assertEqual(
+            target_hit_indices(candidates[0], [(5, 2), (6, 3)], 0),
+            [0],
+        )
 
 
 if __name__ == "__main__":

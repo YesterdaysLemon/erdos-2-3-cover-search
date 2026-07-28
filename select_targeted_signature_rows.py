@@ -65,6 +65,20 @@ def best_legal_target(
     return len(indices), target, indices
 
 
+def target_hit_indices(
+    row: dict,
+    points: list[tuple[int, int]],
+    target: int,
+) -> list[int]:
+    h = int(row["h"])
+    normalized = target % h
+    return [
+        index
+        for index, (k, l) in enumerate(points)
+        if (int(row["a"]) * k + int(row["b"]) * l) % h == normalized
+    ]
+
+
 def largest_prime_power_component(modulus: int) -> int:
     return max(
         (
@@ -82,6 +96,8 @@ def select_rows(
     min_hit: int,
     max_rows: int,
     max_component: int = 0,
+    validation_points: list[tuple[int, int]] | None = None,
+    min_validation_hit: int = 0,
 ) -> tuple[list[dict], list[dict]]:
     base_by_prime = {int(row["p"]): row for row in base_rows}
     if len(base_by_prime) != len(base_rows):
@@ -101,7 +117,15 @@ def select_rows(
         if max_component and component > max_component:
             continue
         hit_count, target, indices = best_legal_target(row, points)
-        if hit_count >= min_hit:
+        validation_indices = (
+            target_hit_indices(row, validation_points, int(target))
+            if target is not None and validation_points
+            else []
+        )
+        if (
+            hit_count >= min_hit
+            and len(validation_indices) >= min_validation_hit
+        ):
             scored.append(
                 {
                     "row": row,
@@ -111,10 +135,13 @@ def select_rows(
                     "hit_count": hit_count,
                     "target": target,
                     "point_indices": indices,
+                    "validation_hit_count": len(validation_indices),
+                    "validation_point_indices": validation_indices,
                 }
             )
     scored.sort(
         key=lambda record: (
+            -int(record["validation_hit_count"]),
             -int(record["hit_count"]),
             int(record["largest_prime_power_component"]),
             int(record["h"]),
@@ -142,7 +169,18 @@ def main() -> int:
     parser.add_argument("base_pool", type=Path)
     parser.add_argument("candidate_pool", type=Path)
     parser.add_argument("points", nargs="+", type=Path)
+    parser.add_argument(
+        "--validation-points",
+        nargs="+",
+        type=Path,
+        default=[],
+        help=(
+            "separate point files tested at the training-selected target; "
+            "these points do not influence which target is selected"
+        ),
+    )
     parser.add_argument("--min-hit", type=int, default=2)
+    parser.add_argument("--min-validation-hit", type=int, default=0)
     parser.add_argument(
         "--max-rows",
         type=int,
@@ -166,10 +204,17 @@ def main() -> int:
         raise SystemExit("--max-rows must be nonnegative")
     if args.max_component < 0:
         raise SystemExit("--max-component must be nonnegative")
+    if args.min_validation_hit < 0:
+        raise SystemExit("--min-validation-hit must be nonnegative")
+    if args.min_validation_hit and not args.validation_points:
+        raise SystemExit(
+            "--min-validation-hit requires --validation-points"
+        )
 
     base = json.loads(args.base_pool.read_text())
     candidates = json.loads(args.candidate_pool.read_text())
     points = load_points(args.points)
+    validation_points = load_points(args.validation_points)
     rows, audit = select_rows(
         base["choices"],
         candidates["choices"],
@@ -177,6 +222,8 @@ def main() -> int:
         args.min_hit,
         args.max_rows,
         args.max_component,
+        validation_points,
+        args.min_validation_hit,
     )
     result = dict(base)
     result["choices"] = rows
@@ -185,14 +232,20 @@ def main() -> int:
         "candidate_pool": str(args.candidate_pool),
         "point_files": [str(path) for path in args.points],
         "point_count": len(points),
+        "validation_point_files": [
+            str(path) for path in args.validation_points
+        ],
+        "validation_point_count": len(validation_points),
         "min_hit": args.min_hit,
+        "min_validation_hit": args.min_validation_hit,
         "max_rows": args.max_rows,
         "max_component": args.max_component,
         "selected": audit,
     }
     args.output.write_text(json.dumps(result, indent=2) + "\n")
     print(
-        f"points={len(points)} selected={len(audit)} "
+        f"points={len(points)} validation={len(validation_points)} "
+        f"selected={len(audit)} "
         f"output_rows={len(rows)} output={args.output}",
         flush=True,
     )
@@ -200,7 +253,9 @@ def main() -> int:
         print(
             f"p={record['p']} h={record['h']} "
             f"component={record['largest_prime_power_component']} "
-            f"hits={record['hit_count']} target={record['target']}",
+            f"hits={record['hit_count']} "
+            f"validation_hits={record['validation_hit_count']} "
+            f"target={record['target']}",
             flush=True,
         )
     return 0
